@@ -1,0 +1,20 @@
+{
+  "name": "meadmin-template",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite -m dev",
+    "build": "vue-tsc --noEmit && vite build -m prod",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.1",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "typescript": "^4.5.4",
+    "vite": "^3.0.0-alpha.14",
+    "vue-tsc": "^0.34.7"
+  }
+}
