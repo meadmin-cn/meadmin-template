@@ -42,19 +42,6 @@ function createProgressGuard(router: Router) {
     });
 }
 
-//动态创建菜单
-function createParamMenuGuard(router:Router){
-    router.beforeEach(async(to, from, next) => {
-        const userStore = UserStore();
-        if(!userStore.auth){
-            
-        }
-        next();
-
-    });
-    
-}
-
 //通知路由变化需要放在最后调用
 function triggerRouteChange(router: Router) {
     router.beforeEach(async (to, from) => {

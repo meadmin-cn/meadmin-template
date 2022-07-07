@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
 import { App } from "vue";
+import { setupRouterGuard } from './guard';
+import { importRoute } from '@/utils/importRoute';
+export const asyncRoutes = importRoute(import.meta.glob('./routes/*.ts',{ eager: true }));
 const baseRoutes: RouteRecordRaw[] = [
     {
         path: '/',
@@ -8,7 +11,7 @@ const baseRoutes: RouteRecordRaw[] = [
     },
     {
         path: PageEnum.LOGIN,
-        component: () => import('@/views/Login.vue'),
+        component: () => import('@/views/login.vue'),
         meta: { title: '登录', noBack: true }
     },
     {

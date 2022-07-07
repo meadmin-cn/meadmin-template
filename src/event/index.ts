@@ -14,5 +14,3 @@ type Events = {
 };
 const mitter = Mitt<Events>(); // inferred as Emitter<Events>
 export { event, mitter }
-import './module';
-

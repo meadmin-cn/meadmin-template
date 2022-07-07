@@ -12,6 +12,7 @@
     "dayjs": "^1.11.3",
     "element-plus": "^2.2.8",
     "js-cookie": "^3.0.1",
+    "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
     "sass": "^1.53.0",
