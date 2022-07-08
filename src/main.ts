@@ -7,6 +7,5 @@ async function bootscrapt() {
     const app = createApp(App);
     await mitter.emit(event.ready, app);
     app.mount('#app');
-    
 }
 bootscrapt();

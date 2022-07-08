@@ -146,7 +146,7 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
         for (const handler of handlers) {
           await handler(type, evt!);
         }
-        once = new Set();
+        once!.clear();
       }
     }
   };

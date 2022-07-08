@@ -1,4 +1,5 @@
 <script setup lang="ts" name="404">
+import {loginApi} from "@/api/user";
 
 
 </script>
