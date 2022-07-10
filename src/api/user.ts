@@ -13,8 +13,17 @@ export class LoginParams {
 export interface LoginResult {
     token: string;
 }
-export const loginApi = request<LoginResult, [LoginParams]>((params) => ({
-    url: api.login,
-    method: 'post',
-    data: params
-}));
+export function loginApi() {
+    return request<LoginResult, [LoginParams
+    
+    
+    
+    
+    
+    
+    ]>((params) => ({
+        url: api.login,
+        method: 'post',
+        data: params
+    }));
+};

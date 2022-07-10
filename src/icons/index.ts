@@ -1,9 +1,9 @@
 /// <reference types="vite-svg-loader" />
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import { App, Component } from 'vue'
-import add from './svg/add.svg?component';
-
+import path from 'path-browserify';
+import { App, Component,h } from 'vue'
+import {upperFirst} from 'lodash-es';
 
 export function installIcon(app: App) {
     function componentIcon(name:string,IconComponent:Component){
@@ -36,9 +36,12 @@ export function installIcon(app: App) {
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
         componentIcon(`ElIcon${key}`, component)
     }
-    
-    componentIcon('SvgIconAdd', add as Component)
-   
-    
-    console.log(add)
+    //注册自定义的svg icons
+    const svgModules = import.meta.glob('./svg/*.svg', {
+        import: 'default',
+        eager: true
+    });
+    for (const [key, component] of Object.entries(<Record<string,Component>>svgModules)) {
+        componentIcon('SvgIcon'+upperFirst(path.parse(key).name), component)
+    }   
 }

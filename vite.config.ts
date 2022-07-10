@@ -7,6 +7,7 @@ function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
 export default defineConfig({
+
   plugins: [vue(),svgLoader({
     svgoConfig:{
       plugins: [

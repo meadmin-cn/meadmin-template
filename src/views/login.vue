@@ -1,7 +1,6 @@
 <template>
     <div class="login">
         <div class="form">
-            <base-input></base-input>
             <div class="title">meadmin</div>
             <el-form>
                 <el-form-item>
@@ -10,7 +9,7 @@
                 <el-form-item>
                     <el-input type="password" placeholder="密码" v-model="loginParams.password">
                         <template #suffix>
-                            <el-icon-view></el-icon-view>
+                            <svg-icon-add/>
                         </template>
 
                     </el-input>
