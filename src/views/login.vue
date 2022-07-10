@@ -1,7 +1,6 @@
 <template>
     <div class="login">
         <div class="form">
-            <base-input></base-input>
             <div class="title">meadmin</div>
             <el-form>
                 <el-form-item>
