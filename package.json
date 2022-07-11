@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite -m dev",
     "build": "vue-tsc --noEmit && vite build -m prod",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "release": "release-it"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.6",
@@ -22,11 +23,17 @@
     "vue-router": "^4.1.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@release-it/conventional-changelog": "^5.0.0",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "^18.0.1",
     "@types/nprogress": "^0.2.0",
+    "@types/path-browserify": "^1.0.0",
     "@vitejs/plugin-vue": "^3.0.0-beta.0",
+    "husky": "^8.0.1",
     "mockjs": "^1.1.0",
+    "release-it": "^15.1.1",
     "typescript": "^4.5.4",
     "unplugin-auto-import": "^0.9.2",
     "vite": "^3.0.0-beta.6",
