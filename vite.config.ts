@@ -3,6 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/rollup';
 import svgLoader from 'vite-svg-loader'
 import { resolve } from 'path';
+import * as fs from 'fs';
+import {default as autogenerationImport,getName} from 'vite-plugin-autogeneration-import-file';
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
@@ -31,7 +33,19 @@ export default defineConfig({
     imports: ['vue', 'vue-router', 'pinia'],
     // 可以选择auto-imports.d.ts生成的位置，使用ts建议设置为'src/auto-imports.d.ts'
     dts: 'types/auto-imports.d.ts'
-  })],
+  }),autogenerationImport([
+    {
+      pattern:['*.svg'],
+      dir:'src/icons/svg',
+      toFile:'types/svgIconComments.d.ts',
+      name:(name)=>{
+        name = getName(name);
+        return 'SvgIcon'+name[0].toUpperCase()+name.slice(1);
+      },
+      template:fs.readFileSync('./template/svgIconComments.d.ts','utf-8'),
+      codeTemplates:[{key:'\n        //code',template:'        {{name}}: Icon;'}]
+    }
+  ])],
   resolve: {
     alias: [
       // /@/xxxx => src/xxxx

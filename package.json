@@ -2,6 +2,7 @@
   "name": "meadmin-template",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite -m dev",
     "build": "vue-tsc --noEmit && vite build -m prod",
@@ -16,6 +17,7 @@
     "js-cookie": "^3.0.1",
     "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
+    "path-browserify": "^1.0.1",
     "pinia": "^2.0.14",
     "sass": "^1.53.0",
     "vue": "^3.2.25",
