@@ -15,12 +15,12 @@ export interface LoginResult {
 }
 export function loginApi() {
     return request<LoginResult, [LoginParams
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     ]>((params) => ({
         url: api.login,
         method: 'post',

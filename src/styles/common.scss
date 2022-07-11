@@ -1,15 +1,18 @@
 @use "element-plus/theme-chalk/src/index.scss" as *;
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-body{
+
+body {
     margin: 0;
     padding: 0;
-    #app{
+
+    #app {
         width: 100%;
         height: 100vh;
         font-size: getCssVar('font-size', 'base');
-        color: getCssVar('text-color','primary');
+        color: getCssVar('text-color', 'primary');
     }
 }
-div{
+
+div {
     box-sizing: border-box;
 }

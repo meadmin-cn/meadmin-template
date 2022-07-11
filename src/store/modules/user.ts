@@ -4,7 +4,7 @@ import cookies from 'js-cookie';
 import config from '@/config/login';
 import { loading } from '@/utils/loading';
 import { PageEnum } from '@/enums/pageEnum';
-import { router,asyncRoutes } from '@/router';
+import { router, asyncRoutes } from '@/router';
 interface UserState {
     user: Record<string, any>; //用户信息
     auth: string[] | undefined; //用户权限信息
@@ -48,10 +48,10 @@ export default defineStore({
             let token = cookies.get(config.tokenName);
             if (token) {
                 this.token = token;
-                asyncRoutes.forEach(route=>router.addRoute(route));
+                asyncRoutes.forEach(route => router.addRoute(route));
             } else {
                 this.token = '';
-                asyncRoutes.forEach(route=>router.addRoute(route));
+                asyncRoutes.forEach(route => router.addRoute(route));
             }
         },
         //登录

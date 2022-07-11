@@ -3,7 +3,7 @@ import { PageEnum } from '@/enums/pageEnum';
 import { App } from "vue";
 import { setupRouterGuard } from './guard';
 import { importRoute } from '@/utils/importRoute';
-export const asyncRoutes = importRoute(import.meta.glob('./routes/*.ts',{ eager: true }));
+export const asyncRoutes = importRoute(import.meta.glob('./routes/*.ts', { eager: true }));
 const baseRoutes: RouteRecordRaw[] = [
     {
         path: '/',

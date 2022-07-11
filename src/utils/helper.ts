@@ -11,7 +11,7 @@
  * @param initialValue  作为第一次调用 callback 函数时参数 previousValue 的值
  * @returns 
  */
-export function objectRreduce<T,P extends Record<string, any>>(
+export function objectRreduce<T, P extends Record<string, any>>(
     object: P,
     callbackfn: (previousValue: T, currentValue: P[keyof P], currentKey: string, object: P) => T,
     initialValue: T): T {
