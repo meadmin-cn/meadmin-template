@@ -1,10 +1,12 @@
 <template>
     <div class="login">
         <div class="form">
+            <test></test>
+            <test2></test2>
             <div class="title">meadmin</div>
             <el-form>
                 <el-form-item>
-                    <el-input placeholder="用户名" v-model="loginParams.username" />
+                    <el-input :placeholder="t('用户名')" v-model="loginParams.username" />
                 </el-form-item>
                 <el-form-item>
                     <el-input type="password" placeholder="密码" v-model="loginParams.password">
@@ -19,12 +21,20 @@
         </div>
     </div>
 </template>
-<script setup lang="ts" name="Login">
-import { loginApi, LoginParams } from "@/api/user";
-let loginParams = reactive(new LoginParams());
-
-
+<script lang="ts">
+export default {
+    langImport: (locale: string) => import(`@/views/login/lang/${locale}.ts`)
+}
 </script>
+<script setup lang="ts">
+import test from '../test.vue';
+import test2 from '../test2.vue';
+import { loginApi, LoginParams } from "@/api/user";
+import { useI18n } from "@/locales/I18n";
+let loginParams = reactive(new LoginParams());
+let { t } = useI18n({}, (locale: string) => import(`@/views/login/lang/${locale}.ts`));
+</script>
+
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
 

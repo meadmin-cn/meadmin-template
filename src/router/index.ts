@@ -11,7 +11,7 @@ const baseRoutes: RouteRecordRaw[] = [
     },
     {
         path: PageEnum.LOGIN,
-        component: () => import('@/views/login.vue'),
+        component: () => import('@/views/login/index.vue'),
         meta: { title: '登录', noBack: true }
     },
     {

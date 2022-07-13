@@ -1,3 +1,5 @@
+import { I18nOptions } from "vue-i18n";
+
 //语言列表 和elment-plus对应 locale字段值不要改变，否则会导致element-plus组件无法翻译为对应语言
 export const localeList= [
     {
@@ -218,11 +220,8 @@ export const localeList= [
     },
 ];
 export const localeSetting: I18nOptions = {
-    showPicker: true,
     // Locale
     locale: localeList[0].locale,
     // Default locale
-    fallback: localeList[0].locale,
-    // available Locales
-    availableLocales: [LOCALE.ZH_CN, LOCALE.EN_US],
-  };
+    fallbackLocale: localeList[0].locale,
+};
