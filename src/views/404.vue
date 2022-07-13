@@ -5,11 +5,17 @@ import { loginApi } from "@/api/user";
 </script>
 
 <template>
-    <div class="404">
-        404
-    </div>
+   <div class="main">
+   <a href="/login">登录</a>
+   </div>
 </template>
 
 <style lang="scss" scoped>
-.404 {}
+.main{
+   background-color: #000000;
+   height: 100vh;
+   width: 100wh;
+   color:#fff
+}
+
 </style>

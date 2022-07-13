@@ -1,22 +1,23 @@
 <template>
   <router-view v-slot="{ Component, route }">
-      <component ref="routeView" v-if="aa(Component) && showComponent"  :is="Component" :key="route.meta.usePathKey ? route.path : undefined"/>
+    <transition name="fade">
+        <load-component :componentKey="route.fullPath" :is="Component"></load-component>
+    </transition>
   </router-view>
 </template>
 <script setup lang="ts">
-  import { WritableComputedRef } from 'vue';
-  import { loadMessage,globaleI18n } from './locales/I18n';
-  const routeView = ref<any>(null);
-  let showComponent = ref(false);
-  const aa = (component:any)=>{
-    if(component){
-      if(component.type.langImport){
-        loadMessage((globaleI18n.global.locale as WritableComputedRef<string>).value,component.type.langImport).finally(()=>showComponent.value = true);
-      }
-      return true;
-    }
-    return false;
-  }
+
+  import loadComponent from './components/loadComponent.vue';  
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

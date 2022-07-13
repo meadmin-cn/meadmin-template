@@ -18,11 +18,11 @@ export function setupRouterGuard(router: Router) {
 function createPermissionGuard(router: Router) {
     const userStore = UserStore();
     router.beforeEach(async (to) => {
-        if (to.path !== PageEnum.LOGIN && !userStore.token) {
-            return PageEnum.LOGIN;
-        } else if (to.path === PageEnum.LOGIN && userStore.token) {
-            return PageEnum.HOME;
-        }
+        // if (to.path !== PageEnum.LOGIN && !userStore.token) {
+        //     return PageEnum.LOGIN;
+        // } else if (to.path === PageEnum.LOGIN && userStore.token) {
+        //     return PageEnum.HOME;
+        // }
     });
 }
 

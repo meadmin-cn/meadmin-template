@@ -1,8 +1,6 @@
 <template>
     <div class="login">
         <div class="form">
-            <test></test>
-            <test2></test2>
             <div class="title">meadmin</div>
             <el-form>
                 <el-form-item>
@@ -16,19 +14,19 @@
 
                     </el-input>
                 </el-form-item>
-                <el-button class="sub" type="primary">登 录</el-button>
+                <el-button class="sub" type="primary" @click="$router.push('/404')">登 录</el-button>
             </el-form>
         </div>
     </div>
 </template>
 <script lang="ts">
 export default {
-    langImport: (locale: string) => import(`@/views/login/lang/${locale}.ts`)
+    langImport: (locale: string) => import(`@/views/login/lang/${locale}.ts`),
+    name:'aa'
 }
 </script>
+
 <script setup lang="ts">
-import test from '../test.vue';
-import test2 from '../test2.vue';
 import { loginApi, LoginParams } from "@/api/user";
 import { useI18n } from "@/locales/I18n";
 let loginParams = reactive(new LoginParams());

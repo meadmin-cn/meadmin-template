@@ -7,7 +7,8 @@
     "dev": "vite -m dev",
     "build": "vue-tsc --noEmit && vite build -m prod",
     "preview": "vite preview",
-    "release": "release-it"
+    "release": "release-it",
+    "i":"npm install --registry=https://registry.npm.taobao.org && npx husky install"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.6",
@@ -25,10 +26,10 @@
     "vue-request": "^2.0.0-rc.2",
     "vue-router": "^4.1.1"
   },
-  "devDependencies": {
+  "devDependencies": {               
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@release-it/conventional-changelog": "^5.0.0",
+    "@release-it/conventional-changelog": "^5.0.0",                  
     "@types/js-cookie": "^3.0.2",
     "@types/node": "^18.0.1",
     "@types/nprogress": "^0.2.0",

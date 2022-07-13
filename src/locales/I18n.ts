@@ -1,14 +1,13 @@
 import { createI18n, I18n, I18nOptions, LocaleMessages, VueMessageType,useI18n as originUseI18n, UseI18nOptions, LocaleMessageDictionary, IntlDateTimeFormat, IntlNumberFormat, Composer } from 'vue-i18n'
 import {localeSetting} from '@/config/locale';
 import { App, Ref } from 'vue';
-const MessageMap:Map<string,LocaleMessages<VueMessageType>> = new Map();
+const MessageMap:Map<string,Record<any,any>> = new Map();
 let mainApp:App;
 export let globaleI18n:I18n<unknown, unknown, unknown, boolean>;
-
+export type MessageImport=(locale:string)=>Promise<{default:LocaleMessages<VueMessageType>}>;
 export function composerToGlobaleI18n(i18nComposer:Composer<unknown,unknown,unknown>):I18n<unknown, unknown, unknown, boolean>{
   return {global:i18nComposer,mode:'composition',install:()=>{}}
 }
-
 
 /**
  * 异步加载语言
@@ -16,22 +15,21 @@ export function composerToGlobaleI18n(i18nComposer:Composer<unknown,unknown,unkn
  * @param messageImport 
  * @returns 
  */
-export async function loadMessage(locale:string,messageImport:(locale:string)=>Promise<Record<any,any>>) {
+export function loadMessage<P extends Record<any,any> = {default:LocaleMessages<VueMessageType>}>
+(locale:string,messageImport:(locale:string)=>Promise<P>){
   const MapName = messageImport+locale;
   let message = MessageMap.get(MapName);
   if(message){
-    return message;
+    return message as P;
   }
-  try{
-    message = (await messageImport(locale)).default;
-    if(message){
-      MessageMap.set(MapName,message);
-      return message;
-    }
-  }catch{
-    
-  }
-  return false;
+  return new Promise<P>((resolve,reject)=>{
+    messageImport(locale).then((message)=>{
+      if(message){
+        MessageMap.set(MapName,message);
+        resolve(message);
+      }
+    }).catch(reject);
+  });
 }
 
 
@@ -42,15 +40,26 @@ export async function loadMessage(locale:string,messageImport:(locale:string)=>P
  * @param url 需要加载的语言的url
  * @returns 
  */
-export async function setLocaleMessage(i18n:I18n<unknown,unknown,unknown,boolean>,locale:string,messageImport:(locale:string)=>Promise<Record<any,any>>){
+export function setLocaleMessage(i18n:I18n<unknown,unknown,unknown,boolean>,locale:string,messageImport:MessageImport){
   if(Object.keys(i18n.global.getLocaleMessage(locale)).length){
     return true;
   }
-  let message = await loadMessage(locale,messageImport);
-  if(message){
-    i18n.global.setLocaleMessage(locale, message)
-    return true;
+  let message = loadMessage(locale,messageImport);
+  if(message instanceof Promise){
+    return new Promise((resolve,reject)=>{
+      (message as Promise<{default:LocaleMessages<VueMessageType>}>).then((message)=>{
+        if(message.default){
+          i18n.global.setLocaleMessage(locale, message.default);
+          resolve(true);
+        }else{
+          resolve(false);
+        }
+      }).catch(()=>resolve(false))
+    });
+  }else if(message.default){
+    i18n.global.setLocaleMessage(locale, message.default);
   }
+  return false;
 }
 
 /**
@@ -98,7 +107,6 @@ export async function installI18n(app: App) {
   globaleI18n = createI18n<{legacy:true,globalInjection:true}>(options as {legacy:true,globalInjection:true} & I18nOptions);
   await setI18nLanguage(localeSetting.locale || 'zh-cn');
   app.use(globaleI18n);
-  console.log(app.config.globalProperties);
 }
 
 /**
@@ -111,7 +119,7 @@ export function useI18n<Options extends UseI18nOptions = object,
 Messages extends Record<keyof Options['messages'],LocaleMessageDictionary<VueMessageType>> = Record<keyof Options['messages'], LocaleMessageDictionary<VueMessageType>>, 
 DateTimeFormats extends Record<keyof Options['datetimeFormats'], IntlDateTimeFormat> = Record<keyof Options['datetimeFormats'], IntlDateTimeFormat>, 
 NumberFormats extends Record<keyof Options['numberFormats'], IntlNumberFormat> = Record<keyof Options['numberFormats'], IntlNumberFormat>>
-(options:Options,messageImport?:(locale:string)=>Promise<Record<any,any>>) {
+(options:Options,messageImport?:MessageImport) {
   let res = originUseI18n<Options,Messages,DateTimeFormats,NumberFormats>(Object.assign({useScope:'local'},options));
   messageImport && setLocaleMessage(composerToGlobaleI18n(res),res.locale.value,messageImport);
   return res;
@@ -127,7 +135,7 @@ export async function asyncUseI18n<Options extends UseI18nOptions = object,
 Messages extends Record<keyof Options['messages'],LocaleMessageDictionary<VueMessageType>> = Record<keyof Options['messages'], LocaleMessageDictionary<VueMessageType>>, 
 DateTimeFormats extends Record<keyof Options['datetimeFormats'], IntlDateTimeFormat> = Record<keyof Options['datetimeFormats'], IntlDateTimeFormat>, 
 NumberFormats extends Record<keyof Options['numberFormats'], IntlNumberFormat> = Record<keyof Options['numberFormats'], IntlNumberFormat>>
-(options:Options,messageImport?:(locale:string)=>Promise<Record<any,any>>) {
+(options:Options,messageImport?:MessageImport) {
   let res = originUseI18n<Options,Messages,DateTimeFormats,NumberFormats>(Object.assign({useScope:'local'},options));
   messageImport && (await setLocaleMessage(composerToGlobaleI18n(res),res.locale.value,messageImport));
   return res;
