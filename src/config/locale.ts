@@ -1,5 +1,7 @@
 import { I18nOptions } from "vue-i18n";
 
+export const importTimeOut = 1000;//导入语言包超时时间(对于单次导入而不是整体导入)
+
 //语言列表 和elment-plus对应 locale字段值不要改变，否则会导致element-plus组件无法翻译为对应语言
 export const localeList= [
     {
@@ -219,9 +221,18 @@ export const localeList= [
         locale: 'bn',
     },
 ];
+/**
+ * VueI18n初始参数
+ * 强制把legacy设置为了false
+ * globalInjection设置为了true
+ * 文档参考: https://vue-i18n.intlify.dev/api/general.html#i18noptions
+ */
 export const localeSetting: I18nOptions = {
     // Locale
     locale: localeList[0].locale,
     // Default locale
     fallbackLocale: localeList[0].locale,
+    missingWarn:false,//当本地化失败时，压制输出的警告
+    fallbackWarn:false,//抑制回落警告
+    fallbackFormat:true,//跳过为你的"base"语言编写模板;key是您的模板
 };

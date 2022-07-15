@@ -1,10 +1,10 @@
 import { createI18n, I18n, I18nOptions, LocaleMessages, VueMessageType,useI18n as originUseI18n, UseI18nOptions, LocaleMessageDictionary, IntlDateTimeFormat, IntlNumberFormat, Composer } from 'vue-i18n'
-import {localeSetting} from '@/config/locale';
+import {localeSetting,importTimeOut} from '@/config/locale';
 import { App, Ref } from 'vue';
 const MessageMap:Map<string,Record<any,any>> = new Map();
 let mainApp:App;
 export let globaleI18n:I18n<unknown, unknown, unknown, boolean>;
-export type MessageImport=(locale:string)=>Promise<{default:LocaleMessages<VueMessageType>}>;
+export type MessageImport=[(locale:string)=>Promise<{default:LocaleMessages<VueMessageType>}>,string?];
 export function composerToGlobaleI18n(i18nComposer:Composer<unknown,unknown,unknown>):I18n<unknown, unknown, unknown, boolean>{
   return {global:i18nComposer,mode:'composition',install:()=>{}}
 }
@@ -16,14 +16,23 @@ export function composerToGlobaleI18n(i18nComposer:Composer<unknown,unknown,unkn
  * @returns 
  */
 export function loadMessage<P extends Record<any,any> = {default:LocaleMessages<VueMessageType>}>
-(locale:string,messageImport:(locale:string)=>Promise<P>){
-  const MapName = messageImport+locale;
+(locale:string,messageImport:[(locale:string)=>Promise<P>,string?]){
+  const MapName = (messageImport[1] === undefined?'':(messageImport[1] || messageImport[0]))+'|'+locale;
   let message = MessageMap.get(MapName);
   if(message){
     return message as P;
   }
   return new Promise<P>((resolve,reject)=>{
-    messageImport(locale).then((message)=>{
+    let timeOut:NodeJS.Timeout;
+    if(importTimeOut){
+      timeOut =  setTimeout(()=>{
+        console.error('超时');
+        reject('导入执行超时了')
+      },importTimeOut);
+    }
+    
+    messageImport[0](locale).then((message)=>{
+      timeOut && clearTimeout(timeOut);
       if(message){
         MessageMap.set(MapName,message);
         resolve(message);
@@ -73,9 +82,9 @@ export function setLocaleMessage(i18n:I18n<unknown,unknown,unknown,boolean>,loca
     return true;
   }
   if(i18n === globaleI18n){
-    await setLocaleMessage(i18n,locale,(locale)=>import(`./lang/${locale}.ts`));
+    await setLocaleMessage(i18n,locale,[(locale)=>import(`./lang/${locale}.ts`)]);
     try{
-      let message = await loadMessage(locale,(locale)=>import(`../../node_modules/element-plus/dist/locale/${locale}.min.js`));
+      let message = await loadMessage(locale,[(locale)=>import(`../../node_modules/element-plus/dist/locale/${locale}.min.js`),'element-plus']);
       if(message){
         mainApp.config.globalProperties.$elLocale = message;
       }

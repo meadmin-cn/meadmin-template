@@ -1,4 +1,4 @@
 export default {
-    '用户名':"username globale"
-
+    '请填写':"please input",
+    '用户名':'username'
 }

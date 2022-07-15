@@ -5,11 +5,11 @@ import svgLoader from 'vite-svg-loader'
 import { resolve } from 'path';
 import * as fs from 'fs';
 import {default as autogenerationImport,getName} from 'vite-plugin-autogeneration-import-file';
+import vueSetUpExtend from './plugin/vueSetupExtend';
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
 export default defineConfig({
-
   plugins: [vue(), svgLoader({
     svgoConfig: {
       plugins: [
@@ -45,7 +45,7 @@ export default defineConfig({
       template:fs.readFileSync('./template/svgIconComments.d.ts','utf-8'),
       codeTemplates:[{key:'\n        //code',template:'        {{name}}: Icon;'}]
     }
-  ])],
+  ]),vueSetUpExtend({setLangImport:true,exclude:['steup','lang']})],
   resolve: {
     alias: [
       // /@/xxxx => src/xxxx
@@ -55,5 +55,5 @@ export default defineConfig({
       }
     ],
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
-  },
+  }
 })

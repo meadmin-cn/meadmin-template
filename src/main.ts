@@ -5,6 +5,7 @@ import '@/event/module';
 import '@/styles/common.scss';
 async function bootscrapt() {
     const app = createApp(App);
+    app.component('aa',{})
     await mitter.emit(event.ready, app);
     app.mount('#app');
 }
