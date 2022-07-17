@@ -1,6 +1,14 @@
 import { I18nOptions } from "vue-i18n";
 
-export const importTimeOut = 1000;//导入语言包超时时间(对于单次导入而不是整体导入)
+
+interface LoadMessageConfig{//导入语言包配置
+    timeOut:number,//导入语言包超时时间(对于单次导入而不是整体导入)
+    errorWarning:boolean,//导入失败的警告（生产环境会被屏蔽）
+}
+export const loadMessageConfig:LoadMessageConfig = {
+    timeOut:1000,
+    errorWarning:true,
+}
 
 //语言列表 和elment-plus对应 locale字段值不要改变，否则会导致element-plus组件无法翻译为对应语言
 export const localeList= [

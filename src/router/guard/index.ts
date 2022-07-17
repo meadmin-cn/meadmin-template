@@ -46,11 +46,11 @@ function createProgressGuard(router: Router) {
 function triggerRouteChange(router: Router) {
     router.beforeEach(async (to, from) => {
         // 通知路由变化开始
-        mitter.emit(event.routeChange, [to, from]);
+        mitter.emit(event.beforeRouteChange, {to,from});
         return true;
     });
-    router.afterEach(() => {
-        mitter.emit(event.routeChangeOver);
+    router.afterEach((to, from, failure) => {
+        mitter.emit(event.afterRouteChange,{to, from, failure});
     });//通知路由变化完成
 }
 

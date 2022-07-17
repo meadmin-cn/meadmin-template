@@ -45,7 +45,7 @@ export default defineConfig({
       template:fs.readFileSync('./template/svgIconComments.d.ts','utf-8'),
       codeTemplates:[{key:'\n        //code',template:'        {{name}}: Icon;'}]
     }
-  ]),vueSetUpExtend({setLangImport:true,exclude:['steup','lang']})],
+  ]),vueSetUpExtend({setLangImport:true,exclude:['steup','lang'],setComponents:true})],
   resolve: {
     alias: [
       // /@/xxxx => src/xxxx

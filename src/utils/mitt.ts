@@ -32,8 +32,8 @@ export interface Mitter<Events extends Record<EventType, unknown>> {
   off<Key extends keyof Events>(type: Key, handler?: Handler<Events[Key]>): void;
   off(type: '*', handler: WildcardHandler<Events>): void;
 
-  emit<Key extends keyof Events>(type: Key, event: Events[Key]): void;
-  emit<Key extends keyof Events>(type: undefined extends Events[Key] ? Key : never): void;
+  emit<Key extends keyof Events>(type: Key, event: Events[Key]): any[];
+  emit<Key extends keyof Events>(type: undefined extends Events[Key] ? Key : never): any[];
 }
 
 /**
@@ -128,12 +128,13 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
      * @param {Any} [evt] Any value (object is recommended and powerful), passed to each handler
      * @memberOf mitt
      */
-    async emit<Key extends keyof Events>(type: Key, evt?: Events[Key]) {
+    emit<Key extends keyof Events>(type: Key, evt?: Events[Key]) {
       let handlers = all!.get(type);
+      let result = [];
       if (handlers) {
         handlers = (handlers as EventHandlerList<Events[keyof Events]>).slice();
         for (const handler of handlers) {
-          await handler(evt!);
+          result.push(handler(evt!));
           if (once!.has(handler)) {
             this.off(type, handler);
           }
@@ -144,10 +145,11 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
       if (handlers) {
         handlers = (handlers as WildCardEventHandlerList<Events>).slice();
         for (const handler of handlers) {
-          await handler(type, evt!);
+          result.push(handler(type, evt!));
         }
         once!.clear();
       }
+      return result;
     }
   };
 }

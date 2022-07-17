@@ -1,8 +1,11 @@
 enum event {
     ready = 'ready',//启动成功
-    routeChange = 'routeChange',//路由变更
-    routeChangeOver = 'routeChangeOver',//路由变更结束
-    login = 'login',//登录
-    logout = 'logout',//退出
+    beforeRouteChange = 'beforeRouteChange',//路由变更前
+    afterRouteChange = 'afterRouteChange',//路由变更后
+    beforeLogin = 'beforeLogin',//登录前
+    afterLogin = 'afterLogin',//登录成功后
+    beforeLogout = 'beforeLogout',//退出前
+    aftreLogout = 'aftreLogout',//退出成功后
+    beforeLocalChange='beforeLocalChange',//全局语言变更前
 }
 export default event

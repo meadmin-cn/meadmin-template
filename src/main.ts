@@ -3,10 +3,9 @@ import App from './app.vue'
 import { event, mitter } from './event';
 import '@/event/module';
 import '@/styles/common.scss';
+const app = createApp(App);
 async function bootscrapt() {
-    const app = createApp(App);
-    app.component('aa',{})
-    await mitter.emit(event.ready, app);
+    await Promise.allSettled(mitter.emit(event.ready, app));
     app.mount('#app');
 }
 bootscrapt();

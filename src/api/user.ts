@@ -14,14 +14,7 @@ export interface LoginResult {
     token: string;
 }
 export function loginApi() {
-    return request<LoginResult, [LoginParams
-
-
-
-
-
-
-    ]>((params) => ({
+    return request<LoginResult, [LoginParams]>((params) => ({
         url: api.login,
         method: 'post',
         data: params
