@@ -1,3 +1,4 @@
-//当前文件自动生成，不要自行更改
-export { default as UserStore } from "./modules/user"
+//当前文件由vite-plugin-autogeneration-import-file自动生成
+export { default as useSettingStore } from "./modules/setting"
+export { default as useUserStore } from "./modules/user"
 //code

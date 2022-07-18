@@ -34,7 +34,7 @@ export default defineConfig({
     // 可以选择auto-imports.d.ts生成的位置，使用ts建议设置为'src/auto-imports.d.ts'
     dts: 'types/auto-imports.d.ts'
   }),autogenerationImport([
-    {
+    {//svg icon
       pattern:['*.svg'],
       dir:'src/icons/svg',
       toFile:'types/meIconComments.d.ts',
@@ -44,6 +44,12 @@ export default defineConfig({
       },
       template:fs.readFileSync('./template/meIconComments.d.ts','utf-8'),
       codeTemplates:[{key:'\n        //code',template:'\n        {{name}}: Icon;'}]
+    },
+    {//pinia module
+      pattern:['**/*.{ts,js}','*.{ts,js}'],
+      dir:'src/store/modules',
+      toFile:'src/store/module.ts',
+      name:'use_{{name}}_store'
     }
   ]),vueSetUpExtend({setLangImport:true,exclude:['steup','lang'],setComponents:true})],
   resolve: {

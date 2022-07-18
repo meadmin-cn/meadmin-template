@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { Ref } from 'vue';
 import cookies from 'js-cookie';
-import {loginConfig as config} from '@/config';
+import { loginConfig as config } from '@/config';
 import { loading } from '@/utils/loading';
 import { PageEnum } from '@/enums/pageEnum';
 import { router, asyncRoutes } from '@/router';
@@ -65,5 +65,4 @@ export default defineStore({
             window.location.href = PageEnum.LOGIN;
         },
     },
-
 });

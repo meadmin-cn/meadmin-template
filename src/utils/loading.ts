@@ -16,7 +16,7 @@ const close = throttle(() => {
         loadingInstance.close();
         number = 0;
     }
-}, 220, { leading:false });//220毫秒后关闭防闪烁
+}, 220, { leading: false });//220毫秒后关闭防闪烁
 
 //关闭加载会判断已展示加载次数 当全部关闭后执行关闭操作
 export function closeLoading(force: boolean = false): void {

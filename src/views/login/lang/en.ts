@@ -1,3 +1,3 @@
-export default{
-    '登 录':'Login'
+export default {
+    '登 录': 'Login'
 }

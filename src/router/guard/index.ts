@@ -1,6 +1,6 @@
 import type { Router, RouteLocationNormalized, useRouter } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
-import { UserStore } from "@/store";
+import { useUserStore } from "@/store";
 import { event, mitter } from '@/event'
 import nProgress from 'nprogress';
 // Don't change the order of creation
@@ -16,7 +16,7 @@ export function setupRouterGuard(router: Router) {
  * @param router
  */
 function createPermissionGuard(router: Router) {
-    const userStore = UserStore();
+    const userStore = useUserStore();
     router.beforeEach(async (to) => {
         // if (to.path !== PageEnum.LOGIN && !userStore.token) {
         //     return PageEnum.LOGIN;
@@ -46,11 +46,11 @@ function createProgressGuard(router: Router) {
 function triggerRouteChange(router: Router) {
     router.beforeEach(async (to, from) => {
         // 通知路由变化开始
-        mitter.emit(event.beforeRouteChange, {to,from});
+        mitter.emit(event.beforeRouteChange, { to, from });
         return true;
     });
     router.afterEach((to, from, failure) => {
-        mitter.emit(event.afterRouteChange,{to, from, failure});
+        mitter.emit(event.afterRouteChange, { to, from, failure });
     });//通知路由变化完成
 }
 

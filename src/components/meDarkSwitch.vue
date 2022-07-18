@@ -10,26 +10,23 @@
 </template>
 
 <script setup lang="ts" name="meDarkSwitch">
-let isDark = ref(false);
-watchEffect(() => {
-    if (isDark.value) {
-        document.getElementsByTagName('html')[0].classList.add('dark');
-    } else {
-        document.getElementsByTagName('html')[0].classList.remove('dark');
-    }
-})
+import { useSettingStore } from '@/store';
+let { isDark } = useSettingStore();
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-.el-switch{
-    .el-switch__core{
-        border-color: getCssVar('switch-off','color');
-        background-color: getCssVar('switch-off','color');
-        .el-switch__action{
-            background-color: getCssVar('bg','color');
+
+.el-switch {
+    .el-switch__core {
+        border-color: getCssVar('switch-off', 'color');
+        background-color: getCssVar('switch-off', 'color');
+
+        .el-switch__action {
+            background-color: getCssVar('bg', 'color');
             position: relative;
-            color: getCssVar('text-color','primary');
-            .icon{
+            color: getCssVar('text-color', 'primary');
+
+            .icon {
                 position: absolute;
                 left: 50%;
                 transform: translateX(-50%);

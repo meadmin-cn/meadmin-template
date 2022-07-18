@@ -3,6 +3,8 @@ import { localeConfig as config } from '@/config';
 import { App, ComponentOptions, Ref, VNode, WritableComputedRef } from 'vue';
 import { event, mitter } from '@/event';
 import { loading, closeLoading } from '@/utils/loading';
+import { useSettingStore } from '@/store';
+import { Language } from 'element-plus/es/locale';
 const MessageMap: Map<string, Record<any, any>> = new Map();
 let mainApp: App;
 export let globaleI18n: I18n<unknown, unknown, unknown, boolean>;
@@ -31,7 +33,7 @@ export function loadMessage<P extends Record<any, any> = { default: LocaleMessag
     let timeOut: NodeJS.Timeout;
     if (config.loadMessageConfig.timeOut) {
       timeOut = setTimeout(() => {
-        console.warn('导入执行超时了');
+        console.warn('加载语言包超时');
         resolve(null)
       }, config.loadMessageConfig.timeOut);
     }
@@ -44,7 +46,7 @@ export function loadMessage<P extends Record<any, any> = { default: LocaleMessag
     }).catch((e) => {
       timeOut && clearTimeout(timeOut);
       if (import.meta.env.DEV && config.loadMessageConfig.errorWarning) {
-        console.warn('文件导入失败', e);
+        console.warn('语言包加载失败', e);
       }
       resolve(null);
     });
@@ -96,12 +98,12 @@ export async function setI18nLanguage(locale: string, isLoading = true, i18n = g
   if (i18n === globaleI18n) {
     let messageArr = [
       setLocaleMessage(i18n, locale, [(locale) => import(`./lang/${locale}.ts`)]),
-      loadMessage([(locale) => import(`../../node_modules/element-plus/dist/locale/${locale}.min.js`), 'element-plus'], locale),
+      loadMessage<{ default: Language }>([(locale) => import(`../../node_modules/element-plus/es/locale/lang/${locale}.mjs`), 'element-plus'], locale),
       ...mitter.emit(event.beforeLocalChange, { locale, i18n })
     ];
     const res = await Promise.allSettled(messageArr);
     if (res[1].status == 'fulfilled' && res[1].value) {
-      mainApp.config.globalProperties.$elLocale = res[1].value;
+      useSettingStore().elLocale = res[1].value.default;
     }
   }
   if (typeof i18n.global.locale == 'string') {
@@ -127,7 +129,7 @@ export async function installI18n(app: App) {
   mainApp = app;
   const options = Object.assign(config.localeSetting, { legacy: false, locale: undefined, globalInjection: true });
   globaleI18n = createI18n<{ legacy: true, globalInjection: true }>(options as { legacy: true, globalInjection: true } & I18nOptions);
-  await setI18nLanguage(config.localeSetting.locale || 'zh-cn',false);
+  await setI18nLanguage(config.localeSetting.locale || 'zh-cn', false);
   app.use(globaleI18n);
 }
 

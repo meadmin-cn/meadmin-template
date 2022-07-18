@@ -1,17 +1,17 @@
 import { I18nOptions } from "vue-i18n";
 
 
-interface LoadMessageConfig{//导入语言包配置
-    timeOut:number,//导入语言包超时时间(对于单次导入而不是整体导入)
-    errorWarning:boolean,//导入失败的警告（生产环境会被屏蔽）
+interface LoadMessageConfig {//导入语言包配置
+    timeOut: number,//导入语言包超时时间(对于单次导入而不是整体导入)
+    errorWarning: boolean,//导入失败的警告（生产环境会被屏蔽）
 }
-export const loadMessageConfig:LoadMessageConfig = {
-    timeOut:1000,
-    errorWarning:true,
+export const loadMessageConfig: LoadMessageConfig = {
+    timeOut: 1000,
+    errorWarning: true,
 }
 
 //语言列表 和elment-plus对应 locale字段值不要改变，否则会导致element-plus组件无法翻译为对应语言
-export const localeList= [
+export const localeList = [
     {
         text: '简体中文',
         locale: 'zh-cn',
@@ -240,7 +240,7 @@ export const localeSetting: I18nOptions = {
     locale: localeList[0].locale,
     // Default locale
     fallbackLocale: localeList[0].locale,
-    missingWarn:false,//当本地化失败时，压制输出的警告
-    fallbackWarn:false,//抑制回落警告
-    fallbackFormat:true,//跳过为你的"base"语言编写模板;key是您的模板
+    missingWarn: false,//当本地化失败时，压制输出的警告
+    fallbackWarn: false,//抑制回落警告
+    fallbackFormat: true,//跳过为你的"base"语言编写模板;key是您的模板
 };

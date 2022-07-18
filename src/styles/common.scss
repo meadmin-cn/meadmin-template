@@ -1,17 +1,41 @@
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-body {
-    margin: 0;
-    padding: 0;
-    #app {
-        width: 100%;
-        height: 100vh;
-        font-size: getCssVar('font-size', 'base');
+
+html {
+    body {
+        margin: 0;
+        padding: 0;
         color: getCssVar('text-color', 'primary');
+
+        #app {
+            width: 100%;
+            height: 100vh;
+        }
+    }
+
+    div {
+        box-sizing: border-box;
+    }
+
+    .pointer {
+        cursor: pointer;
+        /*鼠标变小手*/
     }
 }
-div {
-    box-sizing: border-box;
+
+.me-large {
+    //element 在切换large与default时 大部分组件字体大小用的base，间距大了字体依然没变。这里强制将font-size-base设置为large
+    --#{$namespace}-font-size-base: var(--#{$namespace}-font-size-large);
 }
-.pointer{
-    cursor:pointer;/*鼠标变小手*/
+
+.me-large {
+    font-size: getCssVar('font-size', 'base');
+}
+
+.me-default {
+    font-size: getCssVar('font-size', 'base');
+}
+
+.me-small {
+    font-size: getCssVar('font-size', 'small');
 }

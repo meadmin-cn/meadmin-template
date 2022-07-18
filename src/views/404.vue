@@ -6,16 +6,15 @@ import { loginApi } from "@/api/user";
 
 <template>
    <div class="main">
-   <a href="/login">登录</a>
+      <a href="/login">登录</a>
    </div>
 </template>
 
 <style lang="scss" scoped>
-.main{
+.main {
    background-color: #000000;
    height: 100vh;
    width: 100wh;
-   color:#fff
+   color: #fff
 }
-
 </style>

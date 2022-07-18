@@ -1,4 +1,4 @@
-import { UserStore } from "@/store";
+import { useUserStore } from "@/store";
 import axios, { AxiosRequestConfig } from "axios";
 import { ElMessage } from "element-plus";
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
@@ -14,7 +14,7 @@ service.interceptors.request.use((config) => {
     if (!config.headers) {
         config.headers = {}
     }
-    let userStore = UserStore()
+    let userStore = useUserStore()
     if (userStore.token) {
         config.headers['Auth-Token'] = userStore.token
     }

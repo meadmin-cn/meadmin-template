@@ -1,0 +1,23 @@
+<template>
+    <el-dropdown class="me-size-select pointer" max-height="500px">
+        <me-icon-size class="icon"></me-icon-size>
+        <template #dropdown>
+            <el-dropdown-menu>
+                <el-dropdown-item :disabled="settingStore.size == item" @click="settingStore.size = item"
+                    v-for="item in sizeEnum">{{ $t(item) }}</el-dropdown-item>
+            </el-dropdown-menu>
+        </template>
+    </el-dropdown>
+</template>
+<script setup lang="ts" name="meSize">
+import { sizeEnum } from '@/enums/configEnum';
+import { useSettingStore } from '@/store';
+const settingStore = useSettingStore();
+</script>
+<style lang="scss" scoped>
+.me-size-select {
+    .icon {
+        font-size: 1.2em;
+    }
+}
+</style>
