@@ -1,42 +1,53 @@
 <template>
     <div class="login">
-    <me-dark-switch></me-dark-switch>
+        <Header class="header"></Header>
         <div class="form">
             <div class="title">ME-Admin</div>
             <el-form>
                 <el-form-item>
-                    <el-input :placeholder="t('用户名', { name: 'cc' })" v-model="loginParams.username" />
+                    <el-input :placeholder="t('用户名')" v-model="loginParams.username" />
                 </el-form-item>
                 <el-form-item>
-                    <el-input type="password" :placeholder="t('密码{name}', { name: 'aa' })" v-model="loginParams.password">
+                    <el-input :type="showPass?'input':'password'" :placeholder="t('密码')" v-model="loginParams.password">
                         <template #suffix>
-                            <svg-icon-add></svg-icon-add>
+                            <div class="pointer"  @click="showPass = !showPass">
+                                <el-icon-view v-if="showPass"></el-icon-view>
+                                <el-icon-hide v-else></el-icon-hide>
+                            </div>
                         </template>
 
                     </el-input>
                 </el-form-item>
-                <el-button class="sub" type="primary">登 录</el-button>
+                <el-button class="sub" type="primary">{{t('登 录')}}</el-button>
             </el-form>
         </div>
     </div>
 </template>
 <script setup lang="ts"  name="login">
-import MeDarkSwitch from "@/components/meDarkSwitch.vue";
+import Header from "./components/header.vue";
 import { LoginParams } from "@/api/user";
-import { useLocalesI18n } from "@/locales/I18n";
+import { useLocalesI18n } from "@/locales/i18n";
 let loginParams = reactive(new LoginParams());
 let { t } = useLocalesI18n({}, [(locale: string) => import(`@/views/login/lang/${locale}.ts`), 'login'])
-
+let showPass = ref(false);
 </script>
 
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-
+.dark{
+    .login{
+        background-color:getCssVar('bg','color')
+    }
+}
 .login {
-    background-color: #2d3a4b;
+    background:url(@/assets/login.svg)  no-repeat scroll top center;
+    background-color: #efeeee;
     width: 100%;
     height: 100%;
-    padding-top: 20vh;
+    .header{
+        width: 100%;
+        margin-bottom: 20vh;
+    }
     .form {
         width: 80%;
         max-width: 500px;

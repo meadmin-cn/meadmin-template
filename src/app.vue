@@ -1,12 +1,12 @@
 <template>
   <router-view v-slot="{ Component, route }">
     <transition name="fade">
-        <load-component :componentKey="route.fullPath" :is="Component"></load-component>
+        <me-component :componentKey="route.fullPath" :is="Component"></me-component>
     </transition>
   </router-view>
 </template>
 <script setup lang="ts">
-  import loadComponent from './components/loadComponent.vue';  
+  import meComponent from './components/meComponent.vue';  
 </script>
 <style lang="scss">
 

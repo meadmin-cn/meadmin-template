@@ -42,6 +42,6 @@ export function installIcon(app: App) {
         eager: true
     });
     for (const [key, component] of Object.entries(<Record<string, Component>>svgModules)) {
-        componentIcon('SvgIcon' + upperFirst(path.parse(key).name), component)
+        componentIcon('MeIcon' + upperFirst(path.parse(key).name), component)
     }
 }

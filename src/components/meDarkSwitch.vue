@@ -2,8 +2,8 @@
     <div class="el-switch" @click="isDark = !isDark" :class="{ 'is-checked': isDark }">
         <span class="el-switch__core">
             <div class="el-switch__action">
-                <svg-icon-sunny class="icon" v-show="!isDark"></svg-icon-sunny>
-                <svg-icon-moon class="icon" v-show="isDark"></svg-icon-moon>
+                <me-icon-sunny class="icon" v-show="!isDark"></me-icon-sunny>
+                <me-icon-moon class="icon" v-show="isDark"></me-icon-moon>
             </div>
         </span>
     </div>
@@ -20,14 +20,15 @@ watchEffect(() => {
 })
 </script>
 <style lang="scss" scoped>
+@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
 .el-switch{
     .el-switch__core{
-        border-color: var(--el-switch-border-color, var(--el-switch-off-color)) !important;
-        background-color: var(--el-switch-off-color) !important;
+        border-color: getCssVar('switch-off','color');
+        background-color: getCssVar('switch-off','color');
         .el-switch__action{
-            background-color: var(--el-bg-color);
+            background-color: getCssVar('bg','color');
             position: relative;
-            color: var(--text-color-light);
+            color: getCssVar('text-color','primary');
             .icon{
                 position: absolute;
                 left: 50%;
