@@ -37,13 +37,13 @@ export default defineConfig({
     {
       pattern:['*.svg'],
       dir:'src/icons/svg',
-      toFile:'types/svgIconComments.d.ts',
+      toFile:'types/meIconComments.d.ts',
       name:(name)=>{
         name = getName(name);
-        return 'SvgIcon'+name[0].toUpperCase()+name.slice(1);
+        return 'MeIcon'+name[0].toUpperCase()+name.slice(1);
       },
-      template:fs.readFileSync('./template/svgIconComments.d.ts','utf-8'),
-      codeTemplates:[{key:'\n        //code',template:'        {{name}}: Icon;'}]
+      template:fs.readFileSync('./template/meIconComments.d.ts','utf-8'),
+      codeTemplates:[{key:'\n        //code',template:'\n        {{name}}: Icon;'}]
     }
   ]),vueSetUpExtend({setLangImport:true,exclude:['steup','lang'],setComponents:true})],
   resolve: {

@@ -6,7 +6,7 @@
 </template>
 <script setup lang="ts">
 import { PropType, Ref } from 'vue';
-import { getLoadMessagePromison } from '@/locales/I18n';
+import { getLoadMessagePromison } from '@/locales/i18n';
 const props = defineProps({
     is: {
         required: true,
@@ -22,7 +22,7 @@ let componentIs: Ref<any> = ref(undefined);
 watch(() => props.is, async (is) => {
     componentIs.value = undefined;
     if (is) {
-        await Promise.allSettled(getLoadMessagePromison(is as any));
+        await Promise.allSettled(getLoadMessagePromison(is as any));//自动加载语言包
         componentIs.value = is;
     }
 }, { immediate: true })
