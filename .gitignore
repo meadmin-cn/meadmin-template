@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 package-lock.json
 types/auto-imports.d.ts
-types/svgIconComments.d.ts
+types/meIconComments.d.ts
