@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia';
 import { Ref } from 'vue';
 import cookies from 'js-cookie';
 import { loginConfig as config } from '@/config';
 import { loading } from '@/utils/loading';
 import { PageEnum } from '@/enums/pageEnum';
 import { router, asyncRoutes } from '@/router';
+import { loginApi, LoginParams } from '@/api/user';
 interface UserState {
     user: Record<string, any>; //用户信息
     auth: string[] | undefined; //用户权限信息
@@ -55,8 +55,9 @@ export default defineStore({
             }
         },
         //登录
-        login: async function () {
-
+        login: async function (params: LoginParams) {
+            let res = await loginApi().runAsync(params);
+            this.token = res.token;
         },
         //退出
         logOut: function () {

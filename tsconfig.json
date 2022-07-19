@@ -29,7 +29,8 @@
       "./types"
     ],
     "types": [
-      "./node_modules/element-plus/global"
+      "./node_modules/element-plus/global",
+      "vite/client"
     ]
   },
   "include": [

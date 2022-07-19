@@ -51,7 +51,9 @@ export default defineConfig({
       toFile:'src/store/module.ts',
       name:'use_{{name}}_store'
     }
-  ]),vueSetUpExtend({setLangImport:true,exclude:['steup','lang'],setComponents:true})],
+  ]),
+  // vueSetUpExtend({setLangImport:true,exclude:['steup','lang'],setComponents:true})
+],
   resolve: {
     alias: [
       // /@/xxxx => src/xxxx

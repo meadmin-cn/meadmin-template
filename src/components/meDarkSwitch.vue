@@ -1,9 +1,10 @@
 <template>
-    <div class="el-switch" @click="isDark = !isDark" :class="{ 'is-checked': isDark }">
+    <div class="el-switch" @click="settingStore.isDark = !settingStore.isDark"
+        :class="{ 'is-checked': settingStore.isDark }">
         <span class="el-switch__core">
             <div class="el-switch__action">
-                <me-icon-sunny class="icon" v-show="!isDark"></me-icon-sunny>
-                <me-icon-moon class="icon" v-show="isDark"></me-icon-moon>
+                <me-icon-sunny class="icon" v-show="!settingStore.isDark"></me-icon-sunny>
+                <me-icon-moon class="icon" v-show="settingStore.isDark"></me-icon-moon>
             </div>
         </span>
     </div>
@@ -11,7 +12,7 @@
 
 <script setup lang="ts" name="meDarkSwitch">
 import { useSettingStore } from '@/store';
-let { isDark } = useSettingStore();
+const settingStore = useSettingStore();
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;

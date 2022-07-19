@@ -3,7 +3,7 @@
         <me-icon-translation class="icon"></me-icon-translation>
         <template #dropdown>
             <el-dropdown-menu>
-                <el-dropdown-item :disabled="$i18n.locale == item.locale" @click="setI18nLanguage(item.locale)"
+                <el-dropdown-item :disabled="$i18n.locale == item.locale" @click="setLanguage(item.locale)"
                     v-for="item in localeConfig.localeList">{{ $t(item.text) }}</el-dropdown-item>
             </el-dropdown-menu>
         </template>
@@ -12,6 +12,9 @@
 <script setup lang="ts" name="meTranslation">
 import { localeConfig } from '@/config';
 import { setI18nLanguage } from "@/locales/i18n";
+const setLanguage = (locale: string) => {
+    setI18nLanguage(locale)
+}
 </script>
 <style lang="scss" scoped>
 .me-locale-select {

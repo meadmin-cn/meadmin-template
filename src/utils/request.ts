@@ -1,6 +1,7 @@
 import { useUserStore } from "@/store";
 import axios, { AxiosRequestConfig } from "axios";
 import { ElMessage } from "element-plus";
+import { da } from "element-plus/es/locale";
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
 import { loading, closeLoading } from "./loading";
 
@@ -54,10 +55,10 @@ export default function request<R, P extends unknown[] = any>(axiosConfig: (...a
         try {
             !options?.noLoading && loading();
             let { data: res } = await service(await axiosConfig(...args));
-            if (res.code == undefined) {
+            if (!res || res.code == undefined) {
                 throw '格式错误';
             }
-            if (res.code !== 200) {
+            if (res.code != 200) {
                 throw res.msg;
             }
             !options?.noLoading && closeLoading();

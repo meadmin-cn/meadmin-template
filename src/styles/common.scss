@@ -24,7 +24,7 @@ html {
 }
 
 .me-large {
-    //element 在切换large与default时 大部分组件字体大小用的base，间距大了字体依然没变。这里强制将font-size-base设置为large
+    //element-plus 在切换large与default时 大部分组件字体大小用的base，间距大了字体依然没变。这里强制将font-size-base设置为large
     --#{$namespace}-font-size-base: var(--#{$namespace}-font-size-large);
 }
 

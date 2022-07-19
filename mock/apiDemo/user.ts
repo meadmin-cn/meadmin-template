@@ -1,4 +1,4 @@
-import { success, fail, getRequestToken } from "../help"
+import { success, fail, getRequestToken } from "../helper"
 const tokens = {
     admin: {
         token: 'admin-token'
@@ -34,8 +34,8 @@ export default [
     {
         url: '/api/user/login', //登录
         type: 'post',
-        response: config => {
-            const { username } = config.body
+        response: (config) => {
+            const { username } = JSON.parse(config.body)
             const token = tokens[username]
             // mock error
             if (!token) {
@@ -47,7 +47,7 @@ export default [
     {
         url: '/api/user/info', //获取用户信息
         type: 'get',
-        response: config => {
+        response: (config) => {
             const token = getRequestToken(config);
             if (!token) {
                 return fail('请先登录', '401')

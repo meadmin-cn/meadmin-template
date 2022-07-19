@@ -32,6 +32,7 @@
     "@commitlint/config-conventional": "^17.0.3",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/js-cookie": "^3.0.2",
+    "@types/mockjs": "^1.0.6",
     "@types/node": "^18.0.1",
     "@types/nprogress": "^0.2.0",
     "@types/path-browserify": "^1.0.0",

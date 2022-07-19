@@ -5,7 +5,7 @@ import Mitt from '@/utils/mitt';
 import { NavigationFailure, RouteLocationNormalized } from "vue-router";
 import eventEnmu from '@/enums/eventEnmu';
 import { App } from "vue";
-import { I18n } from 'vue-i18n';
+import { Composer } from 'vue-i18n';
 type Events = {//事件总线
     [eventEnmu.ready]: App
     [eventEnmu.beforeRouteChange]: { to: RouteLocationNormalized, from: RouteLocationNormalized },//路由变更前
@@ -14,7 +14,7 @@ type Events = {//事件总线
     [eventEnmu.afterLogin]: void,//登录成功后
     [eventEnmu.beforeLogout]: void,//退出前
     [eventEnmu.aftreLogout]: void,//退出后
-    [eventEnmu.beforeLocalChange]: { locale: string, i18n: I18n<unknown, unknown, unknown, boolean> }//全局语言变更前
+    [eventEnmu.beforeLocalChange]: { locale: string, i18n: Composer<unknown, unknown, unknown> }//全局语言变更前
 };
 const mitter = Mitt<Events>(); // inferred as Emitter<Events>
 export { eventEnmu as event, mitter }
