@@ -6,7 +6,6 @@ import { loading, closeLoading } from '@/utils/loading';
 import { useSettingStore } from '@/store';
 import { Language } from 'element-plus/es/locale';
 import { useGlobalStore } from '@/store';
-import { app } from '@/app';
 type GlobaleI18n = Composer<unknown, unknown, unknown>;
 const MessageMap: Map<string, Record<any, any>> = new Map();
 export type MessageImport = [(locale: string) => Promise<{ default: LocaleMessages<VueMessageType> }>, string?];
@@ -130,35 +129,44 @@ export const setI18nLanguage = async (locale: string, isLoading = true, i18n?: G
 
 
 /**
- * 获取组件的异步导入语言包promison数组
+ * 获取组件的异步导入语言包promison数组函数
  * @param options 
  * @param importArr 
  * @returns 
  */
-export const getLoadMessagePromison = (options: VNode & { __v_isVNode: true } | ComponentOptions | string, importArr: Promise<any>[] = [], locale?: string) => {
-  if (typeof options == 'string') {
-    const component = app.component(options);
-    if (component) {
-      getLoadMessagePromison(options, importArr)
-    }
-    return importArr;
+export const useGetLoadMessagePromison = () => {
+  const instance = getCurrentInstance();
+  if (instance == null) {
+    throw new Error('必须在setup中调用');
   }
-  if (options.__v_isVNode) {
-    getLoadMessagePromison(options.type, importArr);
-    return importArr;
-  }
-  if (typeof options === 'object') {
-    if ((<ComponentOptions>options).components) {
-      Object.values((<ComponentOptions>options).components!).forEach(component => {
-        getLoadMessagePromison(component as ComponentOptions, importArr);
-      });
+  const app = instance.appContext.app;
+  const getLoadMessagePromison = (options: VNode & { __v_isVNode: true } | ComponentOptions | string, importArr: Promise<any>[] = [], locale?: string) => {
+    if (typeof options == 'string') {
+      const component = app.component(options);
+      if (component) {
+        getLoadMessagePromison(options, importArr)
+      }
+      return importArr;
     }
-    if ((<ComponentOptions>options).langImport) {
-      const res = loadMessage((<ComponentOptions>options).langImport!, locale);
-      if (res instanceof Promise) {
-        importArr.push(res);
+    if (options.__v_isVNode) {
+      getLoadMessagePromison(options.type, importArr);
+      return importArr;
+    }
+    if (typeof options === 'object') {
+      if ((<ComponentOptions>options).components) {
+        Object.values((<ComponentOptions>options).components!).forEach(component => {
+          getLoadMessagePromison(component as ComponentOptions, importArr);
+        });
+      }
+      if ((<ComponentOptions>options).langImport) {
+        const res = loadMessage((<ComponentOptions>options).langImport!, locale);
+        if (res instanceof Promise) {
+          importArr.push(res);
+        }
       }
     }
+    console.log(importArr)
+    return importArr;
   }
-  return importArr;
+  return getLoadMessagePromison;
 }

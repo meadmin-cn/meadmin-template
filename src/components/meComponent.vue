@@ -6,7 +6,8 @@
 </template>
 <script setup lang="ts">
 import { PropType, Ref } from 'vue';
-import { getLoadMessagePromison } from '@/locales/i18n';
+import { useGetLoadMessagePromison } from '@/locales/i18n';
+const getLoadMessagePromison = useGetLoadMessagePromison();
 const props = defineProps({
     is: {
         required: true,
