@@ -19,9 +19,11 @@ function createPermissionGuard(router: Router) {
     const userStore = useUserStore();
     router.beforeEach(async (to) => {
         if (to.path !== PageEnum.LOGIN && !userStore.token) {
-            return PageEnum.LOGIN;
+            router.replace(PageEnum.LOGIN);
+            return false;
         } else if (to.path === PageEnum.LOGIN && userStore.token) {
-            return PageEnum.HOME;
+            router.replace(PageEnum.HOME);
+            return false;
         }
     });
 }

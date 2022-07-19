@@ -47,7 +47,7 @@ const login = async () => {
     formRef.value?.validate(async (valid, fields) => {
         if (valid) {
             await userStore.login(loginParams);
-            await router.push(<string>route.query.redirect || '/');
+            await router.replace(<string>route.query.redirect || '/');
         } else {
             console.log('提交错误', fields)
         }
