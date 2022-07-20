@@ -7,12 +7,14 @@ let loginConfig = { //登录配置
 }
 
 //主题配置
-interface ThemeConfig {
+export interface ThemeConfig {
     isDark: boolean,
-    size: sizeEnum
+    size: sizeEnum,
+    menuCollapse:boolean,
 }
 let themeConfig: ThemeConfig = {
     isDark: false,//是否暗黑模式
     size: sizeEnum.default,//默认大小
+    menuCollapse:false,//菜单是否折叠
 }
 export { loginConfig, localeConfig, themeConfig }

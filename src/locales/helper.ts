@@ -165,7 +165,6 @@ export const useGetLoadMessagePromison = () => {
         }
       }
     }
-    console.log(importArr)
     return importArr;
   }
   return getLoadMessagePromison;

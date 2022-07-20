@@ -1,5 +1,5 @@
 <template>
-  <el-config-provider :locale="settingStore.elLocale" :size="settingStore.size">
+  <el-config-provider :locale="settingStore.elLocale" :size="settingStore.size" >
     <router-view v-slot="{ Component, route }">
       <transition name="fade">
         <me-component :componentKey="route.fullPath" :is="Component"></me-component>
