@@ -9,7 +9,7 @@
     </el-header>
     <el-main >
         <el-scrollbar>
-            <div style="height: 1000px;background-color: blueviolet;" ></div>
+            <div style="height: 1000px;background-color: var(--el-bg-color-page);" ></div>
         </el-scrollbar>
     </el-main>
     </el-container>

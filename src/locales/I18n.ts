@@ -8,9 +8,9 @@ import { useGlobalStore } from '@/store';
 export const installI18n = async (app: App) => {
   const options = Object.assign(config.localeSetting, { legacy: false, locale: undefined, globalInjection: true });
   let i18n = createI18n<{ legacy: false, globalInjection: true }>(options as { legacy: false, globalInjection: true } & I18nOptions);
-  await setI18nLanguage(config.localeSetting.locale || 'zh-cn', false, i18n.global);
-  app.use(i18n);
   useGlobalStore().i18n = i18n.global;
+  await setI18nLanguage(config.localeSetting.locale || 'zh-cn', false);
+  app.use(i18n);
 }
 export * from './helper';
 export * from './hooks';

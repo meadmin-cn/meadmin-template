@@ -1,6 +1,6 @@
 <template>
     <el-dropdown class="me-size-select pointer" max-height="500px">
-        <me-icon-size class="icon"></me-icon-size>
+        <div class="flex-center"><me-icon-size class="icon"></me-icon-size></div>
         <template #dropdown>
             <el-dropdown-menu>
                 <el-dropdown-item :disabled="settingStore.size == item" @click="settingStore.size = item"

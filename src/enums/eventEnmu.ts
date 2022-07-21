@@ -7,5 +7,6 @@ enum eventEnum {
     beforeLogout = 'beforeLogout',//退出前
     aftreLogout = 'aftreLogout',//退出成功后
     beforeLocalChange = 'beforeLocalChange',//全局语言变更前
+    resize='resize',//window变化时触发
 }
 export default eventEnum

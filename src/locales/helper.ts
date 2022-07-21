@@ -43,7 +43,7 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
     }).catch((e) => {
       timeOut && clearTimeout(timeOut);
       if (import.meta.env.DEV && config.loadMessageConfig.errorWarning) {
-        console.warn('语言包加载失败', e);
+        console.warn(`语言包${MapName}加载失败:`, e);
       }
       resolve(null);
     });

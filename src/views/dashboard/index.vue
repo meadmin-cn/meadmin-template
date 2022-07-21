@@ -1,6 +1,4 @@
 <script setup lang="ts" name="Index">
-import { useLocalesI18n } from '@/locales/i18n';
-let { t } = useLocalesI18n({}, [(locale: string) => import(`@/views/login/lang/${locale}.ts`), 'login'])
 
 </script>
 

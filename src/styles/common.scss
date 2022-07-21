@@ -21,6 +21,11 @@ html {
         cursor: pointer;
         /*鼠标变小手*/
     }
+    .flex-center{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .me-large {

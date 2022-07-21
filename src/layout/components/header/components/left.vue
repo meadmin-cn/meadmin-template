@@ -21,7 +21,6 @@ const setMenuCollapse = ()=>{settingStore.menuCollapse = !settingStore.menuColla
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
-
 .left {
     height: 100%;
 

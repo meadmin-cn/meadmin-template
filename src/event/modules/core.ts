@@ -12,4 +12,5 @@ mitter.once(event.ready, async (app) => {
     await installStore(app);
     installRoute(app);
     await installI18n(app);
+    window.addEventListener('resize', ()=>mitter.emit(event.resize));
 });

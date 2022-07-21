@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <me-header class="header"></me-header>
+        <Header class="header"></Header>
         <div class="form">
             <div class="title">ME-Admin</div>
             <el-form ref="formRef" :rules="rules" :model="loginParams">
@@ -24,7 +24,7 @@
     </div>
 </template>
 <script setup lang="ts"  name="login">
-import MeHeader from "./components/header.vue";
+import Header from "./components/header.vue";
 import { LoginParams } from "@/api/user";
 import { useLocalesI18n } from "@/locales/i18n";
 import type { FormInstance, FormRules } from 'element-plus';
