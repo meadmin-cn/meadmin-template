@@ -25,3 +25,4 @@ dist-ssr
 package-lock.json
 types/auto-imports.d.ts
 types/meIconComments.d.ts
+src/store/module.ts
