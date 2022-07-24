@@ -21,7 +21,6 @@ const props = defineProps({
 });
 let componentIs: Ref<any> = ref(undefined);
 watch(() => props.is, async (is) => {
-    componentIs.value = undefined;
     if (is) {
         await Promise.allSettled(getLoadMessagePromison(is as any));//自动加载语言包
         componentIs.value = is;

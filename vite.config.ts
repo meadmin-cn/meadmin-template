@@ -1,4 +1,3 @@
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/rollup';
 import svgLoader from 'vite-svg-loader'
@@ -6,11 +5,26 @@ import { resolve } from 'path';
 import * as fs from 'fs';
 import { default as autogenerationImport, getName } from 'vite-plugin-autogeneration-import-file';
 import vueSetUpExtend from './plugin/vueSetupExtend';
+import { viteMockServe } from 'vite-plugin-mock'
+import { ConfigEnv ,UserConfigExport} from 'vite';
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
-export default defineConfig({
-  plugins: [vue(), svgLoader({
+export default ({ command }: ConfigEnv): UserConfigExport =>{
+  console.log(command);
+
+  return {
+  plugins: [viteMockServe({
+    mockPath: 'mock/apiDemo',
+      localEnabled: command === 'serve',
+      prodEnabled: command !== 'serve',
+      //  这样可以控制关闭mock的时候不让mock打包到最终代码内
+      injectCode: `
+        import { setupProdMockServer } from './mock/index';
+        setupProdMockServer();
+      `,
+  }),
+  vue(), svgLoader({
     svgoConfig: {
       plugins: [
         {
@@ -68,4 +82,4 @@ export default defineConfig({
     ],
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
   }
-})
+}}

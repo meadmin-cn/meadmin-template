@@ -1,5 +1,5 @@
 import { installRoute } from '@/router';
-import { installStore } from '@/store';
+import { installStore, useRouteStore } from '@/store';
 import { event, mitter } from '../index';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
@@ -10,7 +10,7 @@ mitter.once(event.ready, async (app) => {
     app.use(ElementPlus);
     installIcon(app);
     await installStore(app);
-    installRoute(app);
     await installI18n(app);
+    installRoute(app);
     window.addEventListener('resize', ()=>mitter.emit(event.resize));
 });

@@ -12,30 +12,34 @@ const tokens = {
 }
 const users = {
     'admin-token': {
-        auths: ['*'],
+        rules: ['*'],
         introduction: '我是一个管理员',
         avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-        name: '超级管理员'
+        name: '超级管理员',
+        username:'admin',
     },
     'editor-token': {
-        auths: ['edit', 'list'],
+        rules: ['edit', 'list'],
         introduction: '我是一个编辑者',
         avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-        name: '编辑员工'
+        name: '编辑员工',
+        username:'editor',
     },
     'viewer': {
-        auths: ['list'],
+        rules: ['list'],
         introduction: '我是一个查询者',
         avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-        name: '查看员工'
+        name: '查看员工',
+        username:'viewer',
     }
 }
 export default [
     {
         url: '/api/user/login', //登录
-        type: 'post',
-        response: (config) => {
-            const { username } = JSON.parse(config.body)
+        method: 'post',
+        response: (req) => {
+            console.log(req);
+            const { username } = req.body
             const token = tokens[username]
             // mock error
             if (!token) {
@@ -46,14 +50,14 @@ export default [
     },
     {
         url: '/api/user/info', //获取用户信息
-        type: 'get',
-        response: (config) => {
-            const token = getRequestToken(config);
+        method: 'get',
+        response: (req) => {
+            const token = getRequestToken(req);
             if (!token) {
                 return fail('请先登录', '401')
             }
             if (!users[token]) {
-                fail('登录信息已失效,请重新登录', '401')
+                return fail('登录信息已失效,请重新登录', '401')
             }
             return success(users[token]);
         }

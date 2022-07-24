@@ -1,7 +1,7 @@
 <template>
 <el-container class="layout">
     <el-aside width="max-content">
-        <layout-menu></layout-menu>
+        <layout-sidebar></layout-sidebar>
     </el-aside>
     <el-container>
     <el-header height="max-content">
@@ -9,15 +9,17 @@
     </el-header>
     <el-main >
         <el-scrollbar>
-            <div style="height: 1000px;background-color: var(--el-bg-color-page);" ></div>
+            <div style="height: 1000px;background-color: var(--el-bg-color-page);" >
+                <router-view></router-view>
+            </div>
         </el-scrollbar>
     </el-main>
     </el-container>
 </el-container>
 </template>
 <script setup lang="ts" name="layout">
-import LayoutMenu from './components/menu/index.vue';
-import LayoutHeader from './components/header/index.vue';
+import layoutSidebar from './components/sidebar/index.vue';
+import layoutHeader from './components/header/index.vue';
 
 
 </script>

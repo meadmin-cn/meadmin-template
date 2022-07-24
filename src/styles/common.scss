@@ -26,6 +26,13 @@ html {
         align-items: center;
         justify-content: center;
     }
+    a:hover,
+    a:visited,
+    a:link,
+    a:active {
+        color: inherit;
+        text-decoration: none;
+    }
 }
 
 .me-large {

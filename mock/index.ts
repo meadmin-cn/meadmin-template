@@ -1,11 +1,15 @@
-import mock from 'mockjs';
-const modules = import.meta.glob('./apiDemo/*.ts', {
-    import: 'default',
-    eager: true
-});
-Object.entries(modules).forEach(([key,module]:any)=>{
-    module.forEach((item:any)=>{
-        mock.mock(item.url,item.type,item.response);
-    })
-    
-});
+//  mockProdServer.ts
+import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
+
+export function setupProdMockServer() {
+    const modules = import.meta.glob('./apiDemo/*.ts', {
+        import: 'default',
+        eager: true
+    });
+    let moduleArr:any[] = [];
+    Object.entries(modules).forEach(([key,module]:any)=>{
+        moduleArr = moduleArr.concat(module);
+        
+    });
+  createProdMockServer([...moduleArr])
+}

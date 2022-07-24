@@ -3,11 +3,12 @@ import cookies from 'js-cookie';
 import { loginConfig as config } from '@/config';
 import { loading } from '@/utils/loading';
 import { PageEnum } from '@/enums/pageEnum';
-import { router, asyncRoutes } from '@/router';
-import { loginApi, LoginParams } from '@/api/user';
+import { loginApi, LoginParams,userInfoApi,UserInfoResult } from '@/api/user';
+import { router } from '@/router';
+import useRouteStore from './route';
 interface UserState {
-    user: Record<string, any>; //用户信息
-    auth: string[] | undefined; //用户权限信息
+    user: UserInfoResult; //用户信息
+    rules: string[] | undefined; //用户权限信息
     token: Ref<string>;//用户token
 }
 export default defineStore({
@@ -15,8 +16,8 @@ export default defineStore({
     state: (): UserState => {
         let _token: string = '';
         return {
-            user: {},
-            auth: undefined,
+            user: {} as UserInfoResult,
+            rules: undefined,
             token: customRef<string>((track, trigger) => {
                 return {
                     get() {
@@ -44,26 +45,28 @@ export default defineStore({
     },
     actions: {
         //初始化
-        init: async function () {
-            let token = cookies.get(config.tokenName);
+        init: async function (tokenValue?:string) {
+            let token =  tokenValue || cookies.get(config.tokenName);
             if (token) {
                 this.token = token;
-                asyncRoutes.forEach(route => router.addRoute(route));
+                this.user = await userInfoApi().runAsync();
+                this.rules = this.user!.rules;
+                useRouteStore().generateRoutes().forEach(route=>router.addRoute(route));
             } else {
                 this.token = '';
-                asyncRoutes.forEach(route => router.addRoute(route));
             }
         },
         //登录
         login: async function (params: LoginParams) {
             let res = await loginApi().runAsync(params);
-            this.token = res.token;
+            await this.init(res.token);
         },
         //退出
         logOut: function () {
             loading();
             this.token = '';
-            window.location.href = PageEnum.LOGIN;
+            router.replace({path:PageEnum.LOGIN,query:{redirect:window.location.href}})
+            window.location.reload();
         },
     },
 });

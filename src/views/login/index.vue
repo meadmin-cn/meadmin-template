@@ -18,7 +18,7 @@
                         </template>
                     </el-input>
                 </el-form-item>
-                <el-button class="sub" type="primary" @click="login">{{ t('登 录') }}</el-button>
+                <el-button class="sub" type="primary"  @click.enter.exact="login()">{{ t('登 录') }}</el-button>
             </el-form>
         </div>
     </div>

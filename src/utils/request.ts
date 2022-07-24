@@ -1,7 +1,6 @@
 import { useUserStore } from "@/store";
 import axios, { AxiosRequestConfig } from "axios";
 import { ElMessage } from "element-plus";
-import { da } from "element-plus/es/locale";
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
 import { loading, closeLoading } from "./loading";
 
@@ -20,8 +19,7 @@ service.interceptors.request.use((config) => {
         config.headers['Auth-Token'] = userStore.token
     }
     return config
-},
-    (error) => {
+},(error) => {
         // 对请求错误做些什么
         console.error(error) // for debug
         return Promise.reject('请求异常，请联系管理员');//改写错误信息
@@ -46,11 +44,11 @@ type RequestOptions<R, P extends unknown[]> = {
 
 
 setGlobalOptions({
-    manual: true,
+    manual: true,//请求需要手动调用
     // ...
 });
 //请求函数，当请求失败时直接抛出异常;
-export default function request<R, P extends unknown[] = any>(axiosConfig: (...args: P) => AxiosRequestConfig, options?: RequestOptions<R, P>) {
+export default function request<R, P extends unknown[] = []>(axiosConfig: (...args: P) => AxiosRequestConfig, options?: RequestOptions<R, P>) {
     return useRequest<R, P>(async (...args: P) => {
         try {
             !options?.noLoading && loading();
@@ -58,9 +56,15 @@ export default function request<R, P extends unknown[] = any>(axiosConfig: (...a
             if (!res || res.code == undefined) {
                 throw '格式错误';
             }
-            if (res.code != 200) {
+            // 401：认证失败
+            if (res.code === '401') {
+                useUserStore().logOut();
+                return res;
+            }
+            if (res.code !== '200') {
                 throw res.msg;
             }
+            
             !options?.noLoading && closeLoading();
             return options?.needAll ? res : res.data;
         } catch (e) {

@@ -87,7 +87,7 @@
 
     </div>
 </template>
-<script setup lang="ts" name="footer">
+<script setup lang="ts" name="Footer">
 import { mitter, event } from '@/event';
 import { ElScrollbar } from 'element-plus';
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
@@ -104,10 +104,10 @@ onMounted(() => {
     max.value = listRef.value!.clientWidth - scrollbarRef.value?.$el.clientWidth;
 })
 const back = () => {
-    scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: scrollLeft.value - scrollbarRef.value!.$el.clientWidth + 100 })
+    scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: scrollLeft.value - scrollbarRef.value!.$el.clientWidth/2})
 }
 const go = () => {
-    scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: scrollLeft.value + scrollbarRef.value!.$el.clientWidth - 100 })
+    scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: scrollLeft.value + scrollbarRef.value!.$el.clientWidth /2})
 }
 
 </script>

@@ -6,5 +6,4 @@ export const store = createPinia();
 export async function installStore(app: App) {
     app.use(store);
     await useUserStore().init();
-    // useGlobalStore().app = app;
 }

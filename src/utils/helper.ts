@@ -11,7 +11,7 @@
  * @param initialValue  作为第一次调用 callback 函数时参数 previousValue 的值
  * @returns 
  */
-export function objectRreduce<T, P extends Record<string, any>>(
+export function objectRreduce<T, P extends Record<string, any> = Record<string, any>>(
     object: P,
     callbackfn: (previousValue: T, currentValue: P[keyof P], currentKey: string, object: P) => T,
     initialValue: T): T {
@@ -19,4 +19,16 @@ export function objectRreduce<T, P extends Record<string, any>>(
         initialValue = callbackfn(initialValue, object[i], i, object);
     }
     return initialValue
+}
+
+/**
+ * 合并对象的value（value必须为数组）
+ * @param object 
+ * @returns 
+ */
+export function concatObjectValue<T , P extends Record<string,T[]> = Record<string,T[]>>(object:P){
+    return objectRreduce(object, 
+    (currentValue, previousValue) => {
+        return currentValue.concat(previousValue || []);
+    }, [] as T[])
 }

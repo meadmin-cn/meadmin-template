@@ -6,8 +6,8 @@
 <Footer></Footer>
 </template>
 <script setup lang="ts" name="layoutHeader">
-import Left from './components/left.vue';
-import Right from './components/right.vue';
+import left from './components/left.vue';
+import right from './components/right.vue';
 import Footer from './components/footer.vue';
 
 

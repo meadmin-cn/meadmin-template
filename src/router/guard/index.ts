@@ -35,11 +35,11 @@ function createProgressGuard(router: Router) {
         if (to.meta.loaded) {
             return true;
         }
-        nProgress.start();
+        // nProgress.start();
         return true;
     });
     router.afterEach(async () => {
-        nProgress.done();
+        // nProgress.done();
         return true;
     });
 }
