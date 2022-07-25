@@ -5,46 +5,10 @@
         </a>
         <el-scrollbar ref="scrollbarRef" @scroll="scroll($event)" view-class="list-parent" style="flex-grow:1">
             <div class="list" ref="listRef">
-                <el-dropdown trigger="contextmenu">
-                    <div class="item pointer active">控制台1</div>
-                    <template #dropdown>
-                        <el-dropdown-menu>
-                            <el-dropdown-item>
-                                <el-icon-refresh /> 重新加载
-                            </el-dropdown-item>
-                            <el-dropdown-item>
-                                <el-icon-close /> 关闭当前
-                            </el-dropdown-item>
-                            <el-dropdown-item divided>
-                                <el-icon-download style="transform: rotate(90deg);" />关闭左侧
-                            </el-dropdown-item>
-                            <el-dropdown-item>
-                                <el-icon-download style="transform: rotate(270deg);" />关闭右侧
-                            </el-dropdown-item>
-                            <el-dropdown-item divided>
-                                <el-icon-document-delete /> 关闭其他
-                            </el-dropdown-item>
-                            <el-dropdown-item>
-                                <el-icon-minus /> 关闭全部
-                            </el-dropdown-item>
-                        </el-dropdown-menu>
-                    </template>
+                <el-dropdown v-for="tag in tags" :key="tag.fullPath" trigger="contextmenu" ref="tagsRef">
+                    <div class="item pointer" :class="{active:tag.fullPath === currentTag?.fullPath}">{{ tag.meta.title }}</div>
+                    <contextmenu #dropdown></contextmenu>
                 </el-dropdown>
-                <div class="item pointer">控制台2</div>
-                <div class="item pointer">控制台3</div>
-                <div class="item pointer">控制台4</div>
-                <div class="item pointer">控制台5</div>
-                <div class="item pointer">控制台6</div>
-                <div class="item pointer">控制台7</div>
-                <div class="item">控制台8</div>
-                <div class="item">控制台9</div>
-                <div class="item">控制台10</div>
-                <div class="item">控制台1</div>
-                <div class="item">控制台12</div>
-                <div class="item">控制台13</div>
-                <div class="item">控制台14</div>
-                <div class="item">控制台15</div>
-                <div class="item">控制台16</div>
             </div>
 
         </el-scrollbar>
@@ -59,44 +23,36 @@
                 <div class="icon pointer">
                     <el-icon-menu></el-icon-menu>
                 </div>
-                <template #dropdown>
-                    <el-dropdown-menu>
-                        <el-dropdown-item>
-                            <el-icon-refresh /> 重新加载
-                        </el-dropdown-item>
-                        <el-dropdown-item>
-                            <el-icon-close /> 关闭当前
-                        </el-dropdown-item>
-                        <el-dropdown-item divided>
-                            <el-icon-download style="transform: rotate(90deg);" />关闭左侧
-                        </el-dropdown-item>
-                        <el-dropdown-item>
-                            <el-icon-download style="transform: rotate(270deg);" />关闭右侧
-                        </el-dropdown-item>
-                        <el-dropdown-item divided>
-                            <el-icon-document-delete /> 关闭其他
-                        </el-dropdown-item>
-                        <el-dropdown-item>
-                            <el-icon-minus /> 关闭全部
-                        </el-dropdown-item>
-                    </el-dropdown-menu>
-                </template>
+                <contextmenu #dropdown></contextmenu>
             </el-dropdown>
-
         </div>
-
     </div>
 </template>
-<script setup lang="ts" name="Footer">
+<script setup lang="ts" name="tags">
 import { mitter, event } from '@/event';
-import { ElScrollbar } from 'element-plus';
+import { useRouteStore } from '@/store';
+import { ElScrollbar, IElDropdownInstance } from 'element-plus';
+import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
+import contextmenu from './components/contextmenu.vue';
+import { isExternal } from '@/utils/validate';
+import { resolve } from 'path-browserify';
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
 const listRef = ref<HTMLDivElement>();
 let scrollLeft = ref(0);
 const scroll = (options: { scrollLeft: number; }) => {
     scrollLeft.value = options.scrollLeft;
 }
+const resolvePath = (routePath: string,basePath='') => {
+    if (isExternal(routePath) || isExternal(basePath)) {
+        return routePath
+    }
+    return resolve(basePath, routePath)
+}
 let max = ref(0);
+let tagsRef = ref([] as IElDropdownInstance&{$el:HTMLElement}[]);
+let currentTag = ref<RouteLocationNormalized>();
+let route = useRoute();
+let tags = reactive([] as RouteLocationNormalized[]);
 mitter.on(event.resize, () => {
     max.value = listRef.value!.clientWidth - scrollbarRef.value?.$el.clientWidth;
 }, true);
@@ -104,11 +60,54 @@ onMounted(() => {
     max.value = listRef.value!.clientWidth - scrollbarRef.value?.$el.clientWidth;
 })
 const back = () => {
-    scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: scrollLeft.value - scrollbarRef.value!.$el.clientWidth/2})
+    scrollbarRef.value!.setScrollLeft( scrollLeft.value - scrollbarRef.value!.$el.clientWidth / 2 )
 }
 const go = () => {
-    scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: scrollLeft.value + scrollbarRef.value!.$el.clientWidth /2})
+    scrollbarRef.value!.setScrollLeft( scrollLeft.value + scrollbarRef.value!.$el.clientWidth / 2 )
 }
+const jump = (index: number) => {
+    nextTick(()=>{
+        if(tagsRef.value[index]){
+            const offsetLeft = tagsRef.value[index].$el.offsetLeft;
+            const offsetWidth = tagsRef.value[index].$el.offsetWidth;
+            const offsetRight = offsetWidth + offsetLeft;
+            const parentWidth = scrollbarRef.value!.$el.clientWidth;
+            const parentLeft = scrollLeft.value;
+            const parentRight = parentWidth + scrollLeft.value;
+            if(offsetLeft<parentLeft){
+                scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: offsetLeft})
+            }
+            if(offsetRight > parentRight){
+                scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: offsetLeft + offsetWidth - parentWidth});
+            }
+            currentTag.value = tags[index];
+        }
+    })
+}
+
+//添加固定tag
+const addAffixTags = (routes: RouteRecordRaw[],basePath = '') => {
+    routes.forEach(item => {
+        if (item.meta?.affix && item.meta.title) {
+            tags.push(Object.assign({ fullPath: resolvePath(item.path,basePath), hash: '', query: {}, matched: [], redirectedFrom: undefined }, item) as unknown as RouteLocationNormalized);
+        }
+        if (item.children) {
+            addAffixTags(item.children,resolvePath(item.path,basePath));
+        }
+    });
+}
+addAffixTags(useRouteStore().routes);
+watch(route, (route) => {
+    if (route.meta.title && !route.meta.hideTag) {
+        let index = tags.findIndex(item => item.fullPath == route.fullPath);
+        if (index > -1) {
+            return jump(index);
+        }
+        tags.push(JSON.parse(JSON.stringify(route)));
+        return jump(tags.length-1);
+
+    }
+}, { immediate: true });
 
 </script>
 <style lang="scss" scoped>
@@ -156,9 +155,10 @@ const go = () => {
         height: 100%;
         align-items: center;
         width: max-content;
-        .el-dropdown{
+                .el-dropdown {
             height: 100%;
         }
+
         .item {
             border-right: 1px solid getCssVar('border', 'color');
             height: 100%;
@@ -195,12 +195,13 @@ const go = () => {
             left: 0;
             background-color: getCssVar('color', 'primary');
             width: 0;
-            transition: width 0.5s;
         }
 
         .item:hover::after,
         .item.active::after {
             width: 100%;
+            transition: width 0.5s;
+
         }
     }
 

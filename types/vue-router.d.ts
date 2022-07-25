@@ -5,12 +5,12 @@ declare module 'vue-router' {
         title: string,
         //对应权限 多个之间为或的关系
         rule?: string[],
-        // 是否是固定的tab
+        // 是否是固定的tag
         affix?: boolean,
         // 图标
         icon?: string,
-        // 在tab中隐藏
-        hideTab?: boolean,
+        // 在tag中隐藏
+        hideTag?: boolean,
         //外链
         isLink?: boolean,
         // 当路由设置了该属性，则会高亮相对应的侧边栏。

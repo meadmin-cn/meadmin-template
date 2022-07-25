@@ -5,16 +5,16 @@
             <router-link v-if="onlyOneChild!.meta" :to="resolvePath(onlyOneChild!.path)">
                 <el-menu-item :index="resolvePath(onlyOneChild!.path)" :title="onlyOneChild!.meta.title">
                     <component :is="onlyOneChild!.meta.icon" v-if="onlyOneChild!.meta.icon" />
-                    <span class="menu">{{ onlyOneChild!.meta.title }}</span>
+                    <template #title>
+                        <span class="menu">{{ onlyOneChild!.meta.title }}</span>
+                    </template>
                 </el-menu-item>
             </router-link>
         </template>
         <el-sub-menu v-else :index="resolvePath(item.path)">
-            <template #title>
-                <template v-if="item.meta">
-                    <component :is="item.meta.icon" v-if="item.meta.icon" />
-                    <span class="menu">{{ item.meta.title }}</span>
-                </template>
+            <template v-if="item.meta" #title>
+                <component :is="item.meta.icon" v-if="item.meta.icon" />
+                <span class="menu">{{ item.meta.title }}</span>
             </template>
             <sidebar-item v-for="child in item.children" :key="child.path" :item="child"
                 :base-path="resolvePath(child.path)"></sidebar-item>

@@ -3,12 +3,12 @@
     <left></left>
     <right class="right-header"></right>
 </div>
-<Footer></Footer>
+<tags></tags>
 </template>
 <script setup lang="ts" name="layoutHeader">
 import left from './components/left.vue';
 import right from './components/right.vue';
-import Footer from './components/footer.vue';
+import tags from './components/tags/index.vue';
 
 
 </script>

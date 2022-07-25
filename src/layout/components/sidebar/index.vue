@@ -34,7 +34,7 @@ watch(route, (route) => {
 
 .layout-sidebar {
   --#{$namespace}-menu-base-level-padding: 12px;
-  --#{$namespace}-menu-text-color: rgba(255, 255, 255, 0.7);
+  --#{$namespace}-menu-text-color: rgba(255, 255, 255, 0.85);
   --#{$namespace}-menu-active-color: #ffffff;
 
   &:deep(.layout-sidebar-content) {
@@ -79,8 +79,7 @@ watch(route, (route) => {
       }
 
       .#{$namespace}-menu-item.is-active {
-        color: getCssVar('menu-active', 'color') !important;
-        background-color: getCssVar('color', 'primary');
+        color: getCssVar('color', 'primary');
       }
 
       .#{$namespace}-menu--inline {
@@ -92,6 +91,7 @@ watch(route, (route) => {
         .#{$namespace}-icon {
           width: 1em;
           margin-left: -1px;
+          margin-right: 12px;
         }
       }
     }

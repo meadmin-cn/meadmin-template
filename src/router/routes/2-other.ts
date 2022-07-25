@@ -8,6 +8,6 @@ export const routes: RouteRecordRaw[] = [
         redirect: '/other/index',
         component: Layout,
         children:concatObjectValue<RouteRecordRaw>(import.meta.glob('./other/*.ts', { eager: true,import:'routes' })),
-        meta:{title:'其他'}
+        meta:{title:'其他','icon':'el-icon-promotion'}
     }
 ];
