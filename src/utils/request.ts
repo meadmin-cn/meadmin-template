@@ -47,9 +47,19 @@ setGlobalOptions({
     manual: true,//请求需要手动调用
     // ...
 });
+
 //请求函数，当请求失败时直接抛出异常;
-export default function request<R, P extends unknown[] = []>(axiosConfig: (...args: P) => AxiosRequestConfig, options?: RequestOptions<R, P>) {
-    return useRequest<R, P>(async (...args: P) => {
+export default function request<R, P extends unknown[] = []>(axiosConfig: (...args: P) => AxiosRequestConfig, options?: RequestOptions<R, P>):ReturnType<typeof useRequest<R, P>>;
+export default function request<R, P extends unknown[] = [],T extends true|undefined = true|undefined>(axiosConfig: (...args: P) => AxiosRequestConfig, options: RequestOptions<R, P>,returnAxios?:T):T extends true ? (...args: P)=>Promise<R>:ReturnType<typeof useRequest<R, P>>;
+/**
+ * 请求函数
+ * @param axiosConfig  axios的配置项
+ * @param options vue request配置项+自定义配置项参考 RequestOptions
+ * @param returnAxios 
+ * @returns 
+ */
+export default function request<R, P extends unknown[] = [],T=true>(axiosConfig: (...args: P) => AxiosRequestConfig, options?: RequestOptions<R, P>,returnAxios?:T){
+    const axiosService =  async (...args: P):Promise<R> => {
         try {
             !options?.noLoading && loading();
             let { data: res } = await service(await axiosConfig(...args));
@@ -72,6 +82,8 @@ export default function request<R, P extends unknown[] = []>(axiosConfig: (...ar
             !options?.noError && ElMessage.error({ message: e instanceof Error ? e.message : String(e) });
             throw e;
         }
-    }, options);
+    }
+    
+    return returnAxios?axiosService:useRequest<R, P>(axiosService, options);
 }
 

@@ -3,11 +3,15 @@
         <a class="icon pointer" :class="{ 'is-disabled': scrollLeft <= 0 }" @click="back">
             <el-icon-d-arrow-left></el-icon-d-arrow-left>
         </a>
-        <el-scrollbar ref="scrollbarRef" @scroll="scroll($event)" view-class="list-parent" style="flex-grow:1">
+        <el-scrollbar ref="scrollbarRef" @scroll="({scrollLeft:left})=>scrollLeft = left" view-class="list-parent" style="flex-grow:1">
             <div class="list" ref="listRef">
                 <el-dropdown v-for="tag in tags" :key="tag.fullPath" trigger="contextmenu" ref="tagsRef">
-                    <div class="item pointer" :class="{active:tag.fullPath === currentTag?.fullPath}">{{ tag.meta.title }}</div>
-                    <contextmenu #dropdown></contextmenu>
+                    <div class="item pointer" @click="push(tag)" :class="{ active: tag.fullPath === currentTag?.fullPath }">
+                    {{ tag.meta.title}}
+                    </div>
+                    <template #dropdown>
+                        <contextmenu v-model="tags" :current="tag"></contextmenu>
+                    </template>
                 </el-dropdown>
             </div>
 
@@ -23,7 +27,9 @@
                 <div class="icon pointer">
                     <el-icon-menu></el-icon-menu>
                 </div>
-                <contextmenu #dropdown></contextmenu>
+                <template #dropdown>
+                    <contextmenu v-model="tags" :current="currentTag!"></contextmenu>
+                </template>
             </el-dropdown>
         </div>
     </div>
@@ -36,67 +42,77 @@ import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
 import contextmenu from './components/contextmenu.vue';
 import { isExternal } from '@/utils/validate';
 import { resolve } from 'path-browserify';
-const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
-const listRef = ref<HTMLDivElement>();
-let scrollLeft = ref(0);
-const scroll = (options: { scrollLeft: number; }) => {
-    scrollLeft.value = options.scrollLeft;
-}
-const resolvePath = (routePath: string,basePath='') => {
+import $ from 'jquery';
+import { useGlobalConfig } from 'element-plus';
+//初始化tags
+let tags = reactive([] as RouteLocationNormalized[]);
+const resolvePath = (routePath: string, basePath = '') => {
     if (isExternal(routePath) || isExternal(basePath)) {
         return routePath
     }
-    return resolve(basePath, routePath)
+    return resolve(basePath, routePath);
 }
+const addAffixTags = (routes: RouteRecordRaw[], basePath = '') => {
+    routes.forEach(item => {
+        if (item.meta?.affix && item.meta.title) {
+            tags.push(Object.assign({ fullPath: resolvePath(item.path, basePath), hash: '', query: {}, matched: [], redirectedFrom: undefined }, item) as unknown as RouteLocationNormalized);
+        }
+        if (item.children) {
+            addAffixTags(item.children, resolvePath(item.path, basePath));
+        }
+    });
+}
+addAffixTags(useRouteStore().routes);
+//滚动设置
+let elNamespace = useGlobalConfig('namespace');
+const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
+const listRef = ref<HTMLDivElement>();
+let scrollLeft = ref(0);
+const setScrollLeft = (left: number, isAdd = false) => {
+    if (isAdd) {
+        left = left + scrollLeft.value;
+    }
+    $(scrollbarRef.value!.$el).find(`.${elNamespace.value}-scrollbar__wrap`).animate({ scrollLeft: left }, 300);
+
+}
+
 let max = ref(0);
-let tagsRef = ref([] as IElDropdownInstance&{$el:HTMLElement}[]);
-let currentTag = ref<RouteLocationNormalized>();
+let tagsRef = ref([] as IElDropdownInstance & { $el: HTMLElement }[]);
+let currentTag = ref<RouteLocationNormalized>({fullPath:'/',meta:{title:''}} as RouteLocationNormalized);
 let route = useRoute();
-let tags = reactive([] as RouteLocationNormalized[]);
-mitter.on(event.resize, () => {
-    max.value = listRef.value!.clientWidth - scrollbarRef.value?.$el.clientWidth;
-}, true);
 onMounted(() => {
-    max.value = listRef.value!.clientWidth - scrollbarRef.value?.$el.clientWidth;
+    max.value = listRef.value!.offsetWidth - scrollbarRef.value?.$el.clientWidth;
+    mitter.on(event.resize, () => {
+        max.value = listRef.value!.offsetWidth - scrollbarRef.value?.$el.clientWidth;
+    }, true);
 })
 const back = () => {
-    scrollbarRef.value!.setScrollLeft( scrollLeft.value - scrollbarRef.value!.$el.clientWidth / 2 )
+    setScrollLeft(0 - scrollbarRef.value!.$el.clientWidth / 2, true)
 }
 const go = () => {
-    scrollbarRef.value!.setScrollLeft( scrollLeft.value + scrollbarRef.value!.$el.clientWidth / 2 )
+    setScrollLeft(scrollbarRef.value!.$el.clientWidth / 2, true);
 }
 const jump = (index: number) => {
-    nextTick(()=>{
-        if(tagsRef.value[index]){
+    nextTick(() => {
+        if (tagsRef.value[index]) {
             const offsetLeft = tagsRef.value[index].$el.offsetLeft;
             const offsetWidth = tagsRef.value[index].$el.offsetWidth;
             const offsetRight = offsetWidth + offsetLeft;
             const parentWidth = scrollbarRef.value!.$el.clientWidth;
             const parentLeft = scrollLeft.value;
             const parentRight = parentWidth + scrollLeft.value;
-            if(offsetLeft<parentLeft){
-                scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: offsetLeft})
+            if (offsetLeft < parentLeft) {
+                setScrollLeft(offsetLeft)
             }
-            if(offsetRight > parentRight){
-                scrollbarRef.value!.scrollTo({ behavior: 'smooth', left: offsetLeft + offsetWidth - parentWidth});
+            if (offsetRight > parentRight) {
+                setScrollLeft(offsetLeft + offsetWidth - parentWidth);
             }
             currentTag.value = tags[index];
         }
     })
 }
 
-//添加固定tag
-const addAffixTags = (routes: RouteRecordRaw[],basePath = '') => {
-    routes.forEach(item => {
-        if (item.meta?.affix && item.meta.title) {
-            tags.push(Object.assign({ fullPath: resolvePath(item.path,basePath), hash: '', query: {}, matched: [], redirectedFrom: undefined }, item) as unknown as RouteLocationNormalized);
-        }
-        if (item.children) {
-            addAffixTags(item.children,resolvePath(item.path,basePath));
-        }
-    });
-}
-addAffixTags(useRouteStore().routes);
+//动态设置active
 watch(route, (route) => {
     if (route.meta.title && !route.meta.hideTag) {
         let index = tags.findIndex(item => item.fullPath == route.fullPath);
@@ -104,14 +120,20 @@ watch(route, (route) => {
             return jump(index);
         }
         tags.push(JSON.parse(JSON.stringify(route)));
-        return jump(tags.length-1);
+        return jump(tags.length - 1);
 
     }
 }, { immediate: true });
-
+const router = useRouter();
+const push = (route:RouteLocationNormalized)=>{
+    if(route.fullPath !== currentTag.value!.fullPath){
+        router.push(route.fullPath);
+    }
+}
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
 
 .footer {
     border-bottom: 1px solid getCssVar('border', 'color');
@@ -155,10 +177,9 @@ watch(route, (route) => {
         height: 100%;
         align-items: center;
         width: max-content;
-                .el-dropdown {
+        .#{$namespace}-dropdown {
             height: 100%;
         }
-
         .item {
             border-right: 1px solid getCssVar('border', 'color');
             height: 100%;
@@ -200,7 +221,7 @@ watch(route, (route) => {
         .item:hover::after,
         .item.active::after {
             width: 100%;
-            transition: width 0.5s;
+            transition: width 0.45s;
 
         }
     }

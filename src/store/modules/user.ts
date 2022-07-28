@@ -49,7 +49,7 @@ export default defineStore({
             let token =  tokenValue || cookies.get(config.tokenName);
             if (token) {
                 this.token = token;
-                this.user = await userInfoApi().runAsync();
+                this.user = await userInfoApi(true)();
                 this.rules = this.user!.rules;
                 useRouteStore().generateRoutes().forEach(route=>router.addRoute(route));
             } else {
