@@ -38,7 +38,6 @@ export default [
         url: '/api/user/login', //登录
         method: 'post',
         response: (req) => {
-            console.log(req);
             const { username } = req.body
             const token = tokens[username]
             // mock error

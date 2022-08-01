@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './app.vue'
+import App from './App.vue'
 import { event, mitter } from './event';
 import sidebarItem from '@/layout/components/sidebar/components/sidebarItem.vue';
 export const app = createApp(App);

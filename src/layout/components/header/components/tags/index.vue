@@ -3,11 +3,13 @@
         <a class="icon pointer" :class="{ 'is-disabled': scrollLeft <= 0 }" @click="back">
             <el-icon-d-arrow-left></el-icon-d-arrow-left>
         </a>
-        <el-scrollbar ref="scrollbarRef" @scroll="({scrollLeft:left})=>scrollLeft = left" view-class="list-parent" style="flex-grow:1">
+        <el-scrollbar ref="scrollbarRef" @scroll="({ scrollLeft: left }) => scrollLeft = left" view-class="list-parent"
+            style="flex-grow:1">
             <div class="list" ref="listRef">
                 <el-dropdown v-for="tag in tags" :key="tag.fullPath" trigger="contextmenu" ref="tagsRef">
-                    <div class="item pointer" @click="push(tag)" :class="{ active: tag.fullPath === currentTag?.fullPath }">
-                    {{ tag.meta.title}}
+                    <div class="item pointer" @click="push(tag)"
+                        :class="{ active: tag.fullPath === currentTag?.fullPath }">
+                        {{ tag.meta.title }}
                     </div>
                     <template #dropdown>
                         <contextmenu v-model="tags" :current="tag"></contextmenu>
@@ -73,12 +75,10 @@ const setScrollLeft = (left: number, isAdd = false) => {
         left = left + scrollLeft.value;
     }
     $(scrollbarRef.value!.$el).find(`.${elNamespace.value}-scrollbar__wrap`).animate({ scrollLeft: left }, 300);
-
 }
-
 let max = ref(0);
 let tagsRef = ref([] as IElDropdownInstance & { $el: HTMLElement }[]);
-let currentTag = ref<RouteLocationNormalized>({fullPath:'/',meta:{title:''}} as RouteLocationNormalized);
+let currentTag = ref<RouteLocationNormalized>({ fullPath: '/', meta: { title: '' } } as RouteLocationNormalized);
 let route = useRoute();
 onMounted(() => {
     max.value = listRef.value!.offsetWidth - scrollbarRef.value?.$el.clientWidth;
@@ -93,40 +93,43 @@ const go = () => {
     setScrollLeft(scrollbarRef.value!.$el.clientWidth / 2, true);
 }
 const jump = (index: number) => {
-    nextTick(() => {
-        if (tagsRef.value[index]) {
-            const offsetLeft = tagsRef.value[index].$el.offsetLeft;
-            const offsetWidth = tagsRef.value[index].$el.offsetWidth;
-            const offsetRight = offsetWidth + offsetLeft;
-            const parentWidth = scrollbarRef.value!.$el.clientWidth;
-            const parentLeft = scrollLeft.value;
-            const parentRight = parentWidth + scrollLeft.value;
-            if (offsetLeft < parentLeft) {
-                setScrollLeft(offsetLeft)
-            }
-            if (offsetRight > parentRight) {
-                setScrollLeft(offsetLeft + offsetWidth - parentWidth);
-            }
-            currentTag.value = tags[index];
-        }
-    })
+    // nextTick(() => {
+    //     if (tagsRef.value[index]) {
+    //         const offsetLeft = tagsRef.value[index].$el.offsetLeft;
+    //         const offsetWidth = tagsRef.value[index].$el.offsetWidth;
+    //         const offsetRight = offsetWidth + offsetLeft;
+    //         const parentWidth = scrollbarRef.value!.$el.clientWidth;
+    //         const parentLeft = scrollLeft.value;
+    //         const parentRight = parentWidth + scrollLeft.value;
+    //         if (offsetLeft < parentLeft) {
+    //             setScrollLeft(offsetLeft)
+    //         }
+    //         if (offsetRight > parentRight) {
+    //             setScrollLeft(offsetLeft + offsetWidth - parentWidth);
+    //         }
+    //         currentTag.value = tags[index];
+    //     }
+    // })
 }
 
 //动态设置active
 watch(route, (route) => {
     if (route.meta.title && !route.meta.hideTag) {
+        console.log(1);
         let index = tags.findIndex(item => item.fullPath == route.fullPath);
         if (index > -1) {
             return jump(index);
         }
         tags.push(JSON.parse(JSON.stringify(route)));
+        console.log(2);
+
         return jump(tags.length - 1);
 
     }
 }, { immediate: true });
 const router = useRouter();
-const push = (route:RouteLocationNormalized)=>{
-    if(route.fullPath !== currentTag.value!.fullPath){
+const push = (route: RouteLocationNormalized) => {
+    if (route.fullPath !== currentTag.value!.fullPath) {
         router.push(route.fullPath);
     }
 }
@@ -177,9 +180,11 @@ const push = (route:RouteLocationNormalized)=>{
         height: 100%;
         align-items: center;
         width: max-content;
+
         .#{$namespace}-dropdown {
             height: 100%;
         }
+
         .item {
             border-right: 1px solid getCssVar('border', 'color');
             height: 100%;

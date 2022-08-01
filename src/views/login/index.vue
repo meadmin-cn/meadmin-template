@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <Header class="header"></Header>
-        <div class="form">
+        <div class="form" @keyup.enter.exact="login()">
             <div class="title">ME-Admin</div>
             <el-form ref="formRef" :rules="rules" :model="loginParams">
                 <el-form-item prop="username">
@@ -18,7 +18,7 @@
                         </template>
                     </el-input>
                 </el-form-item>
-                <el-button class="sub" type="primary"  @click.enter.exact="login()">{{ t('登 录') }}</el-button>
+                <el-button class="sub" type="primary"  @click="login()">{{ t('登 录') }}</el-button>
             </el-form>
         </div>
     </div>

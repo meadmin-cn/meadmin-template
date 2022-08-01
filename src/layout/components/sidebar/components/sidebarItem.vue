@@ -1,15 +1,14 @@
 <template>
     <template v-if="item.meta && !item.meta.hideMenu">
-        <template
-            v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild!.children || onlyOneChild!.noShowingChildren) && !item.alwaysShow">
-            <router-link v-if="onlyOneChild!.meta" :to="resolvePath(onlyOneChild!.path)">
-                <el-menu-item :index="resolvePath(onlyOneChild!.path)" :title="onlyOneChild!.meta.title">
-                    <component :is="onlyOneChild!.meta.icon" v-if="onlyOneChild!.meta.icon" />
+        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild!.children || onlyOneChild!.noShowingChildren) && !item.meta.alwaysShow">
+            <component v-if="onlyOneChild!.meta" :is="onlyOneChild!.meta?.isLink?'a':'routerLink'" :href="basePath" :to="basePath">
+                <el-menu-item :index="basePath" :title="onlyOneChild!.meta.title">
+                    <component :is="onlyOneChild!.meta!.icon" v-if="onlyOneChild!.meta.icon" />
                     <template #title>
                         <span class="menu">{{ onlyOneChild!.meta.title }}</span>
                     </template>
                 </el-menu-item>
-            </router-link>
+            </component>
         </template>
         <el-sub-menu v-else :index="resolvePath(item.path)">
             <template v-if="item.meta" #title>
@@ -33,7 +32,7 @@ const props = defineProps({
         type: Object as PropType<RouteRecordRaw>,
         required: true
     },
-    basePath: {
+    basePath: {//当前菜单的绝对路径
         type: String,
         default: ''
     }
@@ -52,8 +51,8 @@ const hasOneShowingChild = (children = [] as RouteRecordRaw[], parent: RouteReco
     return false
 };
 const resolvePath = (routePath: string) => {
-    if (isExternal(routePath) || isExternal(props.basePath)) {
-        return routePath
+    if (isExternal(routePath) || isExternal(props.basePath)){
+        return routePath;
     }
     return resolve(props.basePath, routePath)
 }

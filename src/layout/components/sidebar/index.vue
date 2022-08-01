@@ -55,7 +55,7 @@ watch(route, (route) => {
     }
 
     .menu {
-      padding-right: 12px;
+      padding-right: 6px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

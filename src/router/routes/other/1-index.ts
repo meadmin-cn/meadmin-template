@@ -26,8 +26,8 @@ export const routes: RouteRecordRaw[] = [
         meta: { title: '测试菜单5'},
     },
     {
-        path:'index6',
-        component: () => import('@/views/dashboard/index.vue'),
-        meta: { title: '测试菜单6'},
+        path:'http://www.baidu.com',
+        component: () => import('@/views/link.vue'),
+        meta: { title: '外链',isLink:true},
     }
 ];
