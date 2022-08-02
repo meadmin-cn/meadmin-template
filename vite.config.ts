@@ -11,8 +11,6 @@ function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
 export default ({ command }: ConfigEnv): UserConfigExport =>{
-  console.log(command);
-
   return {
   plugins: [viteMockServe({
     mockPath: 'mock/apiDemo',
@@ -47,26 +45,7 @@ export default ({ command }: ConfigEnv): UserConfigExport =>{
     imports: ['vue', 'vue-router', 'pinia'],
     // 可以选择auto-imports.d.ts生成的位置，使用ts建议设置为'src/auto-imports.d.ts'
     dts: 'types/auto-imports.d.ts'
-  }), autogenerationImport([
-    {//svg icon
-      pattern: ['*.svg'],
-      dir: 'src/icons/svg',
-      toFile: 'types/meIconComments.d.ts',
-      name: (name) => {
-        name = getName(name);
-        return 'MeIcon' + name[0].toUpperCase() + name.slice(1);
-      },
-      template: fs.readFileSync('./template/meIconComments.d.ts', 'utf-8'),
-      codeTemplates: [{ key: '\n        //code', template: '\n        {{name}}: Icon;' }]
-    },
-    {//pinia module
-      pattern: ['**/*.{ts,js}', '*.{ts,js}'],
-      dir: 'src/store/modules',
-      toFile: 'src/store/module.ts',
-      name: 'use_{{name}}_store'
-    }
-  ]),
-  vueSetUpExtend({ setLangImport: true, exclude: ['steup', 'lang'], setComponents: true })
+  })
   ],
   resolve: {
     alias: [
@@ -81,5 +60,8 @@ export default ({ command }: ConfigEnv): UserConfigExport =>{
       }
     ],
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
+  },
+  optimizeDeps:{
+    exclude:['vue-router']
   }
 }}
