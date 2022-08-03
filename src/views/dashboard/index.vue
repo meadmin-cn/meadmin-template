@@ -2,9 +2,10 @@
 
 </script>
 
-<template>
+<template name="dashboard">
     <div class="index">
         控制台
+        <input name="text"/>
     </div>
 </template>
 

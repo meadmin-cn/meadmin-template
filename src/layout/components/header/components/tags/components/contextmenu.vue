@@ -1,29 +1,19 @@
 <template>
-    <el-dropdown-menu v-bind="$attrs">
-        <el-dropdown-item>
-            <el-icon-refresh /> 重新加载
-        </el-dropdown-item>
-        <el-dropdown-item @click="closeCurrent()" :disabled="current.meta.affix || modelValue.length == 1">
-            <el-icon-close /> 关闭当前
-        </el-dropdown-item>
-        <el-dropdown-item @click="closeLeft()" :disabled="index <= canCloseFirst" divided>
-            <el-icon-download style="transform: rotate(90deg);" />关闭左侧
-        </el-dropdown-item>
-        <el-dropdown-item @click="closeRight()" :disabled="modelValue.length === index + 1">
-            <el-icon-download style="transform: rotate(270deg);" />关闭右侧
-        </el-dropdown-item>
-        <el-dropdown-item @click="closeOther()" :disabled="index <= canCloseFirst && modelValue.length === index + 1"
-            divided>
-            <el-icon-document-delete /> 关闭其他
-        </el-dropdown-item>
-        <el-dropdown-item @click="closeAll()" :disabled="canCloseFirst === Infinity">
-            <el-icon-minus /> 关闭全部
-        </el-dropdown-item>
-    </el-dropdown-menu>
+    <el-tooltip popper-class="me-contextmenu-tooltip" :visible="visible"   
+    :virtual-ref="virtualRef" virtual-triggering :effect="'light'" :trigger="trigger">
+        <template #content>
+            <ul class="el-dropdown-menu el-dropdown-menu--default" v-bind="$attrs"  ref="popperPaneRef" style="outline: none;" v-click-outside:[popperPaneRef]="handleClose">
+                <li class="el-dropdown-menu__item">
+                    <el-icon-refresh /> 重新加载
+                </li>
+            </ul>
+        </template>
+    </el-tooltip>
 </template>
 <script setup lang="ts" name="contextmenu">
 import { PropType } from 'vue';
 import { RouteLocationNormalized } from 'vue-router';
+import { Trigger } from 'element-plus';
 const props = defineProps({
     modelValue: {
         required: true,
@@ -32,9 +22,21 @@ const props = defineProps({
     current: {
         required: true,
         type: Object as PropType<RouteLocationNormalized>
+    },
+    virtualRef: {
+        required: true,
+        type: Object as PropType<HTMLElement>
+    },
+    trigger: {
+        type: [String,Array] as PropType<Trigger | Trigger[]>,
+        default:'contextmenu',
+    },
+    visible:{
+        type: Boolean,
+        default:true,
     }
 });
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue','update:visible']);
 const router = useRouter();
 const route = useRoute();
 let index = computed(() => props.modelValue.indexOf(props.current));
@@ -86,5 +88,12 @@ const closeAll = () => {//关闭全部
         router.push(props.modelValue[props.modelValue.length - 1].fullPath);
     }
 }
-
+const handleClose = ()=>{
+    
+}
 </script>
+<style scoped>
+:deep(.me-contextmenu-tooltip){
+    padding: 0 !important;
+}
+</style>

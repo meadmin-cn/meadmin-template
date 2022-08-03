@@ -1,7 +1,7 @@
 <template>
   <el-config-provider :locale="settingStore.elLocale" :size="settingStore.size" >
     <router-view v-slot="{ Component, route }">
-        <component :is="Component"></component>
+        <me-component :is="Component"></me-component>
     </router-view>
   </el-config-provider>
 </template>
@@ -23,7 +23,7 @@ watchEffect(() => {
     htmlDom.classList.remove('me-' + value);
   })
   htmlDom.classList.add('me-' + settingStore.size);
-})
+});
 </script>
 <style lang="scss">
 .fade-enter-active,

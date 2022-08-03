@@ -37,7 +37,7 @@ watch(route, (route) => {
   --#{$namespace}-menu-text-color: rgba(255, 255, 255, 0.85);
   --#{$namespace}-menu-active-color: #ffffff;
 
-  &:deep(.layout-sidebar-content) {
+  :deep(.layout-sidebar-content) {
     background-color: rgba(0, 0, 0, 0.9);
     min-height: 100vh;
     width: 200px;
@@ -99,7 +99,7 @@ watch(route, (route) => {
 }
 
 .collapse {
-  &:deep(.layout-sidebar-content) {
+  :deep(.layout-sidebar-content) {
     width: calc(getCssVar('menu-icon', 'width') + getCssVar('menu-base', 'level-padding') * 2);
 
     .title {

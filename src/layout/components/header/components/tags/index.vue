@@ -6,40 +6,32 @@
         <el-scrollbar ref="scrollbarRef" @scroll="({ scrollLeft: left }) => scrollLeft = left" view-class="list-parent"
             style="flex-grow:1">
             <div class="list" ref="listRef">
-                <el-dropdown v-for="tag in tags" :key="tag.fullPath" trigger="contextmenu" ref="tagsRef">
-                    <div class="item pointer" @click="push(tag)"
-                        :class="{ active: tag.fullPath === currentTag?.fullPath }">
-                        {{ tag.meta.title }}
-                    </div>
-                    <template #dropdown>
-                        <contextmenu v-model="tags" :current="tag"></contextmenu>
-                    </template>
-                </el-dropdown>
+                <div class="item pointer" v-for="(tag, index) in tags" :key="tag.fullPath" ref="tagsRef"
+                    :class="{ active: tag.fullPath === currentTag?.fullPath }" @click="push(tag)"
+                    @contextmenu.prevent="setContextmenu($event.currentTarget as any, tag)">
+                    {{ tag.meta.title }}
+                </div>
             </div>
-
         </el-scrollbar>
         <div class="right">
-            <div class="icon pointer" :class="{ 'is-disabled': scrollLeft >= max }" @click="go()">
+            <div class="icon pointer" :class="{'is-disabled': scrollLeft >= max }" @click="go()">
                 <el-icon-d-arrow-right></el-icon-d-arrow-right>
             </div>
             <div class="icon pointer">
                 <el-icon-refresh></el-icon-refresh>
             </div>
-            <el-dropdown>
-                <div class="icon pointer">
-                    <el-icon-menu></el-icon-menu>
-                </div>
-                <template #dropdown>
-                    <contextmenu v-model="tags" :current="currentTag!"></contextmenu>
-                </template>
-            </el-dropdown>
+            <div class="icon pointer" @click="setContextmenu($event.currentTarget as any, currentTag)">
+                <el-icon-menu></el-icon-menu>
+            </div>
         </div>
     </div>
+    <contextmenu v-if="virtualRef" v-model:visible="showContextmenu" v-model="tags" :virtual-ref="virtualRef" :current="contextmenuCurrent">
+    </contextmenu>
 </template>
 <script setup lang="ts" name="tags">
 import { mitter, event } from '@/event';
 import { useRouteStore } from '@/store';
-import { ElScrollbar, IElDropdownInstance } from 'element-plus';
+import { ElScrollbar } from 'element-plus';
 import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
 import contextmenu from './components/contextmenu.vue';
 import { isExternal } from '@/utils/validate';
@@ -47,7 +39,7 @@ import { resolve } from 'path-browserify';
 import $ from 'jquery';
 import { useGlobalConfig } from 'element-plus';
 //初始化tags
-let tags = reactive([] as RouteLocationNormalized[]);
+const tags = reactive([] as RouteLocationNormalized[]);
 const resolvePath = (routePath: string, basePath = '') => {
     if (isExternal(routePath) || isExternal(basePath)) {
         return routePath
@@ -65,8 +57,9 @@ const addAffixTags = (routes: RouteRecordRaw[], basePath = '') => {
     });
 }
 addAffixTags(useRouteStore().routes);
+
 //滚动设置
-let elNamespace = useGlobalConfig('namespace');
+const elNamespace = useGlobalConfig('namespace');
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
 const listRef = ref<HTMLDivElement>();
 let scrollLeft = ref(0);
@@ -76,10 +69,10 @@ const setScrollLeft = (left: number, isAdd = false) => {
     }
     $(scrollbarRef.value!.$el).find(`.${elNamespace.value}-scrollbar__wrap`).animate({ scrollLeft: left }, 300);
 }
-let max = ref(0);
-let tagsRef = ref([] as IElDropdownInstance & { $el: HTMLElement }[]);
-let currentTag = ref<RouteLocationNormalized>({ fullPath: '/', meta: { title: '' } } as RouteLocationNormalized);
-let route = useRoute();
+const max = ref(0);
+const tagsRef = ref([] as HTMLElement[]);
+const currentTag = ref<RouteLocationNormalized>({ fullPath: '/', meta: { title: '' } } as RouteLocationNormalized);
+const route = useRoute();
 onMounted(() => {
     max.value = listRef.value!.offsetWidth - scrollbarRef.value?.$el.clientWidth;
     mitter.on(event.resize, () => {
@@ -93,36 +86,32 @@ const go = () => {
     setScrollLeft(scrollbarRef.value!.$el.clientWidth / 2, true);
 }
 const jump = (index: number) => {
-    // nextTick(() => {
-    //     if (tagsRef.value[index]) {
-    //         const offsetLeft = tagsRef.value[index].$el.offsetLeft;
-    //         const offsetWidth = tagsRef.value[index].$el.offsetWidth;
-    //         const offsetRight = offsetWidth + offsetLeft;
-    //         const parentWidth = scrollbarRef.value!.$el.clientWidth;
-    //         const parentLeft = scrollLeft.value;
-    //         const parentRight = parentWidth + scrollLeft.value;
-    //         if (offsetLeft < parentLeft) {
-    //             setScrollLeft(offsetLeft)
-    //         }
-    //         if (offsetRight > parentRight) {
-    //             setScrollLeft(offsetLeft + offsetWidth - parentWidth);
-    //         }
-    //         currentTag.value = tags[index];
-    //     }
-    // })
+    nextTick(() => {
+        if (tagsRef.value[index]) {
+            const offsetLeft = tagsRef.value[index].offsetLeft;
+            const offsetWidth = tagsRef.value[index].offsetWidth;
+            const offsetRight = offsetWidth + offsetLeft;
+            const parentWidth = scrollbarRef.value!.$el.clientWidth;
+            const parentLeft = scrollLeft.value;
+            const parentRight = parentWidth + scrollLeft.value;
+            if (offsetLeft < parentLeft) {
+                setScrollLeft(offsetLeft)
+            }
+            if (offsetRight > parentRight) {
+                setScrollLeft(offsetLeft + offsetWidth - parentWidth);
+            }
+            currentTag.value = tags[index];
+        }
+    })
 }
-
 //动态设置active
 watch(route, (route) => {
     if (route.meta.title && !route.meta.hideTag) {
-        console.log(1);
         let index = tags.findIndex(item => item.fullPath == route.fullPath);
         if (index > -1) {
             return jump(index);
         }
         tags.push(JSON.parse(JSON.stringify(route)));
-        console.log(2);
-
         return jump(tags.length - 1);
 
     }
@@ -133,6 +122,14 @@ const push = (route: RouteLocationNormalized) => {
         router.push(route.fullPath);
     }
 }
+const contextmenuCurrent = ref(currentTag.value);
+const virtualRef = ref<HTMLElement>();
+const showContextmenu = ref(false);
+const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized) => {
+    virtualRef.value = event;
+    contextmenuCurrent.value = current;
+    showContextmenu.value = true;
+} 
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
@@ -171,19 +168,15 @@ const push = (route: RouteLocationNormalized) => {
         border-left: 1px solid getCssVar('border', 'color');
     }
 
-    &:deep(.list-parent) {
+    :deep(.list-parent) {
         height: 100%;
     }
 
-    &:deep(.list) {
+    :deep(.list) {
         display: flex;
         height: 100%;
         align-items: center;
         width: max-content;
-
-        .#{$namespace}-dropdown {
-            height: 100%;
-        }
 
         .item {
             border-right: 1px solid getCssVar('border', 'color');

@@ -5,18 +5,14 @@
     <component v-else :is="componentIs" :key="componentKey" v-bind="$attrs"></component>
 </template>
 <script setup lang="ts">
-import { PropType, Ref } from 'vue';
+import { KeepAliveProps, PropType, Ref } from 'vue';
 import { useGetLoadMessagePromison } from '@/locales/i18n';
 const getLoadMessagePromison = useGetLoadMessagePromison();
 const props = defineProps({
     is: {
         required: true,
     },
-    keepAlive: Object as PropType<{
-        include?: string | string[] | RegExp,
-        exclude?: string | string[] | RegExp,
-        max?: number | string
-    }>,
+    keepAlive: Object as PropType<KeepAliveProps>,
     componentKey: [Number, String, Symbol],
 });
 let componentIs: Ref<any> = ref(undefined);
