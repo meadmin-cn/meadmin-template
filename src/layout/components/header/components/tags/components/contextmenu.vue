@@ -1,19 +1,39 @@
 <template>
-    <el-tooltip popper-class="me-contextmenu-tooltip" :visible="visible"   
-    :virtual-ref="virtualRef" virtual-triggering :effect="'light'" :trigger="trigger">
-        <template #content>
-            <ul class="el-dropdown-menu el-dropdown-menu--default" v-bind="$attrs"  ref="popperPaneRef" style="outline: none;" v-click-outside:[popperPaneRef]="handleClose">
-                <li class="el-dropdown-menu__item">
+    <el-popover :popper-class="`me-contextmenu-tooltip ${elNamespace}-dropdown__popper`" :visible="visible" :virtual-ref="virtualRef"
+        virtual-triggering  pure>
+            <ul :class="`${elNamespace}-dropdown-menu ${elNamespace}-dropdown-menu--default`" v-bind="$attrs"
+                style="outline: none;" v-click-outside="closeMenu" role="menuitem">
+                <li :class="`${elNamespace}-dropdown-menu__item`">
                     <el-icon-refresh /> 重新加载
                 </li>
+                <li @click="closeCurrent()"
+                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': current.meta.affix || modelValue.length == 1 }">
+                    <el-icon-close /> 关闭当前
+                </li>
+                <li @click="closeLeft()"
+                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst }">
+                    <el-icon-download style="transform: rotate(90deg);" />关闭左侧
+                </li>
+                <li @click="closeRight()"
+                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': modelValue.length === index + 1 }">
+                    <el-icon-download style="transform: rotate(270deg);" />关闭右侧
+                </li>
+                <li @click="closeOther()"
+                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst && modelValue.length === index + 1 }">
+                    <el-icon-document-delete /> 关闭其他
+                </li>
+                <li @click="closeAll()"
+                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': canCloseFirst === Infinity }">
+                    <el-icon-minus /> 关闭全部
+                </li>
             </ul>
-        </template>
-    </el-tooltip>
+    </el-popover>
 </template>
 <script setup lang="ts" name="contextmenu">
 import { PropType } from 'vue';
 import { RouteLocationNormalized } from 'vue-router';
-import { Trigger } from 'element-plus';
+import { Trigger, useGlobalConfig } from 'element-plus';
+import { useSettingStore } from '@/store';
 const props = defineProps({
     modelValue: {
         required: true,
@@ -27,16 +47,13 @@ const props = defineProps({
         required: true,
         type: Object as PropType<HTMLElement>
     },
-    trigger: {
-        type: [String,Array] as PropType<Trigger | Trigger[]>,
-        default:'contextmenu',
-    },
-    visible:{
+    visible: {
         type: Boolean,
-        default:true,
+        default: true,
     }
 });
-const emit = defineEmits(['update:modelValue','update:visible']);
+const emit = defineEmits(['update:modelValue', 'update:visible']);
+const elNamespace = useGlobalConfig('namespace');
 const router = useRouter();
 const route = useRoute();
 let index = computed(() => props.modelValue.indexOf(props.current));
@@ -53,6 +70,7 @@ const closeCurrent = () => { //关闭当前
     if (props.current.fullPath === route.fullPath) {
         router.push(props.modelValue[Math.min(props.modelValue.length - 1, nowIndex)].fullPath)
     }
+    closeMenu();
 }
 const closeLeft = () => {//关闭左侧
     if (index.value <= canCloseFirst.value) {
@@ -63,6 +81,8 @@ const closeLeft = () => {//关闭左侧
     if (props.modelValue.findIndex(item => item.fullPath === route.fullPath) === -1) {
         router.push(props.modelValue[index.value].fullPath);
     }
+    closeMenu();
+
 }
 const closeRight = () => {//关闭右侧
     if (index.value + 1 === props.modelValue.length) {
@@ -73,6 +93,7 @@ const closeRight = () => {//关闭右侧
     if (props.modelValue.findIndex(item => item.fullPath === route.fullPath) === -1) {
         router.push(props.modelValue[index.value].fullPath);
     }
+    closeMenu();
 }
 const closeOther = () => {//关闭其他
     closeLeft();
@@ -87,13 +108,23 @@ const closeAll = () => {//关闭全部
     if (props.modelValue.findIndex(item => item.fullPath === route.fullPath) === -1) {
         router.push(props.modelValue[props.modelValue.length - 1].fullPath);
     }
+    closeMenu();
 }
-const handleClose = ()=>{
-    
+const closeMenu = () => {
+    emit('update:visible', false);
 }
 </script>
-<style scoped>
-:deep(.me-contextmenu-tooltip){
-    padding: 0 !important;
+<style lang="scss">
+@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+
+.me-contextmenu-tooltip {
+    width:max-content !important;
+    min-width: unset !important;
+    .#{$namespace}-dropdown-menu__item:not(.is-disabled):hover {
+        background-color: getCssVar('dropdown-menuItem', 'hover-fill');
+        color: getCssVar('dropdown-menuItem', 'hover-color');
+    }
+
 }
 </style>
