@@ -39,7 +39,6 @@ watch(route,()=>{
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
-
 .layout{
     height: 100%;
     :deep(.#{$namespace}-header){

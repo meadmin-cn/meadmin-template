@@ -1,5 +1,5 @@
 <template>
-    <keep-alive v-if="keepAlive">
+    <keep-alive v-if="keepAlive" v-bind="keepAlive">
         <component :is="componentIs" :key="componentKey" v-bind="$attrs"></component>
     </keep-alive>
     <component v-else :is="componentIs" :key="componentKey" v-bind="$attrs"></component>
