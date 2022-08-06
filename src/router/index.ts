@@ -3,7 +3,7 @@ import { PageEnum } from '@/enums/pageEnum';
 import { App } from "vue";
 import { setupRouterGuard } from './guard';
 import { concatObjectValue } from '@/utils/helper';
-
+import Layout from '@/layout/index.vue';
 export const asyncRoutes = concatObjectValue<RouteRecordRaw>(import.meta.glob('./routes/*.ts', { eager: true, import: 'routes' }));
 export const constantRoutes: RouteRecordRaw[] = [
     {
@@ -19,14 +19,28 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/login/index.vue'),
         meta: {
             hideMenu: true,
-            title: '登录', noBack: true
+            title: '登录'
+        }
+    },
+    {
+        path: '/redirect',
+        component: Layout,
+        children: [
+            {
+                path: '/redirect/:path(.*)',
+                component: () => import('@/views/redirect.vue'),
+            }
+        ],
+        meta: {
+            hideMenu: true,
+            title: ''
         }
     },
     {
         path: '/:pathMatch(.*)*',
 
         component: () => import('@/views/404.vue'),
-        meta: { hideMenu: true, title: '404'}
+        meta: { hideMenu: true, title: '404' }
     }
 ]
 export const router = createRouter({

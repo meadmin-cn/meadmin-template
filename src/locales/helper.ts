@@ -6,7 +6,7 @@ import { loading, closeLoading } from '@/utils/loading';
 import { useSettingStore } from '@/store';
 import { Language } from 'element-plus/es/locale';
 import { useGlobalStore } from '@/store';
-type GlobaleI18n = Composer<unknown, unknown, unknown>;
+type GlobaleI18n = Composer<unknown, unknown, unknown,any>;
 const MessageMap: Map<string, Record<any, any>> = new Map();
 export type MessageImport = [(locale: string) => Promise<{ default: LocaleMessages<VueMessageType> }>, string?];
 
@@ -122,11 +122,6 @@ export const setI18nLanguage = async (locale: string, isLoading = true, i18n?: G
   isLoading && closeLoading();
   return true;
 }
-
-
-
-
-
 
 /**
  * 获取组件的异步导入语言包promison数组函数

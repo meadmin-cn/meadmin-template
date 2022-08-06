@@ -1,19 +1,21 @@
 <template>
-    <keep-alive v-if="keepAlive" v-bind="keepAlive">
-        <component :is="componentIs" :key="componentKey" v-bind="$attrs"></component>
-    </keep-alive>
-    <component v-else :is="componentIs" :key="componentKey" v-bind="$attrs"></component>
+    <me-keep-alive v-if="keepAlive" v-bind="keepAlive">
+        <component :is="componentIs" :key="$route.fullPath" v-bind="$attrs"></component>
+    </me-keep-alive>
+    <component v-else :is="componentIs" :key="componentKey"  v-bind="$attrs"></component>
 </template>
 <script setup lang="ts">
-import { KeepAliveProps, PropType, Ref } from 'vue';
+import { PropType, Ref } from 'vue';
+import { MeKeepAliveProps } from './meKeepAlive';
 import { useGetLoadMessagePromison } from '@/locales/i18n';
+const route = useRoute();
 const getLoadMessagePromison = useGetLoadMessagePromison();
 const props = defineProps({
     is: {
         required: true,
     },
-    keepAlive: Object as PropType<KeepAliveProps>,
-    componentKey: [Number, String, Symbol],
+    keepAlive: Object as PropType<MeKeepAliveProps>,
+    componentKey: String,
 });
 let componentIs: Ref<any> = ref(undefined);
 watch(() => props.is, async (is) => {

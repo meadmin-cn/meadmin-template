@@ -3,7 +3,7 @@
         virtual-triggering  pure>
             <ul :class="`${elNamespace}-dropdown-menu ${elNamespace}-dropdown-menu--default`" v-bind="$attrs"
                 style="outline: none;" v-click-outside="closeMenu" role="menuitem">
-                <li :class="`${elNamespace}-dropdown-menu__item`">
+                <li @click="reload()" :class="`${elNamespace}-dropdown-menu__item`">
                     <el-icon-refresh /> 重新加载
                 </li>
                 <li @click="closeCurrent()"
@@ -32,8 +32,7 @@
 <script setup lang="ts" name="contextmenu">
 import { PropType } from 'vue';
 import { RouteLocationNormalized } from 'vue-router';
-import { Trigger, useGlobalConfig } from 'element-plus';
-import { useSettingStore } from '@/store';
+import { useGlobalConfig } from 'element-plus';
 const props = defineProps({
     modelValue: {
         required: true,
@@ -61,6 +60,9 @@ let canCloseFirst = computed(() => {
     const index = props.modelValue.findIndex(item => !item.meta.affix);
     return index > -1 ? index : Infinity;
 });
+const reload = ()=>{ //刷新
+    router.replace('/redirect/'+encodeURIComponent(props.current.fullPath))
+}
 const closeCurrent = () => { //关闭当前
     if (props.modelValue.length === 0 || props.current.meta.affix) {
         return;

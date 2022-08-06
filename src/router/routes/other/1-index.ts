@@ -2,13 +2,13 @@ import { RouteRecordRaw } from 'vue-router';
 export const routes: RouteRecordRaw[] = [
     {
         path:'index1',
-        component: () => import('@/views/dashboard/index.vue'),
+        component: ()=>import('@/views/dashboard/index.vue'),
         meta: { title: '测试菜单1'},
     },
     {
         path:'index2',
         component: () => import('@/views/dashboard/index.vue'),
-        meta: { title: '测试菜单2',icon:"el-icon-setting"},
+        meta: { title: '测试菜单2',icon:"el-icon-setting",noCache:true},
     },
     {
         path:'index3',

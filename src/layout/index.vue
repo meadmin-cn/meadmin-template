@@ -11,7 +11,9 @@
         <el-scrollbar>
             <div style="height: 1000px;background-color: var(--el-bg-color-page);" >
                 <router-view v-slot="{ Component, route }">
-                    <me-component :keep-alive="keepAliveProps" :is="Component" :component-key="route.fullPath"></me-component>
+                <me-keep-alive :max="30" :excludeKey="routeStore.noCacheFullPath">
+                    <me-component :is="Component" :key="route.fullPath" v-bind="$attrs"></me-component>
+                </me-keep-alive>
                 </router-view>
             </div>
         </el-scrollbar>
@@ -23,15 +25,17 @@
 import layoutSidebar from './components/sidebar/index.vue';
 import layoutHeader from './components/header/index.vue';
 import meComponent from '@/components/meComponent.vue';
-import { KeepAliveProps } from 'vue';
-const keepAliveProps = reactive<KeepAliveProps>({
-    max:30,
-    includeKeys:[]
-});
+import { useRouteStore } from '@/store';
+import { MeKeepAliveProps } from '@/components/meKeepAlive';
+const routeStore = useRouteStore();
+// const keepAliveProps = reactive<MeKeepAliveProps>({
+//     max:30,
+//     excludeKey:routeStore.noCacheFullPath
+// });
 const route = useRoute();
 watch(route,()=>{
-    if(!keepAliveProps.includeKeys!.includes(route.fullPath)){
-        keepAliveProps.includeKeys!.push(route.fullPath);
+    if(route.meta.noCache){
+        routeStore.setNoCache(route.fullPath);
     }
 })
 

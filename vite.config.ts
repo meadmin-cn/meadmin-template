@@ -10,7 +10,7 @@ import { ConfigEnv ,UserConfigExport} from 'vite';
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
-export default ({ command }: ConfigEnv): UserConfigExport =>{
+export default ({ command,mode }: ConfigEnv): UserConfigExport =>{
   return {
   plugins: [viteMockServe({
     mockPath: 'mock/apiDemo',
@@ -18,7 +18,7 @@ export default ({ command }: ConfigEnv): UserConfigExport =>{
       prodEnabled: command !== 'serve',
       //  这样可以控制关闭mock的时候不让mock打包到最终代码内
       injectCode: `
-        import { setupProdMockServer } from './mock/index';
+        import { setupProdMockServer } from '../mock/index';
         setupProdMockServer();
       `,
   }),
@@ -79,5 +79,12 @@ export default ({ command }: ConfigEnv): UserConfigExport =>{
       }
     ],
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
+  },
+  define:{
+    __SSR__:`true`,
+    __DEV__:mode === 'development'?`true`:`false`,
+    __COMPAT__:`false`,
+    __FEATURE_SUSPENSE__:`true`,
+    __FEATURE_PROD_DEVTOOLS__: `false`,
   }
 }}
