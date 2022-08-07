@@ -1,7 +1,7 @@
 <template>
     <div class="index">
         控制台
-        <input name="text"/>
+        <input name="text" />
     </div>
 </template>
 <script setup lang="ts" name="Dashboard">

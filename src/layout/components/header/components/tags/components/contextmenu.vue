@@ -1,32 +1,32 @@
 <template>
-    <el-popover :popper-class="`me-contextmenu-tooltip ${elNamespace}-dropdown__popper`" :visible="visible" :virtual-ref="virtualRef"
-        virtual-triggering  pure>
-            <ul :class="`${elNamespace}-dropdown-menu ${elNamespace}-dropdown-menu--default`" v-bind="$attrs"
-                style="outline: none;" v-click-outside="closeMenu" role="menuitem">
-                <li @click="reload()" :class="`${elNamespace}-dropdown-menu__item`">
-                    <el-icon-refresh /> 重新加载
-                </li>
-                <li @click="closeCurrent()"
-                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': current.meta.affix || modelValue.length == 1 }">
-                    <el-icon-close /> 关闭当前
-                </li>
-                <li @click="closeLeft()"
-                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst }">
-                    <el-icon-download style="transform: rotate(90deg);" />关闭左侧
-                </li>
-                <li @click="closeRight()"
-                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': modelValue.length === index + 1 }">
-                    <el-icon-download style="transform: rotate(270deg);" />关闭右侧
-                </li>
-                <li @click="closeOther()"
-                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst && modelValue.length === index + 1 }">
-                    <el-icon-document-delete /> 关闭其他
-                </li>
-                <li @click="closeAll()"
-                    :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': canCloseFirst === Infinity }">
-                    <el-icon-minus /> 关闭全部
-                </li>
-            </ul>
+    <el-popover :popper-class="`me-contextmenu-tooltip ${elNamespace}-dropdown__popper`" :visible="visible"
+        :virtual-ref="virtualRef" virtual-triggering pure>
+        <ul :class="`${elNamespace}-dropdown-menu ${elNamespace}-dropdown-menu--default`" v-bind="$attrs"
+            style="outline: none;" v-click-outside="closeMenu" role="menuitem">
+            <li @click="reload()" :class="`${elNamespace}-dropdown-menu__item`">
+                <el-icon-refresh /> 重新加载
+            </li>
+            <li @click="closeCurrent()"
+                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': current.meta.affix || modelValue.length == 1 }">
+                <el-icon-close /> 关闭当前
+            </li>
+            <li @click="closeLeft()"
+                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst }">
+                <el-icon-download style="transform: rotate(90deg);" />关闭左侧
+            </li>
+            <li @click="closeRight()"
+                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': modelValue.length === index + 1 }">
+                <el-icon-download style="transform: rotate(270deg);" />关闭右侧
+            </li>
+            <li @click="closeOther()"
+                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst && modelValue.length === index + 1 }">
+                <el-icon-document-delete /> 关闭其他
+            </li>
+            <li @click="closeAll()"
+                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': canCloseFirst === Infinity }">
+                <el-icon-minus /> 关闭全部
+            </li>
+        </ul>
     </el-popover>
 </template>
 <script setup lang="ts" name="contextmenu">
@@ -60,8 +60,8 @@ let canCloseFirst = computed(() => {
     const index = props.modelValue.findIndex(item => !item.meta.affix);
     return index > -1 ? index : Infinity;
 });
-const reload = ()=>{ //刷新
-    router.replace('/redirect/'+encodeURIComponent(props.current.fullPath))
+const reload = () => { //刷新
+    router.replace('/redirect/' + encodeURIComponent(props.current.fullPath))
 }
 const closeCurrent = () => { //关闭当前
     if (props.modelValue.length === 0 || props.current.meta.affix) {
@@ -121,8 +121,9 @@ const closeMenu = () => {
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
 
 .me-contextmenu-tooltip {
-    width:max-content !important;
+    width: max-content !important;
     min-width: unset !important;
+
     .#{$namespace}-dropdown-menu__item:not(.is-disabled):hover {
         background-color: getCssVar('dropdown-menuItem', 'hover-fill');
         color: getCssVar('dropdown-menuItem', 'hover-color');

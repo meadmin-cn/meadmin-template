@@ -6,9 +6,9 @@ import meKeepAlive from '@/components/meKeepAlive';
 import clickOutside from "@/directive/clickOutside";
 export const app = createApp(App);
 export async function bootscrapt() {
-    app.component('sidebarItem',sidebarItem);
-    app.component('meKeepAlive',meKeepAlive);
-    app.directive('ClickOutside',clickOutside)
+    app.component('sidebarItem', sidebarItem);
+    app.component('meKeepAlive', meKeepAlive);
+    app.directive('ClickOutside', clickOutside)
     await Promise.allSettled(mitter.emit(event.ready, app));
     app.mount('#app');
 }

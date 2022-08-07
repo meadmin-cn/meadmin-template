@@ -1,6 +1,8 @@
 <template>
     <el-dropdown class="me-locale-select pointer" max-height="500px">
-        <div class="flex-center"><me-icon-translation class="icon"></me-icon-translation></div>
+        <div class="flex-center">
+            <me-icon-translation class="icon"></me-icon-translation>
+        </div>
         <template #dropdown>
             <el-dropdown-menu>
                 <el-dropdown-item :disabled="$i18n.locale == item.locale" @click="setLanguage(item.locale)"

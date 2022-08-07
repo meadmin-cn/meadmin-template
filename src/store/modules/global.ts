@@ -1,5 +1,5 @@
 import { Composer } from "vue-i18n";
-export default defineStore('global',{
+export default defineStore('global', {
     state: () => {
         let _i18n: Composer<unknown, unknown, unknown>;
         return {

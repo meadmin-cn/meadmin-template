@@ -1,5 +1,5 @@
 export function success(data: any, msg = '操作成功') {
-  return  { code: '200', data, msg }
+  return { code: '200', data, msg }
 }
 
 //code 401 代表token失效
@@ -18,5 +18,5 @@ export interface requestParams {
  *
  */
 export function getRequestToken({ headers }: requestParams): string | undefined {
-  return headers ? headers['auth-token']:'';
+  return headers ? headers['auth-token'] : '';
 }

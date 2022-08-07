@@ -15,7 +15,7 @@ type Events = {//事件总线
     [eventEnmu.beforeLogout]: void,//退出前
     [eventEnmu.aftreLogout]: void,//退出后
     [eventEnmu.beforeLocalChange]: { locale: string, i18n: Composer<unknown, unknown, unknown> },//全局语言变更前
-    [eventEnmu.resize]:void,//窗口变化
+    [eventEnmu.resize]: void,//窗口变化
 };
 const mitter = Mitt<Events>(); // inferred as Emitter<Events>
 export { eventEnmu as event, mitter }

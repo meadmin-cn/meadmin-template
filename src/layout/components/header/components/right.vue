@@ -11,20 +11,20 @@
       <template #dropdown>
         <div class="message-tabs">
           <div class="message-header">
-              <div>全部已读</div>
-              <div>查看更多</div>
+            <div>全部已读</div>
+            <div>查看更多</div>
           </div>
-          <el-tabs  model-value="notify">
-          <el-tab-pane label="通知" name="notify">
-            <el-card class="box-card" shadow="never">
-            <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
-            </el-card>
-          </el-tab-pane>
-          <el-tab-pane label="消息" name="message">Config</el-tab-pane>
-          <el-tab-pane label="待办" name="agenda">Role</el-tab-pane>
+          <el-tabs model-value="notify">
+            <el-tab-pane label="通知" name="notify">
+              <el-card class="box-card" shadow="never">
+                <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+              </el-card>
+            </el-tab-pane>
+            <el-tab-pane label="消息" name="message">Config</el-tab-pane>
+            <el-tab-pane label="待办" name="agenda">Role</el-tab-pane>
           </el-tabs>
         </div>
-        
+
       </template>
     </el-dropdown>
     <me-locale-select class="item"></me-locale-select>
@@ -55,7 +55,7 @@ import MeSizeSelect from "@/components/meSizeSelect.vue";
   }
 
   .item:hover {
-    background-color: getCssVar('bg-color','page');
+    background-color: getCssVar('bg-color', 'page');
   }
 
   .no-hover:hover {
@@ -79,7 +79,8 @@ import MeSizeSelect from "@/components/meSizeSelect.vue";
 .message-tabs {
   padding: 15px 10px;
   height: 300px;
-  .message-header{
+
+  .message-header {
     display: flex;
     align-items: center;
   }

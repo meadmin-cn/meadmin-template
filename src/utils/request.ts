@@ -19,11 +19,11 @@ service.interceptors.request.use((config) => {
         config.headers['Auth-Token'] = userStore.token
     }
     return config
-},(error) => {
-        // 对请求错误做些什么
-        console.error(error) // for debug
-        return Promise.reject('请求异常，请联系管理员');//改写错误信息
-    });
+}, (error) => {
+    // 对请求错误做些什么
+    console.error(error) // for debug
+    return Promise.reject('请求异常，请联系管理员');//改写错误信息
+});
 service.interceptors.response.use(function (response) {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
@@ -49,8 +49,8 @@ setGlobalOptions({
 });
 
 //请求函数，当请求失败时直接抛出异常;
-export default function request<R, P extends unknown[] = []>(axiosConfig: (...args: P) => AxiosRequestConfig, options?: RequestOptions<R, P>):ReturnType<typeof useRequest<R, P>>;
-export default function request<R, P extends unknown[] = [],T extends true|undefined = true|undefined>(axiosConfig: (...args: P) => AxiosRequestConfig, options: RequestOptions<R, P>,returnAxios?:T):T extends true ? (...args: P)=>Promise<R>:ReturnType<typeof useRequest<R, P>>;
+export default function request<R, P extends unknown[] = []>(axiosConfig: (...args: P) => AxiosRequestConfig, options?: RequestOptions<R, P>): ReturnType<typeof useRequest<R, P>>;
+export default function request<R, P extends unknown[] = [], T extends true | undefined = true | undefined>(axiosConfig: (...args: P) => AxiosRequestConfig, options: RequestOptions<R, P>, returnAxios?: T): T extends true ? (...args: P) => Promise<R> : ReturnType<typeof useRequest<R, P>>;
 /**
  * 请求函数
  * @param axiosConfig  axios的配置项
@@ -58,8 +58,8 @@ export default function request<R, P extends unknown[] = [],T extends true|undef
  * @param returnAxios 
  * @returns 
  */
-export default function request<R, P extends unknown[] = [],T=true>(axiosConfig: (...args: P) => AxiosRequestConfig, options?: RequestOptions<R, P>,returnAxios?:T){
-    const axiosService =  async (...args: P):Promise<R> => {
+export default function request<R, P extends unknown[] = [], T = true>(axiosConfig: (...args: P) => AxiosRequestConfig, options?: RequestOptions<R, P>, returnAxios?: T) {
+    const axiosService = async (...args: P): Promise<R> => {
         try {
             !options?.noLoading && loading();
             let { data: res } = await service(await axiosConfig(...args));
@@ -74,7 +74,7 @@ export default function request<R, P extends unknown[] = [],T=true>(axiosConfig:
             if (res.code !== '200') {
                 throw res.msg;
             }
-            
+
             !options?.noLoading && closeLoading();
             return options?.needAll ? res : res.data;
         } catch (e) {
@@ -83,7 +83,7 @@ export default function request<R, P extends unknown[] = [],T=true>(axiosConfig:
             throw e;
         }
     }
-    
-    return returnAxios?axiosService:useRequest<R, P>(axiosService, options);
+
+    return returnAxios ? axiosService : useRequest<R, P>(axiosService, options);
 }
 

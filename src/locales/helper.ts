@@ -1,23 +1,23 @@
 import { LocaleMessages, VueMessageType, Composer, VueI18n } from 'vue-i18n'
 import { localeConfig as config } from '@/config';
-import { ComponentOptions, VNode } from 'vue';
 import { event, mitter } from '@/event';
 import { loading, closeLoading } from '@/utils/loading';
 import { useSettingStore } from '@/store';
 import { Language } from 'element-plus/es/locale';
 import { useGlobalStore } from '@/store';
-type GlobaleI18n = Composer<unknown, unknown, unknown,any>;
+type GlobaleI18n = Composer<unknown, unknown, unknown, any>;
 const MessageMap: Map<string, Record<any, any>> = new Map();
 export type MessageImport = [(locale: string) => Promise<{ default: LocaleMessages<VueMessageType> }>, string?];
 
 /**
  * 异步加载语言包
- * @param locale 
- * @param messageImport 
+ * @param messageImport 加载函数 
+ * @param locale 语言
+ * @param isLoading 是否loading(仅会在异步加载时进行loading)
  * @returns 
  */
 export const loadMessage = <P extends Record<any, any> = { default: LocaleMessages<VueMessageType> }>
-  (messageImport: [(locale: string) => Promise<P>, string?], locale?: string) => {
+  (messageImport: [(locale: string) => Promise<P>, string?], locale?: string, isLoading?: boolean) => {
   if (!locale) {
     locale = useGlobalStore().i18n!.locale.value;
   }
@@ -26,11 +26,13 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
   if (message) {
     return message as P;
   }
+  isLoading && loading();
   return new Promise<P | null>((resolve, reject) => {
     let timeOut: NodeJS.Timeout;
     if (config.loadMessageConfig.timeOut) {
       timeOut = setTimeout(() => {
         console.warn('加载语言包超时');
+        isLoading && closeLoading();
         resolve(null)
       }, config.loadMessageConfig.timeOut);
     }
@@ -38,6 +40,7 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
       timeOut && clearTimeout(timeOut);
       if (message) {
         MessageMap.set(MapName, message);
+        isLoading && closeLoading();
         resolve(message);
       }
     }).catch((e) => {
@@ -45,6 +48,7 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
       if (import.meta.env.DEV && config.loadMessageConfig.errorWarning) {
         console.warn(`语言包${MapName}加载失败:`, e);
       }
+      isLoading && closeLoading();
       resolve(null);
     });
   });
@@ -53,9 +57,9 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
 
 /**
  * 异步设置语言包
- * @param i18n i18n实例
- * @param locale 需要加载的语言
- * @param url 需要加载的语言的url
+ * @param i18n 
+ * @param locale 
+ * @param messageImport 
  * @returns 
  */
 export const setLocaleMessage = (i18n: GlobaleI18n, locale: string, messageImport: MessageImport) => {
@@ -123,44 +127,3 @@ export const setI18nLanguage = async (locale: string, isLoading = true, i18n?: G
   return true;
 }
 
-/**
- * 获取组件的异步导入语言包promison数组函数
- * @param options 
- * @param importArr 
- * @returns 
- */
-export const useGetLoadMessagePromison = () => {
-  const instance = getCurrentInstance();
-  if (instance == null) {
-    throw new Error('必须在setup中调用');
-  }
-  const app = instance.appContext.app;
-  const getLoadMessagePromison = (options: VNode & { __v_isVNode: true } | ComponentOptions | string, importArr: Promise<any>[] = [], locale?: string) => {
-    if (typeof options == 'string') {
-      const component = app.component(options);
-      if (component) {
-        getLoadMessagePromison(options, importArr)
-      }
-      return importArr;
-    }
-    if (options.__v_isVNode) {
-      getLoadMessagePromison(options.type, importArr);
-      return importArr;
-    }
-    if (typeof options === 'object') {
-      if ((<ComponentOptions>options).components) {
-        Object.values((<ComponentOptions>options).components!).forEach(component => {
-          getLoadMessagePromison(component as ComponentOptions, importArr);
-        });
-      }
-      if ((<ComponentOptions>options).langImport) {
-        const res = loadMessage((<ComponentOptions>options).langImport!, locale);
-        if (res instanceof Promise) {
-          importArr.push(res);
-        }
-      }
-    }
-    return importArr;
-  }
-  return getLoadMessagePromison;
-}

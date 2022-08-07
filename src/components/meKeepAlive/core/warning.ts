@@ -1,4 +1,4 @@
-import {  pauseTracking, resetTracking } from '@vue/reactivity'
+import { pauseTracking, resetTracking } from '@vue/reactivity'
 
 export function warn(msg: string, ...args: any[]) {
     pauseTracking()

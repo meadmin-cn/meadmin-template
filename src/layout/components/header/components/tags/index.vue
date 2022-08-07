@@ -14,7 +14,7 @@
             </div>
         </el-scrollbar>
         <div class="right">
-            <div class="icon pointer" :class="{'is-disabled': scrollLeft >= max }" @click="go()">
+            <div class="icon pointer" :class="{ 'is-disabled': scrollLeft >= max }" @click="go()">
                 <el-icon-d-arrow-right></el-icon-d-arrow-right>
             </div>
             <div class="icon pointer">
@@ -25,7 +25,8 @@
             </div>
         </div>
     </div>
-    <contextmenu v-if="virtualRef" v-model:visible="showContextmenu" v-model="tags" :virtual-ref="virtualRef" :current="contextmenuCurrent">
+    <contextmenu v-if="virtualRef" v-model:visible="showContextmenu" v-model="tags" :virtual-ref="virtualRef"
+        :current="contextmenuCurrent">
     </contextmenu>
 </template>
 <script setup lang="ts" name="tags">

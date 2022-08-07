@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "forceConsistentCasingInFileNames":true,
+    "forceConsistentCasingInFileNames": true,
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",

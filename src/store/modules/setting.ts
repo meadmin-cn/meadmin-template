@@ -1,10 +1,10 @@
 import { sizeEnum } from "@/enums/configEnum";
 import { Language } from "element-plus/es/locale";
-import { themeConfig,ThemeConfig } from "@/config";
+import { themeConfig, ThemeConfig } from "@/config";
 
-interface SettingState extends ThemeConfig{
+interface SettingState extends ThemeConfig {
     elLocale: Language | undefined; //elment语言包
 }
-export default defineStore('setting',{
-    state: (): SettingState => (Object.assign({elLocale: undefined,},themeConfig))
+export default defineStore('setting', {
+    state: (): SettingState => (Object.assign({ elLocale: undefined, }, themeConfig))
 });

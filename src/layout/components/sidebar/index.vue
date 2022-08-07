@@ -26,7 +26,7 @@ watch(route, (route) => {
     }
   }
 }, { immediate: true });
-   
+
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;

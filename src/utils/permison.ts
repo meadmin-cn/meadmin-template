@@ -6,42 +6,42 @@ import { RouteRecordRaw } from "vue-router";
  * @param rules 
  * @returns 
  */
- function hasPermission(rules?:string|string[]) {
-    if(!rules){
-        return true;
-    }
-    if(typeof rules == 'string'){
-        rules = [rules];
-    }
-    return useUserStore().rules!.some(rule =>  rule === '*' || rules!.includes(rule));
+function hasPermission(rules?: string | string[]) {
+  if (!rules) {
+    return true;
   }
-  
- /**
-  * 过滤动态路由
-  * @param routes 
-  * @param activeMenu 
-  * @returns 
-  */
-  export function filterAsyncRoutes(routes:RouteRecordRaw[],activeMenu?:string) { 
-    const res:RouteRecordRaw[] = []; 
-    routes.forEach(route => {
-      const tmp = { ...route }
-      if (route.meta && hasPermission(route.meta.rule)) {
-        if(route.meta.hideMenu){
-            if(typeof route.meta.activeMenu === 'undefined' && activeMenu){
-                route.meta.activeMenu = activeMenu;
-            }
-        }else{
-            activeMenu = route.meta.activeMenu || route.path;
-        }
+  if (typeof rules == 'string') {
+    rules = [rules];
+  }
+  return useUserStore().rules!.some(rule => rule === '*' || rules!.includes(rule));
+}
 
-
-        if (tmp.children) {
-          tmp.children = filterAsyncRoutes(tmp.children,activeMenu)
+/**
+ * 过滤动态路由
+ * @param routes 
+ * @param activeMenu 
+ * @returns 
+ */
+export function filterAsyncRoutes(routes: RouteRecordRaw[], activeMenu?: string) {
+  const res: RouteRecordRaw[] = [];
+  routes.forEach(route => {
+    const tmp = { ...route }
+    if (route.meta && hasPermission(route.meta.rule)) {
+      if (route.meta.hideMenu) {
+        if (typeof route.meta.activeMenu === 'undefined' && activeMenu) {
+          route.meta.activeMenu = activeMenu;
         }
-        res.push(tmp)
+      } else {
+        activeMenu = route.meta.activeMenu || route.path;
       }
-    })
-  
-    return res
-  }
+
+
+      if (tmp.children) {
+        tmp.children = filterAsyncRoutes(tmp.children, activeMenu)
+      }
+      res.push(tmp)
+    }
+  })
+
+  return res
+}

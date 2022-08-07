@@ -215,11 +215,11 @@ const KeepAliveImpl: ComponentOptions = {
         // prune cache on includeKey/excludeKey prop change
         watch(
             () => [props.includeKey, props.excludeKey],
-            ([includeKey,excludeKey]) => {
+            ([includeKey, excludeKey]) => {
                 includeKey && pruneCacheByKey(key => typeof key === 'string' && matches(includeKey, key))
-                excludeKey && pruneCacheByKey(key =>{
+                excludeKey && pruneCacheByKey(key => {
                     return typeof key !== 'string' || !matches(excludeKey, key)
-                } )
+                })
             },
             // prune post-render after `current` has been updated
             { flush: 'post', deep: true }
@@ -288,14 +288,13 @@ const KeepAliveImpl: ComponentOptions = {
             const { include, exclude, includeKey, excludeKey, max } = props
             if (
                 (include && (!name || !matches(include, name))) ||
-                (exclude && name && matches(exclude, name)) 
+                (exclude && name && matches(exclude, name))
                 || (includeKey && (typeof key !== 'string' || !matches(includeKey, key))) ||
                 (excludeKey && typeof key === 'string' && matches(excludeKey, key))
             ) {
                 current = vnode
                 return rawVNode
             }
-            console.log(key,vnode);
             const cachedVNode = cache.get(key)
 
             // clone vnode if it's reused because we are going to mutate it

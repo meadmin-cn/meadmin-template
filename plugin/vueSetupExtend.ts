@@ -1,5 +1,5 @@
 import xregexp from 'xregexp';
-import { parse,compileScript } from '@vue/compiler-sfc';
+import { parse, compileScript } from '@vue/compiler-sfc';
 import MagicString from 'magic-string'
 import { Plugin } from 'vite';
 import { SFCDescriptor } from 'vue/compiler-sfc';
@@ -23,10 +23,10 @@ function getLangImport(content: string) {
         if (useI18nParams.endsWith(']')) {
             let arr = xregexp.matchRecursive(useI18nParams, '\\[', '\\]', 'g', {
                 escapeChar: '\\',
-                valueNames: [null,null,'value',null],
+                valueNames: [null, null, 'value', null],
             });
             let res = arr[arr.length - 1];
-            if(res && /\,\s*$/.test(useI18nParams.slice(0,res.start-1))){
+            if (res && /\,\s*$/.test(useI18nParams.slice(0, res.start - 1))) {
                 return '[' + res.value + ']';
             }
         }
@@ -35,12 +35,12 @@ function getLangImport(content: string) {
 }
 
 
-function getComponent(sfc: SFCDescriptor){
-    const sfcScriptBlock = compileScript(sfc,{id:'vueSetupExtendCompile'});
+function getComponent(sfc: SFCDescriptor) {
+    const sfcScriptBlock = compileScript(sfc, { id: 'vueSetupExtendCompile' });
     let components = [];
-    if(sfcScriptBlock.imports){
-        for( let key in sfcScriptBlock.imports){
-            if(/\.vue$/i.test(sfcScriptBlock.imports[key].source)){
+    if (sfcScriptBlock.imports) {
+        for (let key in sfcScriptBlock.imports) {
+            if (/\.vue$/i.test(sfcScriptBlock.imports[key].source)) {
                 components.push(key);
             }
         }
@@ -49,7 +49,7 @@ function getComponent(sfc: SFCDescriptor){
 }
 
 
-export function supportScript(code: string, options:ExtendOptions) {
+export function supportScript(code: string, options: ExtendOptions) {
     let s: MagicString | undefined
     const str = () => s || (s = new MagicString(code))
     const { descriptor } = parse(code);
@@ -65,7 +65,7 @@ export function supportScript(code: string, options:ExtendOptions) {
                 attrs.langImport = `{{${langImport}}}`;
             }
         }
-        if(options.setComponents){
+        if (options.setComponents) {
             const components = getComponent(descriptor);
             if (components.length) {
                 attrs.components = `{{{${components}}}}`;

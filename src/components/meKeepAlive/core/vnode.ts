@@ -10,13 +10,13 @@ export type VNodeHook =
 
 
 export function invokeVNodeHook(
-    hook: VNodeHook,
-    instance: ComponentInternalInstance | null,
-    vnode: VNode,
-    prevVNode: VNode | null = null
-  ) {
-    callWithAsyncErrorHandling(hook, instance, <any>ErrorCodes.VNODE_HOOK, [
-      vnode,
-      prevVNode
-    ])
-  }
+  hook: VNodeHook,
+  instance: ComponentInternalInstance | null,
+  vnode: VNode,
+  prevVNode: VNode | null = null
+) {
+  callWithAsyncErrorHandling(hook, instance, <any>ErrorCodes.VNODE_HOOK, [
+    vnode,
+    prevVNode
+  ])
+}

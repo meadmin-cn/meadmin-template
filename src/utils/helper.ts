@@ -26,9 +26,9 @@ export function objectRreduce<T, P extends Record<string, any> = Record<string, 
  * @param object 
  * @returns 
  */
-export function concatObjectValue<T , P extends Record<string,T[]> = Record<string,T[]>>(object:P){
-    return objectRreduce(object, 
-    (currentValue, previousValue) => {
-        return currentValue.concat(previousValue || []);
-    }, [] as T[])
+export function concatObjectValue<T, P extends Record<string, T[]> = Record<string, T[]>>(object: P) {
+    return objectRreduce(object,
+        (currentValue, previousValue) => {
+            return currentValue.concat(previousValue || []);
+        }, [] as T[])
 }

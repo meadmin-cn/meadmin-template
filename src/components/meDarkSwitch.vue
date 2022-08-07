@@ -21,8 +21,8 @@ const settingStore = useSettingStore();
 
 .#{$namespace}-switch {
     .#{$namespace}-switch__core {
-        border-color: getCssVar('switch-off', 'color')!important;
-        background-color: getCssVar('switch-off', 'color')!important;
+        border-color: getCssVar('switch-off', 'color') !important;
+        background-color: getCssVar('switch-off', 'color') !important;
 
         .#{$namespace}-switch__action {
             background-color: getCssVar('bg', 'color');

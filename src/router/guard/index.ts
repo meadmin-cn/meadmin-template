@@ -32,14 +32,7 @@ function createPermissionGuard(router: Router) {
 //处理页面加载进度条
 function createProgressGuard(router: Router) {
     router.beforeEach(async (to) => {
-        if (to.meta.loaded) {
-            return true;
-        }
-        // nProgress.start();
-        return true;
-    });
-    router.afterEach(async () => {
-        // nProgress.done();
+        nProgress.start();
         return true;
     });
 }

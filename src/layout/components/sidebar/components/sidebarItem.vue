@@ -1,7 +1,9 @@
 <template>
     <template v-if="item.meta && !item.meta.hideMenu">
-        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild!.children || onlyOneChild!.noShowingChildren) && !item.meta.alwaysShow">
-            <component v-if="onlyOneChild!.meta" :is="onlyOneChild!.meta?.isLink?'a':'routerLink'" :href="basePath" :to="basePath">
+        <template
+            v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild!.children || onlyOneChild!.noShowingChildren) && !item.meta.alwaysShow">
+            <component v-if="onlyOneChild!.meta" :is="onlyOneChild!.meta?.isLink ? 'a' : 'routerLink'" :href="basePath"
+                :to="basePath">
                 <el-menu-item :index="basePath" :title="onlyOneChild!.meta.title">
                     <component :is="onlyOneChild!.meta!.icon" v-if="onlyOneChild!.meta.icon" />
                     <template #title>
@@ -51,7 +53,7 @@ const hasOneShowingChild = (children = [] as RouteRecordRaw[], parent: RouteReco
     return false
 };
 const resolvePath = (routePath: string) => {
-    if (isExternal(routePath) || isExternal(props.basePath)){
+    if (isExternal(routePath) || isExternal(props.basePath)) {
         return routePath;
     }
     return resolve(props.basePath, routePath)

@@ -1,4 +1,4 @@
-import { _RouteRecordBase,RouteMeta } from 'vue-router';
+import { _RouteRecordBase, RouteMeta } from 'vue-router';
 declare module 'vue-router' {
     interface RouteMeta extends Record<string | number | symbol, unknown> {
         // 标题设置该路由在侧边栏和面包屑中展示的名字
@@ -28,9 +28,9 @@ declare module 'vue-router' {
         // 你可以设置 alwaysShow: true，这样它就会忽略之前定义的规则，一直显示根路由
         alwaysShow?: boolean,
     }
-    interface _RouteRecordBase  {
+    interface _RouteRecordBase {
         //没有需要展示的子集（会动态计算不要设置默认值）
-        noShowingChildren?:boolean
-    } 
+        noShowingChildren?: boolean
+    }
 }
 export { };

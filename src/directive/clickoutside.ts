@@ -1,2 +1,2 @@
-import {ClickOutside} from "element-plus";
+import { ClickOutside } from "element-plus";
 export default ClickOutside;

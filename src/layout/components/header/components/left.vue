@@ -1,7 +1,8 @@
 <template>
     <el-space class="left">
         <div></div>
-        <el-icon-expand class="fold-expand pointer" @click="setMenuCollapse()" v-if="settingStore.menuCollapse"></el-icon-expand>
+        <el-icon-expand class="fold-expand pointer" @click="setMenuCollapse()" v-if="settingStore.menuCollapse">
+        </el-icon-expand>
         <el-icon-fold class="fold-expand pointer" @click="setMenuCollapse()" v-else></el-icon-fold>
         <el-scrollbar :min-size="10" wrap-style="display:flex;align-items:center">
             <el-breadcrumb separator="/">
@@ -16,11 +17,12 @@
 <script setup lang="ts" name="left">
 import { useSettingStore } from '@/store';
 const settingStore = useSettingStore();
-const setMenuCollapse = ()=>{settingStore.menuCollapse = !settingStore.menuCollapse};
+const setMenuCollapse = () => { settingStore.menuCollapse = !settingStore.menuCollapse };
 
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+
 .left {
     height: 100%;
 

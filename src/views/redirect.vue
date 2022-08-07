@@ -5,14 +5,14 @@ const route = useRoute();
 const router = useRouter();
 const fullPath = route.params.path as string;
 const routeStore = useRouteStore();
-if(routeStore.noCacheFullPath.includes(fullPath)){
+if (routeStore.noCacheFullPath.includes(fullPath)) {
     router.replace(fullPath);
-}else{
+} else {
     routeStore.setNoCache(fullPath);
-    onMounted(()=>{
+    onMounted(() => {
         routeStore.removeNoCache(fullPath);
         router.replace(fullPath);
-        
+
     });
 }
 

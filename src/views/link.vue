@@ -1,15 +1,13 @@
 <template>
-<div class="link">
+    <div class="link">
 
-</div>
+    </div>
 </template>
 <script setup lang="ts" name="link">
 const route = useRoute();
-window.location.href=route.fullPath;
+window.location.href = route.fullPath;
 
 </script>
 <style lang="scss" scoped>
-.link{
-
-}
+.link {}
 </style>

@@ -1,25 +1,24 @@
 <template>
-<el-container class="layout">
-    <el-aside width="max-content">
-        <layout-sidebar></layout-sidebar>
-    </el-aside>
-    <el-container>
-    <el-header height="max-content">
-        <layout-header></layout-header>
-    </el-header>
-    <el-main >
-        <el-scrollbar>
-            <div style="height: 1000px;background-color: var(--el-bg-color-page);" >
-                <router-view v-slot="{ Component, route }">
-                <me-keep-alive :max="30" :excludeKey="routeStore.noCacheFullPath">
-                    <me-component :is="Component" :key="route.fullPath" v-bind="$attrs"></me-component>
-                </me-keep-alive>
-                </router-view>
-            </div>
-        </el-scrollbar>
-    </el-main>
+    <el-container class="layout">
+        <el-aside width="max-content">
+            <layout-sidebar></layout-sidebar>
+        </el-aside>
+        <el-container>
+            <el-header height="max-content">
+                <layout-header></layout-header>
+            </el-header>
+            <el-main>
+                <el-scrollbar>
+                    <div style="height: 1000px;background-color: var(--el-bg-color-page);">
+                        <router-view v-slot="{ Component, route }">
+                            <me-component :keep-alive="keepAliveProps" :is="Component" :component-key="route.fullPath"
+                                doneProgress></me-component>
+                        </router-view>
+                    </div>
+                </el-scrollbar>
+            </el-main>
+        </el-container>
     </el-container>
-</el-container>
 </template>
 <script setup lang="ts" name="layout">
 import layoutSidebar from './components/sidebar/index.vue';
@@ -28,13 +27,14 @@ import meComponent from '@/components/meComponent.vue';
 import { useRouteStore } from '@/store';
 import { MeKeepAliveProps } from '@/components/meKeepAlive';
 const routeStore = useRouteStore();
-// const keepAliveProps = reactive<MeKeepAliveProps>({
-//     max:30,
-//     excludeKey:routeStore.noCacheFullPath
-// });
+const keepAliveProps = reactive<MeKeepAliveProps>({
+    max: 30,
+    excludeKey: routeStore.noCacheFullPath,
+    exclude: 'redirect'
+});
 const route = useRoute();
-watch(route,()=>{
-    if(route.meta.noCache){
+watch(route, () => {
+    if (route.meta.noCache) {
         routeStore.setNoCache(route.fullPath);
     }
 })
@@ -43,12 +43,15 @@ watch(route,()=>{
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
-.layout{
+
+.layout {
     height: 100%;
-    :deep(.#{$namespace}-header){
+
+    :deep(.#{$namespace}-header) {
         padding: 0;
     }
-    :deep(.#{$namespace}-main){
+
+    :deep(.#{$namespace}-main) {
         padding: 0;
     }
 }

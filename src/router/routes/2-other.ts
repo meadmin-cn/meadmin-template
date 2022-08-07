@@ -7,7 +7,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/other',
         redirect: '/other/index',
         component: Layout,
-        children:concatObjectValue<RouteRecordRaw>(import.meta.glob('./other/*.ts', { eager: true,import:'routes' })),
-        meta:{title:'其他','icon':'el-icon-promotion'}
+        children: concatObjectValue<RouteRecordRaw>(import.meta.glob('./other/*.ts', { eager: true, import: 'routes' })),
+        meta: { title: '其他', 'icon': 'el-icon-promotion' }
     }
 ];

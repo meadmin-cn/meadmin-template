@@ -3,7 +3,7 @@ import cookies from 'js-cookie';
 import { loginConfig as config } from '@/config';
 import { loading } from '@/utils/loading';
 import { PageEnum } from '@/enums/pageEnum';
-import { loginApi, LoginParams,userInfoApi,UserInfoResult } from '@/api/user';
+import { loginApi, LoginParams, userInfoApi, UserInfoResult } from '@/api/user';
 import { router } from '@/router';
 import useRouteStore from './route';
 interface UserState {
@@ -45,13 +45,13 @@ export default defineStore({
     },
     actions: {
         //初始化
-        init: async function (tokenValue?:string) {
-            let token =  tokenValue || cookies.get(config.tokenName);
+        init: async function (tokenValue?: string) {
+            let token = tokenValue || cookies.get(config.tokenName);
             if (token) {
                 this.token = token;
                 this.user = await userInfoApi(true)();
                 this.rules = this.user!.rules;
-                useRouteStore().generateRoutes().forEach(route=>router.addRoute(route));
+                useRouteStore().generateRoutes().forEach(route => router.addRoute(route));
             } else {
                 this.token = '';
             }
@@ -65,7 +65,7 @@ export default defineStore({
         logOut: function () {
             loading();
             this.token = '';
-            router.replace({path:PageEnum.LOGIN,query:{redirect:window.location.href}})
+            router.replace({ path: PageEnum.LOGIN, query: { redirect: window.location.href } })
             window.location.reload();
         },
     },

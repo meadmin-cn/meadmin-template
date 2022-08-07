@@ -13,7 +13,8 @@ html {
         }
     }
 
-    div,span {
+    div,
+    span {
         box-sizing: border-box;
     }
 
@@ -21,11 +22,13 @@ html {
         cursor: pointer;
         /*鼠标变小手*/
     }
-    .flex-center{
+
+    .flex-center {
         display: flex;
         align-items: center;
         justify-content: center;
     }
+
     a:hover,
     a:visited,
     a:link,
