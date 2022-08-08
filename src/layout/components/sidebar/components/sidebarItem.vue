@@ -1,21 +1,22 @@
 <template>
-    <template v-if="item.meta && !item.meta.hideMenu">
+    <template v-if="!item.meta?.hideMenu">
         <template
-            v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild!.children || onlyOneChild!.noShowingChildren) && !item.meta.alwaysShow">
-            <component v-if="onlyOneChild!.meta" :is="onlyOneChild!.meta?.isLink ? 'a' : 'routerLink'" :href="basePath"
-                :to="basePath">
-                <el-menu-item :index="basePath" :title="onlyOneChild!.meta.title">
-                    <component :is="onlyOneChild!.meta!.icon" v-if="onlyOneChild!.meta.icon" />
+            v-if="onlyOneChild && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.meta?.alwaysShow">
+            <component v-if="onlyOneChild.meta && onlyOneChild.meta.title"
+                :is="onlyOneChild.meta?.isLink ? 'a' : 'routerLink'" :href="basePath"
+                :to="resolvePath(onlyOneChild.path)">
+                <el-menu-item :index="resolvePath(onlyOneChild.path)" :title="onlyOneChild.meta.title">
+                    <component :is="onlyOneChild.meta.icon" v-if="onlyOneChild.meta.icon" />
                     <template #title>
-                        <span class="menu">{{ onlyOneChild!.meta.title }}</span>
+                        <span class="menu">{{ onlyOneChild.meta.title }}</span>
                     </template>
                 </el-menu-item>
             </component>
         </template>
         <el-sub-menu v-else :index="resolvePath(item.path)">
             <template v-if="item.meta" #title>
-                <component :is="item.meta.icon" v-if="item.meta.icon" />
-                <span class="menu">{{ item.meta.title }}</span>
+                <component :is="item.meta!.icon" v-if="item.meta!.icon" />
+                <span class="menu">{{ item.meta!.title }}</span>
             </template>
             <sidebar-item v-for="child in item.children" :key="child.path" :item="child"
                 :base-path="resolvePath(child.path)"></sidebar-item>
@@ -28,7 +29,6 @@ import { isExternal } from '@/utils/validate';
 import { resolve } from 'path-browserify';
 import { PropType } from 'vue';
 import { RouteRecordRaw } from 'vue-router';
-
 const props = defineProps({
     item: {
         type: Object as PropType<RouteRecordRaw>,
@@ -58,7 +58,7 @@ const resolvePath = (routePath: string) => {
     }
     return resolve(props.basePath, routePath)
 }
-
+hasOneShowingChild(props.item.children, props.item)
 </script>
 <style lang="scss" scoped>
 </style>

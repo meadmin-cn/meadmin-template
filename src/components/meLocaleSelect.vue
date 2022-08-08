@@ -1,6 +1,6 @@
 <template>
-    <el-dropdown class="me-locale-select pointer" max-height="500px">
-        <div class="flex-center">
+    <el-dropdown class="me-locale-select" trigger="click" max-height="500px">
+        <div class="flex-center pointer">
             <me-icon-translation class="icon"></me-icon-translation>
         </div>
         <template #dropdown>
@@ -22,8 +22,12 @@ const setLanguage = (locale: string) => {
 .me-locale-select {
     line-height: 100%;
 
-    .icon {
-        font-size: 1.4em;
+    .flex-center {
+        padding: 0 10px;
+
+        .icon {
+            font-size: 1.2em;
+        }
     }
 }
 </style>

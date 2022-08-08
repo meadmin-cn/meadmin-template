@@ -1,6 +1,6 @@
 <template>
-    <el-dropdown class="me-size-select pointer" max-height="500px">
-        <div class="flex-center">
+    <el-dropdown class="me-size-select" trigger="click" max-height="500px">
+        <div class="flex-center pointer">
             <me-icon-size class="icon"></me-icon-size>
         </div>
         <template #dropdown>
@@ -18,8 +18,13 @@ const settingStore = useSettingStore();
 </script>
 <style lang="scss" scoped>
 .me-size-select {
-    .icon {
-        font-size: 1.2em;
+    .flex-center {
+        padding: 0 10px;
+
+        .icon {
+            font-size: 1.2em;
+        }
     }
+
 }
 </style>

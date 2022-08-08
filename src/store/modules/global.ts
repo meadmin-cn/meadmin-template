@@ -1,4 +1,10 @@
 import { Composer } from "vue-i18n";
+import { event, mitter } from "@/event";
+const WIDTH = 992 // refer to Bootstrap's responsive design
+const isMobile = ref(window.document.body.offsetWidth < WIDTH);
+mitter.on(event.resize, () => {
+    isMobile.value = window.document.body.offsetWidth < WIDTH;
+});
 export default defineStore('global', {
     state: () => {
         let _i18n: Composer<unknown, unknown, unknown>;
@@ -16,7 +22,8 @@ export default defineStore('global', {
                         }
                     }
                 }
-            })
+            }),
+            isMobile
         }
     }
 });

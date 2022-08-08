@@ -16,7 +16,7 @@ mitter.once(event.ready, async (app) => {
     await installI18n(app);
     installRoute(app);
     window.addEventListener('resize', () => mitter.emit(event.resize));
-    // 进度条配置项这样写
+    //进度条配置
     nProgress.configure({
         showSpinner: false
     });

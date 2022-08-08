@@ -26,16 +26,14 @@ export function filterAsyncRoutes(routes: RouteRecordRaw[], activeMenu?: string)
   const res: RouteRecordRaw[] = [];
   routes.forEach(route => {
     const tmp = { ...route }
-    if (route.meta && hasPermission(route.meta.rule)) {
-      if (route.meta.hideMenu) {
+    if (!route.meta || hasPermission(route.meta.rule)) {
+      if (route.meta?.hideMenu) {
         if (typeof route.meta.activeMenu === 'undefined' && activeMenu) {
           route.meta.activeMenu = activeMenu;
         }
       } else {
-        activeMenu = route.meta.activeMenu || route.path;
+        activeMenu = route.meta?.activeMenu || route.path;
       }
-
-
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, activeMenu)
       }

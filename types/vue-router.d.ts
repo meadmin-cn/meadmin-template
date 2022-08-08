@@ -2,7 +2,7 @@ import { _RouteRecordBase, RouteMeta } from 'vue-router';
 declare module 'vue-router' {
     interface RouteMeta extends Record<string | number | symbol, unknown> {
         // 标题设置该路由在侧边栏和面包屑中展示的名字
-        title: string,
+        title?: string,
         //对应权限 多个之间为或的关系
         rule?: string[],
         // 是否是固定的tag
@@ -27,6 +27,8 @@ declare module 'vue-router' {
         // 若你想不管路由下面的 children 声明的个数都显示你的根路由
         // 你可以设置 alwaysShow: true，这样它就会忽略之前定义的规则，一直显示根路由
         alwaysShow?: boolean,
+        //是否需要面包屑false不需要 ture或undefined为需要
+        breadcrumb?: boolean,
     }
     interface _RouteRecordBase {
         //没有需要展示的子集（会动态计算不要设置默认值）

@@ -20,6 +20,8 @@ const settingStore = useSettingStore();
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
 
 .#{$namespace}-switch {
+    margin: 0 10px;
+
     .#{$namespace}-switch__core {
         border-color: getCssVar('switch-off', 'color') !important;
         background-color: getCssVar('switch-off', 'color') !important;

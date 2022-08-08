@@ -15,6 +15,6 @@ export interface ThemeConfig {
 let themeConfig: ThemeConfig = {
     isDark: false,//是否暗黑模式
     size: sizeEnum.default,//默认大小
-    menuCollapse: false,//菜单是否折叠
+    menuCollapse: true,//菜单是否折叠
 }
 export { loginConfig, localeConfig, themeConfig }

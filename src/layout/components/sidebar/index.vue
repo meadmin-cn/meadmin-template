@@ -1,7 +1,8 @@
 <template>
   <el-scrollbar view-class="layout-sidebar-content" class="layout-sidebar"
-    :class="{ collapse: settingStore.menuCollapse }">
-    <el-menu class="el-menu-vertical-demo" :default-active="activeMenu" :collapse="settingStore.menuCollapse">
+    :class="{ collapse: !globalStore.isMobile && settingStore.menuCollapse }">
+    <el-menu class="el-menu-vertical-demo" :default-active="activeMenu"
+      :collapse="!globalStore.isMobile && settingStore.menuCollapse">
       <div class="title">
         Me<span> - Admin</span>
       </div>
@@ -10,9 +11,10 @@
   </el-scrollbar>
 </template>
 <script setup lang="ts" name="layoutSidebar">
-import { useSettingStore, useRouteStore } from '@/store';
+import { useSettingStore, useRouteStore, useGlobalStore } from '@/store';
 const settingStore = useSettingStore();
 const routeStore = useRouteStore();
+const globalStore = useGlobalStore();
 const route = useRoute();
 let activeMenu = ref('');
 watch(route, (route) => {
@@ -48,7 +50,7 @@ watch(route, (route) => {
       height: getCssVar('menu-item', 'height');
       line-height: getCssVar('menu-item', 'height');
       font-weight: bold;
-      margin: 0 12px;
+      padding: 0 12px;
       font-size: 1.25em;
       word-break: break-all;
       overflow-y: hidden;

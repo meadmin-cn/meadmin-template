@@ -16,9 +16,5 @@ import MeSizeSelect from '@/components/meSizeSelect.vue';
     justify-content: right;
     align-items: center;
     padding: 12px;
-
-    >div {
-        padding: 0 12px
-    }
 }
 </style>

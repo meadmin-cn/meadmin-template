@@ -1,11 +1,11 @@
 <template>
     <el-container class="layout">
-        <el-aside width="max-content">
+        <el-aside width="max-content" v-if="!globalStore.isMobile">
             <layout-sidebar></layout-sidebar>
         </el-aside>
         <el-container>
             <el-header height="max-content">
-                <layout-header></layout-header>
+                <layout-navbar></layout-navbar>
             </el-header>
             <el-main>
                 <el-scrollbar>
@@ -19,14 +19,20 @@
             </el-main>
         </el-container>
     </el-container>
+    <el-drawer custom-class="me-sidebar-drawer" :model-value="!settingStore.menuCollapse" :with-header="false"
+        size="200px" direction="ltr" v-if="globalStore.isMobile" @close="() => settingStore.menuCollapse = true">
+        <layout-sidebar></layout-sidebar>
+    </el-drawer>
 </template>
 <script setup lang="ts" name="layout">
 import layoutSidebar from './components/sidebar/index.vue';
-import layoutHeader from './components/header/index.vue';
+import layoutNavbar from './components/navbar/index.vue';
 import meComponent from '@/components/meComponent.vue';
-import { useRouteStore } from '@/store';
+import { useRouteStore, useSettingStore, useGlobalStore } from '@/store';
 import { MeKeepAliveProps } from '@/components/meKeepAlive';
+const settingStore = useSettingStore();
 const routeStore = useRouteStore();
+const globalStore = useGlobalStore();
 const keepAliveProps = reactive<MeKeepAliveProps>({
     max: 30,
     excludeKey: routeStore.noCacheFullPath,
@@ -54,5 +60,9 @@ watch(route, () => {
     :deep(.#{$namespace}-main) {
         padding: 0;
     }
+}
+
+:global(.me-sidebar-drawer .el-drawer__body) {
+    padding: 0;
 }
 </style>
