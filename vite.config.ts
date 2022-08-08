@@ -55,14 +55,35 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           return 'MeIcon' + name[0].toUpperCase() + name.slice(1);
         },
         template: fs.readFileSync('./template/meIconComments.d.ts', 'utf-8'),
-        codeTemplates: [{ key: '\n        //code', template: '\n        {{name}}: Icon;' }]
+        codeTemplates: [{ key: '        //code', template: '        {{name}}: Icon;/n' }]
       },
       {//pinia module
         pattern: ['**/*.{ts,js}', '*.{ts,js}'],
         dir: 'src/store/modules',
         toFile: 'src/store/module.ts',
         name: 'use_{{name}}_store'
-      }
+      },
+      {//global component
+        pattern: ['*.{vue,ts}', '*/index.{vue,ts}'],
+        dir: 'src/components/core',
+        toFile: 'types/globalComponents.d.ts',
+        template: fs.readFileSync('./template/globalComponents.d.ts', 'utf-8'),
+        codeTemplates: [
+          { key: '//import code', template: 'import {{name}} from "{{path}}"\n' },
+          { key: '        //code', template: '        {{name}}: typeof {{name}};\n' }
+        ]
+      },
+      {//global directives
+        pattern: ['*.{vue,ts}', '*/index.{vue,ts}'],
+        dir: 'src/directives/core',
+        toFile: 'types/globalDirectives.d.ts',
+        template: fs.readFileSync('./template/globalDirectives.d.ts', 'utf-8'),
+        codeTemplates: [
+          { key: '//import code', template: 'import {{name}} from "{{path}}"\n' },
+          { key: '        //code', template: '        {{name}}: typeof {{name}};\n' }
+        ],
+        name: 'v_{{name}}'
+      },
     ]),
     vueSetUpExtend({ setLangImport: true, exclude: ['steup', 'lang'], setComponents: true })
     ],

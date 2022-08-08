@@ -1,5 +1,4 @@
 /// <reference types="vite-svg-loader" />
-
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import path from 'path-browserify';
 import { App, Component, h } from 'vue'

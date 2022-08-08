@@ -6,7 +6,6 @@
   </el-config-provider>
 </template>
 <script setup lang="ts">
-import meComponent from './components/meComponent.vue';
 import { useSettingStore } from '@/store';
 import { sizeEnum } from '@/enums/configEnum';
 const settingStore = useSettingStore();

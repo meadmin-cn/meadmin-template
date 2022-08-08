@@ -32,3 +32,24 @@ export function concatObjectValue<T, P extends Record<string, T[]> = Record<stri
             return currentValue.concat(previousValue || []);
         }, [] as T[])
 }
+
+/**
+ * 文件名转驼峰
+ * @param fileName 
+ * @param nameTemplate 
+ * @returns 
+ */
+export const fileToHump = function (fileName: string): string {
+    const index = fileName.lastIndexOf('.');
+    if (index > 0) {
+        fileName = fileName.slice(0, index);
+    }
+    let fileNameArr = fileName.replace(/\\/g, '/').split('/');
+    if (fileNameArr[fileNameArr.length - 1] == 'index' || fileNameArr[fileNameArr.length - 1] == 'Index') {
+        fileNameArr.pop();
+    }
+    for (let i = 1, len = fileNameArr.length; i < len; i++) {
+        fileNameArr[i] = fileNameArr[i].slice(0, 1).toUpperCase() + fileNameArr[i].slice(1)
+    }
+    return fileNameArr.join('');
+}

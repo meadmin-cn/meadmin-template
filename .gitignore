@@ -26,3 +26,5 @@ package-lock.json
 types/auto-imports.d.ts
 types/meIconComments.d.ts
 src/store/module.ts
+types/globalComponents.d.ts
+types/globalDirectives.d.ts

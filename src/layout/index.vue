@@ -27,9 +27,7 @@
 <script setup lang="ts" name="layout">
 import layoutSidebar from './components/sidebar/index.vue';
 import layoutNavbar from './components/navbar/index.vue';
-import meComponent from '@/components/meComponent.vue';
 import { useRouteStore, useSettingStore, useGlobalStore } from '@/store';
-import { MeKeepAliveProps } from '@/components/meKeepAlive';
 const settingStore = useSettingStore();
 const routeStore = useRouteStore();
 const globalStore = useGlobalStore();
