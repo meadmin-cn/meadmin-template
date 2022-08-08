@@ -6,7 +6,7 @@
         <el-icon-fold class="fold-expand pointer" @click="setMenuCollapse()" v-else></el-icon-fold>
         <el-scrollbar :min-size="10" wrap-style="display:flex;align-items:center" v-if="!globalStore.isMobile">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="index === breadcrumbList.length - 1 ? undefined : item.redirect"
+                <el-breadcrumb-item :to="index === breadcrumbList.length - 1 ? undefined : item"
                     v-for="(item, index) in breadcrumbList">{{ item.meta!.title }}</el-breadcrumb-item>
             </el-breadcrumb>
         </el-scrollbar>

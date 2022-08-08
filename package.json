@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build -m prod",
+    "build": "vite build -m prod && vue-tsc --noEmit",
     "preview": "vite preview",
     "release": "release-it",
     "i": "npm install --registry=https://registry.npm.taobao.org && npx husky install"
