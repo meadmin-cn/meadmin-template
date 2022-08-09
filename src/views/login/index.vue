@@ -1,5 +1,6 @@
 <template>
     <div class="login">
+        <img src="/logo.svg?url" class="bg" />
         <Header class="header"></Header>
         <div class="form" @keyup.enter.exact="login()">
             <div class="title">ME-Admin</div>
@@ -64,26 +65,40 @@ const login = async () => {
 }
 
 .login {
-    background: url(@/assets/login-bg.svg) no-repeat scroll top center ;
-    background-size: 100% 100%;
     background-color: #efeeee;
     width: 100%;
     height: 100%;
-
+    position: relative;
+    .bg{
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        max-width: 500px;
+        max-height: 500px;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%,-50%);
+        @media only screen and (max-width: 500px) {
+            background-size:contain;
+        }
+    }
     .header {
         width: 100%;
-        margin-bottom: 20vh;
     }
 
     .form {
+        z-index:1;
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%,-50%);
         width: 80%;
         max-width: 500px;
         margin: auto;
         padding: 30px 20px;
-        background-color: var(--el-mask-color);
+        background-color: var(--el-mask-color-extra-light);
         border-radius: 4px;
         box-shadow: 0px 0px 4px getCssVar('border', 'color');
-
         .title {
             text-align: center;
             width: 100%;
