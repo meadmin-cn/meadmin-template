@@ -55,7 +55,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           return 'MeIcon' + name[0].toUpperCase() + name.slice(1);
         },
         template: fs.readFileSync('./template/meIconComments.d.ts', 'utf-8'),
-        codeTemplates: [{ key: '        //code', template: '        {{name}}: Icon;/n' }]
+        codeTemplates: [{ key: '        //code', template: '        {{name}}: Icon;\n' }]
       },
       {//pinia module
         pattern: ['**/*.{ts,js}', '*.{ts,js}'],
