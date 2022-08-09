@@ -64,7 +64,8 @@ const login = async () => {
 }
 
 .login {
-    background: url(@/assets/login.svg) no-repeat scroll top center;
+    background: url(@/assets/login-bg.svg) no-repeat scroll top center ;
+    background-size: 100% 100%;
     background-color: #efeeee;
     width: 100%;
     height: 100%;
@@ -79,7 +80,7 @@ const login = async () => {
         max-width: 500px;
         margin: auto;
         padding: 30px 20px;
-        background-color: getCssVar('bg', 'color');
+        background-color: var(--el-mask-color);
         border-radius: 4px;
         box-shadow: 0px 0px 4px getCssVar('border', 'color');
 
