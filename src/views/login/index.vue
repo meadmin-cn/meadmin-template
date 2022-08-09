@@ -96,7 +96,7 @@ const login = async () => {
         max-width: 500px;
         margin: auto;
         padding: 30px 20px;
-        background-color: var(--el-mask-color-extra-light);
+        background-color: getCssVar('mask','color');
         border-radius: 4px;
         box-shadow: 0px 0px 4px getCssVar('border', 'color');
         .title {
