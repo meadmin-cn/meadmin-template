@@ -1,5 +1,6 @@
 <template>
     <div class="navbar">
+        <router-link to="/"></router-link>
         <left></left>
         <right class="right-header"></right>
     </div>

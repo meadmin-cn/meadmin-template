@@ -1,8 +1,9 @@
 import xregexp from 'xregexp';
 import { parse, compileScript } from '@vue/compiler-sfc';
+import { camelize,capitalize} from '@vue/shared'
 import MagicString from 'magic-string'
 import { Plugin } from 'vite';
-import { SFCDescriptor } from 'vue/compiler-sfc';
+import { compileTemplate, SFCDescriptor } from 'vue/compiler-sfc';
 export interface ExtendOptions {
     /**
      * 需要要排除的attr
@@ -33,15 +34,28 @@ function getLangImport(content: string) {
     }
     return undefined;
 }
-
-
+let i = 0;
 function getComponent(sfc: SFCDescriptor) {
-    const sfcScriptBlock = compileScript(sfc, { id: 'vueSetupExtendCompile' });
     let components = [];
-    if (sfcScriptBlock.imports) {
-        for (let key in sfcScriptBlock.imports) {
-            if (/\.vue$/i.test(sfcScriptBlock.imports[key].source)) {
-                components.push(key);
+    const sfcScriptBlock = compileScript(sfc, { id: 'vueSetupExtendCompile' });
+    
+    if(sfc.template){
+        const code = compileTemplate({source:sfc.source,filename:sfc.filename,id:'vueSetupExtendCompile'}).code;
+        
+        for (const match of code.matchAll(/_resolveComponent[0-9]*\("(.+?)"\)/g)) {
+            const matchedName = match[1]
+            if (match.index != null && matchedName && !matchedName.startsWith('_')) {
+                if(sfcScriptBlock.imports){
+                    if(sfcScriptBlock.imports[camelize(matchedName)]){
+                        components.push(camelize(matchedName))
+                        continue;
+                    }
+                    if(sfcScriptBlock.imports[capitalize(camelize(matchedName))]){
+                        components.push(capitalize(camelize(matchedName)))
+                        continue;
+                    }
+                }
+                components.push( match[0])  
             }
         }
     }
@@ -56,7 +70,7 @@ export function supportScript(code: string, options: ExtendOptions) {
     if (!descriptor.script && descriptor.scriptSetup) {
         let attrs = Object.assign({}, descriptor.scriptSetup.attrs);
         const lang = attrs.lang;
-        options.exclude.forEach(item => {
+        options.exclude &&options.exclude.forEach(item => {
             delete attrs[item];
         });
         if (options.setLangImport && !attrs.langImport) {
@@ -68,7 +82,7 @@ export function supportScript(code: string, options: ExtendOptions) {
         if (options.setComponents) {
             const components = getComponent(descriptor);
             if (components.length) {
-                attrs.components = `{{{${components}}}}`;
+                attrs.components = `{{[${components}]}}`;
             }
         }
         let scriptStr = '';

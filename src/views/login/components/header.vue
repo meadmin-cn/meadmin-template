@@ -6,9 +6,6 @@
     </div>
 </template>
 <script setup lang="ts" name="Header">
-import MeDarkSwitch from '@/components/meDarkSwitch.vue';
-import MeLocaleSelect from '@/components/meLocaleSelect.vue';
-import MeSizeSelect from '@/components/meSizeSelect.vue';
 </script>
 <style lang="scss" scoped>
 .header {

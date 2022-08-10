@@ -28,3 +28,6 @@ types/meIconComments.d.ts
 src/store/module.ts
 types/globalComponents.d.ts
 types/globalDirectives.d.ts
+stats.html
+vite.config.ts.timestamp*
+types/components.d.ts

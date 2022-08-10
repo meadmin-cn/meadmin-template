@@ -105,7 +105,7 @@ export const setI18nLanguage = async (locale: string, isLoading = true, i18n?: G
   isLoading && loading();
   if (i18n === useGlobalStore().i18n) {
     let messageArr = [
-      setLocaleMessage(i18n, locale, [(locale) => import(`./lang/${locale}.ts`)]),
+      setLocaleMessage(i18n, locale, [(locale) => import(`./lang/${locale}.json`)]),
       loadMessage<{ default: Language }>([(locale) => import(`../../node_modules/element-plus/es/locale/lang/${locale}.mjs`), 'element-plus'], locale),
       ...mitter.emit(event.beforeLocalChange, { locale, i18n })
     ];

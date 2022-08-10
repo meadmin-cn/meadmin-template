@@ -10,10 +10,13 @@
     </div>
 </template>
 <script setup lang="ts" name="meDarkSwitch">
+import { useLocalesI18n } from '@/locales/i18n';
 import { useSettingStore } from '@/store';
 import { useGlobalConfig } from 'element-plus';
 let elNamespace = useGlobalConfig('namespace');
 const settingStore = useSettingStore();
+let { t } = useLocalesI18n({}, [(locale: string) => import(`@/views/test/lang/${locale}.json`), 'login']);
+
 </script>
 <style lang="scss" scoped>
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;

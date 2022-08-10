@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <img src="/logo.svg?url" class="bg" />
+        <img src="/logo.svg" class="bg" />
         <Header class="header"></Header>
         <div class="form" @keyup.enter.exact="login()">
             <div class="title">ME-Admin</div>
@@ -35,7 +35,7 @@ const formRef = ref<FormInstance>();
 const route = useRoute();
 const router = useRouter();
 let loginParams = reactive(new LoginParams());
-let { t } = useLocalesI18n({}, [(locale: string) => import(`@/views/login/lang/${locale}.ts`), 'login']);
+let { t } = useLocalesI18n({}, [(locale: string) => import(`@/views/login/lang/${locale}.json`), 'login']);
 let showPass = ref(false);
 const rules = computed<FormRules>(() => ({
     username: [{ required: true, message: t('请填写') + ' ' + t('用户名'), trigger: 'blur' },
