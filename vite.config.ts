@@ -2,7 +2,7 @@ import vue from '@vitejs/plugin-vue'
 import svgLoader from 'vite-svg-loader'
 import { resolve} from 'path';
 import * as fs from 'fs';
-import { default as autogenerationImport, getName } from 'vite-plugin-autogeneration-import-file';
+import { autoImport,resolver } from 'vite-plugin-autogeneration-import-file';
 import vueSetUpExtend from './plugin/vueSetupExtend';
 import { viteMockServe } from 'vite-plugin-mock'
 import { ConfigEnv, UserConfigExport } from 'vite';
@@ -36,15 +36,16 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         setupProdMockServer();
       `,
     }),
-    AutoImport({//自动加载
+    AutoImport({//自动加载API
       imports: ['vue', 'vue-router', 'pinia'],
       // 可以选择auto-imports.d.ts生成的位置，使用ts建议设置为'src/auto-imports.d.ts'
       dts: 'types/auto-imports.d.ts',
       resolvers: [ElementPlusResolver()],
     }),
     Components({//组件自动注册(包括components下的所有.vue组件和ElementPlus组件)
-      dts:'./types/components.d.ts',
-      resolvers: [ElementPlusResolver()],
+      include:[],
+      dts:false,
+      resolvers: [ElementPlusResolver(),resolver([3],[2])],
     }),
     vue(), svgLoader({
       svgoConfig: {
@@ -66,15 +67,12 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         ],
       },
     })
-    , autogenerationImport([//自动生成
-      {//svg icon
+    , autoImport([//自动生成
+      {//svg icon type
         pattern: ['*.svg'],
         dir: 'src/icons/svg',
         toFile: 'types/meIconComments.d.ts',
-        name: (name) => {
-          name = getName(name);
-          return 'MeIcon' + name[0].toUpperCase() + name.slice(1);
-        },
+        name: 'MeIcon_{{name}}',
         template: fs.readFileSync('./template/meIconComments.d.ts', 'utf-8'),
         codeTemplates: [{ key: '        //code', template: '        {{name}}: Icon;\n' }]
       },
@@ -84,17 +82,26 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         toFile: 'src/store/module.ts',
         name: 'use_{{name}}_store'
       },
-      {//global directives
-        pattern: ['*.{vue,ts}', '*/index.{vue,ts}'],
-        dir: 'src/directives/core',
-        toFile: 'types/globalDirectives.d.ts',
-        template: fs.readFileSync('./template/globalDirectives.d.ts', 'utf-8'),
+      {//auto import directives
+        pattern: ['*.ts', '**/index.ts'],
+        dir: 'src/directives',
+        toFile: 'types/directives.d.ts',
+        template: fs.readFileSync('./template/directives.d.ts', 'utf-8'),
         codeTemplates: [
-          { key: '//import code', template: 'import {{name}} from "{{path}}"\n' },
-          { key: '        //code', template: '        {{name}}: typeof {{name}};\n' }
+          { key: '//code', template: '{{name}}: typeof import("{{path}}")["default"];\n        ' }
         ],
-        name: 'v_{{name}}'
+        name: 'V_{{name}}'
       },
+      {//auto import components
+        pattern: ['*.vue', '**/index.{vue,ts}'],
+        dir: 'src/components',
+        toFile: 'types/components.d.ts',
+        template: fs.readFileSync('./template/components.d.ts', 'utf-8'),
+        codeTemplates: [
+          { key: '//code', template: '{{name}}: typeof import("{{path}}")["default"];\n        ' }
+        ],
+        name: '_{{name}}'
+      }
     ]),
     visualizer(),
     ],

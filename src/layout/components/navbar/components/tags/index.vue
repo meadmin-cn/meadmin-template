@@ -1,7 +1,7 @@
 <template>
     <div class="footer">
         <a class="icon pointer" :class="{ 'is-disabled': scrollLeft <= 0 }" @click="back">
-            <el-icon-d-arrow-left></el-icon-d-arrow-left>
+            <mel-icon-d-arrow-left></mel-icon-d-arrow-left>
         </a>
         <el-scrollbar ref="scrollbarRef" @scroll="({ scrollLeft: left }) => scrollLeft = left" view-class="list-parent"
             style="flex-grow:1">
@@ -15,13 +15,13 @@
         </el-scrollbar>
         <div class="right">
             <div class="icon pointer" :class="{ 'is-disabled': scrollLeft >= max }" @click="go()">
-                <el-icon-d-arrow-right></el-icon-d-arrow-right>
+                <mel-icon-d-arrow-right></mel-icon-d-arrow-right>
             </div>
             <div class="icon pointer">
-                <el-icon-refresh></el-icon-refresh>
+                <mel-icon-refresh></mel-icon-refresh>
             </div>
             <div class="icon pointer" @click="setContextmenu($event.currentTarget as any, currentTag)">
-                <el-icon-menu></el-icon-menu>
+                <mel-icon-menu></mel-icon-menu>
             </div>
         </div>
     </div>

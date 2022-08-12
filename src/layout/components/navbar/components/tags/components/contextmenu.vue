@@ -4,27 +4,27 @@
         <ul :class="`${elNamespace}-dropdown-menu ${elNamespace}-dropdown-menu--default`" v-bind="$attrs"
             style="outline: none;" v-click-outside="closeMenu" role="menuitem">
             <li @click="reload()" :class="`${elNamespace}-dropdown-menu__item`">
-                <el-icon-refresh /> 重新加载
+                <mel-icon-refresh /> 重新加载
             </li>
             <li @click="closeCurrent()"
                 :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': current.meta.affix || modelValue.length == 1 }">
-                <el-icon-close /> 关闭当前
+                <mel-icon-close /> 关闭当前
             </li>
             <li @click="closeLeft()"
                 :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst }">
-                <el-icon-download style="transform: rotate(90deg);" />关闭左侧
+                <mel-icon-download style="transform: rotate(90deg);" />关闭左侧
             </li>
             <li @click="closeRight()"
                 :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': modelValue.length === index + 1 }">
-                <el-icon-download style="transform: rotate(270deg);" />关闭右侧
+                <mel-icon-download style="transform: rotate(270deg);" />关闭右侧
             </li>
             <li @click="closeOther()"
                 :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst && modelValue.length === index + 1 }">
-                <el-icon-document-delete /> 关闭其他
+                <mel-icon-document-delete /> 关闭其他
             </li>
             <li @click="closeAll()"
                 :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': canCloseFirst === Infinity }">
-                <el-icon-minus /> 关闭全部
+                <mel-icon-minus /> 关闭全部
             </li>
         </ul>
     </el-popover>
@@ -63,57 +63,58 @@ let canCloseFirst = computed(() => {
 const reload = () => { //刷新
     router.replace('/redirect/' + encodeURIComponent(props.current.fullPath))
 }
-const closeCurrent = () => { //关闭当前
+const closeCurrent = async () => { //关闭当前
     if (props.modelValue.length === 0 || props.current.meta.affix) {
         return;
     }
+    await closeMenu();
     const nowIndex = index.value;
     props.modelValue.splice(index.value, 1)
     if (props.current.fullPath === route.fullPath) {
         router.push(props.modelValue[Math.min(props.modelValue.length - 1, nowIndex)].fullPath)
     }
-    closeMenu();
 }
-const closeLeft = () => {//关闭左侧
+const closeLeft = async () => {//关闭左侧
     if (index.value <= canCloseFirst.value) {
         return;
     }
+    await closeMenu();
     props.modelValue.splice(canCloseFirst.value, index.value - canCloseFirst.value)
     emit('update:modelValue', props.modelValue);
     if (props.modelValue.findIndex(item => item.fullPath === route.fullPath) === -1) {
         router.push(props.modelValue[index.value].fullPath);
     }
-    closeMenu();
 
 }
-const closeRight = () => {//关闭右侧
+const closeRight = async () => {//关闭右侧
     if (index.value + 1 === props.modelValue.length) {
         return;
     }
+    await closeMenu();
     props.modelValue.splice(index.value + 1);
     emit('update:modelValue', props.modelValue);
     if (props.modelValue.findIndex(item => item.fullPath === route.fullPath) === -1) {
         router.push(props.modelValue[index.value].fullPath);
     }
-    closeMenu();
 }
 const closeOther = () => {//关闭其他
     closeLeft();
     closeRight();
 }
-const closeAll = () => {//关闭全部
+const closeAll = async () => {//关闭全部
     if (canCloseFirst.value === Infinity) {
         return;
     }
+    await closeMenu();
     props.modelValue.splice(canCloseFirst.value)
     emit('update:modelValue', props.modelValue);
     if (props.modelValue.findIndex(item => item.fullPath === route.fullPath) === -1) {
         router.push(props.modelValue[props.modelValue.length - 1].fullPath);
     }
-    closeMenu();
 }
-const closeMenu = () => {
+const closeMenu = async () => {
     emit('update:visible', false);
+    await nextTick();
 }
 </script>
 <style lang="scss">

@@ -1,3 +1,4 @@
+
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
 import { App } from "vue";

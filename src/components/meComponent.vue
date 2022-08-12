@@ -24,7 +24,6 @@ const current = getCurrentInstance();
 const attrs = ref(current?.proxy?.$attrs);
 watch(() => props.is, async (is) => {
     if (is) {
-        console.log(is,is!.type!.setup);
         await Promise.allSettled(loadMessages(is as any, false));//自动加载语言包
         componentIs.value = is;
         key.value = props.componentKey;

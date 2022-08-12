@@ -2,7 +2,7 @@
     <el-dropdown class="message-box" max-height="500px" trigger="click">
         <div class="flex-center pointer">
             <el-badge is-dot>
-                <el-icon-bell class="message-icon"></el-icon-bell>
+                <mel-icon-bell class="message-icon"></mel-icon-bell>
             </el-badge>
         </div>
         <template #dropdown>

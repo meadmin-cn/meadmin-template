@@ -1,4 +1,3 @@
-import { ElLoading } from 'element-plus';
 import { throttle } from 'lodash-es';
 
 let number = 0;

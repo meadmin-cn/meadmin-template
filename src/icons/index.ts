@@ -33,7 +33,7 @@ export function installIcon(app: App) {
     }
     //注册element icons
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-        componentIcon(`ElIcon${key}`, component)
+        componentIcon(`MelIcon${key}`, component)
     }
     //注册自定义的svg icons
     const svgModules = import.meta.glob('./svg/*.svg', {

@@ -1,9 +1,9 @@
 <template>
     <el-space class="left">
         <div></div>
-        <el-icon-expand class="fold-expand pointer" @click="setMenuCollapse()" v-if="settingStore.menuCollapse">
-        </el-icon-expand>
-        <el-icon-fold class="fold-expand pointer" @click="setMenuCollapse()" v-else></el-icon-fold>
+        <mel-icon-expand class="fold-expand pointer" @click="setMenuCollapse()" v-if="settingStore.menuCollapse">
+        </mel-icon-expand>
+        <mel-icon-fold class="fold-expand pointer" @click="setMenuCollapse()" v-else></mel-icon-fold>
         <el-scrollbar :min-size="10" wrap-style="display:flex;align-items:center" v-if="!globalStore.isMobile">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="index === breadcrumbList.length - 1 ? undefined : item"

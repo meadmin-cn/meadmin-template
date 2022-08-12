@@ -26,8 +26,7 @@ package-lock.json
 types/auto-imports.d.ts
 types/meIconComments.d.ts
 src/store/module.ts
-types/globalComponents.d.ts
-types/globalDirectives.d.ts
+types/directives.d.ts
 stats.html
 vite.config.ts.timestamp*
 types/components.d.ts

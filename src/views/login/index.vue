@@ -6,7 +6,7 @@
             <div class="title">ME-Admin</div>
             <el-form ref="formRef" :rules="rules" :model="loginParams">
                 <el-form-item prop="username">
-                    <el-input :placeholder="t('用户名')" v-model="loginParams.username" />
+                    <el-input autofocus :placeholder="t('用户名')" v-model="loginParams.username" />
                 </el-form-item>
                 <el-form-item prop="password">
                     <el-input :type="showPass ? 'input' : 'password'" :placeholder="t('密码')"
@@ -48,7 +48,7 @@ const login = async () => {
     formRef.value?.validate(async (valid, fields) => {
         if (valid) {
             await userStore.login(loginParams);
-            await router.replace(<string>route.query.redirect || '/');
+            await router.replace((route.query.redirect as string) || '/');
         } else {
             console.log('提交错误', fields)
         }
