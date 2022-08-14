@@ -38,5 +38,8 @@ declare module "@vue/runtime-core" {
          */
         ssContent: VNode | null
     }
+    interface ComponentCustomProperties {
+        $permission: (key: string|string[]) => boolean
+    }
 }
 export { };

@@ -9,6 +9,7 @@ import { PropType, Ref } from 'vue';
 import { MeKeepAliveProps } from './meKeepAlive';
 import { useLoadMessages } from '@/locales/i18n';
 import nProgress from 'nprogress';
+import { localeConfig } from '@/config';
 const loadMessages = useLoadMessages();
 const props = defineProps({
     is: {
@@ -24,14 +25,15 @@ const current = getCurrentInstance();
 const attrs = ref(current?.proxy?.$attrs);
 watch(() => props.is, async (is) => {
     if (is) {
-        await Promise.allSettled(loadMessages(is as any, false));//自动加载语言包
+        localeConfig.loadMessageConfig.componentLoad && await Promise.allSettled(loadMessages(is as any, false));//自动加载语言包
         componentIs.value = is;
         key.value = props.componentKey;
         attrs.value = current?.proxy?.$attrs;
+        if (props.doneProgress) {
+            nProgress.done();
+        }
     }
-    if (props.doneProgress) {
-        nProgress.done();
-    }
+
 }, { immediate: true })
 </script>
 <style lang="scss" scoped>

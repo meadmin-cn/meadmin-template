@@ -19,14 +19,14 @@ const users = {
         username: 'admin',
     },
     'editor-token': {
-        rules: ['edit', 'list'],
+        rules: ['edit', 'show'],
         introduction: '我是一个编辑者',
         avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
         name: '编辑员工',
         username: 'editor',
     },
     'viewer': {
-        rules: ['list'],
+        rules: ['show'],
         introduction: '我是一个查询者',
         avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
         name: '查看员工',

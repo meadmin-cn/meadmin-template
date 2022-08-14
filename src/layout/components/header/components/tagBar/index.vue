@@ -6,10 +6,10 @@
         <el-scrollbar ref="scrollbarRef" @scroll="({ scrollLeft: left }) => scrollLeft = left" view-class="list-parent"
             style="flex-grow:1">
             <div class="list" ref="listRef">
-                <div class="item pointer" v-for="(tag, index) in tags" :key="tag.fullPath" ref="tagsRef"
+                <div class="item pointer" v-for="tag in tags" :key="tag.fullPath" ref="tagsRef"
                     :class="{ active: tag.fullPath === currentTag?.fullPath }" @click="push(tag)"
                     @contextmenu.prevent="setContextmenu($event.currentTarget as any, tag)">
-                    {{ tag.meta.title }}
+                    {{ $t(tag.meta.title!) }}
                 </div>
             </div>
         </el-scrollbar>
@@ -17,10 +17,11 @@
             <div class="icon pointer" :class="{ 'is-disabled': scrollLeft >= max }" @click="go()">
                 <mel-icon-d-arrow-right></mel-icon-d-arrow-right>
             </div>
-            <div class="icon pointer">
-                <mel-icon-refresh></mel-icon-refresh>
+            <div class="icon pointer" v-if="themeConfig.tagBarRefresh" @click="reload">
+                <mel-icon-refresh :class="{ 'rotate': reoadUrl }"></mel-icon-refresh>
             </div>
-            <div class="icon pointer" @click="setContextmenu($event.currentTarget as any, currentTag)">
+            <div class="icon pointer" v-if="themeConfig.tagBarMenu"
+                @click="setContextmenu($event.currentTarget as any, currentTag)">
                 <mel-icon-menu></mel-icon-menu>
             </div>
         </div>
@@ -29,16 +30,16 @@
         :current="contextmenuCurrent">
     </contextmenu>
 </template>
-<script setup lang="ts" name="tags">
+<script setup lang="ts" name="tagBar">
 import { mitter, event } from '@/event';
-import { useRouteStore } from '@/store';
+import { useRouteStore, useSettingStore } from '@/store';
 import { ElScrollbar } from 'element-plus';
 import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
 import contextmenu from './components/contextmenu.vue';
 import { isExternal } from '@/utils/validate';
 import { resolve } from 'path-browserify';
 import $ from 'jquery';
-import { useGlobalConfig } from 'element-plus';
+const { themeConfig } = useSettingStore();
 //初始化tags
 const tags = reactive([] as RouteLocationNormalized[]);
 const resolvePath = (routePath: string, basePath = '') => {
@@ -60,7 +61,6 @@ const addAffixTags = (routes: RouteRecordRaw[], basePath = '') => {
 addAffixTags(useRouteStore().routes);
 
 //滚动设置
-const elNamespace = useGlobalConfig('namespace');
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
 const listRef = ref<HTMLDivElement>();
 let scrollLeft = ref(0);
@@ -68,7 +68,7 @@ const setScrollLeft = (left: number, isAdd = false) => {
     if (isAdd) {
         left = left + scrollLeft.value;
     }
-    $(scrollbarRef.value!.$el).find(`.${elNamespace.value}-scrollbar__wrap`).animate({ scrollLeft: left }, 300);
+    $(scrollbarRef.value!.$el).find('.el-scrollbar__wrap').animate({ scrollLeft: left }, 300);
 }
 const max = ref(0);
 const tagsRef = ref([] as HTMLElement[]);
@@ -106,7 +106,7 @@ const jump = (index: number) => {
     })
 }
 //动态设置active
-watch(route, (route) => {
+const setTag = (route: RouteLocationNormalized) => {
     if (route.meta.title && !route.meta.hideTag) {
         let index = tags.findIndex(item => item.fullPath == route.fullPath);
         if (index > -1) {
@@ -114,9 +114,10 @@ watch(route, (route) => {
         }
         tags.push(JSON.parse(JSON.stringify(route)));
         return jump(tags.length - 1);
-
     }
-}, { immediate: true });
+};
+setTag(route);
+mitter.on(event.beforeRouteChange, ({ to }) => setTag(to), true);
 const router = useRouter();
 const push = (route: RouteLocationNormalized) => {
     if (route.fullPath !== currentTag.value!.fullPath) {
@@ -130,20 +131,28 @@ const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized) =>
     virtualRef.value = event;
     contextmenuCurrent.value = current;
     showContextmenu.value = true;
-} 
+}
+const reload = () => { //刷新
+    router.replace('/redirect/' + encodeURIComponent(route.fullPath))
+}
+const reoadUrl = ref('');
+watch(route, () => {
+    if (route.name == 'redirect') {
+        reoadUrl.value = route.params.path as string;
+    } else if (reoadUrl.value == route.fullPath) {
+        setTimeout(() => reoadUrl.value = '', 500);
+    }
+})
 </script>
 <style lang="scss" scoped>
-@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
-
 .footer {
-    border-bottom: 1px solid getCssVar('border', 'color');
+    border-bottom: 1px solid var(--el-border-color);
     height: 35px;
     display: flex;
     align-items: center;
 
     .is-disabled {
-        color: getCssVar('disabled-text', 'color') !important;
+        color: var(--el-disabled-text-color) !important;
         cursor: not-allowed;
     }
 
@@ -152,12 +161,17 @@ const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized) =>
         height: 100%;
         display: flex;
         align-items: center;
-        border-right: 1px solid getCssVar('border', 'color');
-        color: getCssVar('text-color', 'regular');
+        border-right: 1px solid var(--el-border-color);
+        color: var(--el-text-color-regular);
+
+        .rotate {
+            animation: loading-rotate 1s linear infinite;
+        }
+
     }
 
     .icon:hover {
-        color: getCssVar('text-color', 'primary');
+        color: var(--el-text-color-primary);
     }
 
     .right {
@@ -166,7 +180,7 @@ const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized) =>
         flex-grow: 0;
         justify-self: right;
         height: 100%;
-        border-left: 1px solid getCssVar('border', 'color');
+        border-left: 1px solid var(--el-border-color);
     }
 
     :deep(.list-parent) {
@@ -180,7 +194,7 @@ const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized) =>
         width: max-content;
 
         .item {
-            border-right: 1px solid getCssVar('border', 'color');
+            border-right: 1px solid var(--el-border-color);
             height: 100%;
             align-items: center;
             display: flex;
@@ -195,16 +209,16 @@ const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized) =>
         }
 
         .item:hover {
-            // background-color: rgba(getCssVar('color-primary', 'rgb'), 0.5);
-            background-color: rgba(getCssVar('color-primary', 'rgb'), 0.1);
-            color: getCssVar('color', 'primary');
+            // background-color: rgba(var(--el-color-primary-rgb), 0.5);
+            background-color: rgba(var(--el-color-primary-rgb), 0.1);
+            color: var(--el-color-primary);
 
         }
 
         .item.active {
-            // color: getCssVar('color','primary');
-            background-color: rgba(getCssVar('color-primary', 'rgb'), 0.1);
-            color: getCssVar('color', 'primary');
+            // color: var(--el-color-primary);
+            background-color: rgba(var(--el-color-primary-rgb), 0.1);
+            color: var(--el-color-primary);
         }
 
         .item::after {
@@ -213,7 +227,7 @@ const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized) =>
             height: 2px;
             bottom: 0;
             left: 0;
-            background-color: getCssVar('color', 'primary');
+            background-color: var(--el-color-primary);
             width: 0;
         }
 

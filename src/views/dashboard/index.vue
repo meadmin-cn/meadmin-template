@@ -1,6 +1,6 @@
 <template>
     <div class="index">
-        控制台
+        hello word!
         <input name="text" />
     </div>
 </template>

@@ -1,30 +1,29 @@
 <template>
-    <el-popover :popper-class="`me-contextmenu-tooltip ${elNamespace}-dropdown__popper`" :visible="visible"
-        :virtual-ref="virtualRef" virtual-triggering pure>
-        <ul :class="`${elNamespace}-dropdown-menu ${elNamespace}-dropdown-menu--default`" v-bind="$attrs"
-            style="outline: none;" v-click-outside="closeMenu" role="menuitem">
-            <li @click="reload()" :class="`${elNamespace}-dropdown-menu__item`">
-                <mel-icon-refresh /> 重新加载
+    <el-popover popper-class="me-contextmenu-tooltip el-dropdown__popper" :visible="visible" :virtual-ref="virtualRef"
+        virtual-triggering pure>
+        <ul class="el-dropdown-menu el-dropdown-menu--default" v-bind="$attrs" style="outline: none;"
+            v-click-outside="closeMenu" role="menuitem">
+            <li @click="reload()" class="el-dropdown-menu__item">
+                <mel-icon-refresh /> {{ $t('重新加载') }}
             </li>
             <li @click="closeCurrent()"
-                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': current.meta.affix || modelValue.length == 1 }">
-                <mel-icon-close /> 关闭当前
+                :class="{ 'el-dropdown-menu__item': true, 'is-disabled': current.meta.affix || modelValue.length == 1 }">
+                <mel-icon-close /> {{ $t('关闭') }}{{ $t(' ') }}{{ $t('当前') }}
             </li>
-            <li @click="closeLeft()"
-                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst }">
-                <mel-icon-download style="transform: rotate(90deg);" />关闭左侧
+            <li @click="closeLeft()" :class="{ 'el-dropdown-menu__item': true, 'is-disabled': index <= canCloseFirst }">
+                <mel-icon-download style="transform: rotate(90deg);" />{{ $t('关闭') }}{{ $t(' ') }}{{ $t('左侧') }}
             </li>
             <li @click="closeRight()"
-                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': modelValue.length === index + 1 }">
-                <mel-icon-download style="transform: rotate(270deg);" />关闭右侧
+                :class="{ 'el-dropdown-menu__item': true, 'is-disabled': modelValue.length === index + 1 }">
+                <mel-icon-download style="transform: rotate(270deg);" />{{ $t('关闭') }}{{ $t(' ') }}{{ $t('右侧') }}
             </li>
             <li @click="closeOther()"
-                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': index <= canCloseFirst && modelValue.length === index + 1 }">
-                <mel-icon-document-delete /> 关闭其他
+                :class="{ 'el-dropdown-menu__item': true, 'is-disabled': index <= canCloseFirst && modelValue.length === index + 1 }">
+                <mel-icon-document-delete /> {{ $t('关闭') }}{{ $t(' ') }}{{ $t('其他') }}
             </li>
             <li @click="closeAll()"
-                :class="{ [`${elNamespace}-dropdown-menu__item`]: true, 'is-disabled': canCloseFirst === Infinity }">
-                <mel-icon-minus /> 关闭全部
+                :class="{ 'el-dropdown-menu__item': true, 'is-disabled': canCloseFirst === Infinity }">
+                <mel-icon-minus /> {{ $t('关闭') }}{{ $t(' ') }}{{ $t('全部') }}
             </li>
         </ul>
     </el-popover>
@@ -32,7 +31,6 @@
 <script setup lang="ts" name="contextmenu">
 import { PropType } from 'vue';
 import { RouteLocationNormalized } from 'vue-router';
-import { useGlobalConfig } from 'element-plus';
 const props = defineProps({
     modelValue: {
         required: true,
@@ -52,7 +50,6 @@ const props = defineProps({
     }
 });
 const emit = defineEmits(['update:modelValue', 'update:visible']);
-const elNamespace = useGlobalConfig('namespace');
 const router = useRouter();
 const route = useRoute();
 let index = computed(() => props.modelValue.indexOf(props.current));
@@ -118,16 +115,13 @@ const closeMenu = async () => {
 }
 </script>
 <style lang="scss">
-@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
-
 .me-contextmenu-tooltip {
     width: max-content !important;
     min-width: unset !important;
 
-    .#{$namespace}-dropdown-menu__item:not(.is-disabled):hover {
-        background-color: getCssVar('dropdown-menuItem', 'hover-fill');
-        color: getCssVar('dropdown-menuItem', 'hover-color');
+    .el-dropdown-menu__item:not(.is-disabled):hover {
+        background-color: var(--el-dropdown-menuItem-hover-fill);
+        color: var(--el-dropdown-menuItem-hover-color);
     }
 
 }

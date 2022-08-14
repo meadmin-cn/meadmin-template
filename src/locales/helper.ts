@@ -2,9 +2,8 @@ import { LocaleMessages, VueMessageType, Composer, VueI18n } from 'vue-i18n'
 import { localeConfig as config } from '@/config';
 import { event, mitter } from '@/event';
 import { loading, closeLoading } from '@/utils/loading';
-import { useSettingStore } from '@/store';
 import { Language } from 'element-plus/es/locale';
-import { useGlobalStore } from '@/store';
+import { useGlobalStore, useSettingStore } from '@/store';
 type GlobaleI18n = Composer<unknown, unknown, unknown, any>;
 const MessageMap: Map<string, Record<any, any>> = new Map();
 export type MessageImport = [(locale: string) => Promise<{ default: LocaleMessages<VueMessageType> }>, string?];
@@ -98,12 +97,12 @@ export const setI18nLanguage = async (locale: string, isLoading = true, i18n?: G
       throw new Error('请传入i18n 或在全局i18n注册后调用')
     }
   }
-
   if (i18n.locale.value === locale) {
     return true;
   }
   isLoading && loading();
   if (i18n === useGlobalStore().i18n) {
+    useSettingStore().locale = locale;
     let messageArr = [
       setLocaleMessage(i18n, locale, [(locale) => import(`./lang/${locale}.json`)]),
       loadMessage<{ default: Language }>([(locale) => import(`../../node_modules/element-plus/es/locale/lang/${locale}.mjs`), 'element-plus'], locale),
@@ -113,16 +112,9 @@ export const setI18nLanguage = async (locale: string, isLoading = true, i18n?: G
     if (res[1].status == 'fulfilled' && res[1].value) {
       useSettingStore().elLocale = res[1].value.default;
     }
+    document?.querySelector('html')?.setAttribute('lang', locale);
   }
   i18n.locale.value = locale;
-  /**
-   * NOTE:
-   * If you need to specify the language setting for headers, such as the `fetch` API, set it here.
-   * The following is an example for axios.
-   *
-   * axios.defaults.headers.common['Accept-Language'] = locale
-   */
-  document?.querySelector('html')?.setAttribute('lang', locale);
   isLoading && closeLoading();
   return true;
 }

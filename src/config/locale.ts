@@ -1,13 +1,9 @@
 import { I18nOptions } from "vue-i18n";
 
-
-interface LoadMessageConfig {//导入语言包配置
-    timeOut: number,//导入语言包超时时间(对于单次导入而不是整体导入)
-    errorWarning: boolean,//导入失败的警告（生产环境会被屏蔽）
-}
-export const loadMessageConfig: LoadMessageConfig = {
-    timeOut: 1000,
-    errorWarning: true,
+export const loadMessageConfig = {//导入语言包配置
+    timeOut: 10000,//导入语言包超时时间ms(对于单次导入而不是整体导入)0代表不超时
+    errorWarning: false,//导入失败的警告（生产环境会被屏蔽）
+    componentLoad: true,//组件语言包导入 不需要多语言或只使用全局语言包时设置为false以提升性能
 }
 
 //语言列表 和elment-plus对应 locale字段值不要改变，否则会导致element-plus组件无法翻译为对应语言
@@ -235,7 +231,7 @@ export const localeList = [
  * globalInjection设置为了true
  * 文档参考: https://vue-i18n.intlify.dev/api/general.html#i18noptions
  */
-export const localeSetting: I18nOptions = {
+const localeSetting: I18nOptions = {
     // Locale
     locale: localeList[0].locale,
     // Default locale
@@ -244,3 +240,4 @@ export const localeSetting: I18nOptions = {
     fallbackWarn: false,//抑制回落警告
     fallbackFormat: true,//跳过为你的"base"语言编写模板;key是您的模板
 };
+export { localeSetting }

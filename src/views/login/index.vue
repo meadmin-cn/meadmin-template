@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <img src="/logo.svg" class="bg" />
-        <Header class="header"></Header>
+        <login-header class="header"></login-header>
         <div class="form" @keyup.enter.exact="login()">
             <div class="title">ME-Admin</div>
             <el-form ref="formRef" :rules="rules" :model="loginParams">
@@ -19,13 +19,13 @@
                         </template>
                     </el-input>
                 </el-form-item>
-                <el-button class="sub" type="primary" @click="login()">{{ t('登 录') }}</el-button>
+                <el-button class="sub" type="primary" @click="login()">{{ t('登录') }}</el-button>
             </el-form>
         </div>
     </div>
 </template>
 <script setup lang="ts"  name="login">
-import Header from "./components/header.vue";
+import LoginHeader from "./components/header.vue";
 import { LoginParams } from "@/api/user";
 import { useLocalesI18n } from "@/locales/i18n";
 import type { FormInstance, FormRules } from 'element-plus';
@@ -35,7 +35,7 @@ const formRef = ref<FormInstance>();
 const route = useRoute();
 const router = useRouter();
 let loginParams = reactive(new LoginParams());
-let { t } = useLocalesI18n({}, [(locale: string) => import(`@/views/login/lang/${locale}.json`), 'login']);
+let { t } = useLocalesI18n();
 let showPass = ref(false);
 const rules = computed<FormRules>(() => ({
     username: [{ required: true, message: t('请填写') + ' ' + t('用户名'), trigger: 'blur' },
@@ -56,11 +56,9 @@ const login = async () => {
 }
 </script>
 <style lang="scss" scoped>
-@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-
 .dark {
     .login {
-        background-color: getCssVar('bg', 'color')
+        background-color: var(--el-bg-color)
     }
 }
 
@@ -69,7 +67,8 @@ const login = async () => {
     width: 100%;
     height: 100%;
     position: relative;
-    .bg{
+
+    .bg {
         position: absolute;
         left: 50%;
         top: 40%;
@@ -77,28 +76,31 @@ const login = async () => {
         max-height: 500px;
         width: 100%;
         height: 100%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
+
         @media only screen and (max-width: 500px) {
-            background-size:contain;
+            background-size: contain;
         }
     }
+
     .header {
         width: 100%;
     }
 
     .form {
-        z-index:1;
+        z-index: 1;
         position: absolute;
         left: 50%;
         top: 40%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         width: 80%;
         max-width: 500px;
         margin: auto;
         padding: 30px 20px;
-        background-color: getCssVar('mask','color');
+        background-color: var(--el-mask-color);
         border-radius: 4px;
-        box-shadow: 0px 0px 4px getCssVar('border', 'color');
+        box-shadow: 0px 0px 4px var(--el-border-color);
+
         .title {
             text-align: center;
             width: 100%;

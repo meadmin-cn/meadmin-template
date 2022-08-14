@@ -2,7 +2,7 @@ import { _RouteRecordBase, RouteMeta } from 'vue-router';
 declare module 'vue-router' {
     interface RouteMeta extends Record<string | number | symbol, unknown> {
         // 标题设置该路由在侧边栏和面包屑中展示的名字
-        title?: string,
+        title: string,
         //对应权限 多个之间为或的关系
         rule?: string[],
         // 是否是固定的tag

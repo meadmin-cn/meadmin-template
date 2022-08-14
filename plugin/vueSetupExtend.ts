@@ -100,8 +100,8 @@ export function supportScript(code: string, options: ExtendOptions) {
             str().appendLeft(
                 0,
                 `<script ${lang ? `lang="${lang}"` : ''}>
-  import { defineComponent } from 'vue'
-  export default defineComponent({${scriptStr}})
+  import { defineComponent } from 'vue';
+  export default defineComponent({${scriptStr}});
   </script>\n`,
             )
         }

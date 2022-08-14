@@ -1,10 +1,39 @@
-import { sizeEnum } from "@/enums/configEnum";
 import { Language } from "element-plus/es/locale";
-import { themeConfig, ThemeConfig } from "@/config";
+import { themeConfig, settingKey, localeConfig } from "@/config";
+import { event, mitter } from "@/event";
+import { mixColor } from "@/utils/helper";
+const { css } = useStyleTag('');
+const useSettingStore = defineStore('setting', {
+    state: () => ({
+        themeConfig: useStorage(`${settingKey}-theme`, themeConfig),
+        locale: useStorage(`${settingKey}-locale`, localeConfig.localeSetting.locale || 'zh-cn'),
+        elLocale: undefined as Language | undefined,
+    }),
+    actions: {
+        setPrimaryStyle() {
+            const style = [];
+            const darkStyle = [];
+            style.push(`--el-color-primary:${this.themeConfig.primaryColor} !important`);
+            darkStyle.push(`--el-color-primary:${this.themeConfig.primaryColor} !important`);
+            style.push(`--el-color-primary-rgb:` + mixColor(this.themeConfig.primaryColor, '#000000', 0) + ' !important');
+            darkStyle.push(`--el-color-primary-rgb:` + mixColor(this.themeConfig.primaryColor, '#000000', 0) + ' !important');
+            style.push(`--el-color-primary-dark-2:` + mixColor(this.themeConfig.primaryColor, '#000000', 0.2) + ' !important');
+            darkStyle.push(`--el-color-primary-dark-2:` + mixColor(this.themeConfig.primaryColor, '#ffffff', 0.2) + ' !important');
+            [3, 5, 7, 8, 9].forEach((number) => {
+                style.push(`--el-color-primary-light-${number}:` + mixColor(this.themeConfig.primaryColor, '#ffffff', number / 10) + ' !important')
+                darkStyle.push(`--el-color-primary-light-${number}:` + mixColor(this.themeConfig.primaryColor, '#141414', number / 10) + ' !important')
+            });
+            css.value = ':root{' + style.join(';') + '}' + '.dark{' + darkStyle.join(';') + '}';
 
-interface SettingState extends ThemeConfig {
-    elLocale: Language | undefined; //elment语言包
-}
-export default defineStore('setting', {
-    state: (): SettingState => (Object.assign({ elLocale: undefined, }, themeConfig))
+        },
+        clearCache() {
+            localStorage.clear();
+        }
+    }
 });
+mitter.once(event.ready, () => {
+    const settingStore = useSettingStore();
+    watch(() => settingStore.themeConfig.primaryColor, settingStore.setPrimaryStyle, { immediate: true });
+});
+export default useSettingStore;
+

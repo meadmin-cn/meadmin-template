@@ -10,6 +10,7 @@ import { useI18n, UseI18nOptions } from "vue-i18n";
 import { loadMessage, MessageImport, setLocaleMessage } from './helper';
 import { mitter, event } from "@/event";
 import { ComponentOptions, VNode } from 'vue';
+import { useSettingStore } from '@/store';
 
 /**
  * useI18n 会自动加载locale语言包（语言包加载为异步执行，如果语言包被加载过则执行时效和同步一致）
@@ -18,8 +19,8 @@ import { ComponentOptions, VNode } from 'vue';
  * @returns 
  */
 export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>
-  (options: Options, messageImport?: MessageImport) => {
-  let res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
+  (options?: Options, messageImport?: MessageImport) => {
+  const res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
   if (messageImport) {
     setLocaleMessage(res, res.locale.value, messageImport);
     mitter.on(event.beforeLocalChange, (params) => {
@@ -35,8 +36,8 @@ export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>
 * @param messageImport 
 * @returns 
 */
-export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI18nOptions>(options: Options, messageImport?: MessageImport) => {
-  let res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
+export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI18nOptions>(options?: Options, messageImport?: MessageImport) => {
+  const res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
   if (messageImport) {
     await setLocaleMessage(res, res.locale.value, messageImport);
     mitter.on(event.beforeLocalChange, (params) => {

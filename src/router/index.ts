@@ -28,6 +28,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: Layout,
         children: [
             {
+                name: 'redirect',
                 path: '/redirect/:path(.*)',
                 component: () => import('@/views/redirect.vue'),
             }
@@ -39,7 +40,6 @@ export const constantRoutes: RouteRecordRaw[] = [
     },
     {
         path: '/:pathMatch(.*)*',
-
         component: () => import('@/views/404.vue'),
         meta: { hideMenu: true, title: '404' }
     }

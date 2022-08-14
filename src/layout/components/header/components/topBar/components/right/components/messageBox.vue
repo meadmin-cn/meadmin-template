@@ -1,24 +1,32 @@
 <template>
     <el-dropdown class="message-box" max-height="500px" trigger="click">
         <div class="flex-center pointer">
-            <el-badge is-dot>
+            <el-badge :is-dot="isDot">
                 <mel-icon-bell class="message-icon"></mel-icon-bell>
             </el-badge>
         </div>
         <template #dropdown>
             <div class="message-tabs">
                 <div class="message-header">
-                    <el-link>全部已读</el-link>
-                    <el-link>查看更多</el-link>
+                    <el-link>{{ $t('全部') }}{{ $t(' ') }}{{ $t('已读') }}</el-link>
+                    <el-link>{{ $t('查看') }}{{ $t(' ') }}{{ $t('更多') }}</el-link>
                 </div>
                 <el-tabs model-value="notify">
-                    <el-tab-pane label="通知" name="notify">
+                    <el-tab-pane :label="$t('通知')" name="notify">
                         <div v-for="o in 4" :key="o" class="text notify-item">
                             {{ 'List item ' + o }}<div class="date">2022/08/08</div>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane label="消息" name="message">Config</el-tab-pane>
-                    <el-tab-pane label="待办" name="agenda">Role</el-tab-pane>
+                    <el-tab-pane :label="$t('消息')" name="message">
+                        <div v-for="o in 4" :key="o" class="text notify-item">
+                            {{ 'List item ' + o }}<div class="date">2022/08/08</div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane :label="$t('待办')" name="agenda">
+                        <div v-for="o in 4" :key="o" class="text notify-item">
+                            {{ 'List item ' + o }}<div class="date">2022/08/08</div>
+                        </div>
+                    </el-tab-pane>
                 </el-tabs>
             </div>
 
@@ -26,12 +34,10 @@
     </el-dropdown>
 </template>
 <script setup lang="ts" name="messageBox">
-
+const isDot = ref(true);
 
 </script>
 <style lang="scss" scoped>
-@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-
 .message-box {
     .flex-center {
         padding: 0 10px;
@@ -68,7 +74,7 @@
 
         .date {
             font-size: 12px;
-            color: getCssVar('text-color', 'placeholder');
+            color: var(--el-text-color-placeholder);
         }
     }
 }

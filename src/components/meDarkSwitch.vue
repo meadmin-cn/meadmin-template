@@ -1,38 +1,29 @@
 <template>
-    <div @click="settingStore.isDark = !settingStore.isDark"
-        :class="{ [`${elNamespace}-switch`]: true, 'is-checked': settingStore.isDark }">
-        <span :class="`${elNamespace}-switch__core`">
-            <div :class="`${elNamespace}-switch__action`">
-                <me-icon-sunny class="icon" v-show="!settingStore.isDark"></me-icon-sunny>
-                <me-icon-moon class="icon" v-show="settingStore.isDark"></me-icon-moon>
+    <div @click="isDark = !isDark" :class="{ 'el-switch': true, 'is-checked': isDark }">
+        <span class="el-switch__core">
+            <div class="el-switch__action">
+                <me-icon-sunny class="icon" v-show="!isDark"></me-icon-sunny>
+                <me-icon-moon class="icon" v-show="isDark"></me-icon-moon>
             </div>
         </span>
     </div>
 </template>
 <script setup lang="ts" name="meDarkSwitch">
-import { useLocalesI18n } from '@/locales/i18n';
-import { useSettingStore } from '@/store';
-import { useGlobalConfig } from 'element-plus';
-let elNamespace = useGlobalConfig('namespace');
-const settingStore = useSettingStore();
-let { t } = useLocalesI18n({}, [(locale: string) => import(`@/views/test/lang/${locale}.json`), 'login']);
+const isDark = useDark({ storageKey: 'me-color-dark-scheme' });
 
 </script>
 <style lang="scss" scoped>
-@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
-
-.#{$namespace}-switch {
+.el-switch {
     margin: 0 10px;
 
-    .#{$namespace}-switch__core {
-        border-color: getCssVar('switch-off', 'color') !important;
-        background-color: getCssVar('switch-off', 'color') !important;
+    .el-switch__core {
+        border-color: var(--el-switch-off-color) !important;
+        background-color: var(--el-switch-off-color) !important;
 
-        .#{$namespace}-switch__action {
-            background-color: getCssVar('bg', 'color');
+        .el-switch__action {
+            background-color: var(--el-bg-color);
             position: relative;
-            color: getCssVar('text-color', 'primary') !important;
+            color: var(--el-text-color-primary) !important;
 
             .icon {
                 position: absolute;

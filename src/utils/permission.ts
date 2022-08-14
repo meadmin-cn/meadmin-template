@@ -6,7 +6,7 @@ import { RouteRecordRaw } from "vue-router";
  * @param rules 
  * @returns 
  */
-function hasPermission(rules?: string | string[]) {
+export function permission(rules?: string | string[]) {
   if (!rules) {
     return true;
   }
@@ -26,7 +26,7 @@ export function filterAsyncRoutes(routes: RouteRecordRaw[], activeMenu?: string)
   const res: RouteRecordRaw[] = [];
   routes.forEach(route => {
     const tmp = { ...route }
-    if (!route.meta || hasPermission(route.meta.rule)) {
+    if (!route.meta || permission(route.meta.rule)) {
       if (route.meta?.hideMenu) {
         if (typeof route.meta.activeMenu === 'undefined' && activeMenu) {
           route.meta.activeMenu = activeMenu;

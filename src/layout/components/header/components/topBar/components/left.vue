@@ -1,32 +1,34 @@
 <template>
     <el-space class="left">
         <div></div>
-        <mel-icon-expand class="fold-expand pointer" @click="setMenuCollapse()" v-if="settingStore.menuCollapse">
+        <mel-icon-expand class="fold-expand pointer" @click="setMenuCollapse()" v-if="themeConfig.menuCollapse">
         </mel-icon-expand>
         <mel-icon-fold class="fold-expand pointer" @click="setMenuCollapse()" v-else></mel-icon-fold>
-        <el-scrollbar :min-size="10" wrap-style="display:flex;align-items:center" v-if="!globalStore.isMobile">
+        <el-scrollbar :min-size="10" wrap-style="display:flex;align-items:center"
+            v-if="!globalStore.isMobile && themeConfig.breadcrumb">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="index === breadcrumbList.length - 1 ? undefined : item"
-                    v-for="(item, index) in breadcrumbList">{{ item.meta!.title }}</el-breadcrumb-item>
+                    v-for="(item, index) in breadcrumbList">{{ $t(item.meta!.title!) }}</el-breadcrumb-item>
             </el-breadcrumb>
         </el-scrollbar>
     </el-space>
 </template>
 <script setup lang="ts" name="left">
+import { mitter, event } from '@/event';
 import { useSettingStore, useGlobalStore } from '@/store';
-import { RouteRecordRaw } from 'vue-router';
-const settingStore = useSettingStore();
+import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
+const { themeConfig } = useSettingStore();
 const globalStore = useGlobalStore();
-const setMenuCollapse = () => { settingStore.menuCollapse = !settingStore.menuCollapse };
+const setMenuCollapse = () => { themeConfig.menuCollapse = !themeConfig.menuCollapse };
 const breadcrumbList = ref([] as RouteRecordRaw[]);
 const route = useRoute();
-watch(route, (route) => {
+const setBreadcrumbList = (route: RouteLocationNormalized) => {
     breadcrumbList.value = route.matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
-}, { immediate: true });
+}
+setBreadcrumbList(route);
+mitter.on(event.beforeRouteChange, ({ to }) => setBreadcrumbList(to), true);
 </script>
 <style lang="scss" scoped>
-@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
-
 .left {
     height: 100%;
 
@@ -34,11 +36,11 @@ watch(route, (route) => {
         font-size: 1.55rem;
     }
 
-    &:deep(.#{$namespace}-breadcrumb__inner.is-link) {
+    &:deep(.el-breadcrumb__inner.is-link) {
         font-weight: normal;
     }
 
-    &:deep(.#{$namespace}-space__item:nth-child(3)) {
+    &:deep(.el-space__item:nth-child(3)) {
         height: 80%;
     }
 }

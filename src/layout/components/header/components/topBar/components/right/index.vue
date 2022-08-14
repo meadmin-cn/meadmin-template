@@ -1,37 +1,37 @@
 <template>
-  <el-space class="right">
+  <div class="right">
     <div></div>
-    <me-dark-switch class="item no-hover"></me-dark-switch>
+    <me-dark-switch v-if="themeConfig.showDark" class="item no-hover"></me-dark-switch>
+    <me-locale-select class="item" v-if="localeConfig.localeList.length > 1"></me-locale-select>
+    <me-size-select v-if="themeConfig.showSize" class="item"></me-size-select>
     <message-box class="item"></message-box>
-    <me-locale-select class="item"></me-locale-select>
-    <me-size-select class="item"></me-size-select>
-    <el-space class="item pointer">
-      <el-avatar size="small" src="" />
-      admin
-    </el-space>
-  </el-space>
+    <user class="item"></user>
+    <me-setting class="item" v-if="themeConfig.showSetting"></me-setting>
+  </div>
 </template>
 <script setup lang="ts" name="right">
+import { localeConfig } from '@/config';
 import MeDarkSwitch from "@/components/meDarkSwitch.vue";
 import MeLocaleSelect from "@/components/meLocaleSelect.vue";
 import MeSizeSelect from "@/components/meSizeSelect.vue";
 import MessageBox from "./components/messageBox.vue";
-
+import { useSettingStore } from "@/store";
+import User from './components/user.vue';
+const { themeConfig } = useSettingStore();
 
 </script>
 <style lang="scss" scoped>
-@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
-
 .right {
   font-size: 1rem;
   height: 100%;
+  display: flex;
 
   .item {
     height: 100%;
   }
 
   .item:hover {
-    background-color: getCssVar('bg-color', 'page');
+    background-color: var(--el-bg-color-page);
   }
 
   .no-hover:hover {

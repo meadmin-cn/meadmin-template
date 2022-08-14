@@ -5,10 +5,10 @@
             <component v-if="onlyOneChild.meta && onlyOneChild.meta.title"
                 :is="onlyOneChild.meta?.isLink ? 'a' : 'routerLink'" :href="basePath"
                 :to="resolvePath(onlyOneChild.path)">
-                <el-menu-item :index="resolvePath(onlyOneChild.path)" :title="onlyOneChild.meta.title">
+                <el-menu-item :index="resolvePath(onlyOneChild.path)" :title="$t(onlyOneChild.meta.title)">
                     <component :is="onlyOneChild.meta.icon" v-if="onlyOneChild.meta.icon" />
                     <template #title>
-                        <span class="menu">{{ onlyOneChild.meta.title }}</span>
+                        <span class="menu">{{ $t(onlyOneChild.meta.title) }}</span>
                     </template>
                 </el-menu-item>
             </component>
@@ -16,15 +16,15 @@
         <el-sub-menu v-else :index="resolvePath(item.path)">
             <template v-if="item.meta" #title>
                 <component :is="item.meta!.icon" v-if="item.meta!.icon" />
-                <span class="menu">{{ item.meta!.title }}</span>
+                <span class="menu">{{ $t(item.meta!.title!) }}</span>
             </template>
-            <sidebar-item v-for="child in item.children" :key="child.path" :item="child"
-                :base-path="resolvePath(child.path)"></sidebar-item>
+            <layout-menu-item v-for="child in item.children" :key="child.path" :item="child"
+                :base-path="resolvePath(child.path)"></layout-menu-item>
         </el-sub-menu>
     </template>
 </template>
 
-<script setup lang="ts" name="sidebarItem">
+<script setup lang="ts" name="menuItem">
 import { isExternal } from '@/utils/validate';
 import { resolve } from 'path-browserify';
 import { PropType } from 'vue';

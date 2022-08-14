@@ -1,5 +1,6 @@
 enum eventEnum {
-    ready = 'ready',//启动成功
+    start = 'start',//vue准备启动
+    ready = 'ready',//vue启动完成渲染之前触发
     beforeRouteChange = 'beforeRouteChange',//路由变更前
     afterRouteChange = 'afterRouteChange',//路由变更后
     beforeLogin = 'beforeLogin',//登录前

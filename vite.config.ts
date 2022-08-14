@@ -10,17 +10,19 @@ import { visualizer } from "rollup-plugin-visualizer";
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import { splitVendorChunkPlugin } from 'vite'
+// @ts-ignore
+import {loadMessageConfig} from './src/config/locale';
 
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   return {
+    envPrefix :'ME_',
     plugins: [
-      vueSetUpExtend({ setLangImport: true, exclude: ['steup', 'lang'], setComponents: true }),
+      vueSetUpExtend({exclude: ['steup', 'lang'], setLangImport: loadMessageConfig.componentLoad,setComponents: loadMessageConfig.componentLoad }),
       splitVendorChunkPlugin(),VueI18nPlugin({
       /* options */
       // locale messages resource pre-compile option
@@ -37,7 +39,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       `,
     }),
     AutoImport({//自动加载API
-      imports: ['vue', 'vue-router', 'pinia'],
+      imports: ['vue', 'vue-router', 'pinia','@vueuse/core'],
       // 可以选择auto-imports.d.ts生成的位置，使用ts建议设置为'src/auto-imports.d.ts'
       dts: 'types/auto-imports.d.ts',
       resolvers: [ElementPlusResolver()],
@@ -45,7 +47,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     Components({//组件自动注册(包括components下的所有.vue组件和ElementPlus组件)
       include:[],
       dts:false,
-      resolvers: [ElementPlusResolver(),resolver([3],[2])],
+      resolvers: [ElementPlusResolver({importStyle:false}),resolver([3],[2])],
     }),
     vue(), svgLoader({
       svgoConfig: {

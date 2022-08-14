@@ -12,8 +12,6 @@ if (routeStore.noCacheFullPath.includes(fullPath)) {
     onMounted(() => {
         routeStore.removeNoCache(fullPath);
         router.replace(fullPath);
-
     });
 }
-
 </script>

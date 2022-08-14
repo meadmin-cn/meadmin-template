@@ -1,4 +1,4 @@
-import { filterAsyncRoutes } from '@/utils/permison';
+import { filterAsyncRoutes } from '@/utils/permission';
 import useUserStore from './user';
 import { constantRoutes, asyncRoutes } from '@/router';
 import { RouteRecordRaw } from 'vue-router';

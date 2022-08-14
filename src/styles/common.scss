@@ -1,11 +1,9 @@
-@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
-@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
 
 html {
     body {
         margin: 0;
         padding: 0;
-        color: getCssVar('text-color', 'primary');
+        color: var(--el-text-color-primary);
 
         #app {
             width: 100%;
@@ -36,21 +34,45 @@ html {
         color: inherit;
         text-decoration: none;
     }
+
+    .ellipsis-1 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .ellipsis-2 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+    .ellipsis-3 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
 }
 
 .me-large {
     //element-plus 在切换large与default时 大部分组件字体大小用的base，间距大了字体依然没变。这里强制将font-size-base设置为large
-    --#{$namespace}-font-size-base: var(--#{$namespace}-font-size-large);
+    --el-font-size-base: var(--el-font-size-large);
 }
 
 .me-large {
-    font-size: getCssVar('font-size', 'base');
+    font-size: var(--el-font-size-base);
 }
 
 .me-default {
-    font-size: getCssVar('font-size', 'base');
+    font-size: var(--el-font-size-base);
 }
 
 .me-small {
-    font-size: getCssVar('font-size', 'small');
+    font-size: var(--el-font-size-small);
+}
+.el-color-predefine__color-selector>div {
+    border: 1px solid var(--el-border-color);
 }

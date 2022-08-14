@@ -1,63 +1,54 @@
 <template>
     <el-container class="layout">
         <el-aside width="max-content" v-if="!globalStore.isMobile">
-            <layout-sidebar></layout-sidebar>
+            <layout-menu></layout-menu>
         </el-aside>
         <el-container>
-            <el-header height="max-content">
-                <layout-navbar></layout-navbar>
+            <el-header class="right-header" height="max-content" v-show="themeConfig.fixedHeader">
+                <layout-header></layout-header>
             </el-header>
-            <el-main>
+            <el-main class="right-main">
                 <el-scrollbar>
-                    <div style="height: 1000px;background-color: var(--el-bg-color-page);">
-                        <router-view v-slot="{ Component, route }">
-                            <me-component :keep-alive="keepAliveProps" :is="Component" :component-key="route.fullPath"
-                                doneProgress></me-component>
-                        </router-view>
-                    </div>
+                    <layout-header v-show="!themeConfig.fixedHeader"></layout-header>
+                    <layout-page></layout-page>
                 </el-scrollbar>
             </el-main>
         </el-container>
     </el-container>
-    <el-drawer custom-class="me-sidebar-drawer" :model-value="!settingStore.menuCollapse" :with-header="false"
-        size="200px" direction="ltr" v-if="globalStore.isMobile" @close="() => settingStore.menuCollapse = true">
-        <layout-sidebar></layout-sidebar>
+    <el-drawer custom-class="me-sidebar-drawer" :model-value="!themeConfig.menuCollapse" :with-header="false"
+        :size="themeConfig.menuWidth" direction="ltr" v-if="globalStore.isMobile"
+        @close="() => themeConfig.menuCollapse = true">
+        <layout-menu></layout-menu>
     </el-drawer>
 </template>
 <script setup lang="ts" name="layout">
-import layoutSidebar from './components/sidebar/index.vue';
-import layoutNavbar from './components/navbar/index.vue';
-import { useRouteStore, useSettingStore, useGlobalStore } from '@/store';
-import { MeKeepAliveProps } from '@/components/meKeepAlive';
-const settingStore = useSettingStore();
-const routeStore = useRouteStore();
+import LayoutHeader from './components/header/index.vue';
+import LayoutMenu from './components/menu/index.vue';
+import LayoutPage from './components/page.vue';
+import { useSettingStore, useGlobalStore } from '@/store';
+const { themeConfig } = useSettingStore();
 const globalStore = useGlobalStore();
-const keepAliveProps = reactive<MeKeepAliveProps>({
-    max: 30,
-    excludeKey: routeStore.noCacheFullPath,
-    exclude: 'redirect'
-});
-const route = useRoute();
-watch(route, () => {
-    if (route.meta.noCache) {
-        routeStore.setNoCache(route.fullPath);
-    }
-})
-
-
 </script>
 <style lang="scss" scoped>
-@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
-
 .layout {
     height: 100%;
 
-    :deep(.#{$namespace}-header) {
+    .right-header {
         padding: 0;
     }
 
-    :deep(.#{$namespace}-main) {
+    .right-main {
         padding: 0;
+        background-color: rgb(240, 242, 245);
+
+    }
+}
+
+.dark {
+    .layout {
+        .right-main {
+            background-color: var(--el-bg-color);
+        }
     }
 }
 
