@@ -8,7 +8,7 @@ const useSettingStore = defineStore('setting', {
     themeConfig: useStorage(`${settingKey}-theme`, themeConfig),
     locale: useStorage(
       `${settingKey}-locale`,
-      localeConfig.localeSetting.locale || 'zh-cn'
+      localeConfig.localeSetting.locale ?? 'zh-cn'
     ),
     elLocale: undefined as Language | undefined
   }),
@@ -23,22 +23,22 @@ const useSettingStore = defineStore('setting', {
         `--el-color-primary:${this.themeConfig.primaryColor} !important`
       );
       style.push(
-        `--el-color-primary-rgb:` +
+        '--el-color-primary-rgb:' +
           mixColor(this.themeConfig.primaryColor, '#000000', 0) +
           ' !important'
       );
       darkStyle.push(
-        `--el-color-primary-rgb:` +
+        '--el-color-primary-rgb:' +
           mixColor(this.themeConfig.primaryColor, '#000000', 0) +
           ' !important'
       );
       style.push(
-        `--el-color-primary-dark-2:` +
+        '--el-color-primary-dark-2:' +
           mixColor(this.themeConfig.primaryColor, '#000000', 0.2) +
           ' !important'
       );
       darkStyle.push(
-        `--el-color-primary-dark-2:` +
+        '--el-color-primary-dark-2:' +
           mixColor(this.themeConfig.primaryColor, '#ffffff', 0.2) +
           ' !important'
       );

@@ -17,7 +17,7 @@ declare module 'vue-router' {
     // 这在某些场景非常有用，比如：一个文章的列表页路由为：/article/list
     // 点击文章进入文章详情页，这时候路由为/article/1，但你想在侧边栏高亮文章列表的路由，就可以进行如下设置
     // 如果不设置会自动计算展示不隐藏的祖级（包括当前）
-    activeMenu?: string | false;
+    activeMenu?: string;
     // 如果设置为true，则不会被 <keep-alive> 缓存
     noCache?: boolean;
     //在菜单中隐藏

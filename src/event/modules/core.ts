@@ -15,7 +15,7 @@ mitter.once(event.start, async (app) => {
   installRoute(app);
   window.addEventListener('resize', () => mitter.emit(event.resize));
   app.config.globalProperties.$permission = permission;
-  //进度条配置
+  // 进度条配置
   nProgress.configure({
     showSpinner: false
   });

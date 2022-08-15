@@ -10,9 +10,8 @@ const enum DevtoolsHooks {
   PERFORMANCE_START = 'perf:start',
   PERFORMANCE_END = 'perf:end'
 }
-export const devtoolsComponentAdded = /*#__PURE__*/ createDevtoolsComponentHook(
-  DevtoolsHooks.COMPONENT_ADDED
-);
+export const devtoolsComponentAdded =
+  /* #__PURE__ */ createDevtoolsComponentHook(DevtoolsHooks.COMPONENT_ADDED);
 
 function createDevtoolsComponentHook(hook: DevtoolsHooks) {
   return (component: ComponentInternalInstance) => {
@@ -32,11 +31,11 @@ function emit(event: string, ...args: any[]) {
   // } else if (!devtoolsNotInstalled) {
   //   buffer.push({ event, args })
   // }
-  //TODO::因为拿不到devtoolsNotInstalled和buffer这里只在devtools Installed 成功后处理
+  // TODO::因为拿不到devtoolsNotInstalled和buffer这里只在devtools Installed 成功后处理
   if (devtools) {
     return devtools.emit(event, ...args);
   }
-  //TODO::因为拿不到devtoolsNotInstalled和buffer这里做特别处理
+  // TODO::因为拿不到devtoolsNotInstalled和buffer这里做特别处理
   // const doEmit = (event: string,frequency:number,...args: any[])=>{
   //   if (devtools) {
   //     return devtools.emit(event, ...args)

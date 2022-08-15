@@ -1,4 +1,4 @@
-import { LocaleMessages, VueMessageType, Composer, VueI18n } from 'vue-i18n';
+import { LocaleMessages, VueMessageType, Composer } from 'vue-i18n';
 import { localeConfig as config } from '@/config';
 import { event, mitter } from '@/event';
 import { loading, closeLoading } from '@/utils/loading';
@@ -26,15 +26,11 @@ export const loadMessage = <
   isLoading?: boolean
 ) => {
   if (!locale) {
-    locale = useGlobalStore().i18n!.locale.value;
+    locale = useGlobalStore().i18n.locale.value;
   }
   const MapName =
-    (messageImport[1] === undefined
-      ? ''
-      : messageImport[1] || messageImport[0]) +
-    '|' +
-    locale;
-  let message = MessageMap.get(MapName);
+    (messageImport[1] ?? messageImport[0].toString()) + '|' + locale;
+  const message = MessageMap.get(MapName);
   if (message) {
     return message as P;
   }
@@ -83,7 +79,7 @@ export const setLocaleMessage = (
   if (Object.keys(i18n.getLocaleMessage(locale)).length) {
     return true;
   }
-  let message = loadMessage(messageImport, locale);
+  const message = loadMessage(messageImport, locale);
   if (message instanceof Promise) {
     return new Promise((resolve, reject) => {
       (
@@ -92,7 +88,7 @@ export const setLocaleMessage = (
         >
       )
         .then((message) => {
-          if (message && message.default) {
+          if (message?.default) {
             i18n.setLocaleMessage(locale, message.default);
             resolve(true);
           } else {
@@ -131,14 +127,14 @@ export const setI18nLanguage = async (
   isLoading && loading();
   if (i18n === useGlobalStore().i18n) {
     useSettingStore().locale = locale;
-    let messageArr = [
+    const messageArr = [
       setLocaleMessage(i18n, locale, [
-        (locale) => import(`./lang/${locale}.json`)
+        async (locale) => await import(`./lang/${locale}.json`)
       ]),
       loadMessage<{ default: Language }>(
         [
-          (locale) =>
-            import(
+          async (locale) =>
+            await import(
               `../../node_modules/element-plus/es/locale/lang/${locale}.mjs`
             ),
           'element-plus'
@@ -148,7 +144,7 @@ export const setI18nLanguage = async (
       ...mitter.emit(event.beforeLocalChange, { locale, i18n })
     ];
     const res = await Promise.allSettled(messageArr);
-    if (res[1].status == 'fulfilled' && res[1].value) {
+    if (res[1].status === 'fulfilled' && res[1].value) {
       useSettingStore().elLocale = res[1].value.default;
     }
     document?.querySelector('html')?.setAttribute('lang', locale);

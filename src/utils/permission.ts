@@ -10,7 +10,7 @@ export function permission(rules?: string | string[]) {
   if (!rules) {
     return true;
   }
-  if (typeof rules == 'string') {
+  if (typeof rules === 'string') {
     rules = [rules];
   }
   return useUserStore().rules!.some(
@@ -37,7 +37,7 @@ export function filterAsyncRoutes(
           route.meta.activeMenu = activeMenu;
         }
       } else {
-        activeMenu = route.meta?.activeMenu || route.path;
+        activeMenu = route.meta?.activeMenu ?? route.path;
       }
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, activeMenu);

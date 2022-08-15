@@ -18,7 +18,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
   {
     path: PageEnum.LOGIN,
-    component: () => import('@/views/login/index.vue'),
+    component: async () => await import('@/views/login/index.vue'),
     meta: {
       hideMenu: true,
       title: '登录'
@@ -31,7 +31,7 @@ export const constantRoutes: RouteRecordRaw[] = [
       {
         name: 'redirect',
         path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect.vue')
+        component: async () => await import('@/views/redirect.vue')
       }
     ],
     meta: {
@@ -41,7 +41,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
   {
     path: '/:pathMatch(.*)*',
-    component: () => import('@/views/404.vue'),
+    component: async () => await import('@/views/404.vue'),
     meta: { hideMenu: true, title: '404' }
   }
 ];

@@ -11,11 +11,11 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
-    //在发送请求之前做一些事情
+    // 在发送请求之前做一些事情
     if (!config.headers) {
       config.headers = {};
     }
-    let userStore = useUserStore();
+    const userStore = useUserStore();
     if (userStore.token) {
       config.headers['Auth-Token'] = userStore.token;
     }
@@ -24,7 +24,7 @@ service.interceptors.request.use(
   (error) => {
     // 对请求错误做些什么
     console.error(error); // for debug
-    return Promise.reject('请求异常，请联系管理员'); //改写错误信息
+    throw Error('请求异常，请联系管理员'); // 改写错误信息
   }
 );
 service.interceptors.response.use(
@@ -37,27 +37,27 @@ service.interceptors.response.use(
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
     console.error(error); // for debug
-    return Promise.reject('操作失败，请稍后重试');
+    throw Error('操作失败，请稍后重试');
   }
 );
 
 type RequestOptions<R, P extends unknown[]> = {
-  needAll?: boolean; //需要所有的
-  noLoading?: boolean; //不需要加载特效
-  noError?: boolean; //不需要错误提示
+  needAll?: boolean; // 需要所有的
+  noLoading?: boolean; // 不需要加载特效
+  noError?: boolean; // 不需要错误提示
 } & Options<R, P>;
 
 setGlobalOptions({
-  manual: true //请求需要手动调用
+  manual: true // 请求需要手动调用
   // ...
 });
 
-//请求函数，当请求失败时直接抛出异常;
-export default function request<R, P extends unknown[] = []>(
+// 请求函数，当请求失败时直接抛出异常;
+function request<R, P extends unknown[] = []>(
   axiosConfig: (...args: P) => AxiosRequestConfig,
   options?: RequestOptions<R, P>
 ): ReturnType<typeof useRequest<R, P>>;
-export default function request<
+function request<
   R,
   P extends unknown[] = [],
   T extends true | undefined = true | undefined
@@ -75,7 +75,7 @@ export default function request<
  * @param returnAxios
  * @returns
  */
-export default function request<R, P extends unknown[] = [], T = true>(
+function request<R, P extends unknown[] = [], T = true>(
   axiosConfig: (...args: P) => AxiosRequestConfig,
   options?: RequestOptions<R, P>,
   returnAxios?: T
@@ -83,13 +83,13 @@ export default function request<R, P extends unknown[] = [], T = true>(
   const axiosService = async (...args: P): Promise<R> => {
     try {
       !options?.noLoading && loading();
-      let { data: res } = await service(await axiosConfig(...args));
-      if (!res || res.code == undefined) {
-        throw '格式错误';
+      const { data: res } = await service(await axiosConfig(...args));
+      if (!res || res.code === undefined) {
+        throw Error('格式错误');
       }
       // 401：认证失败
       if (res.code === '401') {
-        useUserStore().logOut();
+        await useUserStore().logOut();
         return res;
       }
       if (res.code !== '200') {
@@ -110,3 +110,5 @@ export default function request<R, P extends unknown[] = [], T = true>(
 
   return returnAxios ? axiosService : useRequest<R, P>(axiosService, options);
 }
+
+export default request;

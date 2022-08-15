@@ -5,7 +5,7 @@ const api = {
   userInfo: '/api/user/info'
 };
 
-//登录
+// 登录
 export class LoginParams {
   username = '';
   password = '';
@@ -21,13 +21,13 @@ export function loginApi() {
   }));
 }
 
-//获取用户详细信息
+// 获取用户详细信息
 export interface UserInfoResult {
-  rules: string[]; //权限
-  introduction: string; //备注
-  avatar: string; //头像
-  name: string; //名称
-  username: string; //用户名
+  rules: string[]; // 权限
+  introduction: string; // 备注
+  avatar: string; // 头像
+  name: string; // 名称
+  username: string; // 用户名
 }
 export function userInfoApi<T extends true | undefined>(returnAxios?: T) {
   return request<UserInfoResult, [], T>(

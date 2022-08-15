@@ -19,7 +19,11 @@
       "#/*": ["types/*"]
     },
     "typeRoots": ["./node_modules/@types/", "./types"],
-    "types": ["./node_modules/element-plus/global", "vite/client"]
+    "types": [
+      "./node_modules/element-plus/global",
+      "vite/client",
+      "vite-svg-loader"
+    ]
   },
   "include": [
     "src/**/*.ts",

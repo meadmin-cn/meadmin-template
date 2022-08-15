@@ -1,10 +1,11 @@
-//根据开源项目mitt自定义更改
+// 根据开源项目mitt自定义更改
 import { onUnmounted } from 'vue';
-export type EventType = string | symbol;
+import eventEnmu from '@/enums/eventEnmu';
+type EventType = eventEnmu;
 
 // An event handler can take an optional event argument
 // and should not return a value
-export type Handler<T = unknown> = (event: T) => void;
+export type Handler<T = unknown> = (event: T) => void | Promise<void>;
 export type WildcardHandler<T = Record<string, unknown>> = (
   type: keyof T,
   event: T[keyof T]
@@ -25,38 +26,38 @@ export type EventHandlerMap<Events extends Record<EventType, unknown>> = Map<
 export interface Mitter<Events extends Record<EventType, unknown>> {
   all: EventHandlerMap<Events>;
 
-  once<Key extends keyof Events>(
+  once: (<Key extends keyof Events>(
     type: Key,
     handler: Handler<Events[Key]>,
     needUnmounted?: boolean
-  ): void;
-  once(
-    type: '*',
-    handler: WildcardHandler<Events>,
-    needUnmounted?: boolean
-  ): void;
+  ) => void) &
+    ((
+      type: '*',
+      handler: WildcardHandler<Events>,
+      needUnmounted?: boolean
+    ) => void);
 
-  on<Key extends keyof Events>(
+  on: (<Key extends keyof Events>(
     type: Key,
     handler: Handler<Events[Key]>,
     needUnmounted?: boolean
-  ): void;
-  on(
-    type: '*',
-    handler: WildcardHandler<Events>,
-    needUnmounted?: boolean
-  ): void;
+  ) => void) &
+    ((
+      type: '*',
+      handler: WildcardHandler<Events>,
+      needUnmounted?: boolean
+    ) => void);
 
-  off<Key extends keyof Events>(
+  off: (<Key extends keyof Events>(
     type: Key,
     handler?: Handler<Events[Key]>
-  ): void;
-  off(type: '*', handler: WildcardHandler<Events>): void;
+  ) => void) &
+    ((type: '*', handler: WildcardHandler<Events>) => void);
 
-  emit<Key extends keyof Events>(type: Key, event: Events[Key]): any[];
-  emit<Key extends keyof Events>(
-    type: undefined extends Events[Key] ? Key : never
-  ): any[];
+  emit: (<Key extends keyof Events>(type: Key, event: Events[Key]) => any[]) &
+    (<Key extends keyof Events>(
+      type: undefined extends Events[Key] ? Key : never
+    ) => any[]);
 }
 
 /**
@@ -64,15 +65,15 @@ export interface Mitter<Events extends Record<EventType, unknown>> {
  * @name Mitter
  * @returns {Mitt}
  */
-export default function Mitter<Events extends Record<EventType, unknown>>(
+export default function mitter<Events extends Record<EventType, unknown>>(
   all?: EventHandlerMap<Events>,
   once?: Set<Handler<Events[keyof Events]> | WildcardHandler<Events>>
 ): Mitter<Events> {
   type GenericEventHandler =
     | Handler<Events[keyof Events]>
     | WildcardHandler<Events>;
-  all = all || new Map();
-  once = once || new Set();
+  all = all ?? new Map();
+  once = once ?? new Set();
 
   return {
     /**
@@ -92,7 +93,7 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
       handler: GenericEventHandler,
       needUnmounted: boolean = false
     ) {
-      const handlers: Array<GenericEventHandler> | undefined = all!.get(type);
+      const handlers: GenericEventHandler[] | undefined = all!.get(type);
       if (handlers) {
         handlers.push(handler);
       } else {
@@ -101,7 +102,7 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
       }
       needUnmounted &&
         onUnmounted(() => {
-          this.off<Key>(type, <any>handler);
+          this.off<Key>(type, handler as any);
         });
     },
 
@@ -117,7 +118,7 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
       handler: GenericEventHandler,
       needUnmounted: boolean = false
     ) {
-      const handlers: Array<GenericEventHandler> | undefined = all!.get(type);
+      const handlers: GenericEventHandler[] | undefined = all!.get(type);
       if (handlers) {
         handlers.push(handler);
       } else {
@@ -125,7 +126,7 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
       }
       needUnmounted &&
         onUnmounted(() => {
-          this.off<Key>(type, <any>handler);
+          this.off<Key>(type, handler as any);
         });
     },
 
@@ -137,7 +138,7 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
      * @memberOf mitt
      */
     off<Key extends keyof Events>(type: Key, handler?: GenericEventHandler) {
-      const handlers: Array<GenericEventHandler> | undefined = all!.get(type);
+      const handlers: GenericEventHandler[] | undefined = all!.get(type);
       if (handlers) {
         if (handler) {
           handlers.splice(handlers.indexOf(handler) >>> 0, 1);
@@ -160,11 +161,11 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
      */
     emit<Key extends keyof Events>(type: Key, evt?: Events[Key]) {
       let handlers = all!.get(type);
-      let result = [];
+      const result = [];
       if (handlers) {
         handlers = (handlers as EventHandlerList<Events[keyof Events]>).slice();
         for (const handler of handlers) {
-          result.push(handler(evt!));
+          result.push(handler(evt));
           if (once!.has(handler)) {
             this.off(type, handler);
           }
@@ -175,7 +176,7 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
       if (handlers) {
         handlers = (handlers as WildCardEventHandlerList<Events>).slice();
         for (const handler of handlers) {
-          result.push(handler(type, evt!));
+          result.push(handler(type, evt));
         }
         once!.clear();
       }

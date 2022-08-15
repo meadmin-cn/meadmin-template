@@ -17,7 +17,7 @@ export default defineStore('global', {
           },
           set(i18n: Composer<unknown, unknown, unknown>) {
             if (!_i18n) {
-              //只初始化一次值
+              // 只初始化一次值
               _i18n = i18n;
               trigger(); // 记得触发事件 trigger,告诉vue触发页面更新
             }

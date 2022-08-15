@@ -29,7 +29,7 @@ import { ComponentRenderContext } from './core/componentPublicInstance';
 import { devtoolsComponentAdded } from './core/devtools';
 import { isAsyncWrapper } from './core/apiAsyncComponent';
 import { isSuspense } from './core/Suspense';
-type MatchPattern = string | RegExp | (string | RegExp)[];
+type MatchPattern = string | RegExp | Array<string | RegExp>;
 
 export interface MeKeepAliveProps {
   include?: MatchPattern;
@@ -319,7 +319,7 @@ const KeepAliveImpl: ComponentOptions = {
         vnode.component = cachedVNode.component;
         if (vnode.transition) {
           // recursively update transition hooks on subTree
-          setTransitionHooks(vnode, vnode.transition!);
+          setTransitionHooks(vnode, vnode.transition);
         }
         // avoid vnode being mounted as fresh
         vnode.shapeFlag |= ShapeFlags.COMPONENT_KEPT_ALIVE;

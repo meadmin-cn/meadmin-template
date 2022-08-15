@@ -7,9 +7,9 @@ import { loginApi, LoginParams, userInfoApi, UserInfoResult } from '@/api/user';
 import { router } from '@/router';
 import useRouteStore from './route';
 interface UserState {
-  user: UserInfoResult; //用户信息
-  rules: string[] | undefined; //用户权限信息
-  token: Ref<string>; //用户token
+  user: UserInfoResult; // 用户信息
+  rules: string[] | undefined; // 用户权限信息
+  token: Ref<string>; // 用户token
 }
 export default defineStore({
   id: 'user',
@@ -44,13 +44,13 @@ export default defineStore({
     };
   },
   actions: {
-    //初始化
+    // 初始化
     init: async function (tokenValue?: string) {
-      let token = tokenValue || cookies.get(config.tokenName);
+      const token = tokenValue ?? cookies.get(config.tokenName);
       if (token) {
         this.token = token;
         this.user = await userInfoApi(true)();
-        this.rules = this.user!.rules;
+        this.rules = this.user.rules;
         useRouteStore()
           .generateRoutes()
           .forEach((route) => router.addRoute(route));
@@ -58,16 +58,16 @@ export default defineStore({
         this.token = '';
       }
     },
-    //登录
+    // 登录
     login: async function (params: LoginParams) {
-      let res = await loginApi().runAsync(params);
+      const res = await loginApi().runAsync(params);
       await this.init(res.token);
     },
-    //退出
-    logOut: function () {
+    // 退出
+    logOut: async function () {
       loading();
       this.token = '';
-      router.replace({
+      await router.replace({
         path: PageEnum.LOGIN,
         query: { redirect: window.location.href }
       });

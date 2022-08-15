@@ -1,4 +1,3 @@
-/// <reference types="vite-svg-loader" />
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import path from 'path-browserify';
 import { App, Component, h } from 'vue';
@@ -12,12 +11,12 @@ export function installIcon(app: App) {
         color: String
       },
       render() {
-        let fontSize: string | undefined = undefined;
+        let fontSize: string | undefined;
         if (this.size) {
           if (typeof this.size === 'string') {
             fontSize = this.size;
           } else if (typeof this.size === 'number') {
-            fontSize = this.size + 'px';
+            fontSize = `${this.size as string}px`;
           }
         }
         return h(
@@ -25,7 +24,7 @@ export function installIcon(app: App) {
           {
             class: 'el-icon',
             style: {
-              fontSize: fontSize,
+              fontSize,
               color: this.color
             }
           },
@@ -34,11 +33,11 @@ export function installIcon(app: App) {
       }
     });
   }
-  //注册element icons
+  // 注册element icons
   for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     componentIcon(`MelIcon${key}`, component);
   }
-  //注册自定义的svg icons
+  // 注册自定义的svg icons
   const svgModules = import.meta.glob('./svg/*.svg', {
     import: 'default',
     eager: true

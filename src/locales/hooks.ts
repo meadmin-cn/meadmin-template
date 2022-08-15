@@ -10,7 +10,6 @@ import { useI18n, UseI18nOptions } from 'vue-i18n';
 import { loadMessage, MessageImport, setLocaleMessage } from './helper';
 import { mitter, event } from '@/event';
 import { ComponentOptions, VNode } from 'vue';
-import { useSettingStore } from '@/store';
 
 /**
  * useI18n 会自动加载locale语言包（语言包加载为异步执行，如果语言包被加载过则执行时效和同步一致）
@@ -24,7 +23,7 @@ export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>(
 ) => {
   const res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
   if (messageImport) {
-    setLocaleMessage(res, res.locale.value, messageImport);
+    void setLocaleMessage(res, res.locale.value, messageImport);
     mitter.on(
       event.beforeLocalChange,
       (params) => {
@@ -72,9 +71,9 @@ export const useLoadMessages = () => {
     options: (VNode & { __v_isVNode: true }) | ComponentOptions | string,
     isLoading = true,
     locale: string | undefined = undefined,
-    importArr: Promise<any>[] = []
+    importArr: Array<Promise<any>> = []
   ) => {
-    if (typeof options == 'string') {
+    if (typeof options === 'string') {
       const component = app.component(options);
       if (component) {
         loadMessages(options, isLoading, locale, importArr);
