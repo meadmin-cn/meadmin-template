@@ -1,5 +1,5 @@
-import { number } from "@intlify/core-base"
-import { ComponentInternalInstance, devtools } from "vue"
+import { number } from '@intlify/core-base';
+import { ComponentInternalInstance, devtools } from 'vue';
 const enum DevtoolsHooks {
   APP_INIT = 'app:init',
   APP_UNMOUNT = 'app:unmount',
@@ -12,7 +12,7 @@ const enum DevtoolsHooks {
 }
 export const devtoolsComponentAdded = /*#__PURE__*/ createDevtoolsComponentHook(
   DevtoolsHooks.COMPONENT_ADDED
-)
+);
 
 function createDevtoolsComponentHook(hook: DevtoolsHooks) {
   return (component: ComponentInternalInstance) => {
@@ -22,8 +22,8 @@ function createDevtoolsComponentHook(hook: DevtoolsHooks) {
       component.uid,
       component.parent ? component.parent.uid : undefined,
       component
-    )
-  }
+    );
+  };
 }
 
 function emit(event: string, ...args: any[]) {
@@ -34,7 +34,7 @@ function emit(event: string, ...args: any[]) {
   // }
   //TODO::因为拿不到devtoolsNotInstalled和buffer这里只在devtools Installed 成功后处理
   if (devtools) {
-    return devtools.emit(event, ...args)
+    return devtools.emit(event, ...args);
   }
   //TODO::因为拿不到devtoolsNotInstalled和buffer这里做特别处理
   // const doEmit = (event: string,frequency:number,...args: any[])=>{

@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "format": "prettier --write --cache .",
     "dev": "vite",
     "build": "vite build -m prod && npm run tsc",
-    "tsc":"vue-tsc --noEmi",
+    "tsc": "vue-tsc --noEmi",
     "preview": "vite preview",
     "release": "release-it",
     "i": "npm install --registry=https://registry.npm.taobao.org && npx husky install"
@@ -29,8 +30,6 @@
     "vue-router": "^4.1.1"
   },
   "devDependencies": {
-    "sass": "^1.53.0",
-    "xregexp": "^5.1.1",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@intlify/unplugin-vue-i18n": "^0.5.0",
@@ -41,18 +40,32 @@
     "@types/node": "^18.0.1",
     "@types/nprogress": "^0.2.0",
     "@types/path-browserify": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@vitejs/plugin-vue": "^3.0.0",
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.3.0",
     "husky": "^8.0.1",
+    "prettier": "2.7.1",
     "release-it": "^15.1.1",
     "rollup-plugin-visualizer": "^5.7.1",
+    "sass": "^1.53.0",
     "terser": "^5.14.2",
-    "typescript": "^4.5.4",
+    "typescript": "^4.7.4",
     "unplugin-auto-import": "^0.11.1",
     "unplugin-vue-components": "^0.22.4",
     "vite": "^3.0.0",
     "vite-plugin-autogeneration-import-file": "^2.1.0",
     "vite-plugin-mock": "^2.9.6",
     "vite-svg-loader": "^3.4.0",
-    "vue-tsc": "^0.34.7"
+    "vue-tsc": "^0.34.7",
+    "xregexp": "^5.1.1"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

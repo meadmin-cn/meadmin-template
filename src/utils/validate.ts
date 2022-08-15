@@ -1,8 +1,8 @@
 /**
  * 是否是外链
- * @param path 
- * @returns 
+ * @param path
+ * @returns
  */
 export function isExternal(path: string) {
-    return /^(https?:|mailto:|tel:)/.test(path)
+  return /^(https?:|mailto:|tel:)/.test(path);
 }

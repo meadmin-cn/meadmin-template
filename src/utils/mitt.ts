@@ -12,7 +12,9 @@ export type WildcardHandler<T = Record<string, unknown>> = (
 
 // An array of all currently registered event handlers for a type
 export type EventHandlerList<T = unknown> = Array<Handler<T>>;
-export type WildCardEventHandlerList<T = Record<string, unknown>> = Array<WildcardHandler<T>>;
+export type WildCardEventHandlerList<T = Record<string, unknown>> = Array<
+  WildcardHandler<T>
+>;
 
 // A map of event types and their corresponding event handlers.
 export type EventHandlerMap<Events extends Record<EventType, unknown>> = Map<
@@ -23,17 +25,38 @@ export type EventHandlerMap<Events extends Record<EventType, unknown>> = Map<
 export interface Mitter<Events extends Record<EventType, unknown>> {
   all: EventHandlerMap<Events>;
 
-  once<Key extends keyof Events>(type: Key, handler: Handler<Events[Key]>, needUnmounted?: boolean): void;
-  once(type: '*', handler: WildcardHandler<Events>, needUnmounted?: boolean): void;
+  once<Key extends keyof Events>(
+    type: Key,
+    handler: Handler<Events[Key]>,
+    needUnmounted?: boolean
+  ): void;
+  once(
+    type: '*',
+    handler: WildcardHandler<Events>,
+    needUnmounted?: boolean
+  ): void;
 
-  on<Key extends keyof Events>(type: Key, handler: Handler<Events[Key]>, needUnmounted?: boolean): void;
-  on(type: '*', handler: WildcardHandler<Events>, needUnmounted?: boolean): void;
+  on<Key extends keyof Events>(
+    type: Key,
+    handler: Handler<Events[Key]>,
+    needUnmounted?: boolean
+  ): void;
+  on(
+    type: '*',
+    handler: WildcardHandler<Events>,
+    needUnmounted?: boolean
+  ): void;
 
-  off<Key extends keyof Events>(type: Key, handler?: Handler<Events[Key]>): void;
+  off<Key extends keyof Events>(
+    type: Key,
+    handler?: Handler<Events[Key]>
+  ): void;
   off(type: '*', handler: WildcardHandler<Events>): void;
 
   emit<Key extends keyof Events>(type: Key, event: Events[Key]): any[];
-  emit<Key extends keyof Events>(type: undefined extends Events[Key] ? Key : never): any[];
+  emit<Key extends keyof Events>(
+    type: undefined extends Events[Key] ? Key : never
+  ): any[];
 }
 
 /**
@@ -42,7 +65,8 @@ export interface Mitter<Events extends Record<EventType, unknown>> {
  * @returns {Mitt}
  */
 export default function Mitter<Events extends Record<EventType, unknown>>(
-  all?: EventHandlerMap<Events>, once?: Set<Handler<Events[keyof Events]> | WildcardHandler<Events>>
+  all?: EventHandlerMap<Events>,
+  once?: Set<Handler<Events[keyof Events]> | WildcardHandler<Events>>
 ): Mitter<Events> {
   type GenericEventHandler =
     | Handler<Events[keyof Events]>
@@ -51,7 +75,6 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
   once = once || new Set();
 
   return {
-
     /**
      * A Map of event names to registered handler functions.
      */
@@ -64,18 +87,22 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
      * @param needUnmounted 是否需要在Unmounted时移除监听
      * @memberOf mitt
      */
-    once<Key extends keyof Events>(type: Key, handler: GenericEventHandler, needUnmounted: boolean = false) {
+    once<Key extends keyof Events>(
+      type: Key,
+      handler: GenericEventHandler,
+      needUnmounted: boolean = false
+    ) {
       const handlers: Array<GenericEventHandler> | undefined = all!.get(type);
       if (handlers) {
         handlers.push(handler);
-      }
-      else {
+      } else {
         all!.set(type, [handler] as EventHandlerList<Events[keyof Events]>);
         once!.add(handler as Handler<Events[keyof Events]>);
       }
-      needUnmounted && onUnmounted(() => {
-        this.off<Key>(type, <any>handler);
-      })
+      needUnmounted &&
+        onUnmounted(() => {
+          this.off<Key>(type, <any>handler);
+        });
     },
 
     /**
@@ -85,17 +112,21 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
      * @param needUnmounted 是否需要在Unmounted时移除监听
      * @memberOf mitt
      */
-    on<Key extends keyof Events>(type: Key, handler: GenericEventHandler, needUnmounted: boolean = false) {
+    on<Key extends keyof Events>(
+      type: Key,
+      handler: GenericEventHandler,
+      needUnmounted: boolean = false
+    ) {
       const handlers: Array<GenericEventHandler> | undefined = all!.get(type);
       if (handlers) {
         handlers.push(handler);
-      }
-      else {
+      } else {
         all!.set(type, [handler] as EventHandlerList<Events[keyof Events]>);
       }
-      needUnmounted && onUnmounted(() => {
-        this.off<Key>(type, <any>handler);
-      })
+      needUnmounted &&
+        onUnmounted(() => {
+          this.off<Key>(type, <any>handler);
+        });
     },
 
     /**
@@ -111,8 +142,7 @@ export default function Mitter<Events extends Record<EventType, unknown>>(
         if (handler) {
           handlers.splice(handlers.indexOf(handler) >>> 0, 1);
           once!.delete(handler);
-        }
-        else {
+        } else {
           all!.set(type, []);
         }
       }

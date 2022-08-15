@@ -9,82 +9,105 @@
  *  currentKey：数组中正在处理的元素的key。
  *  object：用于遍历的d对象。
  * @param initialValue  作为第一次调用 callback 函数时参数 previousValue 的值
- * @returns 
+ * @returns
  */
-export function objectRreduce<T, P extends Record<string, any> = Record<string, any>>(
-    object: P,
-    callbackfn: (previousValue: T, currentValue: P[keyof P], currentKey: string, object: P) => T,
-    initialValue: T): T {
-    for (const i in object) {
-        initialValue = callbackfn(initialValue, object[i], i, object);
-    }
-    return initialValue
+export function objectRreduce<
+  T,
+  P extends Record<string, any> = Record<string, any>
+>(
+  object: P,
+  callbackfn: (
+    previousValue: T,
+    currentValue: P[keyof P],
+    currentKey: string,
+    object: P
+  ) => T,
+  initialValue: T
+): T {
+  for (const i in object) {
+    initialValue = callbackfn(initialValue, object[i], i, object);
+  }
+  return initialValue;
 }
 
 /**
  * 合并对象的value（value必须为数组）
- * @param object 
- * @returns 
+ * @param object
+ * @returns
  */
-export function concatObjectValue<T, P extends Record<string, T[]> = Record<string, T[]>>(object: P) {
-    return objectRreduce(object,
-        (currentValue, previousValue) => {
-            return currentValue.concat(previousValue || []);
-        }, [] as T[])
+export function concatObjectValue<
+  T,
+  P extends Record<string, T[]> = Record<string, T[]>
+>(object: P) {
+  return objectRreduce(
+    object,
+    (currentValue, previousValue) => {
+      return currentValue.concat(previousValue || []);
+    },
+    [] as T[]
+  );
 }
 
 /**
  * 文件名转驼峰
- * @param fileName 
- * @param nameTemplate 
- * @returns 
+ * @param fileName
+ * @param nameTemplate
+ * @returns
  */
 export const fileToHump = function (fileName: string): string {
-    const index = fileName.lastIndexOf('.');
-    if (index > 0) {
-        fileName = fileName.slice(0, index);
-    }
-    let fileNameArr = fileName.replace(/\\/g, '/').split('/');
-    if (fileNameArr[fileNameArr.length - 1] == 'index' || fileNameArr[fileNameArr.length - 1] == 'Index') {
-        fileNameArr.pop();
-    }
-    for (let i = 1, len = fileNameArr.length; i < len; i++) {
-        fileNameArr[i] = fileNameArr[i].slice(0, 1).toUpperCase() + fileNameArr[i].slice(1)
-    }
-    return fileNameArr.join('');
-}
+  const index = fileName.lastIndexOf('.');
+  if (index > 0) {
+    fileName = fileName.slice(0, index);
+  }
+  let fileNameArr = fileName.replace(/\\/g, '/').split('/');
+  if (
+    fileNameArr[fileNameArr.length - 1] == 'index' ||
+    fileNameArr[fileNameArr.length - 1] == 'Index'
+  ) {
+    fileNameArr.pop();
+  }
+  for (let i = 1, len = fileNameArr.length; i < len; i++) {
+    fileNameArr[i] =
+      fileNameArr[i].slice(0, 1).toUpperCase() + fileNameArr[i].slice(1);
+  }
+  return fileNameArr.join('');
+};
 
 /**
  * 混色
- * @param color1  16进制颜色1 
+ * @param color1  16进制颜色1
  * @param color2  16进制颜色2
  * @param opacity 透明度0-1
- * @returns 
+ * @returns
  */
-export const mixColor = function (color1: string, color2: string, opacity: number) {
-    let red1 = parseInt(color1.slice(1, 3), 16);
-    let green1 = parseInt(color1.slice(3, 5), 16);
-    let blue1 = parseInt(color1.slice(5, 7), 16);
-    if (opacity === 0) {
-        return [red1, green1, blue1];
-    }
-    const red2 = parseInt(color2.slice(1, 3), 16);
-    const green2 = parseInt(color2.slice(3, 5), 16);
-    const blue2 = parseInt(color2.slice(5, 7), 16);
-    red1 += Math.round(opacity * (red2 - red1));
-    green1 += Math.round(opacity * (green2 - green1));
-    blue1 += Math.round(opacity * (blue2 - blue1));
-    return '#' + red1.toString(16) + green1.toString(16) + blue1.toString(16);
-}
+export const mixColor = function (
+  color1: string,
+  color2: string,
+  opacity: number
+) {
+  let red1 = parseInt(color1.slice(1, 3), 16);
+  let green1 = parseInt(color1.slice(3, 5), 16);
+  let blue1 = parseInt(color1.slice(5, 7), 16);
+  if (opacity === 0) {
+    return [red1, green1, blue1];
+  }
+  const red2 = parseInt(color2.slice(1, 3), 16);
+  const green2 = parseInt(color2.slice(3, 5), 16);
+  const blue2 = parseInt(color2.slice(5, 7), 16);
+  red1 += Math.round(opacity * (red2 - red1));
+  green1 += Math.round(opacity * (green2 - green1));
+  blue1 += Math.round(opacity * (blue2 - blue1));
+  return '#' + red1.toString(16) + green1.toString(16) + blue1.toString(16);
+};
 
 /**
  * 获取灰阶值 越小颜色越深
- * @param color 
- * @returns 
+ * @param color
+ * @returns
  */
 export const getColorLuma = function (color: string) {
-    const red = parseInt(color.slice(1, 3), 16);
-    const green = parseInt(color.slice(3, 5), 16);
-    const blue = parseInt(color.slice(5, 7), 16);
-    return red * 0.299 + green * 0.587 + blue * 0.114;
-}
+  const red = parseInt(color.slice(1, 3), 16);
+  const green = parseInt(color.slice(3, 5), 16);
+  const blue = parseInt(color.slice(5, 7), 16);
+  return red * 0.299 + green * 0.587 + blue * 0.114;
+};

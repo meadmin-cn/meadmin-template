@@ -1,5 +1,14 @@
-import { RendererNode, RendererElement, RendererOptions, ComponentInternalInstance, SuspenseBoundary, VNode, VNodeArrayChildren, queuePostFlushCb } from "vue"
-import { queueEffectWithSuspense } from "./Suspense"
+import {
+  RendererNode,
+  RendererElement,
+  RendererOptions,
+  ComponentInternalInstance,
+  SuspenseBoundary,
+  VNode,
+  VNodeArrayChildren,
+  queuePostFlushCb
+} from 'vue';
+import { queueEffectWithSuspense } from './Suspense';
 
 // An object exposing the internals of a renderer, passed to tree-shakeable
 // features so that they can be decoupled from this file. Keys are shortened
@@ -8,18 +17,17 @@ export interface RendererInternals<
   HostNode = RendererNode,
   HostElement = RendererElement
 > {
-  p: PatchFn
-  um: UnmountFn
-  r: RemoveFn
-  m: MoveFn
-  mt: MountComponentFn
-  mc: MountChildrenFn
-  pc: PatchChildrenFn
-  pbc: PatchBlockChildrenFn
-  n: NextFn
-  o: RendererOptions<HostNode, HostElement>
+  p: PatchFn;
+  um: UnmountFn;
+  r: RemoveFn;
+  m: MoveFn;
+  mt: MountComponentFn;
+  mc: MountChildrenFn;
+  pc: PatchChildrenFn;
+  pbc: PatchBlockChildrenFn;
+  n: NextFn;
+  o: RendererOptions<HostNode, HostElement>;
 }
-
 
 // These functions are created inside a closure and therefore their types cannot
 // be directly exported. In order to avoid maintaining function signatures in
@@ -34,8 +42,7 @@ type PatchFn = (
   isSVG?: boolean,
   slotScopeIds?: string[] | null,
   optimized?: boolean
-) => void
-
+) => void;
 
 type UnmountFn = (
   vnode: VNode,
@@ -43,9 +50,9 @@ type UnmountFn = (
   parentSuspense: SuspenseBoundary | null,
   doRemove?: boolean,
   optimized?: boolean
-) => void
+) => void;
 
-type RemoveFn = (vnode: VNode) => void
+type RemoveFn = (vnode: VNode) => void;
 
 type MoveFn = (
   vnode: VNode,
@@ -53,7 +60,7 @@ type MoveFn = (
   anchor: RendererNode | null,
   type: MoveType,
   parentSuspense?: SuspenseBoundary | null
-) => void
+) => void;
 
 export const enum MoveType {
   ENTER,
@@ -69,8 +76,7 @@ export type MountComponentFn = (
   parentSuspense: SuspenseBoundary | null,
   isSVG: boolean,
   optimized: boolean
-) => void
-
+) => void;
 
 type MountChildrenFn = (
   children: VNodeArrayChildren,
@@ -82,7 +88,7 @@ type MountChildrenFn = (
   slotScopeIds: string[] | null,
   optimized: boolean,
   start?: number
-) => void
+) => void;
 
 type PatchChildrenFn = (
   n1: VNode | null,
@@ -94,7 +100,7 @@ type PatchChildrenFn = (
   isSVG: boolean,
   slotScopeIds: string[] | null,
   optimized: boolean
-) => void
+) => void;
 
 type PatchBlockChildrenFn = (
   oldChildren: VNode[],
@@ -104,15 +110,13 @@ type PatchBlockChildrenFn = (
   parentSuspense: SuspenseBoundary | null,
   isSVG: boolean,
   slotScopeIds: string[] | null
-) => void
+) => void;
 
-type NextFn = (vnode: VNode) => RendererNode | null
-
+type NextFn = (vnode: VNode) => RendererNode | null;
 
 export const queuePostRenderEffect = __FEATURE_SUSPENSE__
   ? queueEffectWithSuspense
-  : queuePostFlushCb
-
+  : queuePostFlushCb;
 
 export type SetupRenderEffectFn = (
   instance: ComponentInternalInstance,
@@ -122,4 +126,4 @@ export type SetupRenderEffectFn = (
   parentSuspense: SuspenseBoundary | null,
   isSVG: boolean,
   optimized: boolean
-) => void
+) => void;

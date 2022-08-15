@@ -1,55 +1,54 @@
 <template>
-   <div class="no-page">
-      <img src="@/assets/images/404.svg?url">
-      <div class="info">
-         <div class="title">404</div>
-         <div class="content">
-            {{ $t('页面不见了') }}!
-            <router-link to="/">{{ $t('去') }}{{ $t(' ') }}{{ $t('首页') }}</router-link>
-         </div>
-
+  <div class="no-page">
+    <img src="@/assets/images/404.svg?url" />
+    <div class="info">
+      <div class="title">404</div>
+      <div class="content">
+        {{ $t('页面不见了') }}!
+        <router-link to="/"
+          >{{ $t('去') }}{{ $t(' ') }}{{ $t('首页') }}</router-link
+        >
       </div>
-   </div>
+    </div>
+  </div>
 </template>
 
-<script setup lang="ts" name="404">
-
-</script>
+<script setup lang="ts" name="404"></script>
 
 <style lang="scss" scoped>
-.no-page {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   width: 100%;
-   height: 100%;
+  .no-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 
-   img {
+    img {
       width: 100%;
       max-width: 500px;
-   }
+    }
 
-   .info {
+    .info {
       display: flex;
       flex-direction: column;
       align-items: center;
 
       .title {
-         font-size: 1.2em;
+        font-size: 1.2em;
       }
 
       .content {
-         margin: 10px 0;
-         color: var(--el-text-color-placeholder);
-         display: flex;
-         align-items: center;
+        margin: 10px 0;
+        color: var(--el-text-color-placeholder);
+        display: flex;
+        align-items: center;
 
-         a {
-            margin-left: 10px;
-            color: var(--el-color-primary);
-         }
+        a {
+          margin-left: 10px;
+          color: var(--el-color-primary);
+        }
       }
-   }
-}
+    }
+  }
 </style>

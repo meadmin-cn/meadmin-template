@@ -11,35 +11,23 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "#/*": [
-        "types/*"
-      ]
+      "@/*": ["src/*"],
+      "#/*": ["types/*"]
     },
-    "typeRoots": [
-      "./node_modules/@types/",
-      "./types"
-    ],
-    "types": [
-      "./node_modules/element-plus/global",
-      "vite/client"
-    ]
+    "typeRoots": ["./node_modules/@types/", "./types"],
+    "types": ["./node_modules/element-plus/global", "vite/client"]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "types/**/*.d.ts"
+    "types/**/*.d.ts",
+    "mock/**/*.ts"
   ],
   "references": [
     {

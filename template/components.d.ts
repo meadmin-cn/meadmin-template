@@ -1,6 +1,6 @@
-declare module "@vue/runtime-core" {
-    interface GlobalComponents {
-        //code
-    }
+declare module '@vue/runtime-core' {
+  interface GlobalComponents {
+    //code
+  }
 }
-export { };
+export {};

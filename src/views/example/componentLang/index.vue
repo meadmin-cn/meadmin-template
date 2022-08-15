@@ -7,8 +7,10 @@
 </template>
 
 <script setup lang="ts">
-import { useLocalesI18n } from '@/locales/i18n';
-const { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'compnentLang'])
+  import { useLocalesI18n } from '@/locales/i18n';
+  const { t } = useLocalesI18n({}, [
+    (locale: string) => import(`./lang/${locale}.json`),
+    'compnentLang'
+  ]);
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

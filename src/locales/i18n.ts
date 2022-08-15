@@ -6,11 +6,17 @@ import { useGlobalStore, useSettingStore } from '@/store';
 
 //安装VueI18n
 export const installI18n = async (app: App) => {
-  const options = Object.assign({}, config.localeSetting, { legacy: false, locale: undefined, globalInjection: true });
-  let i18n = createI18n(options as { legacy: false, globalInjection: true } & I18nOptions);
+  const options = Object.assign({}, config.localeSetting, {
+    legacy: false,
+    locale: undefined,
+    globalInjection: true
+  });
+  let i18n = createI18n(
+    options as { legacy: false; globalInjection: true } & I18nOptions
+  );
   useGlobalStore().i18n = i18n.global;
   await setI18nLanguage(useSettingStore().locale, false);
   app.use(i18n);
-}
+};
 export * from './helper';
 export * from './hooks';

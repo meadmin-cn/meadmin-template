@@ -1,10 +1,10 @@
-import { useUserStore } from "@/store";
-import { RouteRecordRaw } from "vue-router";
+import { useUserStore } from '@/store';
+import { RouteRecordRaw } from 'vue-router';
 
 /**
  * 用户是否具有权限
- * @param rules 
- * @returns 
+ * @param rules
+ * @returns
  */
 export function permission(rules?: string | string[]) {
   if (!rules) {
@@ -13,19 +13,24 @@ export function permission(rules?: string | string[]) {
   if (typeof rules == 'string') {
     rules = [rules];
   }
-  return useUserStore().rules!.some(rule => rule === '*' || rules!.includes(rule));
+  return useUserStore().rules!.some(
+    (rule) => rule === '*' || rules!.includes(rule)
+  );
 }
 
 /**
  * 过滤动态路由
- * @param routes 
- * @param activeMenu 
- * @returns 
+ * @param routes
+ * @param activeMenu
+ * @returns
  */
-export function filterAsyncRoutes(routes: RouteRecordRaw[], activeMenu?: string) {
+export function filterAsyncRoutes(
+  routes: RouteRecordRaw[],
+  activeMenu?: string
+) {
   const res: RouteRecordRaw[] = [];
-  routes.forEach(route => {
-    const tmp = { ...route }
+  routes.forEach((route) => {
+    const tmp = { ...route };
     if (!route.meta || permission(route.meta.rule)) {
       if (route.meta?.hideMenu) {
         if (typeof route.meta.activeMenu === 'undefined' && activeMenu) {
@@ -35,11 +40,11 @@ export function filterAsyncRoutes(routes: RouteRecordRaw[], activeMenu?: string)
         activeMenu = route.meta?.activeMenu || route.path;
       }
       if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, activeMenu)
+        tmp.children = filterAsyncRoutes(tmp.children, activeMenu);
       }
-      res.push(tmp)
+      res.push(tmp);
     }
-  })
+  });
 
-  return res
+  return res;
 }

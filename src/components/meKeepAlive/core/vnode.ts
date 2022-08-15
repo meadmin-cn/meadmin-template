@@ -1,13 +1,16 @@
-import { ComponentInternalInstance, VNode, callWithAsyncErrorHandling } from "vue";
-import { ErrorCodes } from "./errorHandling";
-type VNodeMountHook = (vnode: VNode) => void
-type VNodeUpdateHook = (vnode: VNode, oldVNode: VNode) => void
+import {
+  ComponentInternalInstance,
+  VNode,
+  callWithAsyncErrorHandling
+} from 'vue';
+import { ErrorCodes } from './errorHandling';
+type VNodeMountHook = (vnode: VNode) => void;
+type VNodeUpdateHook = (vnode: VNode, oldVNode: VNode) => void;
 export type VNodeHook =
   | VNodeMountHook
   | VNodeUpdateHook
   | VNodeMountHook[]
-  | VNodeUpdateHook[]
-
+  | VNodeUpdateHook[];
 
 export function invokeVNodeHook(
   hook: VNodeHook,
@@ -18,5 +21,5 @@ export function invokeVNodeHook(
   callWithAsyncErrorHandling(hook, instance, <any>ErrorCodes.VNODE_HOOK, [
     vnode,
     prevVNode
-  ])
+  ]);
 }
