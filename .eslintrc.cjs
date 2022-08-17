@@ -3,7 +3,6 @@ module.exports = {
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: {
-      cjs: '@babel/eslint-parser',
       js: '@babel/eslint-parser',
       jsx: '@babel/eslint-parser',
 
@@ -18,12 +17,6 @@ module.exports = {
       files: ['*.vue', '*.ts'],
       rules: {
         'no-undef': 'off', // ts(2304)
-      },
-    },
-    {
-      files: ['*.cjs'],
-      rules: {
-        '@typescript-eslint/no-require-imports': 'off',
       },
     },
   ],

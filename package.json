@@ -10,10 +10,10 @@
     "type-check": "vue-tsc --noEmit",
     "preview": "vite preview",
     "release": "release-it",
-    "eslint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts",
+    "eslint": "eslint . --cache --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts",
     "eslint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
-    "prettier": "prettier -l \"./**/*\"",
-    "prettier:fix": "prettier --write -l \"./**/*\"",
+    "prettier": "prettier --cache  -l \"./**/*\"",
+    "prettier:fix": "prettier --write --cache  -l \"./**/*\"",
     "i": "npm install --registry=https://registry.npm.taobao.org && npx husky install"
   },
   "dependencies": {
@@ -71,6 +71,7 @@
     "xregexp": "^5.1.1"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "prettier --cache --write --ignore-unknown",
+    "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": "eslint --cache"
   }
 }
