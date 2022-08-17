@@ -6,9 +6,9 @@
 </template>
 
 <script setup lang="ts" name="permission">
-  import { permission } from '@/utils/permission';
+import { permission } from '@/utils/permission';
 </script>
 <style lang="scss" scoped>
-  .permission {
-  }
+.permission {
+}
 </style>

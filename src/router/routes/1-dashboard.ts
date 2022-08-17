@@ -8,8 +8,8 @@ export const routes: RouteRecordRaw[] = [
     redirect: PageEnum.HOME + '/index',
     component: Layout,
     children: concatObjectValue<RouteRecordRaw>(
-      import.meta.glob('./dashboard/*.ts', { eager: true, import: 'routes' })
+      import.meta.glob('./dashboard/*.ts', { eager: true, import: 'routes' }),
     ),
-    meta: { title: '' }
-  }
+    meta: { title: '' },
+  },
 ];

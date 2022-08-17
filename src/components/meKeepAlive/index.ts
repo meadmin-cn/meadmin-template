@@ -13,18 +13,14 @@ import {
   watch,
   RendererElement,
   RendererNode,
-  setTransitionHooks
+  setTransitionHooks,
 } from 'vue';
 import { getComponentName } from './core/component';
 import { invokeVNodeHook } from './core/vnode';
 import { warn } from './core/warning';
 import { isString, isArray, invokeArrayFns } from '@vue/shared';
 import { ShapeFlags } from './core/shapeFlags';
-import {
-  RendererInternals,
-  queuePostRenderEffect,
-  MoveType
-} from './core/renderer';
+import { RendererInternals, queuePostRenderEffect, MoveType } from './core/renderer';
 import { ComponentRenderContext } from './core/componentPublicInstance';
 import { devtoolsComponentAdded } from './core/devtools';
 import { isAsyncWrapper } from './core/apiAsyncComponent';
@@ -49,7 +45,7 @@ export interface KeepAliveContext extends ComponentRenderContext {
     container: RendererElement,
     anchor: RendererNode | null,
     isSVG: boolean,
-    optimized: boolean
+    optimized: boolean,
   ) => void;
   deactivate: (vnode: VNode) => void;
 }
@@ -67,7 +63,7 @@ const KeepAliveImpl: ComponentOptions = {
     exclude: [String, RegExp, Array],
     max: [String, Number],
     includeKey: [String, RegExp, Array],
-    excludeKey: [String, RegExp, Array]
+    excludeKey: [String, RegExp, Array],
   },
 
   setup(props: MeKeepAliveProps, { slots }: SetupContext) {
@@ -103,8 +99,8 @@ const KeepAliveImpl: ComponentOptions = {
         p: patch,
         m: move,
         um: _unmount,
-        o: { createElement }
-      }
+        o: { createElement },
+      },
     } = sharedContext;
     const storageContainer = createElement('div');
 
@@ -112,17 +108,7 @@ const KeepAliveImpl: ComponentOptions = {
       const instance = vnode.component!;
       move(vnode, container, anchor, MoveType.ENTER, parentSuspense);
       // in case props have changed
-      patch(
-        instance.vnode,
-        vnode,
-        container,
-        anchor,
-        instance,
-        parentSuspense,
-        isSVG,
-        vnode.slotScopeIds,
-        optimized
-      );
+      patch(instance.vnode, vnode, container, anchor, instance, parentSuspense, isSVG, vnode.slotScopeIds, optimized);
       queuePostRenderEffect(() => {
         instance.isDeactivated = false;
         if (instance.a) {
@@ -204,23 +190,20 @@ const KeepAliveImpl: ComponentOptions = {
         exclude && pruneCache((name) => !matches(exclude, name));
       },
       // prune post-render after `current` has been updated
-      { flush: 'post', deep: true }
+      { flush: 'post', deep: true },
     );
     // prune cache on includeKey/excludeKey prop change
     watch(
       () => [props.includeKey, props.excludeKey],
       ([includeKey, excludeKey]) => {
-        includeKey &&
-          pruneCacheByKey(
-            (key) => typeof key === 'string' && matches(includeKey, key)
-          );
+        includeKey && pruneCacheByKey((key) => typeof key === 'string' && matches(includeKey, key));
         excludeKey &&
           pruneCacheByKey((key) => {
             return typeof key !== 'string' || !matches(excludeKey, key);
           });
       },
       // prune post-render after `current` has been updated
-      { flush: 'post', deep: true }
+      { flush: 'post', deep: true },
     );
 
     // cache sub tree after render
@@ -259,17 +242,13 @@ const KeepAliveImpl: ComponentOptions = {
       const rawVNode = children[0];
       if (children.length > 1) {
         if (__DEV__) {
-          warn(
-            `KeepAlive should contain exactly one component child.`,
-            current
-          );
+          warn(`KeepAlive should contain exactly one component child.`, current);
         }
         current = null;
         return children;
       } else if (
         !isVNode(rawVNode) ||
-        (!(rawVNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) &&
-          !(rawVNode.shapeFlag & ShapeFlags.SUSPENSE))
+        (!(rawVNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) && !(rawVNode.shapeFlag & ShapeFlags.SUSPENSE))
       ) {
         current = null;
         return rawVNode;
@@ -281,17 +260,14 @@ const KeepAliveImpl: ComponentOptions = {
       // for async components, name check should be based in its loaded
       // inner component if available
       const name = getComponentName(
-        isAsyncWrapper(vnode)
-          ? (vnode.type as ComponentOptions).__asyncResolved || {}
-          : comp
+        isAsyncWrapper(vnode) ? (vnode.type as ComponentOptions).__asyncResolved || {} : comp,
       );
       const key = vnode.key == null ? comp : vnode.key;
       const { include, exclude, includeKey, excludeKey, max } = props;
       if (
         (include && (!name || !matches(include, name))) ||
         (exclude && name && matches(exclude, name)) ||
-        (includeKey &&
-          (typeof key !== 'string' || !matches(includeKey, key))) ||
+        (includeKey && (typeof key !== 'string' || !matches(includeKey, key))) ||
         (excludeKey && typeof key === 'string' && matches(excludeKey, key))
       ) {
         current = vnode;
@@ -339,7 +315,7 @@ const KeepAliveImpl: ComponentOptions = {
       current = vnode;
       return isSuspense(rawVNode.type) ? rawVNode : vnode;
     };
-  }
+  },
 };
 
 if (__COMPAT__) {

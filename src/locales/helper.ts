@@ -6,10 +6,7 @@ import { Language } from 'element-plus/es/locale';
 import { useGlobalStore, useSettingStore } from '@/store';
 type GlobaleI18n = Composer<unknown, unknown, unknown, any>;
 const MessageMap: Map<string, Record<any, any>> = new Map();
-export type MessageImport = [
-  (locale: string) => Promise<{ default: LocaleMessages<VueMessageType> }>,
-  string?
-];
+export type MessageImport = [(locale: string) => Promise<{ default: LocaleMessages<VueMessageType> }>, string?];
 
 /**
  * 异步加载语言包
@@ -18,18 +15,15 @@ export type MessageImport = [
  * @param isLoading 是否loading(仅会在异步加载时进行loading)
  * @returns
  */
-export const loadMessage = <
-  P extends Record<any, any> = { default: LocaleMessages<VueMessageType> }
->(
+export const loadMessage = <P extends Record<any, any> = { default: LocaleMessages<VueMessageType> }>(
   messageImport: [(locale: string) => Promise<P>, string?],
   locale?: string,
-  isLoading?: boolean
+  isLoading?: boolean,
 ) => {
   if (!locale) {
     locale = useGlobalStore().i18n.locale.value;
   }
-  const MapName =
-    (messageImport[1] ?? messageImport[0].toString()) + '|' + locale;
+  const MapName = (messageImport[1] ?? messageImport[0].toString()) + '|' + locale;
   const message = MessageMap.get(MapName);
   if (message) {
     return message as P;
@@ -71,22 +65,14 @@ export const loadMessage = <
  * @param messageImport
  * @returns
  */
-export const setLocaleMessage = (
-  i18n: GlobaleI18n,
-  locale: string,
-  messageImport: MessageImport
-) => {
+export const setLocaleMessage = (i18n: GlobaleI18n, locale: string, messageImport: MessageImport) => {
   if (Object.keys(i18n.getLocaleMessage(locale)).length) {
     return true;
   }
   const message = loadMessage(messageImport, locale);
   if (message instanceof Promise) {
     return new Promise((resolve, reject) => {
-      (
-        message as Promise<
-          { default: LocaleMessages<VueMessageType> } | undefined
-        >
-      )
+      (message as Promise<{ default: LocaleMessages<VueMessageType> } | undefined>)
         .then((message) => {
           if (message?.default) {
             i18n.setLocaleMessage(locale, message.default);
@@ -110,11 +96,7 @@ export const setLocaleMessage = (
  * @param i18n
  * @returns
  */
-export const setI18nLanguage = async (
-  locale: string,
-  isLoading = true,
-  i18n?: GlobaleI18n
-) => {
+export const setI18nLanguage = async (locale: string, isLoading = true, i18n?: GlobaleI18n) => {
   if (!i18n) {
     i18n = useGlobalStore().i18n;
     if (!i18n) {
@@ -128,20 +110,15 @@ export const setI18nLanguage = async (
   if (i18n === useGlobalStore().i18n) {
     useSettingStore().locale = locale;
     const messageArr = [
-      setLocaleMessage(i18n, locale, [
-        async (locale) => await import(`./lang/${locale}.json`)
-      ]),
+      setLocaleMessage(i18n, locale, [async (locale) => await import(`./lang/${locale}.json`)]),
       loadMessage<{ default: Language }>(
         [
-          async (locale) =>
-            await import(
-              `../../node_modules/element-plus/es/locale/lang/${locale}.mjs`
-            ),
-          'element-plus'
+          async (locale) => await import(`../../node_modules/element-plus/es/locale/lang/${locale}.mjs`),
+          'element-plus',
         ],
-        locale
+        locale,
       ),
-      ...mitter.emit(event.beforeLocalChange, { locale, i18n })
+      ...mitter.emit(event.beforeLocalChange, { locale, i18n }),
     ];
     const res = await Promise.allSettled(messageArr);
     if (res[1].status === 'fulfilled' && res[1].value) {

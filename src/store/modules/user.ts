@@ -14,7 +14,7 @@ interface UserState {
 export default defineStore({
   id: 'user',
   state: (): UserState => {
-    let _token: string = '';
+    let _token = '';
     return {
       user: {} as UserInfoResult,
       rules: undefined,
@@ -30,17 +30,17 @@ export default defineStore({
             if (token) {
               cookies.set(config.tokenName, token, {
                 expires: config.tokenExpires,
-                domain: config.tokenDomain
+                domain: config.tokenDomain,
               });
             } else {
               cookies.remove(config.tokenName, {
-                domain: config.tokenDomain
+                domain: config.tokenDomain,
               });
             }
             trigger(); // 记得触发事件 trigger,告诉vue触发页面更新
-          }
+          },
         };
-      })
+      }),
     };
   },
   actions: {
@@ -69,9 +69,9 @@ export default defineStore({
       this.token = '';
       await router.replace({
         path: PageEnum.LOGIN,
-        query: { redirect: window.location.href }
+        query: { redirect: window.location.href },
       });
       window.location.reload();
-    }
-  }
+    },
+  },
 });

@@ -1,6 +1,6 @@
 import xregexp from 'xregexp';
 import { parse, compileScript } from '@vue/compiler-sfc';
-import { camelize, capitalize } from '@vue/shared';
+import { camelize, capitalize } from 'vue';
 import MagicString from 'magic-string';
 import { Plugin } from 'vite';
 import { compileTemplate, SFCDescriptor } from 'vue/compiler-sfc';
@@ -10,11 +10,11 @@ export interface ExtendOptions {
    * @default true
    */
   exclude?: string[];
-  setLangImport?: boolean; //是否需要获取langImport(单独用于构建meadmin,普通用户不需要设置)
-  setComponents?: boolean; //是否需要设置components(根据<script setup> 引入文件名是否以.vue结尾来判断)
+  setLangImport?: boolean; // 是否需要获取langImport(单独用于构建meadmin,普通用户不需要设置)
+  setComponents?: boolean; // 是否需要设置components(根据<script setup> 引入文件名是否以.vue结尾来判断)
 }
 function getLangImport(content: string) {
-  const regex = new RegExp('(\\s|=)useLocalesI18n\\s*\\([\\s\\S]*');
+  const regex = /(\s|=)useLocalesI18n\s*\([\s\S]*/;
   let useI18nStr = (content.match(regex) || [])[0];
   if (useI18nStr) {
     let useI18nParams = xregexp.matchRecursive(useI18nStr, '\\(', '\\)')[0];
@@ -24,7 +24,7 @@ function getLangImport(content: string) {
     if (useI18nParams.endsWith(']')) {
       let arr = xregexp.matchRecursive(useI18nParams, '\\[', '\\]', 'g', {
         escapeChar: '\\',
-        valueNames: [null, null, 'value', null]
+        valueNames: [null, null, 'value', null],
       });
       let res = arr[arr.length - 1];
       if (res && /\,\s*$/.test(useI18nParams.slice(0, res.start - 1))) {
@@ -43,12 +43,12 @@ function getComponent(sfc: SFCDescriptor) {
     const code = compileTemplate({
       source: sfc.source,
       filename: sfc.filename,
-      id: 'vueSetupExtendCompile'
+      id: 'vueSetupExtendCompile',
     }).code;
 
     for (const match of code.matchAll(/_resolveComponent[0-9]*\("(.+?)"\)/g)) {
       const matchedName = match[1];
-      if (match.index != null && matchedName && !matchedName.startsWith('_')) {
+      if (match.index !== undefined && matchedName && !matchedName.startsWith('_')) {
         if (sfcScriptBlock.imports) {
           if (sfcScriptBlock.imports[camelize(matchedName)]) {
             components.push(camelize(matchedName));
@@ -67,11 +67,10 @@ function getComponent(sfc: SFCDescriptor) {
 }
 
 export function supportScript(code: string, options: ExtendOptions) {
-  let s: MagicString | undefined;
-  const str = () => s || (s = new MagicString(code));
+  const str = () => new MagicString(code);
   const { descriptor } = parse(code);
   if (!descriptor.script && descriptor.scriptSetup) {
-    let attrs = Object.assign({}, descriptor.scriptSetup.attrs);
+    let attrs = { ...descriptor.scriptSetup.attrs };
     const lang = attrs.lang;
     options.exclude &&
       options.exclude.forEach((item) => {
@@ -93,10 +92,7 @@ export function supportScript(code: string, options: ExtendOptions) {
     for (let k in attrs) {
       if (attrs[k] === true) {
         scriptStr += `"${k}":true,`;
-      } else if (
-        (<string>attrs[k]).startsWith('{{') &&
-        (<string>attrs[k]).endsWith('}}')
-      ) {
+      } else if ((<string>attrs[k]).startsWith('{{') && (<string>attrs[k]).endsWith('}}')) {
         scriptStr += `"${k}":` + (<string>attrs[k]).slice(2, -2) + ',';
       } else {
         scriptStr += `"${k}":"${attrs[k]}",`;
@@ -109,21 +105,19 @@ export function supportScript(code: string, options: ExtendOptions) {
         `<script ${lang ? `lang="${lang}"` : ''}>
   import { defineComponent } from 'vue';
   export default defineComponent({${scriptStr}});
-  </script>\n`
+  </script>\n`,
       );
     }
     return {
       map: str().generateMap(),
-      code: str().toString()
+      code: str().toString(),
     };
   } else {
     return null;
   }
 }
 
-export default (
-  options: ExtendOptions = { exclude: ['lang', 'setup'] }
-): Plugin => {
+export default (options: ExtendOptions = { exclude: ['lang', 'setup'] }): Plugin => {
   return {
     name: 'vite:vue-setup-support',
     enforce: 'pre',
@@ -132,6 +126,6 @@ export default (
         return null;
       }
       return supportScript.call(this, code, options);
-    }
+    },
   };
 };

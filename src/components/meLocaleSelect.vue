@@ -6,9 +6,10 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
-          :disabled="$i18n.locale == item.locale"
+          v-for="(item, index) in localeConfig.localeList"
+          :key="index"
+          :disabled="$i18n.locale === item.locale"
           @click="setLanguage(item.locale)"
-          v-for="item in localeConfig.localeList"
           >{{ $t(item.text) }}</el-dropdown-item
         >
       </el-dropdown-menu>
@@ -16,22 +17,22 @@
   </el-dropdown>
 </template>
 <script setup lang="ts" name="meTranslation">
-  import { localeConfig } from '@/config';
-  import { setI18nLanguage } from '@/locales/i18n';
-  const setLanguage = (locale: string) => {
-    setI18nLanguage(locale);
-  };
+import { localeConfig } from '@/config';
+import { setI18nLanguage } from '@/locales/i18n';
+const setLanguage = (locale: string) => {
+  setI18nLanguage(locale);
+};
 </script>
 <style lang="scss" scoped>
-  .me-locale-select {
-    line-height: 100%;
+.me-locale-select {
+  line-height: 100%;
 
-    .flex-center {
-      padding: 0 10px;
+  .flex-center {
+    padding: 0 10px;
 
-      .icon {
-        font-size: 1.2em;
-      }
+    .icon {
+      font-size: 1.2em;
     }
   }
+}
 </style>

@@ -5,7 +5,7 @@ import { setupRouterGuard } from './guard';
 import { concatObjectValue } from '@/utils/helper';
 import Layout from '@/layout/index.vue';
 export const asyncRoutes = concatObjectValue<RouteRecordRaw>(
-  import.meta.glob('./routes/*.ts', { eager: true, import: 'routes' })
+  import.meta.glob('./routes/*.ts', { eager: true, import: 'routes' }),
 );
 export const constantRoutes: RouteRecordRaw[] = [
   {
@@ -13,16 +13,16 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: PageEnum.HOME,
     meta: {
       hideMenu: true,
-      title: '首页'
-    }
+      title: '首页',
+    },
   },
   {
     path: PageEnum.LOGIN,
     component: async () => await import('@/views/login/index.vue'),
     meta: {
       hideMenu: true,
-      title: '登录'
-    }
+      title: '登录',
+    },
   },
   {
     path: '/redirect',
@@ -31,23 +31,23 @@ export const constantRoutes: RouteRecordRaw[] = [
       {
         name: 'redirect',
         path: '/redirect/:path(.*)',
-        component: async () => await import('@/views/redirect.vue')
-      }
+        component: async () => await import('@/views/redirect.vue'),
+      },
     ],
     meta: {
       hideMenu: true,
-      title: ''
-    }
+      title: '',
+    },
   },
   {
     path: '/:pathMatch(.*)*',
     component: async () => await import('@/views/404.vue'),
-    meta: { hideMenu: true, title: '404' }
-  }
+    meta: { hideMenu: true, title: '404' },
+  },
 ];
 export const router = createRouter({
   history: createWebHistory(),
-  routes: constantRoutes
+  routes: constantRoutes,
 });
 
 /**

@@ -13,5 +13,5 @@ export const enum ErrorCodes {
   APP_WARN_HANDLER,
   FUNCTION_REF,
   ASYNC_COMPONENT_LOADER,
-  SCHEDULER
+  SCHEDULER,
 }

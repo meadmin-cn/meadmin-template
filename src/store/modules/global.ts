@@ -21,10 +21,10 @@ export default defineStore('global', {
               _i18n = i18n;
               trigger(); // 记得触发事件 trigger,告诉vue触发页面更新
             }
-          }
+          },
         };
       }),
-      isMobile
+      isMobile,
     };
-  }
+  },
 });

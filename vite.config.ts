@@ -25,13 +25,13 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       vueSetUpExtend({
         exclude: ['steup', 'lang'],
         setLangImport: loadMessageConfig.componentLoad,
-        setComponents: loadMessageConfig.componentLoad
+        setComponents: loadMessageConfig.componentLoad,
       }),
       splitVendorChunkPlugin(),
       VueI18nPlugin({
         /* options */
         // locale messages resource pre-compile option
-        include: './src/**/lang/**.json'
+        include: './src/**/lang/**.json',
       }),
       viteMockServe({
         mockPath: 'mock/apiDemo',
@@ -41,23 +41,20 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         injectCode: `
         import { setupProdMockServer } from '../mock/index';
         setupProdMockServer();
-      `
+      `,
       }),
       AutoImport({
-        //自动加载API
+        // 自动加载API
         imports: ['vue', 'vue-router', 'pinia', '@vueuse/core'],
         // 可以选择auto-imports.d.ts生成的位置，使用ts建议设置为'src/auto-imports.d.ts'
         dts: 'types/auto-imports.d.ts',
-        resolvers: [ElementPlusResolver()]
+        resolvers: [ElementPlusResolver()],
       }),
       Components({
-        //组件自动注册(包括components下的所有.vue组件和ElementPlus组件)
+        // 组件自动注册(包括components下的所有.vue组件和ElementPlus组件)
         include: [],
         dts: false,
-        resolvers: [
-          ElementPlusResolver({ importStyle: false }),
-          resolver([3], [2])
-        ]
+        resolvers: [ElementPlusResolver({ importStyle: false }), resolver([3], [2])],
       }),
       vue(),
       svgLoader({
@@ -67,41 +64,39 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               name: 'preset-default',
               params: {
                 overrides: {
-                  removeViewBox: false //禁用插件
-                }
-              }
+                  removeViewBox: false, // 禁用插件
+                },
+              },
             },
             {
               name: 'removeAttrs',
               params: {
-                attrs: '(width|height|fill)' //清除svg属性
-              }
-            }
-          ]
-        }
+                attrs: '(width|height|fill)', // 清除svg属性
+              },
+            },
+          ],
+        },
       }),
       autoImport([
-        //自动生成
+        // 自动生成
         {
-          //svg icon type
+          // svg icon type
           pattern: ['*.svg'],
           dir: 'src/icons/svg',
           toFile: 'types/meIconComments.d.ts',
           name: 'MeIcon_{{name}}',
           template: fs.readFileSync('./template/meIconComments.d.ts', 'utf-8'),
-          codeTemplates: [
-            { key: '        //code', template: '        {{name}}: Icon;\n' }
-          ]
+          codeTemplates: [{ key: '//code', template: '{{name}}: Icon;\n   ' }],
         },
         {
-          //pinia module
+          // pinia module
           pattern: ['**/*.{ts,js}', '*.{ts,js}'],
           dir: 'src/store/modules',
           toFile: 'src/store/module.ts',
-          name: 'use_{{name}}_store'
+          name: 'use_{{name}}_store',
         },
         {
-          //auto import directives
+          // auto import directives
           pattern: ['*.ts', '**/index.ts'],
           dir: 'src/directives',
           toFile: 'types/directives.d.ts',
@@ -109,14 +104,13 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           codeTemplates: [
             {
               key: '//code',
-              template:
-                '{{name}}: typeof import("{{path}}")["default"];\n        '
-            }
+              template: '{{name}}: typeof import("{{path}}")["default"];\n    ',
+            },
           ],
-          name: 'V_{{name}}'
+          name: 'V_{{name}}',
         },
         {
-          //auto import components
+          // auto import components
           pattern: ['*.vue', '**/index.{vue,ts}'],
           dir: 'src/components',
           toFile: 'types/components.d.ts',
@@ -124,50 +118,41 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           codeTemplates: [
             {
               key: '//code',
-              template:
-                '{{name}}: typeof import("{{path}}")["default"];\n        '
-            }
+              template: '{{name}}: typeof import("{{path}}")["default"];\n    ',
+            },
           ],
-          name: '_{{name}}'
-        }
+          name: '_{{name}}',
+        },
       ]),
-      visualizer()
+      visualizer(),
     ],
     resolve: {
       alias: [
         // /@/xxxx => src/xxxx
         {
           find: /@\//,
-          replacement: pathResolve('src') + '/'
-        }
+          replacement: pathResolve('src') + '/',
+        },
       ],
-      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
+      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     },
     define: {
       __SSR__: `true`,
       __DEV__: mode === 'development' ? `true` : `false`,
       __COMPAT__: `false`,
       __FEATURE_SUSPENSE__: `true`,
-      __FEATURE_PROD_DEVTOOLS__: `false`
+      __FEATURE_PROD_DEVTOOLS__: `false`,
     },
     build: {
       rollupOptions: {
         output: {
           manualChunks: {
-            //打包优化
-            core: [
-              'vue',
-              'vue-router',
-              'pinia',
-              'vue-request',
-              'vue-i18n/dist/vue-i18n.cjs.js',
-              'jquery',
-              'lodash-es'
-            ],
-            elIcon: ['@element-plus/icons-vue']
-          }
-        }
-      }
-    }
+            // 打包优化
+            core: ['vue', 'vue-router', 'pinia', 'vue-request', 'vue-i18n/dist/vue-i18n.cjs.js', 'jquery', 'lodash-es'],
+            elIcon: ['@element-plus/icons-vue'],
+          },
+        },
+      },
+    },
   };
 };

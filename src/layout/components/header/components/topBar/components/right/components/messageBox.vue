@@ -36,47 +36,47 @@
   </el-dropdown>
 </template>
 <script setup lang="ts" name="messageBox">
-  const isDot = ref(true);
+const isDot = ref(true);
 </script>
 <style lang="scss" scoped>
-  .message-box {
-    .flex-center {
-      padding: 0 10px;
+.message-box {
+  .flex-center {
+    padding: 0 10px;
 
-      .message-icon {
-        height: 25px;
-        line-height: 25px;
-        font-size: 1.2em;
-      }
+    .message-icon {
+      height: 25px;
+      line-height: 25px;
+      font-size: 1.2em;
+    }
+  }
+}
+
+.message-tabs {
+  padding: 15px 10px;
+  height: 300px;
+  font-size: 1rem;
+
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+
+    :deep(.el-link) {
+      font-size: 0.85em !important;
     }
   }
 
-  .message-tabs {
-    padding: 15px 10px;
-    height: 300px;
-    font-size: 1rem;
+  :deep(.el-tabs__header) {
+    margin-bottom: 0;
+  }
 
-    .message-header {
-      display: flex;
-      justify-content: space-between;
+  .notify-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #eeeeee;
 
-      :deep(.el-link) {
-        font-size: 0.85em !important;
-      }
-    }
-
-    :deep(.el-tabs__header) {
-      margin-bottom: 0;
-    }
-
-    .notify-item {
-      padding: 5px 0;
-      border-bottom: 1px solid #eeeeee;
-
-      .date {
-        font-size: 12px;
-        color: var(--el-text-color-placeholder);
-      }
+    .date {
+      font-size: 12px;
+      color: var(--el-text-color-placeholder);
     }
   }
+}
 </style>

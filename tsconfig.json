@@ -19,20 +19,9 @@
       "#/*": ["types/*"]
     },
     "typeRoots": ["./node_modules/@types/", "./types"],
-    "types": [
-      "./node_modules/element-plus/global",
-      "vite/client",
-      "vite-svg-loader"
-    ]
+    "types": ["./node_modules/element-plus/global", "vite/client", "vite-svg-loader"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "types/**/*.d.ts",
-    "mock/**/*.ts"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts", "mock/**/*.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -8,7 +8,7 @@ export function installIcon(app: App) {
     app.component(name, {
       props: {
         size: [Number, String],
-        color: String
+        color: String,
       },
       render() {
         let fontSize: string | undefined;
@@ -25,12 +25,12 @@ export function installIcon(app: App) {
             class: 'el-icon',
             style: {
               fontSize,
-              color: this.color
-            }
+              color: this.color,
+            },
           },
-          h(IconComponent)
+          h(IconComponent),
         );
-      }
+      },
     });
   }
   // 注册element icons
@@ -40,11 +40,9 @@ export function installIcon(app: App) {
   // 注册自定义的svg icons
   const svgModules = import.meta.glob('./svg/*.svg', {
     import: 'default',
-    eager: true
+    eager: true,
   });
-  for (const [key, component] of Object.entries(
-    <Record<string, Component>>svgModules
-  )) {
+  for (const [key, component] of Object.entries(<Record<string, Component>>svgModules)) {
     componentIcon('MeIcon' + upperFirst(path.parse(key).name), component);
   }
 }

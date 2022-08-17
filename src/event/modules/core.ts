@@ -17,6 +17,6 @@ mitter.once(event.start, async (app) => {
   app.config.globalProperties.$permission = permission;
   // 进度条配置
   nProgress.configure({
-    showSpinner: false
+    showSpinner: false,
   });
 });

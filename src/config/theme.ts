@@ -13,5 +13,5 @@ export default {
   tagBar: true, // 标签栏
   tagBarMenu: true, // 标签栏快捷菜单
   tagBarRefresh: true, // 标签栏刷新按钮
-  showSetting: true // 展示设置按钮
+  showSetting: true, // 展示设置按钮
 };

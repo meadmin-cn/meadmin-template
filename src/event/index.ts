@@ -24,7 +24,5 @@ interface Events {
     i18n: Composer<unknown, unknown, unknown>;
   }; // 全局语言变更前
 }
-const mitter = Mitt<
-  Events & Omit<{ [key in eventEnmu]: undefined }, keyof Events>
->(); // inferred as Emitter<Events>
+const mitter = Mitt<Events & Omit<{ [key in eventEnmu]: undefined }, keyof Events>>(); // inferred as Emitter<Events>
 export { eventEnmu as event, mitter };

@@ -4,7 +4,7 @@ import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer';
 export function setupProdMockServer() {
   const modules = import.meta.glob('./apiDemo/*.ts', {
     import: 'default',
-    eager: true
+    eager: true,
   });
   let moduleArr: any[] = [];
   Object.entries(modules).forEach(([key, module]: any) => {

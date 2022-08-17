@@ -5,11 +5,11 @@
   </div>
 </template>
 <script setup lang="ts" name="Dashboard">
-  //
-  let a = 1;
+//
+let a = 1;
 </script>
 
 <style lang="scss" scoped>
-  .index {
-  }
+.index {
+}
 </style>

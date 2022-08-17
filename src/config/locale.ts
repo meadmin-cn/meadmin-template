@@ -4,19 +4,19 @@ export const loadMessageConfig = {
   // 导入语言包配置
   timeOut: 10000, // 导入语言包超时时间ms(对于单次导入而不是整体导入)0代表不超时
   errorWarning: false, // 导入失败的警告（生产环境会被屏蔽）
-  componentLoad: true // 组件语言包导入 不需要多语言或只使用全局语言包时设置为false以提升性能
+  componentLoad: true, // 组件语言包导入 不需要多语言或只使用全局语言包时设置为false以提升性能
 };
 
 // 语言列表 和elment-plus对应 locale字段值不要改变，否则会导致element-plus组件无法翻译为对应语言
 export const localeList = [
   {
     text: '简体中文',
-    locale: 'zh-cn'
+    locale: 'zh-cn',
   },
   {
     text: '美国英语',
-    locale: 'en'
-  }
+    locale: 'en',
+  },
   // {
   //     text: '阿塞拜疆语',
   //     locale: 'az',
@@ -239,6 +239,6 @@ const localeSetting: I18nOptions = {
   fallbackLocale: localeList[0].locale,
   missingWarn: false, // 当本地化失败时，压制输出的警告
   fallbackWarn: false, // 抑制回落警告
-  fallbackFormat: true // 跳过为你的"base"语言编写模板;key是您的模板
+  fallbackFormat: true, // 跳过为你的"base"语言编写模板;key是您的模板
 };
 export { localeSetting };

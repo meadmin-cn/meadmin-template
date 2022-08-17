@@ -1,4 +1,3 @@
-import { number } from '@intlify/core-base';
 import { ComponentInternalInstance, devtools } from 'vue';
 const enum DevtoolsHooks {
   APP_INIT = 'app:init',
@@ -8,20 +7,13 @@ const enum DevtoolsHooks {
   COMPONENT_REMOVED = 'component:removed',
   COMPONENT_EMIT = 'component:emit',
   PERFORMANCE_START = 'perf:start',
-  PERFORMANCE_END = 'perf:end'
+  PERFORMANCE_END = 'perf:end',
 }
-export const devtoolsComponentAdded =
-  /* #__PURE__ */ createDevtoolsComponentHook(DevtoolsHooks.COMPONENT_ADDED);
+export const devtoolsComponentAdded = /* #__PURE__ */ createDevtoolsComponentHook(DevtoolsHooks.COMPONENT_ADDED);
 
 function createDevtoolsComponentHook(hook: DevtoolsHooks) {
   return (component: ComponentInternalInstance) => {
-    emit(
-      hook,
-      component.appContext.app,
-      component.uid,
-      component.parent ? component.parent.uid : undefined,
-      component
-    );
+    emit(hook, component.appContext.app, component.uid, component.parent ? component.parent.uid : undefined, component);
   };
 }
 

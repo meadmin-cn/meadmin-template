@@ -6,10 +6,14 @@
   "scripts": {
     "format": "prettier --write --cache .",
     "dev": "vite",
-    "build": "vite build -m prod && npm run tsc",
-    "tsc": "vue-tsc --noEmi",
+    "build": "vite build -m prod && npm run type-check",
+    "type-check": "vue-tsc --noEmit",
     "preview": "vite preview",
     "release": "release-it",
+    "eslint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts",
+    "eslint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
+    "prettier": "prettier -l \"./**/*\"",
+    "prettier:fix": "prettier --write -l \"./**/*\"",
     "i": "npm install --registry=https://registry.npm.taobao.org && npx husky install"
   },
   "dependencies": {
@@ -30,6 +34,8 @@
     "vue-router": "^4.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/eslint-parser": "^7.18.9",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@intlify/unplugin-vue-i18n": "^0.5.0",
@@ -40,14 +46,12 @@
     "@types/node": "^18.0.1",
     "@types/nprogress": "^0.2.0",
     "@types/path-browserify": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
     "@vitejs/plugin-vue": "^3.0.0",
+    "@vue/eslint-config-typescript": "^11.0.0",
     "eslint": "^8.22.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-standard-with-typescript": "^22.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.4",
-    "eslint-plugin-promise": "^6.0.0",
+    "eslint-config-alloy": "^4.6.2",
     "eslint-plugin-vue": "^9.3.0",
     "husky": "^8.0.1",
     "prettier": "2.7.1",
@@ -62,6 +66,7 @@
     "vite-plugin-autogeneration-import-file": "^2.1.0",
     "vite-plugin-mock": "^2.9.6",
     "vite-svg-loader": "^3.4.0",
+    "vue-eslint-parser": "^9.0.3",
     "vue-tsc": "^0.34.7",
     "xregexp": "^5.1.1"
   },

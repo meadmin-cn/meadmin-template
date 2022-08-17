@@ -1,24 +1,13 @@
 <template>
   <div class="me-setting pointer" @click="show = true">
     <mel-icon-setting class="icon"></mel-icon-setting>
-    <el-drawer
-      v-model="show"
-      :title="$t('项目配置')"
-      size="300px"
-      append-to-body
-    >
+    <el-drawer v-model="show" :title="$t('项目配置')" size="300px" append-to-body>
       <el-form label-position="left" label-width="170px">
         <el-form-item :label="$t('主题色')">
-          <el-color-picker
-            v-model="themeConfig.primaryColor"
-            :predefine="predefinePrimaryColors"
-          />
+          <el-color-picker v-model="themeConfig.primaryColor" :predefine="predefinePrimaryColors" />
         </el-form-item>
         <el-form-item :label="$t('侧边栏背景色')">
-          <el-color-picker
-            v-model="themeConfig.menuBg"
-            :predefine="sidebarBgColors"
-          />
+          <el-color-picker v-model="themeConfig.menuBg" :predefine="sidebarBgColors" />
         </el-form-item>
         <el-form-item :label="$t('折叠侧边栏')">
           <el-switch v-model="themeConfig.menuCollapse"></el-switch>
@@ -44,28 +33,17 @@
         <el-form-item :label="$t('标签栏')">
           <el-switch v-model="themeConfig.tagBar"></el-switch>
         </el-form-item>
-        <el-form-item
-          :label="$t('标签栏') + $t(' ') + $t('刷新') + $t(' ') + $t('按钮')"
-        >
+        <el-form-item :label="$t('标签栏') + $t(' ') + $t('刷新') + $t(' ') + $t('按钮')">
           <el-switch v-model="themeConfig.tagBarRefresh"></el-switch>
         </el-form-item>
-        <el-form-item
-          :label="$t('标签栏') + $t(' ') + $t('菜单') + $t(' ') + $t('按钮')"
-        >
+        <el-form-item :label="$t('标签栏') + $t(' ') + $t('菜单') + $t(' ') + $t('按钮')">
           <el-switch v-model="themeConfig.tagBarMenu"></el-switch>
         </el-form-item>
-        <el-button
-          style="width: 100%"
-          @click="Object.assign(themeConfig, origionThemeConfig)"
+        <el-button style="width: 100%" @click="Object.assign(themeConfig, origionThemeConfig)"
           >{{ $t('重置') }}
         </el-button>
-        <el-button
-          style="width: 100%; margin: 10px 0"
-          @click="clear()"
-          type="danger"
-        >
-          {{ $t('清除缓存') }}{{ $t(' ') }}{{ $t('并') }}{{ $t(' ')
-          }}{{ $t('退出登录') }}
+        <el-button style="width: 100%; margin: 10px 0" type="danger" @click="clear">
+          {{ $t('清除缓存') }}{{ $t(' ') }}{{ $t('并') }}{{ $t(' ') }}{{ $t('退出登录') }}
         </el-button>
       </el-form>
     </el-drawer>
@@ -73,44 +51,44 @@
 </template>
 
 <script setup lang="ts" name="meSetting">
-  import { useSettingStore, useUserStore } from '@/store';
-  import { themeConfig as origionThemeConfig } from '@/config';
-  const show = ref(false);
-  let { themeConfig, clearCache } = useSettingStore();
-  const userStore = useUserStore();
-  const predefinePrimaryColors = reactive([
-    '#409EFF',
-    '#1890FF',
-    '#304156',
-    '#212121',
-    '#11A983',
-    '#13C2C2',
-    '#6959CD',
-    '#F5222D'
-  ]);
-  const sidebarBgColors = reactive([
-    '#1d1e1f',
-    '#212121',
-    '#273352',
-    '#ffffff',
-    '#191b24',
-    '#191a23',
-    '#304156',
-    '#001628'
-  ]);
-  const clear = () => {
-    clearCache();
-    userStore.logOut();
-  };
+import { useSettingStore, useUserStore } from '@/store';
+import { themeConfig as origionThemeConfig } from '@/config';
+const show = ref(false);
+let { themeConfig, clearCache } = useSettingStore();
+const userStore = useUserStore();
+const predefinePrimaryColors = reactive([
+  '#409EFF',
+  '#1890FF',
+  '#304156',
+  '#212121',
+  '#11A983',
+  '#13C2C2',
+  '#6959CD',
+  '#F5222D',
+]);
+const sidebarBgColors = reactive([
+  '#1d1e1f',
+  '#212121',
+  '#273352',
+  '#ffffff',
+  '#191b24',
+  '#191a23',
+  '#304156',
+  '#001628',
+]);
+const clear = () => {
+  clearCache();
+  userStore.logOut();
+};
 </script>
 <style lang="scss" scoped>
-  .me-setting {
-    padding: 0 10px;
-    display: flex;
-    align-items: center;
+.me-setting {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
 
-    .icon {
-      font-size: 1.2em;
-    }
+  .icon {
+    font-size: 1.2em;
   }
+}
 </style>

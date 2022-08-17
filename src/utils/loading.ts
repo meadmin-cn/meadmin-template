@@ -4,9 +4,7 @@ let number = 0;
 let loadingInstance: ReturnType<typeof ElLoading.service>;
 
 // 全局加载
-export function loading(
-  options?: Parameters<typeof ElLoading.service>[0]
-): void {
+export function loading(options?: Parameters<typeof ElLoading.service>[0]): void {
   number++;
   loadingInstance = ElLoading.service(options);
 }
@@ -20,11 +18,11 @@ const close = throttle(
     }
   },
   220,
-  { leading: false }
+  { leading: false },
 ); // 220毫秒后关闭防闪烁
 
 // 关闭加载会判断已展示加载次数 当全部关闭后执行关闭操作
-export function closeLoading(force: boolean = false): void {
+export function closeLoading(force = false): void {
   if (number <= 0) {
     return;
   }

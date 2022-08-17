@@ -13,9 +13,7 @@ export function permission(rules?: string | string[]) {
   if (typeof rules === 'string') {
     rules = [rules];
   }
-  return useUserStore().rules!.some(
-    (rule) => rule === '*' || rules!.includes(rule)
-  );
+  return useUserStore().rules!.some((rule) => rule === '*' || rules!.includes(rule));
 }
 
 /**
@@ -24,10 +22,7 @@ export function permission(rules?: string | string[]) {
  * @param activeMenu
  * @returns
  */
-export function filterAsyncRoutes(
-  routes: RouteRecordRaw[],
-  activeMenu?: string
-) {
+export function filterAsyncRoutes(routes: RouteRecordRaw[], activeMenu?: string) {
   const res: RouteRecordRaw[] = [];
   routes.forEach((route) => {
     const tmp = { ...route };

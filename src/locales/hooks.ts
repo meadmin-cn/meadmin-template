@@ -19,17 +19,17 @@ import { ComponentOptions, VNode } from 'vue';
  */
 export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>(
   options?: Options,
-  messageImport?: MessageImport
+  messageImport?: MessageImport,
 ) => {
   const res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
   if (messageImport) {
-    void setLocaleMessage(res, res.locale.value, messageImport);
+    setLocaleMessage(res, res.locale.value, messageImport);
     mitter.on(
       event.beforeLocalChange,
       (params) => {
-        return setLocaleMessage(res, params.locale, messageImport);
+        setLocaleMessage(res, params.locale, messageImport);
       },
-      true
+      true,
     );
   }
   return res;
@@ -41,17 +41,15 @@ export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>(
  * @param messageImport
  * @returns
  */
-export const asyncUseLocalesI18n = async <
-  Options extends UseI18nOptions = UseI18nOptions
->(
+export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI18nOptions>(
   options?: Options,
-  messageImport?: MessageImport
+  messageImport?: MessageImport,
 ) => {
   const res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
   if (messageImport) {
     await setLocaleMessage(res, res.locale.value, messageImport);
     mitter.on(event.beforeLocalChange, (params) => {
-      return setLocaleMessage(res, params.locale, messageImport);
+      setLocaleMessage(res, params.locale, messageImport);
     });
   }
   return res;
@@ -63,7 +61,7 @@ export const asyncUseLocalesI18n = async <
  */
 export const useLoadMessages = () => {
   const instance = getCurrentInstance();
-  if (instance == null) {
+  if (instance === null) {
     throw new Error('必须在setup中调用');
   }
   const app = instance.appContext.app;
@@ -71,7 +69,7 @@ export const useLoadMessages = () => {
     options: (VNode & { __v_isVNode: true }) | ComponentOptions | string,
     isLoading = true,
     locale: string | undefined = undefined,
-    importArr: Array<Promise<any>> = []
+    importArr: Array<Promise<any>> = [],
   ) => {
     if (typeof options === 'string') {
       const component = app.component(options);
@@ -86,23 +84,12 @@ export const useLoadMessages = () => {
     }
     if (typeof options === 'object') {
       if ((<ComponentOptions>options).components) {
-        Object.values((<ComponentOptions>options).components!).forEach(
-          (component) => {
-            loadMessages(
-              component as ComponentOptions,
-              isLoading,
-              locale,
-              importArr
-            );
-          }
-        );
+        Object.values((<ComponentOptions>options).components!).forEach((component) => {
+          loadMessages(component as ComponentOptions, isLoading, locale, importArr);
+        });
       }
       if ((<ComponentOptions>options).langImport) {
-        const res = loadMessage(
-          (<ComponentOptions>options).langImport!,
-          locale,
-          isLoading
-        );
+        const res = loadMessage((<ComponentOptions>options).langImport!, locale, isLoading);
         if (res instanceof Promise) {
           importArr.push(res);
         }

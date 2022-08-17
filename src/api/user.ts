@@ -2,7 +2,7 @@ import request from '@/utils/request';
 
 const api = {
   login: '/api/user/login',
-  userInfo: '/api/user/info'
+  userInfo: '/api/user/info',
 };
 
 // 登录
@@ -17,7 +17,7 @@ export function loginApi() {
   return request<LoginResult, [LoginParams]>((params) => ({
     url: api.login,
     method: 'post',
-    data: params
+    data: params,
   }));
 }
 
@@ -33,9 +33,9 @@ export function userInfoApi<T extends true | undefined>(returnAxios?: T) {
   return request<UserInfoResult, [], T>(
     () => ({
       url: api.userInfo,
-      method: 'get'
+      method: 'get',
     }),
     { noLoading: true },
-    returnAxios
+    returnAxios,
   );
 }

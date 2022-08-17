@@ -1,4 +1,4 @@
-import type { Router } from 'vue-router';
+import type { NavigationFailure, Router } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
 import { useUserStore } from '@/store';
 import { event, mitter } from '@/event';
@@ -43,6 +43,6 @@ function triggerRouteChange(router: Router) {
     return true;
   });
   router.afterEach((to, from, failure) => {
-    mitter.emit(event.afterRouteChange, { to, from, failure });
+    mitter.emit(event.afterRouteChange, { to, from, failure: failure as NavigationFailure | undefined });
   }); // 通知路由变化完成
 }

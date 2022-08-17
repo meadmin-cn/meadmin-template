@@ -20,11 +20,7 @@ declare module '@vue/runtime-core' {
      */
     a: LifecycleHook;
   }
-  export interface VNode<
-    HostNode = RendererNode,
-    HostElement = RendererElement,
-    ExtraProps = { [key: string]: any }
-  > {
+  export interface VNode<HostNode = RendererNode, HostElement = RendererElement, ExtraProps = { [key: string]: any }> {
     /**
      * SFC only. This is assigned to:
      * - Slot fragment vnodes with :slotted SFC styles.

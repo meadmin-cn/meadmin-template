@@ -6,7 +6,7 @@ import { loading, closeLoading } from './loading';
 
 const service = axios.create({
   baseURL: '/', // url = base url + request url
-  timeout: 10000 // request timeout
+  timeout: 10000, // request timeout
 });
 // 请求拦截器
 service.interceptors.request.use(
@@ -25,20 +25,20 @@ service.interceptors.request.use(
     // 对请求错误做些什么
     console.error(error); // for debug
     throw Error('请求异常，请联系管理员'); // 改写错误信息
-  }
+  },
 );
 service.interceptors.response.use(
-  function (response) {
+  (response) => {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
     return response;
   },
-  function (error) {
+  (error) => {
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
     console.error(error); // for debug
     throw Error('操作失败，请稍后重试');
-  }
+  },
 );
 
 type RequestOptions<R, P extends unknown[]> = {
@@ -48,26 +48,20 @@ type RequestOptions<R, P extends unknown[]> = {
 } & Options<R, P>;
 
 setGlobalOptions({
-  manual: true // 请求需要手动调用
+  manual: true, // 请求需要手动调用
   // ...
 });
 
 // 请求函数，当请求失败时直接抛出异常;
 function request<R, P extends unknown[] = []>(
   axiosConfig: (...args: P) => AxiosRequestConfig,
-  options?: RequestOptions<R, P>
+  options?: RequestOptions<R, P>,
 ): ReturnType<typeof useRequest<R, P>>;
-function request<
-  R,
-  P extends unknown[] = [],
-  T extends true | undefined = true | undefined
->(
+function request<R, P extends unknown[] = [], T extends true | undefined = true | undefined>(
   axiosConfig: (...args: P) => AxiosRequestConfig,
   options: RequestOptions<R, P>,
-  returnAxios?: T
-): T extends true
-  ? (...args: P) => Promise<R>
-  : ReturnType<typeof useRequest<R, P>>;
+  returnAxios?: T,
+): T extends true ? (...args: P) => Promise<R> : ReturnType<typeof useRequest<R, P>>;
 /**
  * 请求函数
  * @param axiosConfig  axios的配置项
@@ -78,7 +72,7 @@ function request<
 function request<R, P extends unknown[] = [], T = true>(
   axiosConfig: (...args: P) => AxiosRequestConfig,
   options?: RequestOptions<R, P>,
-  returnAxios?: T
+  returnAxios?: T,
 ) {
   const axiosService = async (...args: P): Promise<R> => {
     try {
@@ -102,7 +96,7 @@ function request<R, P extends unknown[] = [], T = true>(
       !options?.noLoading && closeLoading();
       !options?.noError &&
         ElMessage.error({
-          message: e instanceof Error ? e.message : String(e)
+          message: e instanceof Error ? e.message : String(e),
         });
       throw e;
     }

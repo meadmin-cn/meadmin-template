@@ -6,10 +6,10 @@ import { RouteRecordRaw } from 'vue-router';
 export default defineStore('route', {
   state: () => ({
     addRoutes: [] as RouteRecordRaw[],
-    noCacheFullPath: [] as Array<string | RegExp>
+    noCacheFullPath: [] as Array<string | RegExp>,
   }),
   getters: {
-    routes: (state) => constantRoutes.concat(state.addRoutes)
+    routes: (state) => constantRoutes.concat(state.addRoutes),
   },
   actions: {
     generateRoutes() {
@@ -28,6 +28,6 @@ export default defineStore('route', {
       if (index > -1) {
         this.noCacheFullPath.splice(index, 1);
       }
-    }
-  }
+    },
+  },
 });

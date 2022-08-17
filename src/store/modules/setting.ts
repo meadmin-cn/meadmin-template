@@ -6,68 +6,44 @@ const { css } = useStyleTag('');
 const useSettingStore = defineStore('setting', {
   state: () => ({
     themeConfig: useStorage(`${settingKey}-theme`, themeConfig),
-    locale: useStorage(
-      `${settingKey}-locale`,
-      localeConfig.localeSetting.locale ?? 'zh-cn'
-    ),
-    elLocale: undefined as Language | undefined
+    locale: useStorage(`${settingKey}-locale`, localeConfig.localeSetting.locale ?? 'zh-cn'),
+    elLocale: undefined as Language | undefined,
   }),
   actions: {
     setPrimaryStyle() {
       const style = [];
       const darkStyle = [];
+      style.push(`--el-color-primary:${this.themeConfig.primaryColor} !important`);
+      darkStyle.push(`--el-color-primary:${this.themeConfig.primaryColor} !important`);
+      style.push('--el-color-primary-rgb:' + mixColor(this.themeConfig.primaryColor, '#000000', 0) + ' !important');
+      darkStyle.push('--el-color-primary-rgb:' + mixColor(this.themeConfig.primaryColor, '#000000', 0) + ' !important');
       style.push(
-        `--el-color-primary:${this.themeConfig.primaryColor} !important`
+        '--el-color-primary-dark-2:' + mixColor(this.themeConfig.primaryColor, '#000000', 0.2) + ' !important',
       );
       darkStyle.push(
-        `--el-color-primary:${this.themeConfig.primaryColor} !important`
-      );
-      style.push(
-        '--el-color-primary-rgb:' +
-          mixColor(this.themeConfig.primaryColor, '#000000', 0) +
-          ' !important'
-      );
-      darkStyle.push(
-        '--el-color-primary-rgb:' +
-          mixColor(this.themeConfig.primaryColor, '#000000', 0) +
-          ' !important'
-      );
-      style.push(
-        '--el-color-primary-dark-2:' +
-          mixColor(this.themeConfig.primaryColor, '#000000', 0.2) +
-          ' !important'
-      );
-      darkStyle.push(
-        '--el-color-primary-dark-2:' +
-          mixColor(this.themeConfig.primaryColor, '#ffffff', 0.2) +
-          ' !important'
+        '--el-color-primary-dark-2:' + mixColor(this.themeConfig.primaryColor, '#ffffff', 0.2) + ' !important',
       );
       [3, 5, 7, 8, 9].forEach((number) => {
         style.push(
           `--el-color-primary-light-${number}:` +
             mixColor(this.themeConfig.primaryColor, '#ffffff', number / 10) +
-            ' !important'
+            ' !important',
         );
         darkStyle.push(
           `--el-color-primary-light-${number}:` +
             mixColor(this.themeConfig.primaryColor, '#141414', number / 10) +
-            ' !important'
+            ' !important',
         );
       });
-      css.value =
-        ':root{' + style.join(';') + '}' + '.dark{' + darkStyle.join(';') + '}';
+      css.value = ':root{' + style.join(';') + '}' + '.dark{' + darkStyle.join(';') + '}';
     },
     clearCache() {
       localStorage.clear();
-    }
-  }
+    },
+  },
 });
 mitter.once(event.ready, () => {
   const settingStore = useSettingStore();
-  watch(
-    () => settingStore.themeConfig.primaryColor,
-    settingStore.setPrimaryStyle,
-    { immediate: true }
-  );
+  watch(() => settingStore.themeConfig.primaryColor, settingStore.setPrimaryStyle, { immediate: true });
 });
 export default useSettingStore;
