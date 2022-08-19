@@ -31,7 +31,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       VueI18nPlugin({
         /* options */
         // locale messages resource pre-compile option
-        include: './src/**/lang/**.json',
+        include: ['./src/**/lang/**/*.json', './src/**/lang/*.json'],
       }),
       viteMockServe({
         mockPath: 'mock/apiDemo',

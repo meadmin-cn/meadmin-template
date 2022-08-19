@@ -84,7 +84,9 @@ const menuTextColor = computed(() => mixColor(themeConfig.menuBg, menuActiveColo
           color: var(--el-menu-active-color);
         }
       }
-
+      .el-sub-menu__title {
+        padding-right: 28px;
+      }
       .el-sub-menu__title:hover,
       .el-menu-item:hover {
         background-color: rgba(var(--el-color-primary-rgb), 0.3);
