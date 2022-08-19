@@ -23,7 +23,7 @@ module.exports = {
     },
     sourceType: 'module',
     project: ['./tsconfig.json', './tsconfig.node.json'],
-    extraFileExtensions: ['.vue', '.cjs', '.js'],
+    extraFileExtensions: ['.vue'],
   },
   overrides: [
     {
