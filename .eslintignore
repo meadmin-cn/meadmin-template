@@ -1,2 +1,4 @@
 template
 src/components/meKeepAlive
+dist
+vite.config.ts.*

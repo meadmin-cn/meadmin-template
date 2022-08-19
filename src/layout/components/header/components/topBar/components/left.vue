@@ -35,7 +35,7 @@ const setBreadcrumbList = (route: RouteLocationNormalized) => {
   breadcrumbList.value = route.matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false);
 };
 setBreadcrumbList(route);
-mitter.on(event.beforeRouteChange, ({ to }) => setBreadcrumbList(to), true);
+mitter.on(event.BEFORE_ROUTE_CHANGE, ({ to }) => setBreadcrumbList(to), true);
 </script>
 <style lang="scss" scoped>
 .left {

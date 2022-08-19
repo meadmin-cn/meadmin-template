@@ -5,6 +5,7 @@ declare global {
     size: (StringConstructor | NumberConstructor)[];
     color: StringConstructor;
   }>;
+  /* eslint-disable */
   declare const __SSR__: boolean;
   declare const __DEV__: boolean;
   declare const __COMPAT__: boolean;
@@ -12,4 +13,5 @@ declare global {
   // Feature flags
   declare const __FEATURE_PROD_DEVTOOLS__: boolean;
   declare const __FEATURE_SUSPENSE__: boolean;
+  /* eslint-disable */
 }

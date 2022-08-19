@@ -42,7 +42,7 @@ const useSettingStore = defineStore('setting', {
     },
   },
 });
-mitter.once(event.ready, () => {
+mitter.once(event.READY, () => {
   const settingStore = useSettingStore();
   watch(() => settingStore.themeConfig.primaryColor, settingStore.setPrimaryStyle, { immediate: true });
 });

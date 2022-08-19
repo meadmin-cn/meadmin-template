@@ -29,7 +29,7 @@ function createPermissionGuard(router: Router) {
 
 // 处理页面加载进度条
 function createProgressGuard(router: Router) {
-  router.beforeEach(async (to) => {
+  router.beforeEach(async () => {
     nProgress.start();
     return true;
   });
@@ -39,10 +39,10 @@ function createProgressGuard(router: Router) {
 function triggerRouteChange(router: Router) {
   router.beforeEach(async (to, from) => {
     // 通知路由变化开始
-    mitter.emit(event.beforeRouteChange, { to, from });
+    mitter.emit(event.BEFORE_ROUTE_CHANGE, { to, from });
     return true;
   });
   router.afterEach((to, from, failure) => {
-    mitter.emit(event.afterRouteChange, { to, from, failure: failure as NavigationFailure | undefined });
+    mitter.emit(event.AFTER_ROUTE_CHANGE, { to, from, failure: failure as NavigationFailure | undefined });
   }); // 通知路由变化完成
 }

@@ -4,10 +4,7 @@
     <input name="text" />
   </div>
 </template>
-<script setup lang="ts" name="Dashboard">
-//
-let a = 1;
-</script>
+<script setup lang="ts" name="Dashboard"></script>
 
 <style lang="scss" scoped>
 .index {

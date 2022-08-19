@@ -1,10 +1,10 @@
-import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import * as elementPlusIconsVue from '@element-plus/icons-vue';
 import path from 'path-browserify';
 import { App, Component, h } from 'vue';
 import { upperFirst } from 'lodash-es';
 
 export function installIcon(app: App) {
-  function componentIcon(name: string, IconComponent: Component) {
+  function componentIcon(name: string, iconComponent: Component) {
     app.component(name, {
       props: {
         size: [Number, String],
@@ -28,13 +28,13 @@ export function installIcon(app: App) {
               color: this.color,
             },
           },
-          h(IconComponent),
+          h(iconComponent),
         );
       },
     });
   }
   // 注册element icons
-  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  for (const [key, component] of Object.entries(elementPlusIconsVue)) {
     componentIcon(`MelIcon${key}`, component);
   }
   // 注册自定义的svg icons

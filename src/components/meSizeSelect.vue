@@ -6,7 +6,7 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
-          v-for="item in sizeEnum"
+          v-for="item in SizeEnum"
           :key="item"
           :disabled="themeConfig.size === item"
           @click="themeConfig.size = item"
@@ -17,7 +17,7 @@
   </el-dropdown>
 </template>
 <script setup lang="ts" name="meSize">
-import { sizeEnum } from '@/enums/configEnum';
+import { SizeEnum } from '@/enums/configEnum';
 import { useSettingStore } from '@/store';
 const { themeConfig } = useSettingStore();
 </script>

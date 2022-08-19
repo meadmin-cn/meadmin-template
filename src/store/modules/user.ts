@@ -1,3 +1,4 @@
+import { event, mitter } from '@/event';
 import { Ref } from 'vue';
 import cookies from 'js-cookie';
 import { loginConfig as config } from '@/config';
@@ -60,12 +61,15 @@ export default defineStore({
     },
     // 登录
     login: async function (params: LoginParams) {
+      mitter.emit(event.BEFORE_LOGIN);
       const res = await loginApi().runAsync(params);
       await this.init(res.token);
+      mitter.emit(event.AFTER_LOGIN);
     },
     // 退出
     logOut: async function () {
       loading();
+      await Promise.allSettled(mitter.emit(event.BEFORE_LOGOUT));
       this.token = '';
       await router.replace({
         path: PageEnum.LOGIN,

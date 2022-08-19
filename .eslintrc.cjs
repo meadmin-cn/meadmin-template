@@ -1,53 +1,103 @@
 module.exports = {
-  extends: ['alloy', 'alloy/vue', 'alloy/typescript'],
+  extends: [
+    // add more generic rulesets here, such as:
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-recommended',
+    'prettier',
+  ],
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: {
-      js: '@babel/eslint-parser',
-      jsx: '@babel/eslint-parser',
+      // Script parser for `<script>`
+      js: '@typescript-eslint/parser',
 
+      // Script parser for `<script lang="ts">`
       ts: '@typescript-eslint/parser',
-      tsx: '@typescript-eslint/parser',
 
-      // Leave the template parser unspecified, so that it could be determined by `<script lang="...">`
+      // Script parser for vue directives (e.g. `v-if=` or `:attribute=`)
+      // and vue interpolations (e.g. `{{variable}}`).
+      // If not specified, the parser determined by `<script lang ="...">` is used.
+      '<template>': 'espree',
     },
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    extraFileExtensions: ['.vue', '.cjs', '.js'],
   },
   overrides: [
     {
-      files: ['*.vue', '*.ts'],
+      files: ['*.vue'],
       rules: {
-        'no-undef': 'off', // ts(2304)
+        '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
+    {
+      files: ['*.cjs'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ],
-  env: {
-    // Your environments (which contains several predefined global variables)
-    //
-    // browser: true,
-    // node: true,
-    // mocha: true,
-    // jest: true,
-    // jquery: true
-  },
-  globals: {
-    // Your global variables (setting to false means it's not allowed to be reassigned)
-    //
-    // myGlobal: false
-  },
   rules: {
-    // Customize your rules
-    //
-    // Please keep this rule off because it requiresTypeChecking
-    // https://github.com/vuejs/vue-eslint-parser/issues/104
-    // https://github.com/typescript-eslint/typescript-eslint/pull/5318
-    '@typescript-eslint/prefer-optional-chain': 0,
-    'no-param-reassign': 0,
-    '@typescript-eslint/consistent-type-assertions': 0,
-    'prefer-object-spread': 0,
-    'max-params': ['error', 4],
-    'vue/no-duplicate-attributes': 0,
-    'vue/no-duplicate-attr-inheritance': 0,
-    '@typescript-eslint/explicit-member-accessibility': 0,
-    'spaced-comment': 0,
+    // override/add rules settings here, such as:
+    'vue/multi-word-component-names': 'off',
+    'vue/no-template-shadow': 'off',
+    'vue/no-parsing-error': 'off',
+    'vue/require-default-prop': 'off',
+    'no-unused-vars': [
+      'error',
+      // we are only using this rule to check for unused arguments since TS
+      // catches unused variables but not args.
+      { varsIgnorePattern: '.*', args: 'none' },
+    ],
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    'no-undef': 'off', // ts(2304)
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'default',
+        format: ['camelCase'],
+        leadingUnderscore: 'allow',
+        filter: {
+          // you can expand this regex to add more allowed names
+          regex: '^__v_.*$',
+          match: false,
+        },
+      },
+      {
+        selector: 'variable',
+        modifiers: ['const'],
+        format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+        leadingUnderscore: 'allow',
+      },
+      {
+        selector: ['memberLike'],
+        format: ['camelCase', 'PascalCase'],
+        leadingUnderscore: 'allow',
+        filter: {
+          // you can expand this regex to add more allowed names
+          regex: '^__v_.*$',
+          match: false,
+        },
+      },
+      {
+        selector: 'enumMember',
+        format: ['UPPER_CASE'],
+      },
+      {
+        selector: 'typeLike',
+        format: ['PascalCase'],
+        leadingUnderscore: 'allow',
+      },
+      {
+        selector: ['default'],
+        modifiers: ['destructured', 'exported'],
+        format: null,
+      },
+    ],
   },
 };

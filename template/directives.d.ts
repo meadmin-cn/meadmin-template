@@ -1,5 +1,5 @@
 declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
+  export interface ComponentCustomProperties {
     //code
   }
 }

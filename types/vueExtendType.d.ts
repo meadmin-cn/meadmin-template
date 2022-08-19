@@ -1,5 +1,6 @@
 import { MessageImport } from '@/locales/I18n';
 declare module '@vue/runtime-core' {
+  /* eslint-disable */
   type LifecycleHook<TFn = Function> = TFn[] | null;
   export declare interface ComponentOptionsBase {
     langImport?: MessageImport;
@@ -34,6 +35,7 @@ declare module '@vue/runtime-core' {
      */
     ssContent: VNode | null;
   }
+  /* eslint-disable */
   interface ComponentCustomProperties {
     $permission: (key: string | string[]) => boolean;
   }

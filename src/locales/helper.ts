@@ -5,7 +5,7 @@ import { loading, closeLoading } from '@/utils/loading';
 import { Language } from 'element-plus/es/locale';
 import { useGlobalStore, useSettingStore } from '@/store';
 type GlobaleI18n = Composer<unknown, unknown, unknown, any>;
-const MessageMap: Map<string, Record<any, any>> = new Map();
+const messageMap: Map<string, Record<any, any>> = new Map();
 export type MessageImport = [(locale: string) => Promise<{ default: LocaleMessages<VueMessageType> }>, string?];
 
 /**
@@ -23,13 +23,13 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
   if (!locale) {
     locale = useGlobalStore().i18n.locale.value;
   }
-  const MapName = (messageImport[1] ?? messageImport[0].toString()) + '|' + locale;
-  const message = MessageMap.get(MapName);
+  const mapName = (messageImport[1] ?? messageImport[0].toString()) + '|' + locale;
+  const message = messageMap.get(mapName);
   if (message) {
     return message as P;
   }
   isLoading && loading();
-  return new Promise<P | null>((resolve, reject) => {
+  return new Promise<P | null>((resolve) => {
     let timeOut: NodeJS.Timeout;
     if (config.loadMessageConfig.timeOut) {
       timeOut = setTimeout(() => {
@@ -42,7 +42,7 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
       .then((message) => {
         timeOut && clearTimeout(timeOut);
         if (message) {
-          MessageMap.set(MapName, message);
+          messageMap.set(mapName, message);
           isLoading && closeLoading();
           resolve(message);
         }
@@ -50,7 +50,7 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
       .catch((e) => {
         timeOut && clearTimeout(timeOut);
         if (import.meta.env.DEV && config.loadMessageConfig.errorWarning) {
-          console.warn(`语言包${MapName}加载失败:`, e);
+          console.warn(`语言包${mapName}加载失败:`, e);
         }
         isLoading && closeLoading();
         resolve(null);
@@ -71,7 +71,7 @@ export const setLocaleMessage = (i18n: GlobaleI18n, locale: string, messageImpor
   }
   const message = loadMessage(messageImport, locale);
   if (message instanceof Promise) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       (message as Promise<{ default: LocaleMessages<VueMessageType> } | undefined>)
         .then((message) => {
           if (message?.default) {
@@ -118,7 +118,7 @@ export const setI18nLanguage = async (locale: string, isLoading = true, i18n?: G
         ],
         locale,
       ),
-      ...mitter.emit(event.beforeLocalChange, { locale, i18n }),
+      ...mitter.emit(event.BEFORE_LOCAL_CHANGE, { locale, i18n }),
     ];
     const res = await Promise.allSettled(messageArr);
     if (res[1].status === 'fulfilled' && res[1].value) {

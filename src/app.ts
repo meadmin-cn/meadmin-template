@@ -5,7 +5,7 @@ import layoutMenuItem from '@/layout/components/menu/components/menuItem.vue';
 export const app = createApp(App);
 export async function bootscrapt() {
   app.component('LayoutMenuItem', layoutMenuItem);
-  await Promise.allSettled(mitter.emit(event.start, app));
-  mitter.emit(event.ready, app);
+  await Promise.allSettled(mitter.emit(event.START, app));
+  mitter.emit(event.READY, app);
   app.mount('#app');
 }

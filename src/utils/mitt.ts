@@ -1,7 +1,7 @@
 // 根据开源项目mitt自定义更改
 import { onUnmounted } from 'vue';
-import eventEnmu from '@/enums/eventEnmu';
-type EventType = eventEnmu;
+import EventEnum from '@/enums/eventEnmu';
+type EventType = EventEnum;
 
 // An event handler can take an optional event argument
 // and should not return a value

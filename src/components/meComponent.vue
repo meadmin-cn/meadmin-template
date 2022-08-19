@@ -12,6 +12,7 @@ import nProgress from 'nprogress';
 import { localeConfig } from '@/config';
 const props = defineProps({
   is: {
+    type: [String, Object],
     required: true,
   },
   keepAlive: Object as PropType<MeKeepAliveProps>,

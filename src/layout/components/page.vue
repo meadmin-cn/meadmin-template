@@ -2,7 +2,7 @@ hu
 <template>
   <div class="main">
     <router-view v-slot="{ Component, route }">
-      <me-component :is="Component" :keep-alive="keepAliveProps" :component-key="route.fullPath" doneProgress>
+      <me-component :is="Component" :keep-alive="keepAliveProps" :component-key="route.fullPath" done-progress>
       </me-component>
     </router-view>
   </div>

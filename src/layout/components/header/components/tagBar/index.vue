@@ -110,7 +110,7 @@ const route = useRoute();
 onMounted(() => {
   max.value = listRef.value!.offsetWidth - scrollbarRef.value?.$el.clientWidth;
   mitter.on(
-    event.resize,
+    event.RESIZE,
     () => {
       max.value = listRef.value!.offsetWidth - scrollbarRef.value?.$el.clientWidth;
     },
@@ -154,7 +154,7 @@ const setTag = (route: RouteLocationNormalized) => {
   }
 };
 setTag(route);
-mitter.on(event.beforeRouteChange, ({ to }) => setTag(to), true);
+mitter.on(event.BEFORE_ROUTE_CHANGE, ({ to }) => setTag(to), true);
 const router = useRouter();
 const push = (route: RouteLocationNormalized) => {
   if (route.fullPath !== currentTag.value!.fullPath) {

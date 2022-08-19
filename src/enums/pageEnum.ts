@@ -1,4 +1,4 @@
-export enum PageEnum {
+export const enum PageEnum {
   // basic login path
   LOGIN = '/login',
   // basic home path

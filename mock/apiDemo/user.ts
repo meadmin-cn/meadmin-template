@@ -1,31 +1,31 @@
-import { success, fail, getRequestToken, requestParams } from '../helper';
+import { success, fail, getRequestToken, RequestParams } from '../helper';
 const tokens = {
   admin: {
-    token: 'admin-token',
+    token: 'adminToken',
   },
   editor: {
-    token: 'editor-token',
+    token: 'editorToken',
   },
   viewer: {
-    token: 'viewer-token',
+    token: 'viewerToken',
   },
 } as Record<string, { token: string }>;
 const users = {
-  'admin-token': {
+  adminToken: {
     rules: ['*'],
     introduction: '我是一个管理员',
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: '超级管理员',
     username: 'admin',
   },
-  'editor-token': {
+  editorToken: {
     rules: ['edit', 'show'],
     introduction: '我是一个编辑者',
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: '编辑员工',
     username: 'editor',
   },
-  viewer: {
+  viewerToken: {
     rules: ['show'],
     introduction: '我是一个查询者',
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
@@ -50,7 +50,7 @@ export default [
   {
     url: '/api/user/info', // 获取用户信息
     method: 'get',
-    response: (req: requestParams) => {
+    response: (req: RequestParams) => {
       const token = getRequestToken(req);
       if (!token) {
         return fail('请先登录', '401');

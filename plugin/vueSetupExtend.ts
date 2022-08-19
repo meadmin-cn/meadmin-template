@@ -15,28 +15,27 @@ export interface ExtendOptions {
 }
 function getLangImport(content: string) {
   const regex = /(\s|=)useLocalesI18n\s*\([\s\S]*/;
-  let useI18nStr = (content.match(regex) || [])[0];
+  const useI18nStr = (content.match(regex) || [])[0];
   if (useI18nStr) {
     let useI18nParams = xregexp.matchRecursive(useI18nStr, '\\(', '\\)')[0];
     if (useI18nParams) {
       useI18nParams = useI18nParams.replace(/(\s*$)/g, '');
     }
     if (useI18nParams.endsWith(']')) {
-      let arr = xregexp.matchRecursive(useI18nParams, '\\[', '\\]', 'g', {
+      const arr = xregexp.matchRecursive(useI18nParams, '\\[', '\\]', 'g', {
         escapeChar: '\\',
         valueNames: [null, null, 'value', null],
       });
-      let res = arr[arr.length - 1];
-      if (res && /\,\s*$/.test(useI18nParams.slice(0, res.start - 1))) {
+      const res = arr[arr.length - 1];
+      if (res && /,\s*$/.test(useI18nParams.slice(0, res.start - 1))) {
         return '[' + res.value + ']';
       }
     }
   }
   return undefined;
 }
-let i = 0;
 function getComponent(sfc: SFCDescriptor) {
-  let components = [];
+  const components = [];
   const sfcScriptBlock = compileScript(sfc, { id: 'vueSetupExtendCompile' });
 
   if (sfc.template) {
@@ -70,7 +69,7 @@ export function supportScript(code: string, options: ExtendOptions) {
   const str = () => new MagicString(code);
   const { descriptor } = parse(code);
   if (!descriptor.script && descriptor.scriptSetup) {
-    let attrs = { ...descriptor.scriptSetup.attrs };
+    const attrs = { ...descriptor.scriptSetup.attrs };
     const lang = attrs.lang;
     options.exclude &&
       options.exclude.forEach((item) => {
@@ -89,7 +88,7 @@ export function supportScript(code: string, options: ExtendOptions) {
       }
     }
     let scriptStr = '';
-    for (let k in attrs) {
+    for (const k in attrs) {
       if (attrs[k] === true) {
         scriptStr += `"${k}":true,`;
       } else if ((<string>attrs[k]).startsWith('{{') && (<string>attrs[k]).endsWith('}}')) {

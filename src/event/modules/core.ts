@@ -8,12 +8,12 @@ import { installI18n } from '@/locales/i18n';
 import nProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { permission } from '@/utils/permission';
-mitter.once(event.start, async (app) => {
+mitter.once(event.START, async (app) => {
   installIcon(app);
   await installStore(app);
   await installI18n(app);
   installRoute(app);
-  window.addEventListener('resize', () => mitter.emit(event.resize));
+  window.addEventListener('resize', () => mitter.emit(event.RESIZE));
   app.config.globalProperties.$permission = permission;
   // 进度条配置
   nProgress.configure({

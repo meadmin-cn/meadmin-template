@@ -7,11 +7,11 @@
 </template>
 <script setup lang="ts">
 import { useSettingStore } from '@/store';
-import { sizeEnum } from '@/enums/configEnum';
+import { SizeEnum } from '@/enums/configEnum';
 const settingStore = useSettingStore();
 const htmlDom = document.getElementsByTagName('html')[0];
 watchEffect(() => {
-  Object.entries(sizeEnum).forEach(([key, value]) => {
+  Object.entries(SizeEnum).forEach(([key, value]) => {
     htmlDom.classList.remove('me-' + value);
   });
   htmlDom.classList.add('me-' + settingStore.themeConfig.size);
