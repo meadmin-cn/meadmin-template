@@ -8,12 +8,11 @@
 import { PropType, Ref } from 'vue';
 import { MeKeepAliveProps } from './meKeepAlive';
 import { useLoadMessages } from '@/locales/i18n';
-import nProgress from 'nprogress';
+import { done } from '@/utils/nProgress';
 import { localeConfig } from '@/config';
 const props = defineProps({
   is: {
     type: [String, Object],
-    required: true,
   },
   keepAlive: Object as PropType<MeKeepAliveProps>,
   componentKey: [Number, String, Symbol],
@@ -33,7 +32,7 @@ watch(
       key.value = props.componentKey;
       attrs.value = current?.proxy?.$attrs;
       if (props.doneProgress) {
-        nProgress.done();
+        done();
       }
     }
   },

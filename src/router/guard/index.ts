@@ -2,7 +2,7 @@ import type { NavigationFailure, Router } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
 import { useUserStore } from '@/store';
 import { event, mitter } from '@/event';
-import nProgress from 'nprogress';
+import { start } from '@/utils/nProgress';
 // Don't change the order of creation
 export function setupRouterGuard(router: Router) {
   createPermissionGuard(router);
@@ -18,7 +18,7 @@ function createPermissionGuard(router: Router) {
   const userStore = useUserStore();
   router.beforeEach(async (to) => {
     if (to.path !== PageEnum.LOGIN && !userStore.token) {
-      await router.replace(PageEnum.LOGIN);
+      await router.replace({ path: PageEnum.LOGIN, query: { redirect: to.fullPath } });
       return false;
     } else if (to.path === PageEnum.LOGIN && userStore.token) {
       await router.replace(PageEnum.HOME);
@@ -29,8 +29,8 @@ function createPermissionGuard(router: Router) {
 
 // 处理页面加载进度条
 function createProgressGuard(router: Router) {
-  router.beforeEach(async () => {
-    nProgress.start();
+  router.beforeEach(async (to) => {
+    start(to.matched.length);
     return true;
   });
 }

@@ -1,9 +1,9 @@
 import request from '@/utils/request';
 
-const api = {
-  login: '/api/user/login',
-  userInfo: '/api/user/info',
-};
+const enum Api {
+  LOGIN = '/api/user/login',
+  USER_INFO = '/api/user/info',
+}
 
 // 登录
 export class LoginParams {
@@ -15,7 +15,7 @@ export interface LoginResult {
 }
 export function loginApi() {
   return request<LoginResult, [LoginParams]>((params) => ({
-    url: api.login,
+    url: Api.LOGIN,
     method: 'post',
     data: params,
   }));
@@ -32,7 +32,7 @@ export interface UserInfoResult {
 export function userInfoApi<T extends true | undefined>(returnAxios?: T) {
   return request<UserInfoResult, [], T>(
     () => ({
-      url: api.userInfo,
+      url: Api.USER_INFO,
       method: 'get',
     }),
     { noLoading: true },

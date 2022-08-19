@@ -10,7 +10,9 @@
       <el-main class="right-main">
         <el-scrollbar>
           <layout-header v-show="!themeConfig.fixedHeader"></layout-header>
-          <layout-page></layout-page>
+          <div class="main">
+            <layout-page></layout-page>
+          </div>
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -57,6 +59,9 @@ const globalStore = useGlobalStore();
   }
 }
 
+.main {
+  padding: 1rem;
+}
 :global(.me-sidebar-drawer .el-drawer__body) {
   padding: 0;
 }

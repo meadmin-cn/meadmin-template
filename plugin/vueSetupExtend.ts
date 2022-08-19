@@ -21,12 +21,14 @@ function getLangImport(content: string) {
     if (useI18nParams) {
       useI18nParams = useI18nParams.replace(/(\s*$)/g, '');
     }
+
     if (useI18nParams.endsWith(']')) {
       const arr = xregexp.matchRecursive(useI18nParams, '\\[', '\\]', 'g', {
         escapeChar: '\\',
         valueNames: [null, null, 'value', null],
       });
       const res = arr[arr.length - 1];
+
       if (res && /,\s*$/.test(useI18nParams.slice(0, res.start - 1))) {
         return '[' + res.value + ']';
       }
@@ -66,7 +68,7 @@ function getComponent(sfc: SFCDescriptor) {
 }
 
 export function supportScript(code: string, options: ExtendOptions) {
-  const str = () => new MagicString(code);
+  const str = new MagicString(code);
   const { descriptor } = parse(code);
   if (!descriptor.script && descriptor.scriptSetup) {
     const attrs = { ...descriptor.scriptSetup.attrs };
@@ -97,9 +99,8 @@ export function supportScript(code: string, options: ExtendOptions) {
         scriptStr += `"${k}":"${attrs[k]}",`;
       }
     }
-
     if (scriptStr) {
-      str().appendLeft(
+      str.appendLeft(
         0,
         `<script ${lang ? `lang="${lang}"` : ''}>
   import { defineComponent } from 'vue';
@@ -108,8 +109,8 @@ export function supportScript(code: string, options: ExtendOptions) {
       );
     }
     return {
-      map: str().generateMap(),
-      code: str().toString(),
+      map: str.generateMap(),
+      code: str.toString(),
     };
   } else {
     return null;

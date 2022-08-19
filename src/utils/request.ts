@@ -79,7 +79,7 @@ function request<R, P extends unknown[] = [], T = true>(
       !options?.noLoading && loading();
       const { data: res } = await service(await axiosConfig(...args));
       if (!res || res.code === undefined) {
-        throw Error('格式错误');
+        throw Error('返回值解析失败');
       }
       // 401：认证失败
       if (res.code === '401') {
@@ -87,7 +87,7 @@ function request<R, P extends unknown[] = [], T = true>(
         return res;
       }
       if (res.code !== '200') {
-        throw res.msg;
+        throw Error(res.msg);
       }
 
       !options?.noLoading && closeLoading();

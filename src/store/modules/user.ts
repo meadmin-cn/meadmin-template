@@ -73,7 +73,6 @@ export default defineStore({
       this.token = '';
       await router.replace({
         path: PageEnum.LOGIN,
-        query: { redirect: window.location.href },
       });
       window.location.reload();
     },
