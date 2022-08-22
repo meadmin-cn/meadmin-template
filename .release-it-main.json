@@ -1,0 +1,71 @@
+{
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tagName": "main-${version}",
+    "tagAnnotation": "main Release ${version}"
+  },
+  "github": {
+    "release": true,
+    "releaseName": "Release ${version}"
+  },
+  "npm": {
+    "publish": false,
+    "allowSameVersion": true
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          {
+            "type": "feat",
+            "section": "新功能[feat]"
+          },
+          {
+            "type": "fix",
+            "section": "Bug 修复[fix]"
+          },
+          {
+            "type": "chore",
+            "section": "其他[chore]"
+          },
+          {
+            "type": "docs",
+            "section": "文档更改[docs]"
+          },
+          {
+            "type": "style",
+            "section": "样式更改[style]"
+          },
+          {
+            "type": "refactor",
+            "section": "重构[refactor]"
+          },
+          {
+            "type": "perf",
+            "section": "性能改进[perf]"
+          },
+          {
+            "type": "test",
+            "section": "测试添加/更正[test]"
+          },
+          {
+            "type": "revert",
+            "section": "还原提交[revert]"
+          },
+          {
+            "type": "ignore",
+            "section": "需要忽略[ignore]",
+            "hidden": true
+          },
+          {
+            "type": "ci",
+            "section": "CI发版[ci]"
+          }
+        ]
+      },
+      "infile": "CHANGELOG.md",
+      "ignoreRecommendedBump": true
+    }
+  }
+}
