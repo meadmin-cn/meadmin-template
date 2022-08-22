@@ -1,12 +1,12 @@
 {
   "git": {
-    "commitMessage": "chore: release v${version}",
-    "tagName": "main-${version}",
-    "tagAnnotation": "main Release ${version}"
+    "commitMessage": "chore: template-release v${version}",
+    "tagName": "template-${version}",
+    "tagAnnotation": "Template Release ${version}"
   },
   "github": {
     "release": true,
-    "releaseName": "Release ${version}"
+    "releaseName": "Template Release ${version}"
   },
   "npm": {
     "publish": false,
@@ -64,7 +64,7 @@
           }
         ]
       },
-      "infile": "CHANGELOG.md",
+      "infile": "Template CHANGELOG.md",
       "ignoreRecommendedBump": true
     }
   }
