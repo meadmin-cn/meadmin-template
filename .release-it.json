@@ -6,7 +6,7 @@
   },
   "github": {
     "release": true,
-    "releaseName": "Release ${version}"
+    "releaseName": "Template Release ${version}"
   },
   "npm": {
     "publish": false,
