@@ -7,6 +7,7 @@
     "format": "prettier --write --cache .",
     "dev": "vite",
     "build": "vite build -m prod && npm run type-check",
+    "build-github": "vite build -m prod --base=/meadmin-template/ && npm run type-check",
     "type-check": "vue-tsc --noEmit",
     "preview": "vite preview",
     "release": "release-it",

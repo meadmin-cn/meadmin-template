@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { PageEnum } from '@/enums/pageEnum';
 import { App } from 'vue';
 import { setupRouterGuard } from './guard';
@@ -46,7 +46,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
 ];
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(), //createWebHistory(),
   routes: constantRoutes,
 });
 
