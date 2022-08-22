@@ -6,10 +6,18 @@
       <div class="title">ME-Admin</div>
       <el-form ref="formRef" :rules="rules" :model="loginParams">
         <el-form-item prop="username">
-          <el-input v-model="loginParams.username" autofocus :placeholder="t('用户名')" />
+          <el-input
+            v-model="loginParams.username"
+            autofocus
+            :placeholder="t('用户名') + '(示例：admin、editor、viewer)'"
+          />
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="loginParams.password" :type="showPass ? 'input' : 'password'" :placeholder="t('密码')">
+          <el-input
+            v-model="loginParams.password"
+            :type="showPass ? 'input' : 'password'"
+            :placeholder="t('密码') + '(任意填写即可)'"
+          >
             <template #suffix>
               <div class="pointer" @click="showPass = !showPass">
                 <el-icon-view v-if="showPass"></el-icon-view>
