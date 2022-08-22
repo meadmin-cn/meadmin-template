@@ -31,3 +31,5 @@ stats.html
 vite.config.ts.timestamp*
 types/components.d.ts
 .eslintcache
+.release-it.json
+.github/workflows/deploy.yml
