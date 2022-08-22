@@ -4,7 +4,7 @@
   },
   "github": {
     "release": true,
-    "releaseName": "Template Release ${version}"
+    "releaseName": "Release ${version}"
   },
   "npm": {
     "publish": false,
@@ -62,7 +62,7 @@
           }
         ]
       },
-      "infile": "TEMPLATE-CHANGELOG.md",
+      "infile": "CHANGELOG.md",
       "ignoreRecommendedBump": true
     }
   }
