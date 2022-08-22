@@ -1,8 +1,6 @@
 {
   "git": {
-    "commitMessage": "chore: release v${version}",
-    "tagName": "main-${version}",
-    "tagAnnotation": "main Release ${version}"
+    "commitMessage": "chore: release v${version}"
   },
   "github": {
     "release": true,
