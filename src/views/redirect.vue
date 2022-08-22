@@ -1,3 +1,6 @@
+<template>
+  <span></span>
+</template>
 <script setup lang="ts" name="redirect">
 import { useRouteStore } from '@/store';
 const route = useRoute();

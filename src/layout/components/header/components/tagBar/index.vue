@@ -80,7 +80,7 @@ const addAffixTags = (routes: RouteRecordRaw[], basePath = '') => {
         query: {},
         matched: [],
         redirectedFrom: undefined,
-        ...item,
+        meta: { ...item.meta },
       } as unknown as RouteLocationNormalized);
     }
     if (item.children) {
@@ -145,11 +145,11 @@ const jump = (index: number) => {
 // 动态设置active
 const setTag = (route: RouteLocationNormalized) => {
   if (route.meta.title && !route.meta.hideTag) {
-    let index = tags.findIndex((item) => item.fullPath == route.fullPath);
+    let index = tags.findIndex((item) => item.fullPath === route.fullPath);
     if (index > -1) {
       return jump(index);
     }
-    tags.push(route);
+    tags.push({ ...route });
     return jump(tags.length - 1);
   }
 };
