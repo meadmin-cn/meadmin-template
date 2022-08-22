@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     hello word!
-    <input name="text" v-model="value" />
+    <input v-model="value" name="text" />
   </div>
 </template>
 <script setup lang="ts" name="Dashboard">

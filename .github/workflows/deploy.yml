@@ -1,4 +1,4 @@
-name: deploy-main
+name: deploy-template
 
 on:
   # 每当 push 到 main 分支时触发部署
@@ -46,7 +46,7 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v2
         with:
           # 部署到 gh-template-pages 分支
-          target_branch: gh-pages
+          target_branch: gh-template-pages
           # 部署目录为默认输出目录
           build_dir: ./dist
         env:
