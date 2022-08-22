@@ -149,7 +149,7 @@ const setTag = (route: RouteLocationNormalized) => {
     if (index > -1) {
       return jump(index);
     }
-    tags.push(JSON.parse(JSON.stringify(route)));
+    tags.push(route);
     return jump(tags.length - 1);
   }
 };
