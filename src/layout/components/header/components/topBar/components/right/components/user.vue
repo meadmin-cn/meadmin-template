@@ -16,7 +16,7 @@
             {{ $t('Github') }}
           </el-dropdown-item>
         </a>
-        <a>
+        <a href="https://gitee.com/meadmin-cn/meadmin-template">
           <el-dropdown-item>
             {{ $t('Gitee') }}
           </el-dropdown-item>
