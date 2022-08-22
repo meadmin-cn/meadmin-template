@@ -62,7 +62,7 @@
           }
         ]
       },
-      "infile": "CHANGELOG.md",
+      "infile": "TEMPLATE-CHANGELOG.md",
       "ignoreRecommendedBump": true
     }
   }
