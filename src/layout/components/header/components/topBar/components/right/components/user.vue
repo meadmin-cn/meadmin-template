@@ -21,7 +21,7 @@
             {{ $t('Gitee') }}
           </el-dropdown-item>
         </a>
-        <a>
+        <a href="https://meadmin-cn.github.io/meadmin-template-doc/">
           <el-dropdown-item disabled>
             {{ $t('文档') }}
           </el-dropdown-item>
