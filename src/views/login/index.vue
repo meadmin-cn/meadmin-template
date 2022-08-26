@@ -10,21 +10,17 @@
             v-model="loginParams.username"
             autofocus
             :placeholder="t('用户名') + '(示例：admin、editor、viewer)'"
+            clearable
           />
         </el-form-item>
         <el-form-item prop="password">
           <el-input
             v-model="loginParams.password"
-            :type="showPass ? 'input' : 'password'"
+            type="password"
             :placeholder="t('密码') + '(任意填写即可)'"
-          >
-            <template #suffix>
-              <div class="pointer" @click="showPass = !showPass">
-                <el-icon-view v-if="showPass"></el-icon-view>
-                <el-icon-hide v-else></el-icon-hide>
-              </div>
-            </template>
-          </el-input>
+            clearable
+            show-password
+          />
         </el-form-item>
         <el-button class="sub" type="primary" @click="login">{{ t('登录') }}</el-button>
       </el-form>
@@ -43,7 +39,6 @@ const route = useRoute();
 const router = useRouter();
 let loginParams = reactive(new LoginParams());
 let { t } = useLocalesI18n();
-let showPass = ref(false);
 const rules = computed<FormRules>(() => ({
   username: [
     {
