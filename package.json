@@ -40,7 +40,6 @@
     "@babel/eslint-parser": "^7.18.9",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@intlify/unplugin-vue-i18n": "^0.5.0",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jquery": "^3.5.14",
     "@types/js-cookie": "^3.0.2",

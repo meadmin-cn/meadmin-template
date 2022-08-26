@@ -10,7 +10,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
+// import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import { splitVendorChunkPlugin } from 'vite';
 // @ts-ignore
 import { loadMessageConfig } from './src/config/locale';
@@ -28,11 +28,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         setComponents: loadMessageConfig.componentLoad,
       }),
       splitVendorChunkPlugin(),
-      VueI18nPlugin({
-        /* options */
-        // locale messages resource pre-compile option
-        include: ['./src/**/lang/**/*.json', './src/**/lang/*.json'],
-      }),
+      // VueI18nPlugin({
+      //   /* options */
+      //   // locale messages resource pre-compile option
+      //   include: ['./src/**/lang/**/*.json', './src/**/lang/*.json'],
+      // }),
       viteMockServe({
         mockPath: 'mock/apiDemo',
         localEnabled: command === 'serve',
