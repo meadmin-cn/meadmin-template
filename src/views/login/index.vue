@@ -69,7 +69,7 @@ const rules = computed<FormRules>(() => ({
     {
       min: 6,
       max: 12,
-      message: t('长度必须 在 {0} 到 {1}个字符之间', [6, 12]),
+      message: t('长度必须在 {0} 到 {1}个字符之间', [6, 12]),
       trigger: 'blur',
     },
   ],
