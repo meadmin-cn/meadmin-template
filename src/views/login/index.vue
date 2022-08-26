@@ -22,7 +22,14 @@
             show-password
           />
         </el-form-item>
-        <el-button class="sub" type="primary" @click="login">{{ t('登录') }}</el-button>
+        <el-form-item prop="captcha">
+          <el-input v-model="loginParams.captcha" :placeholder="t('验证码') + '(任意填写即可)'" clearable>
+            <template #append>
+              <img src="@/assets/images/captcha.png" class="captcha" />
+            </template>
+          </el-input>
+        </el-form-item>
+        <el-button class="submit" type="primary" @click="login">{{ t('登录') }}</el-button>
       </el-form>
     </div>
   </div>
@@ -63,6 +70,18 @@ const rules = computed<FormRules>(() => ({
       min: 6,
       max: 12,
       message: t('长度必须 在 {0} 到 {1}个字符之间', [6, 12]),
+      trigger: 'blur',
+    },
+  ],
+  captcha: [
+    {
+      required: true,
+      message: t('请填写') + ' ' + t('验证码'),
+      trigger: 'blur',
+    },
+    {
+      len: 4,
+      message: t('验证码') + ' ' + t('长度必须为 {0} 个字符', [4]),
       trigger: 'blur',
     },
   ],
@@ -132,8 +151,24 @@ const login = async () => {
       font-size: 1.6rem;
       font-weight: bold;
     }
+    :deep(.el-input) {
+      .captcha {
+        margin: 0 -19px;
+        height: calc(var(--el-component-size) - 2px);
+      }
+    }
+    :deep(.el-input--large) {
+      .captcha {
+        height: calc(var(--el-component-size-large) - 2px);
+      }
+    }
 
-    .sub {
+    :deep(.el-input--small) {
+      .captcha {
+        height: calc(var(--el-component-size-small) - 2px);
+      }
+    }
+    .submit {
       width: 100%;
       margin: auto;
       display: block;
