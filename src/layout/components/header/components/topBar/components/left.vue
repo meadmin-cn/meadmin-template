@@ -12,7 +12,7 @@
       <el-breadcrumb separator="/">
         <el-breadcrumb-item
           v-for="(item, index) in breadcrumbList"
-          :key="index"
+          :key="item.path"
           :to="index === breadcrumbList.length - 1 || !item.redirect ? undefined : item"
           >{{ $t(item.meta!.title!) }}</el-breadcrumb-item
         >
