@@ -1,0 +1,77 @@
+@import './element-plus.scss';
+@import './transition.scss';
+html {
+  body {
+    margin: 0;
+    padding: 0;
+    color: var(--el-text-color-primary);
+
+    #app {
+      width: 100%;
+      height: 100vh;
+    }
+  }
+
+  div,
+  span {
+    box-sizing: border-box;
+  }
+}
+
+.me-large {
+  font-size: var(--el-font-size-base);
+}
+
+.me-default {
+  font-size: var(--el-font-size-base);
+}
+
+.me-small {
+  font-size: var(--el-font-size-small);
+}
+
+//鼠标变小手
+.pointer {
+  cursor: pointer;
+}
+
+//用felx 子元素居中
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+//去a标签默认样式
+a:hover,
+a:visited,
+a:link,
+a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+//超出一行...
+.ellipsis-1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+//超出两行...
+.ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+//超出三行...
+.ellipsis-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}

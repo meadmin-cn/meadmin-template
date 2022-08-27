@@ -11,7 +11,7 @@ import Right from './components/right/index.vue';
 </script>
 <style lang="scss" scoped>
 .top-bar {
-  height: 48px;
+  height: $header-top-height;
   display: flex;
   align-items: center;
   justify-content: space-between;
