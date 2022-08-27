@@ -60,9 +60,6 @@ const globalStore = useGlobalStore();
 }
 
 .main {
-  padding: 1rem;
-}
-:global(.me-sidebar-drawer .el-drawer__body) {
-  padding: 0;
+  padding: $page-padding;
 }
 </style>

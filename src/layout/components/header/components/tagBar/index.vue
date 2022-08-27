@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="tag-bar">
     <a class="icon pointer" :class="{ 'is-disabled': scrollLeft <= 0 }" @click="back">
       <mel-icon-d-arrow-left></mel-icon-d-arrow-left>
     </a>
@@ -185,9 +185,9 @@ watch(route, () => {
 });
 </script>
 <style lang="scss" scoped>
-.footer {
+.tag-bar {
   border-bottom: 1px solid var(--el-border-color);
-  height: 35px;
+  height: $header-tag-height;
   display: flex;
   align-items: center;
 

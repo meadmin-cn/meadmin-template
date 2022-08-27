@@ -42,7 +42,7 @@ mitter.on(event.BEFORE_ROUTE_CHANGE, ({ to }) => setBreadcrumbList(to), true);
   height: 100%;
 
   .fold-expand {
-    font-size: 1.55rem;
+    font-size: 20px;
   }
 
   &:deep(.el-breadcrumb__inner.is-link) {

@@ -148,7 +148,7 @@ const login = async () => {
       text-align: center;
       width: 100%;
       margin-bottom: 20px;
-      font-size: 1.6rem;
+      font-size: 20px;
       font-weight: bold;
     }
     :deep(.el-input) {
