@@ -112,7 +112,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
         {
           // auto import components
-          pattern: ['*.vue', '**/index.{vue,ts}'],
+          pattern: ['*.{vue,ts}', '**/index.{vue,ts}'],
           dir: 'src/components',
           toFile: 'types/components.d.ts',
           template: fs.readFileSync('./template/components.d.ts', 'utf-8'),
