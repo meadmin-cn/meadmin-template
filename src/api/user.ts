@@ -9,6 +9,7 @@ const enum Api {
 export class LoginParams {
   username = '';
   password = '';
+  captcha = '';
 }
 export interface LoginResult {
   token: string;

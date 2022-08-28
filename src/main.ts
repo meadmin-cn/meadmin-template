@@ -1,4 +1,4 @@
 import '@/event/module';
-import '@/styles/common.scss';
+import '@/styles/index.scss';
 import { bootscrapt } from './app';
 bootscrapt();
