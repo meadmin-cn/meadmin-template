@@ -54,7 +54,7 @@ const isDot = ref(true);
 .message-tabs {
   padding: 15px 10px;
   height: 300px;
-  font-size: 1rem;
+  font-size: 14px;
 
   .message-header {
     display: flex;

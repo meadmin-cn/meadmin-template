@@ -1,0 +1,21 @@
+//自定义 element-ui 样式
+.me-large {
+  //这里强制将font-size-base设置为large
+  --el-font-size-base: var(--el-font-size-large);
+}
+.me-small {
+  //这里强制将font-size-base设置为small
+  --el-font-size-base: var(--el-font-size-small);
+}
+//颜色选择器预定义样式加上border
+.el-color-predefine__color-selector > div {
+  border: 1px solid var(--el-border-color);
+}
+.me-sidebar-drawer {
+  .el-drawer__body {
+    padding: 0;
+  }
+}
+.el-breadcrumb {
+  font-size: var(--el-font-size-base);
+}

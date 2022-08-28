@@ -22,7 +22,7 @@
           </el-dropdown-item>
         </a>
         <a href="https://meadmin-cn.github.io/meadmin-template-doc/">
-          <el-dropdown-item disabled>
+          <el-dropdown-item>
             {{ $t('文档') }}
           </el-dropdown-item>
         </a>
