@@ -1,5 +1,36 @@
 
 
+## [1.0.1](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.0...main-1.0.1) (2022-08-28)
+
+
+### 文档更改[docs]
+
+* 加上文档地址 ([#13](https://github.com/meadmin-cn/meadmin-template/issues/13)) ([0ee505d](https://github.com/meadmin-cn/meadmin-template/commit/0ee505d4c4a7b4260ad52ae03fc4d6755c57dcc4))
+* 文档名称修改 ([9ceeb9b](https://github.com/meadmin-cn/meadmin-template/commit/9ceeb9bd87bd2dcb5a2f3671973889d8f0018ab8))
+
+
+### 重构[refactor]
+
+* 样式规范化 ([d45ff53](https://github.com/meadmin-cn/meadmin-template/commit/d45ff5355dffd36c00f3bc7944764c25ea2ea1a5))
+
+
+### Bug 修复[fix]
+
+* 去除VueI18nPlugin以让Vue18n其支持内联 JavaScript 字符串的模板 ([e76411f](https://github.com/meadmin-cn/meadmin-template/commit/e76411fc7c3ed8e3cdb37ad79a88309951ba49e8))
+* 修复文档链接样式错误，修复刷新不自动关闭菜单错误 ([2de62c5](https://github.com/meadmin-cn/meadmin-template/commit/2de62c52559b712b4b43aa5305292b5795020125))
+
+
+### 新功能[feat]
+
+* 登录框加上验证码 ([5526274](https://github.com/meadmin-cn/meadmin-template/commit/5526274e52c0819a0281345215186ebd29a9a401))
+* 登录输入框加一键清空和密码框显示隐藏 ([f6c1c65](https://github.com/meadmin-cn/meadmin-template/commit/f6c1c65b41e87d740b15d0c4acae7fffaff64158))
+* 加上切换动画 ([2be4f31](https://github.com/meadmin-cn/meadmin-template/commit/2be4f3134d703c3b6fa3f65596541f1da16c25dc))
+
+
+### 其他[chore]
+
+* template-release v1.0.1 ([424eaee](https://github.com/meadmin-cn/meadmin-template/commit/424eaeef8498b8e3dccea3da38c82b1e7abdf3a9))
+
 ## 1.0.0 (2022-08-22)
 
 
