@@ -1,5 +1,37 @@
 
 
+## [1.0.1](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.0...template-1.0.1) (2022-08-28)
+
+
+### CI发版[ci]
+
+* 改为各自独立发版命令 ([ae3bcf7](https://github.com/meadmin-cn/meadmin-template/commit/ae3bcf77b67375e8b35253a3dd7838c9fd8666c5))
+* 忽略部署文件 ([37d7068](https://github.com/meadmin-cn/meadmin-template/commit/37d7068cb090070d94484f3c047f19deeb04b22b))
+
+
+### 文档更改[docs]
+
+* 加上文档地址 ([534d870](https://github.com/meadmin-cn/meadmin-template/commit/534d8700a397f65a2934fa0ffe199355bba75fed))
+* 文档名称修改 ([2484986](https://github.com/meadmin-cn/meadmin-template/commit/2484986058c3f1c85c692d770871006309a43f56))
+
+
+### 重构[refactor]
+
+* 样式规范化 ([d7ee0dd](https://github.com/meadmin-cn/meadmin-template/commit/d7ee0ddeb46de0cb9db2b0882df43ac261d43bfa))
+
+
+### Bug 修复[fix]
+
+* 去除VueI18nPlugin以让Vue18n其支持内联 JavaScript 字符串的模板 ([8c78f47](https://github.com/meadmin-cn/meadmin-template/commit/8c78f474bf01e60fe930d8457fb6986a13b9f663))
+* 修复文档链接样式错误，修复刷新不自动关闭菜单错误 ([6dda967](https://github.com/meadmin-cn/meadmin-template/commit/6dda967e3960625c64041d686972630503af0d72))
+
+
+### 新功能[feat]
+
+* 登录框加上验证码 ([3273dfb](https://github.com/meadmin-cn/meadmin-template/commit/3273dfb9092f4e7dadd466953fb9e3d970b49270))
+* 登录输入框加一键清空和密码框显示隐藏 ([7905fb8](https://github.com/meadmin-cn/meadmin-template/commit/7905fb83ff6daa35422877cd741d9d6d99241239))
+* 加上切换动画 ([303195a](https://github.com/meadmin-cn/meadmin-template/commit/303195a986900a751244ae5f22e1d79efcb5ed67))
+
 ## 1.0.0 (2022-08-22)
 
 
