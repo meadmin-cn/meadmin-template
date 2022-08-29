@@ -1,7 +1,7 @@
 {
   "name": "meadmin-template",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "format": "prettier --write --cache .",
@@ -51,11 +51,13 @@
     "@typescript-eslint/parser": "^5.33.1",
     "@vitejs/plugin-vue": "^3.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
+    "autoprefixer": "^10.4.8",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^9.3.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
+    "postcss-plugin-px2rem": "^0.8.1",
     "prettier": "2.7.1",
     "release-it": "^15.1.1",
     "rollup-plugin-visualizer": "^5.7.1",

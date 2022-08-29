@@ -14,7 +14,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { splitVendorChunkPlugin } from 'vite';
 // @ts-ignore
 import { loadMessageConfig } from './src/config/locale';
-
+import autoprefixer from 'autoprefixer';
+import px2rem from 'postcss-plugin-px2rem';
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
@@ -111,7 +112,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
         {
           // auto import components
-          pattern: ['*.vue', '**/index.{vue,ts}'],
+          pattern: ['*.{vue,ts}', '**/index.{vue,ts}'],
           dir: 'src/components',
           toFile: 'types/components.d.ts',
           template: fs.readFileSync('./template/components.d.ts', 'utf-8'),
@@ -126,6 +127,30 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       ]),
       visualizer(),
     ],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/styles/variables.scss" as *;`,
+        },
+      },
+      postcss: {
+        plugins: [
+          autoprefixer,
+          px2rem({
+            rootValue: 14, //换算基数，将 px 替换为 1/rootValue rem (即设计图下的fontSize)
+            // unitPrecision: 5, //允许REM单位增长到的十进制数字。
+            propWhiteList: ['font-size'], //默认值是一个空数组，这意味着禁用白名单并启用所有属性。
+            // propBlackList: ['font-size', 'border'], //不应从 px 更改为 rem 的属性
+            exclude: /(node_module)/, //默认false，可以（reg）利用正则表达式排除某些文件夹的方法，例如/(node_module)\/如果想把前端UI框架内的px也转换成rem，请把此属性设为默认值
+            // selectorBlackList: [], //要忽略并保留为px的选择器
+            // ignoreIdentifier: false,  //（boolean/string）忽略单个属性的方法，启用ignoreidentifier后，replace将自动设置为true。
+            // replace: true, // （布尔值）替换包含REM的规则，而不是添加回退。
+            mediaQuery: false, //（布尔值）允许在媒体查询中转换px。
+            minPixelValue: 2, //设置要替换的最小像素值(包含)。 默认 0
+          }),
+        ],
+      },
+    },
     resolve: {
       alias: [
         // /@/xxxx => src/xxxx

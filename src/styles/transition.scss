@@ -1,0 +1,33 @@
+//动画样式文件
+
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.3s;
+}
+
+.fade-transform-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* fade-transform-top */
+.fade-transform-top-leave-active,
+.fade-transform-top-enter-active {
+  transition: all 0.3s;
+}
+
+.fade-transform-top-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.fade-transform-top-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
