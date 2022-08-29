@@ -51,7 +51,7 @@ export interface KeepAliveContext extends ComponentRenderContext {
 }
 
 const KeepAliveImpl: ComponentOptions = {
-  name: `meKeepAlive`,
+  name: `MeKeepAlive`,
 
   // Marker for special handling inside the renderer. We are not using a ===
   // check directly on KeepAlive in the renderer, because importing it directly

@@ -21,7 +21,7 @@ const { themeConfig } = useSettingStore();
 </script>
 <style lang="scss" scoped>
 .right {
-  font-size: 1rem;
+  font-size: 14px;
   height: 100%;
   display: flex;
 

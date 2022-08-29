@@ -103,6 +103,7 @@ let canCloseFirst = computed(() => {
 const reload = () => {
   // 刷新
   router.replace('/redirect/' + encodeURIComponent(props.current.fullPath));
+  closeMenu();
 };
 const closeCurrent = async () => {
   // 关闭当前
