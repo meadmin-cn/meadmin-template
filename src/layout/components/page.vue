@@ -1,8 +1,8 @@
 <template>
   <router-view v-slot="{ Component, route }">
     <me-component
-      :is="Component"
       :transition="{ name: 'fade-transform', mode: 'out-in' }"
+      :is="Component"
       :keep-alive="keepAliveProps"
       :component-key="route.fullPath"
       done-progress
