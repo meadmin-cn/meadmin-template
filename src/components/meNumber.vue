@@ -16,13 +16,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  end: {
-    type: [Number, String],
-    required: true,
-  },
-  delay: Number, //开始动画等待的毫秒数
-  disabled: Boolean, //禁用动画
-  duration: { type: Number, default: 3000 }, //动画持续毫秒
+  end: [Number, Array] as PropType<number | [number, string?, string?]>,
+  delay: { type: Number, default: 0 }, //开始动画等待的毫秒数
+  disabled: { type: Boolean, default: false }, //禁用动画
+  duration: { type: Number, default: 1000 }, //动画持续毫秒
   transition: {
     //动画
     type: [Function, String] as PropType<EasingFunction | keyof typeof TransitionPresets>,
@@ -43,29 +40,35 @@ const numberInfo = reactive({
 const output = useTransition(
   computed(() => numberInfo.number),
   {
-    delay: props.delay,
-    disabled: props.disabled,
-    duration: props.duration,
+    delay: computed(() => props.delay),
+    disabled: computed(() => props.disabled),
+    duration: computed(() => props.duration),
     onFinished: () => emit('finished'),
     onStarted: () => emit('started'),
-    transition: typeof props.transition === 'string' ? TransitionPresets[props.transition] : props.transition,
+    transition: computed(() =>
+      typeof props.transition === 'string' ? TransitionPresets[props.transition] : props.transition,
+    ),
   },
 );
-const getFormatInfo = (value: string | number) => {
-  const res = /(.*[^\d.])?(\d+\.?\d*)([^\d.].*)?/.exec(value as string);
-  if (!res) {
-    throw new Error('请传入带有数字的字符');
+const getFormatInfo = (value: number | [number, string?, string?]) => {
+  if (typeof value === 'number') {
+    return {
+      prefix: '',
+      number: value,
+      suffix: '',
+      decimals: (value + '').split('.')[1]?.length ?? 0,
+    };
   }
   return {
-    prefix: res[1] ?? '',
-    number: Number(res[2]),
-    suffix: res[3] ?? '',
-    decimals: res[2].split('.')[1]?.length ?? 0,
+    prefix: value[1] ?? '',
+    number: value[0],
+    suffix: value[2] ?? '',
+    decimals: (value[0] + '').split('.')[1]?.length ?? 0,
   };
 };
 watch(
   () => props.end,
-  (end) => Object.assign(numberInfo, getFormatInfo(end)),
+  (end) => Object.assign(numberInfo, getFormatInfo(end ?? props.start)),
   { immediate: true },
 );
 </script>
