@@ -12,10 +12,11 @@ import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 // import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import { splitVendorChunkPlugin } from 'vite';
+import autoprefixer from 'autoprefixer';
+// @ts-ignore
+import px2rem from 'postcss-plugin-px2rem';
 // @ts-ignore
 import { loadMessageConfig } from './src/config/locale';
-import autoprefixer from 'autoprefixer';
-import px2rem from 'postcss-plugin-px2rem';
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
