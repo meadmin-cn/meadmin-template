@@ -1,21 +1,21 @@
 <template>
-  <el-card shadow="hover" header="浏览量">
+  <el-card shadow="hover" :header="t('浏览量')">
     <div ref="viewChartRef" class="view-charts"></div>
   </el-card>
 
   <el-row :gutter="20">
     <el-col :xs="24" :sm="8">
-      <el-card shadow="hover" header="访问来源">
+      <el-card shadow="hover" :header="t('访问来源')">
         <div ref="origionChartRef" class="view-charts"></div>
       </el-card>
     </el-col>
     <el-col :xs="24" :sm="8">
-      <el-card shadow="hover" header="预算分配">
+      <el-card shadow="hover" :header="t('预算分配')">
         <div ref="allocationChartRef" class="view-charts"></div>
       </el-card>
     </el-col>
     <el-col :xs="24" :sm="8">
-      <el-card shadow="hover" header="订单分布">
+      <el-card shadow="hover" :header="t('订单分布')">
         <div ref="orderDistributionChartRef" class="view-charts"></div>
       </el-card>
     </el-col>
@@ -39,6 +39,10 @@ import {
 import { LineChart, LineSeriesOption, PieChart, PieSeriesOption, RadarChart, RadarSeriesOption } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
 import { SVGRenderer } from 'echarts/renderers';
+import { mitter, event } from '@/event';
+import { throttle } from 'lodash-es';
+import { useLocalesI18n } from '@/locales/i18n';
+let { t, locale } = useLocalesI18n({}, [(locale) => import(`../lang/${locale}.json`), 'dashboard']);
 echarts.use([
   TitleComponent,
   ToolboxComponent,
@@ -51,18 +55,18 @@ echarts.use([
   SVGRenderer,
   UniversalTransition,
 ]);
-type ViewEChartsOption = echarts.ComposeOption<
+type BaseChartOption =
   | TitleComponentOption
   | ToolboxComponentOption
   | TooltipComponentOption
   | GridComponentOption
-  | LegendComponentOption
-  | LineSeriesOption
->;
+  | LegendComponentOption;
 const viewChartRef = ref(null as HTMLElement | null);
 const origionChartRef = ref(null as HTMLElement | null);
 const allocationChartRef = ref(null as HTMLElement | null);
 const orderDistributionChartRef = ref(null as HTMLElement | null);
+const setting = useSettingStore();
+const textColor = computed(() => (setting.isDark ? '#E5EAF3' : '#303133'));
 
 onMounted(() => {
   const viewChart = echarts.init(viewChartRef.value!);
@@ -70,9 +74,9 @@ onMounted(() => {
   const allocationChart = echarts.init(allocationChartRef.value!);
   const orderDistributionChart = echarts.init(orderDistributionChartRef.value!);
   watchEffect(() => {
-    viewChart.setOption({
+    const viewChartOptions: echarts.ComposeOption<BaseChartOption | LineSeriesOption> = {
       textStyle: {
-        color: '#303133', //'#E5EAF3'
+        color: textColor.value,
       },
       tooltip: {
         trigger: 'axis',
@@ -84,7 +88,7 @@ onMounted(() => {
         top: '10px',
         data: ['PV', 'UV'],
         textStyle: {
-          color: '#303133', //'#E5EAF3'
+          color: textColor.value,
         },
       },
       grid: {
@@ -115,7 +119,7 @@ onMounted(() => {
           emphasis: {
             focus: 'series',
           },
-          data: [300, 500, 800, 900, 3000, 3500, 4000, 5000, 4000, 2800, 1000],
+          data: [],
         },
         {
           name: 'UV',
@@ -125,17 +129,20 @@ onMounted(() => {
           emphasis: {
             focus: 'series',
           },
-          data: [8, 16, 39, 42, 156, 160, 153, 200, 148, 140, 43],
+          data: [],
         },
       ],
-    });
-    origionChart.setOption({
+    };
+    const origionOptions: echarts.ComposeOption<BaseChartOption | PieSeriesOption> = {
       textStyle: {
-        color: '#303133', //'#E5EAF3'
+        color: textColor.value,
       },
       legend: {
         bottom: '0',
         left: 'center',
+        textStyle: {
+          color: textColor.value,
+        },
       },
       tooltip: {
         trigger: 'item',
@@ -145,7 +152,7 @@ onMounted(() => {
       },
       series: [
         {
-          name: '访问来源',
+          name: t('访问来源'),
           type: 'pie',
           top: '-20%',
           radius: ['40%', '65%'],
@@ -162,22 +169,25 @@ onMounted(() => {
             },
           },
           data: [
-            { value: 1048, name: '直接访问' },
-            { value: 735, name: '搜索引擎' },
-            { value: 580, name: '推广邮件' },
-            { value: 484, name: '推广短信' },
-            { value: 300, name: '营销广告' },
+            { value: 0, name: t('直接访问') },
+            { value: 0, name: t('搜索引擎') },
+            { value: 0, name: t('推广邮件') },
+            { value: 0, name: t('推广短信') },
+            { value: 0, name: t('营销广告') },
           ],
         },
       ],
-    });
-    allocationChart.setOption({
+    };
+    const allocationOptions: echarts.ComposeOption<BaseChartOption | PieSeriesOption> = {
       textStyle: {
-        color: '#303133', //'#E5EAF3'
+        color: textColor.value,
       },
       legend: {
         bottom: '0',
         left: 'center',
+        textStyle: {
+          color: textColor.value,
+        },
       },
       tooltip: {
         trigger: 'item',
@@ -187,7 +197,7 @@ onMounted(() => {
       },
       series: [
         {
-          name: '预算分配',
+          name: t('预算分配'),
           type: 'pie',
           top: '-20%',
           radius: '65%',
@@ -204,49 +214,69 @@ onMounted(() => {
             },
           },
           data: [
-            { value: 1048, name: '日用/百货' },
-            { value: 735, name: '电子产品' },
-            { value: 580, name: '配饰/挂件' },
-            { value: 484, name: '服装/箱包' },
-            { value: 300, name: '化妆品' },
+            { value: 0, name: t('日用/百货') },
+            { value: 0, name: t('电子产品') },
+            { value: 0, name: t('配饰/挂件') },
+            { value: 0, name: t('服装/箱包') },
+            { value: 0, name: t('化妆品') },
           ],
         },
       ],
-    });
-    orderDistributionChart.setOption({
+    };
+    const orderDistributionOptions: echarts.ComposeOption<BaseChartOption | RadarSeriesOption> = {
+      textStyle: {
+        color: textColor.value,
+      },
       legend: {
-        data: ['新客', '老客'],
+        data: [t('新客'), t('老客')],
         bottom: '0',
+        textStyle: {
+          color: textColor.value,
+        },
       },
       radar: {
         center: ['50%', '45%'],
         radius: '65%',
         indicator: [
-          { name: '日用/百货', max: 6500 },
-          { name: '电子产品', max: 16000 },
-          { name: '配饰/挂件', max: 30000 },
-          { name: '服装/箱包', max: 38000 },
-          { name: '化妆品', max: 52000 },
+          { name: t('日用/百货'), max: 6500 },
+          { name: t('电子产品'), max: 16000 },
+          { name: t('配饰/挂件'), max: 30000 },
+          { name: t('服装/箱包'), max: 38000 },
+          { name: t('化妆品'), max: 52000 },
         ],
       },
       series: [
         {
-          name: '订单分布',
+          name: t('订单分布'),
           type: 'radar',
           data: [
             {
-              value: [4200, 3000, 20000, 35000, 50000],
-              name: '新客',
+              value: [],
+              name: t('新客'),
             },
             {
-              value: [5000, 14000, 28000, 26000, 42000],
-              name: '老客',
+              value: [],
+              name: t('老客'),
             },
           ],
         },
       ],
-    });
+    };
+    viewChart.setOption(viewChartOptions);
+    origionChart.setOption(origionOptions);
+    allocationChart.setOption(allocationOptions);
+    orderDistributionChart.setOption(orderDistributionOptions);
   });
+  mitter.on(
+    event.RESIZE,
+    throttle(() => {
+      viewChart.resize();
+      origionChart.resize();
+      allocationChart.resize();
+      orderDistributionChart.resize();
+    }, 800),
+    true,
+  );
 });
 </script>
 <style lang="scss" scoped>
