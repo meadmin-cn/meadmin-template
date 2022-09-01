@@ -4,12 +4,12 @@
       <layout-menu></layout-menu>
     </el-aside>
     <el-container>
-      <el-header v-show="themeConfig.fixedHeader" class="right-header" height="max-content">
+      <el-header v-if="themeConfig.fixedHeader" class="right-header" height="max-content">
         <layout-header></layout-header>
       </el-header>
       <el-main class="right-main">
         <el-scrollbar>
-          <layout-header v-show="!themeConfig.fixedHeader"></layout-header>
+          <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
           <div class="main">
             <layout-page></layout-page>
           </div>
@@ -28,6 +28,8 @@
   >
     <layout-menu></layout-menu>
   </el-drawer>
+  <me-setting v-if="themeConfig.showSetting && !themeConfig.topBar" class="fixed-setting"></me-setting>
+  <me-setting-menu></me-setting-menu>
 </template>
 <script setup lang="ts" name="layout">
 import LayoutHeader from './components/header/index.vue';
@@ -61,5 +63,16 @@ const globalStore = useGlobalStore();
 
 .main {
   padding: $page-padding;
+}
+.fixed-setting {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  padding: 10px;
+  border-radius: 3px 0 0 3px;
+  transform: translateY(-50%);
+  z-index: $z-index-top;
+  background-color: var(--el-color-primary);
+  color: var(--el-color-white);
 }
 </style>
