@@ -1,3 +1,5 @@
 $page-padding: 20px;
 $header-top-height: 48px;
 $header-tag-height: 35px;
+$z-index-top: 1999; //当前系统内最高但低于element-plus对应弹窗的z-index
+$z-index-higher: 3000; //高于element-plus对应弹窗的z-index
