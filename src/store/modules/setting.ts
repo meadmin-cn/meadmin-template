@@ -8,6 +8,7 @@ const useSettingStore = defineStore('setting', {
     themeConfig: useStorage(`${settingKey}-theme`, themeConfig),
     locale: useStorage(`${settingKey}-locale`, localeConfig.localeSetting.locale ?? 'zh-cn'),
     elLocale: undefined as Language | undefined,
+    isDark: useDark({ storageKey: 'me-color-dark-scheme' }),
   }),
   actions: {
     setPrimaryStyle() {
