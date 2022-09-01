@@ -1,5 +1,25 @@
 
 
+## [1.0.2](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.0...template-1.0.2) (2022-09-01)
+
+
+### 样式更改[style]
+
+* 忽略纯js库 ([dad0920](https://github.com/meadmin-cn/meadmin-template/commit/dad092029d6b04a118b6f6eded3e31328bce6ac0))
+* 加上国内访问及文档地址 ([eb2fc36](https://github.com/meadmin-cn/meadmin-template/commit/eb2fc36f7692b9b1c7bc390c51e37555034e5e15))
+* elint格式修复 ([1e59609](https://github.com/meadmin-cn/meadmin-template/commit/1e596094d89e03799e7f7cab9c33b6f0c5b1944c))
+
+
+### 文档更改[docs]
+
+* 加上仓库说明 ([277d0bb](https://github.com/meadmin-cn/meadmin-template/commit/277d0bbea2ce0e6ba528fcf3db5cdf2f8d60a682))
+
+
+### 重构[refactor]
+
+* 暗黑模式切换的设置项吸入settingStore中 ([ddccfac](https://github.com/meadmin-cn/meadmin-template/commit/ddccfac17923b7f25d9d0ef7cdcb275c974bbdd3))
+* 设置按钮优化 ([7f3e559](https://github.com/meadmin-cn/meadmin-template/commit/7f3e55902acf5ed0d15306c5afba4a85f6c02c40))
+
 ## [1.0.1](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.0...template-1.0.1) (2022-08-28)
 
 
