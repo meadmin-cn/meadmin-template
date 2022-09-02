@@ -11,7 +11,7 @@
         <el-scrollbar>
           <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
           <div class="main">
-            <layout-page></layout-page>
+            <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
           </div>
         </el-scrollbar>
       </el-main>
