@@ -19,41 +19,42 @@
     </el-row>
   </div>
 </template>
-
 <script setup lang="ts">
 import { statisticsApi } from '@/api/statistics';
+import { useLocalesI18n } from '@/locales/i18n';
+let { t } = useLocalesI18n({}, [(locale) => import(`../lang/${locale}.json`), 'dashboard']);
 const { loading, runAsync, data } = statisticsApi(true);
 const list = reactive([
   {
-    title: '访问量',
+    title: computed(() => t('访问量')),
     icon: 'mel-icon-platform',
     iconColor: '#409EFF',
     total: computed(() => data.value?.view.total),
-    subTitle: '昨日新增：',
+    subTitle: computed(() => t('昨日新增') + '：'),
     subTotal: computed(() => data.value?.view.yesterdayTotal),
   },
   {
-    title: '用户数',
+    title: t('用户数'),
     icon: 'mel-icon-user-filled',
     iconColor: '#67C23A',
     total: computed(() => data.value?.user.total),
-    subTitle: '昨日新增：',
+    subTitle: computed(() => t('昨日新增') + '：'),
     subTotal: computed(() => data.value?.user.yesterdayTotal),
   },
   {
-    title: '订单数',
+    title: computed(() => t('订单数')),
     icon: 'mel-icon-histogram',
     iconColor: '#E6A23C',
     total: computed(() => data.value?.order.total),
-    subTitle: '昨日新增：',
+    subTitle: computed(() => t('昨日新增') + '：'),
     subTotal: computed(() => data.value?.order.yesterdayTotal),
   },
   {
-    title: '成交额',
+    title: computed(() => t('成交额')),
     icon: 'mel-icon-money',
     iconColor: '#F56C6C',
     total: computed(() => (data.value ? ([data.value.turnover.total, '￥'] as [number, string]) : 0)),
-    subTitle: '昨日新增：',
+    subTitle: computed(() => t('昨日新增') + '：'),
     subTotal: computed(() => '￥' + data.value?.turnover.yesterdayTotal ?? ''),
   },
 ]);
@@ -61,6 +62,7 @@ runAsync();
 </script>
 <style lang="scss" scoped>
 .total-panel {
+  margin-bottom: -10px;
   .total-item {
     --el-card-padding: 10px;
     margin-bottom: 10px;

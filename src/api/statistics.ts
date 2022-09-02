@@ -3,6 +3,7 @@ import request from '@/utils/request';
 
 const enum Api {
   STATISTICS = '/api/statistics',
+  CHART = '/api/statistics/chart',
 }
 
 // 获取用户详细信息
@@ -35,5 +36,28 @@ export function statisticsApi(noLoading?: boolean) {
       method: 'get',
     }),
     { noLoading },
+  );
+}
+
+export interface ChartResult {
+  view: {
+    PV: number[];
+    UV: number[];
+  };
+  origion: [number, number, number, number, number];
+  allocation: [number, number, number, number, number];
+  orderDistribution: {
+    new: [number, number, number, number, number];
+    old: [number, number, number, number, number];
+  };
+}
+
+export function chartApi() {
+  return request<ChartResult, []>(
+    () => ({
+      url: Api.CHART,
+      method: 'get',
+    }),
+    { noLoading: true },
   );
 }

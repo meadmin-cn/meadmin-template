@@ -85,18 +85,6 @@ const rules = computed<FormRules>(() => ({
       trigger: 'blur',
     },
   ],
-  captcha: [
-    {
-      required: true,
-      message: t('请填写') + ' ' + t('验证码'),
-      trigger: 'blur',
-    },
-    {
-      len: 4,
-      message: t('验证码') + ' ' + t('长度必须为 {0} 个字符', [4]),
-      trigger: 'blur',
-    },
-  ],
 }));
 
 const login = async () => {
