@@ -37,6 +37,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     meta: {
       hideMenu: true,
       title: '',
+      noCache: true,
     },
   },
   {

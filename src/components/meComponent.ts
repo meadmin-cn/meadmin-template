@@ -4,7 +4,7 @@ import { useLoadMessages } from '@/locales/i18n';
 import { done } from '@/utils/nProgress';
 import { localeConfig } from '@/config';
 export default defineComponent({
-  name: 'meComponent',
+  name: 'MeComponent',
   props: {
     is: {
       type: [String, Object],
@@ -45,7 +45,6 @@ export default defineComponent({
       );
       if (props.keepAlive) {
         const index = components.length - 1;
-        console.log(index);
         components.push(h(MeKeepAlive, props.keepAlive, [components[index]]));
       }
       if (props.transition) {

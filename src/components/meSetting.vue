@@ -3,7 +3,7 @@
     <mel-icon-setting class="icon"></mel-icon-setting>
   </div>
 </template>
-<script setup lang="ts" name="meSetting">
+<script setup lang="ts" name="MeSetting">
 import { useSettingStore } from '@/store';
 let setting = useSettingStore();
 </script>

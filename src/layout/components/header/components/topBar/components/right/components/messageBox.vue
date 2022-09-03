@@ -35,7 +35,7 @@
     </template>
   </el-dropdown>
 </template>
-<script setup lang="ts" name="messageBox">
+<script setup lang="ts" name="MessageBox">
 const isDot = ref(true);
 </script>
 <style lang="scss" scoped>

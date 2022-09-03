@@ -8,7 +8,7 @@
     </span>
   </div>
 </template>
-<script setup lang="ts" name="meDarkSwitch">
+<script setup lang="ts" name="MeDarkSwitch">
 import { useSettingStore } from '@/store';
 const setting = useSettingStore();
 </script>

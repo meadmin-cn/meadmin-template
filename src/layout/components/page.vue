@@ -11,7 +11,7 @@
   </router-view>
 </template>
 
-<script setup lang="ts" name="layoutPage">
+<script setup lang="ts" name="LayoutPage">
 import { MeKeepAliveProps } from '@/components/meKeepAlive';
 import { useRouteStore } from '@/store';
 import { PropType, TransitionProps } from 'vue';
@@ -19,15 +19,19 @@ const props = defineProps({
   transition: Object as PropType<TransitionProps>,
 });
 const routeStore = useRouteStore();
-const keepAliveProps = reactive<MeKeepAliveProps>({
+const keepAliveProps = computed<MeKeepAliveProps>(() => ({
   max: 30,
-  excludeKey: routeStore.noCacheFullPath,
-  exclude: 'redirect',
-});
+  includeKey: [...routeStore.cacheFullPath],
+}));
+
 const route = useRoute();
-watch(route, () => {
-  if (route.meta.noCache) {
-    routeStore.setNoCache(route.fullPath);
-  }
-});
+watch(
+  route,
+  () => {
+    if (!route.meta.noCache) {
+      routeStore.cacheFullPath.add(route.fullPath);
+    }
+  },
+  { immediate: true },
+);
 </script>

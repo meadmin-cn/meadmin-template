@@ -46,7 +46,7 @@
     </el-form>
   </el-drawer>
 </template>
-<script lang="ts" setup>
+<script lang="ts" setup name="MeSettingMenu">
 import { themeConfig as origionThemeConfig } from '@/config';
 import { useSettingStore, useUserStore } from '@/store';
 const setting = useSettingStore();
