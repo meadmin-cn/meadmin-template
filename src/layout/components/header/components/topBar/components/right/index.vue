@@ -9,7 +9,7 @@
     <me-setting v-if="themeConfig.showSetting" class="item"></me-setting>
   </div>
 </template>
-<script setup lang="ts" name="right">
+<script setup lang="ts" name="Right">
 import { localeConfig } from '@/config';
 import MeDarkSwitch from '@/components/meDarkSwitch.vue';
 import MeLocaleSelect from '@/components/meLocaleSelect.vue';

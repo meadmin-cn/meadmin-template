@@ -32,7 +32,7 @@
   </template>
 </template>
 
-<script setup lang="ts" name="menuItem">
+<script setup lang="ts" name="MenuItem">
 import { isExternal } from '@/utils/validate';
 import { resolve } from 'path-browserify';
 import { PropType } from 'vue';

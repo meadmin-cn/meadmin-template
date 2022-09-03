@@ -20,7 +20,7 @@
     </el-scrollbar>
   </el-space>
 </template>
-<script setup lang="ts" name="left">
+<script setup lang="ts" name="Left">
 import { mitter, event } from '@/event';
 import { useSettingStore, useGlobalStore } from '@/store';
 import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';

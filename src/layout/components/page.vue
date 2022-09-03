@@ -11,7 +11,7 @@
   </router-view>
 </template>
 
-<script setup lang="ts" name="layoutPage">
+<script setup lang="ts" name="LayoutPage">
 import { MeKeepAliveProps } from '@/components/meKeepAlive';
 import { useRouteStore } from '@/store';
 import { PropType, TransitionProps } from 'vue';

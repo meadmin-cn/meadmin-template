@@ -62,7 +62,7 @@
     </ul>
   </el-popover>
 </template>
-<script setup lang="ts" name="contextmenu">
+<script setup lang="ts" name="Contextmenu">
 import { useRouteStore } from '@/store';
 import { PropType } from 'vue';
 import { RouteLocationNormalized } from 'vue-router';

@@ -31,7 +31,7 @@
   <me-setting v-if="themeConfig.showSetting && !themeConfig.topBar" class="fixed-setting"></me-setting>
   <me-setting-menu></me-setting-menu>
 </template>
-<script setup lang="ts" name="layout">
+<script setup lang="ts" name="Layout">
 import LayoutHeader from './components/header/index.vue';
 import LayoutMenu from './components/menu/index.vue';
 import LayoutPage from './components/page.vue';
