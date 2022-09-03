@@ -45,7 +45,6 @@ export default defineComponent({
       );
       if (props.keepAlive) {
         const index = components.length - 1;
-        console.log(index);
         components.push(h(MeKeepAlive, props.keepAlive, [components[index]]));
       }
       if (props.transition) {

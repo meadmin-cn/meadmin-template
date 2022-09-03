@@ -19,15 +19,20 @@ const props = defineProps({
   transition: Object as PropType<TransitionProps>,
 });
 const routeStore = useRouteStore();
-const keepAliveProps = reactive<MeKeepAliveProps>({
+const keepAliveProps = computed<MeKeepAliveProps>(() => ({
   max: 30,
-  excludeKey: routeStore.noCacheFullPath,
+  includeKey: [...routeStore.cacheFullPath],
   exclude: 'redirect',
-});
+}));
+
 const route = useRoute();
-watch(route, () => {
-  if (route.meta.noCache) {
-    routeStore.setNoCache(route.fullPath);
-  }
-});
+watch(
+  route,
+  () => {
+    if (!route.meta.noCache) {
+      routeStore.cacheFullPath.add(route.fullPath);
+    }
+  },
+  { immediate: true },
+);
 </script>

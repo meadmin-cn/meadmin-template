@@ -7,13 +7,6 @@ const route = useRoute();
 const router = useRouter();
 const fullPath = route.params.path as string;
 const routeStore = useRouteStore();
-if (routeStore.noCacheFullPath.includes(fullPath)) {
-  router.replace(fullPath);
-} else {
-  routeStore.setNoCache(fullPath);
-  onMounted(() => {
-    routeStore.removeNoCache(fullPath);
-    router.replace(fullPath);
-  });
-}
+routeStore.cacheFullPath.delete(fullPath);
+router.replace(fullPath);
 </script>
