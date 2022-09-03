@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.1.0",
+    "@wangeditor/editor": "^5.1.15",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^0.27.2",
     "dayjs": "^1.11.3",
     "echarts": "^5.3.3",

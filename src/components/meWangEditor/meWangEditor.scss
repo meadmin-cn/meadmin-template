@@ -1,0 +1,25 @@
+@import '@wangeditor/editor/dist/css/style.css'; // 引入 css
+:root,
+:host {
+  // textarea - css vars
+  --w-e-textarea-bg-color: var(--el-bg-color);
+  --w-e-textarea-color: var(--el-text-color-primary);
+  --w-e-textarea-border-color: var(--el-border-color);
+  --w-e-textarea-slight-border-color: var(--el-border-color);
+  --w-e-textarea-slight-color: var(--el-text-color-placeholder);
+  --w-e-textarea-slight-bg-color: var(--el-bg-color-page);
+  --w-e-textarea-selected-border-color: var(--el-color-primary-light-5); // 选中的元素，如选中了分割线
+  --w-e-textarea-handler-bg-color: var(--el-color-primary); // 工具，如图片拖拽按钮
+
+  // toolbar - css vars
+  --w-e-toolbar-color: var(--el-text-color-regular);
+  --w-e-toolbar-bg-color: var(--el-bg-color);
+  --w-e-toolbar-active-color: var(--el-text-color-primary);
+  --w-e-toolbar-active-bg-color: var(--el-fill-color);
+  --w-e-toolbar-disabled-color: var(--el-text-color-disabled);
+  --w-e-toolbar-border-color: var(--el-border-color);
+
+  // modal - css vars
+  --w-e-modal-button-bg-color: var(--el-color-info-light-9);
+  --w-e-modal-button-border-color: var(--el-color-info-light-5);
+}
