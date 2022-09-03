@@ -8,5 +8,5 @@ const router = useRouter();
 const fullPath = route.params.path as string;
 const routeStore = useRouteStore();
 routeStore.cacheFullPath.delete(fullPath);
-router.replace(fullPath);
+onMounted(() => router.replace(fullPath));
 </script>
