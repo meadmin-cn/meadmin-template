@@ -16,7 +16,7 @@
     </template>
   </el-dropdown>
 </template>
-<script setup lang="ts" name="meTranslation">
+<script setup lang="ts" name="MeTranslation">
 import { localeConfig } from '@/config';
 import { setI18nLanguage } from '@/locales/i18n';
 const setLanguage = (locale: string) => {

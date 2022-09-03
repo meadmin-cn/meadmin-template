@@ -17,7 +17,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts" name="request">
+<script setup lang="ts" name="Request">
 import { infoApi, listApi } from '@/api/example';
 const { run, loading, error, data } = listApi();
 

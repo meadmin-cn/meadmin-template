@@ -34,7 +34,7 @@
   </el-dropdown>
 </template>
 
-<script setup lang="ts" name="user">
+<script setup lang="ts" name="User">
 import { useGlobalStore, useUserStore } from '@/store';
 const userStore = useUserStore();
 const globalStore = useGlobalStore();

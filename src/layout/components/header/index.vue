@@ -4,7 +4,7 @@
     <tag-bar v-if="themeConfig.tagBar"></tag-bar>
   </div>
 </template>
-<script setup lang="ts" name="navbar">
+<script setup lang="ts" name="LayoutHeader">
 import { useSettingStore } from '@/store';
 import TopBar from './components/topBar/index.vue';
 import TagBar from './components/tagBar/index.vue';

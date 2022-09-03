@@ -34,7 +34,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts" name="login">
+<script setup lang="ts" name="Login">
 import LoginHeader from './components/header.vue';
 import { LoginParams } from '@/api/user';
 import { useLocalesI18n } from '@/locales/i18n';

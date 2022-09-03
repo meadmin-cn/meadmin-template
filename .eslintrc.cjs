@@ -45,6 +45,7 @@ module.exports = {
     'vue/no-template-shadow': 'off',
     'vue/no-parsing-error': 'off',
     'vue/require-default-prop': 'off',
+    'vue/no-v-html': 'off',
     'no-unused-vars': [
       'error',
       // we are only using this rule to check for unused arguments since TS

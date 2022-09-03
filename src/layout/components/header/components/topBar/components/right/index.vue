@@ -9,7 +9,7 @@
     <me-setting v-if="themeConfig.showSetting" class="item"></me-setting>
   </div>
 </template>
-<script setup lang="ts" name="right">
+<script setup lang="ts" name="Right">
 import { localeConfig } from '@/config';
 import MeDarkSwitch from '@/components/meDarkSwitch.vue';
 import MeLocaleSelect from '@/components/meLocaleSelect.vue';
@@ -30,7 +30,7 @@ const { themeConfig } = useSettingStore();
   }
 
   .item:hover {
-    background-color: var(--el-bg-color-page);
+    background-color: var(--el-fill-color);
   }
 
   .no-hover:hover {

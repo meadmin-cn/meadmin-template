@@ -1,7 +1,7 @@
 {
   "name": "meadmin-template",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "format": "prettier --write --cache .",
@@ -20,8 +20,11 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.1.0",
+    "@wangeditor/editor": "^5.1.15",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^0.27.2",
     "dayjs": "^1.11.3",
+    "echarts": "^5.3.3",
     "element-plus": "^2.2.8",
     "jquery": "^3.6.0",
     "js-cookie": "^3.0.1",

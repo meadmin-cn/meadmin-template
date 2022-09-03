@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="permission">
+<script setup lang="ts" name="Permission">
 import { permission } from '@/utils/permission';
 </script>
 <style lang="scss" scoped>
