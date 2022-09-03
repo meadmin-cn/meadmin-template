@@ -20,6 +20,10 @@
           @contextmenu.prevent="setContextmenu($event.currentTarget as any, tag)"
         >
           {{ $t(tag.meta.title!) }}
+          <div v-if="!tag.meta.affix" class="del-icon" @click.stop="close($event.currentTarget as any, tag)">
+            <mel-icon-close />
+          </div>
+          <div></div>
         </div>
       </div>
     </el-scrollbar>
@@ -41,6 +45,7 @@
   </div>
   <contextmenu
     v-if="virtualRef"
+    ref="contextmenuRef"
     v-model:visible="showContextmenu"
     :virtual-ref="virtualRef"
     :current="contextmenuCurrent"
@@ -53,7 +58,7 @@
   >
   </contextmenu>
 </template>
-<script setup lang="ts" name="tagBar">
+<script setup lang="ts" name="TagBar">
 import { mitter, event } from '@/event';
 import { useRouteStore, useSettingStore } from '@/store';
 import { ElScrollbar } from 'element-plus';
@@ -164,10 +169,15 @@ const push = (route: RouteLocationNormalized) => {
 const contextmenuCurrent = ref(currentTag.value);
 const virtualRef = ref<HTMLElement>();
 const showContextmenu = ref(false);
-const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized) => {
+const contextmenuRef = ref<InstanceType<typeof contextmenu>>();
+const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized, show = true) => {
   virtualRef.value = event;
   contextmenuCurrent.value = current;
-  showContextmenu.value = true;
+  showContextmenu.value = show;
+};
+const close = (event: HTMLElement, current: RouteLocationNormalized) => {
+  setContextmenu(event, current, false);
+  contextmenuRef.value?.closeCurrent();
 };
 const reload = () => {
   // 刷新
@@ -237,10 +247,26 @@ watch(route, () => {
       height: 100%;
       align-items: center;
       display: flex;
-      padding: 0 16px;
+      padding-left: 16px;
+      padding-right: 16px;
       flex-shrink: 0;
       flex-grow: 0;
       position: relative;
+
+      .del-icon {
+        height: 100%;
+        width: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        margin-right: -16px;
+        visibility: hidden;
+      }
+
+      .del-icon:hover {
+        font-size: 14px;
+      }
     }
 
     .item:first-child {
@@ -251,6 +277,10 @@ watch(route, () => {
       // background-color: rgba(var(--el-color-primary-rgb), 0.5);
       background-color: rgba(var(--el-color-primary-rgb), 0.1);
       color: var(--el-color-primary);
+
+      .del-icon {
+        visibility: unset;
+      }
     }
 
     .item.active {
