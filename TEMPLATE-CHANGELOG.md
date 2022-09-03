@@ -36,6 +36,7 @@
 * 顶栏按钮hover背景色修改 ([d2489ee](https://github.com/meadmin-cn/meadmin-template/commit/d2489ee161561729e5f2ec867eda97bf82baef44))
 * 修复多级菜单无法正常加载bug ([f14edad](https://github.com/meadmin-cn/meadmin-template/commit/f14edadaa5c9cf6b7ef5b898e70f3a135ef54b34))
 * 修复关闭页面不清除缓存bug ([39f8e24](https://github.com/meadmin-cn/meadmin-template/commit/39f8e248a56a868c00e4129beeebec4aef357b48))
+* 修复关闭tag按钮需要点两次才生效问题 ([9f7c99b](https://github.com/meadmin-cn/meadmin-template/commit/9f7c99bdb9ee24859054d446ff3a6146e24ef493))
 
 ## [1.0.2](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.0...template-1.0.2) (2022-09-01)
 
