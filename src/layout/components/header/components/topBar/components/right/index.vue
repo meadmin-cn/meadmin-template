@@ -30,7 +30,7 @@ const { themeConfig } = useSettingStore();
   }
 
   .item:hover {
-    background-color: var(--el-bg-color-page);
+    background-color: var(--el-fill-color);
   }
 
   .no-hover:hover {
