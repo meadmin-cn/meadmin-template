@@ -2,7 +2,7 @@
 import request from '@/utils/request';
 
 const enum Api {
-  STATISTICS = '/api/statistics',
+  STATISTICS = '/api/statistics/index',
   CHART = '/api/statistics/chart',
 }
 

@@ -1,8 +1,8 @@
 import { success, fail } from '../helper';
-
+//请求地址是按先后顺序模糊匹配
 export default [
   {
-    url: '/api/statistics', //
+    url: '/api/statistics/index',
     method: 'get',
     timeout: 500 + Math.floor(Math.random() * 1000),
     response: () => {

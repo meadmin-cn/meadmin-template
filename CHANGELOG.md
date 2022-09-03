@@ -5,9 +5,9 @@
 
 ### 文档更改[docs]
 
-* 加上仓库说明 ([9a9278b](https://github.com/meadmin-cn/meadmin-template/commit/9a9278b4f5ee750bac40499a1475026934c4e78b))
-* 加上文档地址 ([edfa3d3](https://github.com/meadmin-cn/meadmin-template/commit/edfa3d3f569b5addbd7dd58eb8c703f000f502a5))
-* 文档名称修改 ([b3e9446](https://github.com/meadmin-cn/meadmin-template/commit/b3e9446b237128a9fcf64a908b3e76d2fd90b8c5))
+* 加上仓库说明 ([5ad6b06](https://github.com/meadmin-cn/meadmin-template/commit/5ad6b06af546a54c6dcd6bc11d3818ac169faab4))
+* 加上文档地址 ([#16](https://github.com/meadmin-cn/meadmin-template/issues/16)) 
+* 文档名称修改 ([2484986](https://github.com/meadmin-cn/meadmin-template/commit/2484986058c3f1c85c692d770871006309a43f56))
 
 
 ### 重构[refactor]
@@ -19,22 +19,29 @@
 
 ### 样式更改[style]
 
-* 忽略纯js库 ([2f081e7](https://github.com/meadmin-cn/meadmin-template/commit/2f081e7768878c6662c6bfddde80bfffe1bcac91))
-* 加上国内访问及文档地址 ([66dc9f1](https://github.com/meadmin-cn/meadmin-template/commit/66dc9f141d38c8120a2628049d7be03850e46eb1))
+* 忽略纯js库 ([79f4f0b](https://github.com/meadmin-cn/meadmin-template/commit/79f4f0b1b2bf74cef763da1bfc3e1b0aad264d1c))
+* 加上国内访问及文档地址 ([eb2fc36](https://github.com/meadmin-cn/meadmin-template/commit/eb2fc36f7692b9b1c7bc390c51e37555034e5e15))
 * 组件名规范化，改为大驼峰 ([d2f64f6](https://github.com/meadmin-cn/meadmin-template/commit/d2f64f6d7b911a71c27c8e65fe5b2edc94d52ef7))
-* elint格式修复 ([47781cc](https://github.com/meadmin-cn/meadmin-template/commit/47781cc1acc910337783d74eb2e30cd99cd945e1))
+* elint格式修复 ([1e59609](https://github.com/meadmin-cn/meadmin-template/commit/1e596094d89e03799e7f7cab9c33b6f0c5b1944c))
 * layout组件名改为大驼峰 ([b25b453](https://github.com/meadmin-cn/meadmin-template/commit/b25b4537a14354de5889cddfb4c4682b3701af05))
 
 
 ### 新功能[feat]
 
-* 登录框加上验证码 ([b835d81](https://github.com/meadmin-cn/meadmin-template/commit/b835d81c31b262e6eaf06b36056e43db80fdee5f))
+* 登录框加上验证码 ([09f5ccc](https://github.com/meadmin-cn/meadmin-template/commit/09f5ccc0b6a5707f2e81fcfe2a712d43216e7e54))
 * 登录输入框加一键清空和密码框显示隐藏 ([6648b9a](https://github.com/meadmin-cn/meadmin-template/commit/6648b9addfff7f939d703d8a9b35cf478947b7ac))
 * 加上数字动画组件 ([82951a9](https://github.com/meadmin-cn/meadmin-template/commit/82951a9614249dd558dd3a5d00f7583b7279a143))
 * 加上wangEditor ([4abbbda](https://github.com/meadmin-cn/meadmin-template/commit/4abbbdadd343aca078fdc218d249248d58454d6c))
 * 加上wangEditor语言包优化滚动条样式 ([1c235e5](https://github.com/meadmin-cn/meadmin-template/commit/1c235e533a42e4a835450f38ac457041561d4a3e))
 * 控制面板demo完善完成 ([d20e602](https://github.com/meadmin-cn/meadmin-template/commit/d20e602b5064c3469501fca7d9fab95c14bf759f))
 * tag加上删除按钮 ([a20fe1a](https://github.com/meadmin-cn/meadmin-template/commit/a20fe1a7f8c340804209407d40418e4cadcb57a3))
+
+
+### 其他[chore]
+
+* 禁用eslint vue/no-v-html规则 ([f228569](https://github.com/meadmin-cn/meadmin-template/commit/f2285691c92edec5303ec5b8714bdf8f3f1e04b3))
+* template-release v1.0.2 ([4e226bb](https://github.com/meadmin-cn/meadmin-template/commit/4e226bbd5ff58d227a6ff6f49ba1f59dcdb05861))
+* template-release v1.0.3 ([73c881a](https://github.com/meadmin-cn/meadmin-template/commit/73c881adf616d6afbf68f27dc8f6f39d679befcd))
 
 
 ### Bug 修复[fix]
@@ -44,13 +51,7 @@
 * 修复多级菜单无法正常加载bug ([f14edad](https://github.com/meadmin-cn/meadmin-template/commit/f14edadaa5c9cf6b7ef5b898e70f3a135ef54b34))
 * 修复关闭页面不清除缓存bug ([39f8e24](https://github.com/meadmin-cn/meadmin-template/commit/39f8e248a56a868c00e4129beeebec4aef357b48))
 * 修复关闭tag按钮需要点两次才生效问题 ([9f7c99b](https://github.com/meadmin-cn/meadmin-template/commit/9f7c99bdb9ee24859054d446ff3a6146e24ef493))
-
-
-### 其他[chore]
-
-* 禁用eslint vue/no-v-html规则 ([f228569](https://github.com/meadmin-cn/meadmin-template/commit/f2285691c92edec5303ec5b8714bdf8f3f1e04b3))
-* template-release v1.0.2 ([4e226bb](https://github.com/meadmin-cn/meadmin-template/commit/4e226bbd5ff58d227a6ff6f49ba1f59dcdb05861))
-* template-release v1.0.3 ([73c881a](https://github.com/meadmin-cn/meadmin-template/commit/73c881adf616d6afbf68f27dc8f6f39d679befcd))
+* 修复mockjs模糊匹配问题 ([e287f58](https://github.com/meadmin-cn/meadmin-template/commit/e287f58cb8fd3f08eaa5a118fcafbf9fbc0d5ed7))
 
 ## [1.0.1](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.0...main-1.0.1) (2022-08-28)
 
