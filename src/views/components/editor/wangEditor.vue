@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="api">
-      <el-button @click="editor?.setHtml('<p>hello word!</p>')">重置</el-button>
-      <el-button @click="editor?.clear()">清除内容</el-button>
-      <el-button @click="showDialog = true">获取Html</el-button>
+      <el-button @click="editor?.setHtml('<p>hello word!</p>')">{{ $t('重置') }}</el-button>
+      <el-button @click="editor?.clear()">{{ $t('清除') }}{{ $t(' ') }}{{ $t('内容') }}</el-button>
+      <el-button @click="showDialog = true">{{ $t('获取') }}{{ $t(' ') }}Html</el-button>
     </div>
     <me-wang-editor
       ref="editorRef"
@@ -27,7 +27,6 @@ const html = ref('<p>hello word!</p>');
 const config = {
   editor: {
     maxLength: 1000,
-    placeholder: '请输入内容',
     ['MENU_CONF']: {
       uploadImage: {
         // 小于该值就插入 base64 格式（而不上传），默认为 0

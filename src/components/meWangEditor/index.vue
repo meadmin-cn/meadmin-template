@@ -99,15 +99,18 @@ const handleCreated = (editor: IDomEditor) => {
     &::-webkit-scrollbar {
       z-index: 1;
       border-radius: 4px;
-      width: 4px;
+      width: 6px;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: var(--el-text-color-secondary);
+      background-color: rgba(144, 147, 153, 0.3);
       width: 100%;
-      opacity: 0.1;
+      opacity: 0.3;
       border-radius: 4px;
     }
     overflow-y: overlay !important;
   }
+}
+:global(.dark .me-wang-editor .w-e-scroll::-webkit-scrollbar-thumb) {
+  background-color: rgba(163, 166, 173, 0.3);
 }
 </style>
