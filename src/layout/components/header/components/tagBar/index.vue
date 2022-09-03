@@ -175,8 +175,9 @@ const setContextmenu = (event: HTMLElement, current: RouteLocationNormalized, sh
   contextmenuCurrent.value = current;
   showContextmenu.value = show;
 };
-const close = (event: HTMLElement, current: RouteLocationNormalized) => {
+const close = async (event: HTMLElement, current: RouteLocationNormalized) => {
   setContextmenu(event, current, false);
+  await nextTick();
   contextmenuRef.value?.closeCurrent();
 };
 const reload = () => {
