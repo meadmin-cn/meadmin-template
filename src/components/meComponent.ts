@@ -4,7 +4,7 @@ import { useLoadMessages } from '@/locales/i18n';
 import { done } from '@/utils/nProgress';
 import { localeConfig } from '@/config';
 export default defineComponent({
-  name: 'meComponent',
+  name: 'MeComponent',
   props: {
     is: {
       type: [String, Object],

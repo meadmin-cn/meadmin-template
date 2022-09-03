@@ -4,11 +4,6 @@
     <input v-model="value" name="text" />
   </div>
 </template>
-<script setup lang="ts" name="Dashboard">
+<script setup lang="ts" name="DashboardIndex">
 const value = ref('');
 </script>
-
-<style lang="scss" scoped>
-.index {
-}
-</style>

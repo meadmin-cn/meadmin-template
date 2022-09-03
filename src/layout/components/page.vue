@@ -22,7 +22,7 @@ const routeStore = useRouteStore();
 const keepAliveProps = computed<MeKeepAliveProps>(() => ({
   max: 30,
   includeKey: [...routeStore.cacheFullPath],
-  exclude: 'redirect',
+  exclude: 'Redirect',
 }));
 
 const route = useRoute();
