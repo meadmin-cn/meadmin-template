@@ -62,8 +62,8 @@
     </ul>
   </el-popover>
 </template>
-<script setup lang="ts" name="contextmenu">
-import { cloneDeep } from 'lodash';
+<script setup lang="ts" name="Contextmenu">
+import { useRouteStore } from '@/store';
 import { PropType } from 'vue';
 import { RouteLocationNormalized } from 'vue-router';
 const props = defineProps({
@@ -100,69 +100,81 @@ let canCloseFirst = computed(() => {
   const index = tags.value.findIndex((item) => !item.meta.affix);
   return index > -1 ? index : Infinity;
 });
+const closeMenu = async () => {
+  emit('update:visible', false);
+  await nextTick();
+};
+//清除清除tab对应缓存
+const routeStore = useRouteStore();
+const cleanCache = async (start: number, end: number) => {
+  for (let i = start; i <= end; i++) {
+    routeStore.cacheFullPath.delete(tags.value[i].fullPath);
+  }
+};
+// 刷新
 const reload = () => {
-  // 刷新
   router.replace('/redirect/' + encodeURIComponent(props.current.fullPath));
   closeMenu();
 };
+// 关闭当前
 const closeCurrent = async () => {
-  // 关闭当前
   if (tags.value.length === 0 || props.current.meta.affix) {
     return;
   }
   await closeMenu();
   const nowIndex = index.value;
+  cleanCache(index.value, index.value);
   tags.value.splice(index.value, 1);
   emit('update:modelValue', [...tags.value]);
   if (props.current.fullPath === route.fullPath) {
     router.push(tags.value[Math.min(tags.value.length - 1, nowIndex)].fullPath);
   }
 };
+// 关闭左侧
 const closeLeft = async () => {
-  // 关闭左侧
   if (index.value <= canCloseFirst.value) {
     return;
   }
   await closeMenu();
+  cleanCache(canCloseFirst.value, index.value);
   tags.value.splice(canCloseFirst.value, index.value - canCloseFirst.value);
   emit('update:modelValue', [...tags.value]);
   if (tags.value.findIndex((item) => item.fullPath === route.fullPath) === -1) {
     router.push(tags.value[index.value].fullPath);
   }
 };
+// 关闭右侧
 const closeRight = async () => {
-  // 关闭右侧
   if (index.value + 1 === tags.value.length) {
     return;
   }
   await closeMenu();
+  cleanCache(index.value + 1, tags.value.length - 1);
   tags.value.splice(index.value + 1);
   emit('update:modelValue', [...tags.value]);
   if (tags.value.findIndex((item) => item.fullPath === route.fullPath) === -1) {
     router.push(tags.value[index.value].fullPath);
   }
 };
+// 关闭其他
 const closeOther = () => {
-  // 关闭其他
   closeLeft();
   closeRight();
 };
+// 关闭全部
 const closeAll = async () => {
-  // 关闭全部
   if (canCloseFirst.value === Infinity) {
     return;
   }
   await closeMenu();
+  cleanCache(canCloseFirst.value, tags.value.length - 1);
   tags.value.splice(canCloseFirst.value);
   emit('update:modelValue', [...tags.value]);
   if (tags.value.findIndex((item) => item.fullPath === route.fullPath) === -1) {
     router.push(tags.value[tags.value.length - 1].fullPath);
   }
 };
-const closeMenu = async () => {
-  emit('update:visible', false);
-  await nextTick();
-};
+defineExpose({ closeAll, closeCurrent, closeLeft, closeMenu, closeOther, closeRight });
 </script>
 <style lang="scss">
 .me-contextmenu-tooltip {

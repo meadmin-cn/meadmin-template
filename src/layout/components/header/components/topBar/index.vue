@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="topBar">
+<script setup lang="ts" name="TopBar">
 import Left from './components/left.vue';
 import Right from './components/right/index.vue';
 </script>

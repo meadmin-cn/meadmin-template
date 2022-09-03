@@ -1,5 +1,63 @@
 
 
+## [1.0.3](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.2...template-1.0.3) (2022-09-03)
+
+
+### 文档更改[docs]
+
+* 加上仓库说明 ([5ad6b06](https://github.com/meadmin-cn/meadmin-template/commit/5ad6b06af546a54c6dcd6bc11d3818ac169faab4))
+
+
+### 其他[chore]
+
+* 禁用eslint vue/no-v-html规则 ([f228569](https://github.com/meadmin-cn/meadmin-template/commit/f2285691c92edec5303ec5b8714bdf8f3f1e04b3))
+
+
+### 重构[refactor]
+
+* 设置按钮优化 ([8d64714](https://github.com/meadmin-cn/meadmin-template/commit/8d64714126d054384a81d474b4b0a6b021ef02d5))
+* 优化刷新页面，方式 ([9714171](https://github.com/meadmin-cn/meadmin-template/commit/9714171ca36d1dd41ec638488512545de81fed3b))
+
+
+### 样式更改[style]
+
+* 忽略纯js库 ([79f4f0b](https://github.com/meadmin-cn/meadmin-template/commit/79f4f0b1b2bf74cef763da1bfc3e1b0aad264d1c))
+* 组件名规范化，改为大驼峰 ([d2f64f6](https://github.com/meadmin-cn/meadmin-template/commit/d2f64f6d7b911a71c27c8e65fe5b2edc94d52ef7))
+* layout组件名改为大驼峰 ([b25b453](https://github.com/meadmin-cn/meadmin-template/commit/b25b4537a14354de5889cddfb4c4682b3701af05))
+
+
+### 新功能[feat]
+
+* tag加上删除按钮 ([a20fe1a](https://github.com/meadmin-cn/meadmin-template/commit/a20fe1a7f8c340804209407d40418e4cadcb57a3))
+
+
+### Bug 修复[fix]
+
+* 顶栏按钮hover背景色修改 ([d2489ee](https://github.com/meadmin-cn/meadmin-template/commit/d2489ee161561729e5f2ec867eda97bf82baef44))
+* 修复多级菜单无法正常加载bug ([f14edad](https://github.com/meadmin-cn/meadmin-template/commit/f14edadaa5c9cf6b7ef5b898e70f3a135ef54b34))
+* 修复关闭页面不清除缓存bug ([39f8e24](https://github.com/meadmin-cn/meadmin-template/commit/39f8e248a56a868c00e4129beeebec4aef357b48))
+* 修复关闭tag按钮需要点两次才生效问题 ([9f7c99b](https://github.com/meadmin-cn/meadmin-template/commit/9f7c99bdb9ee24859054d446ff3a6146e24ef493))
+
+## [1.0.2](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.0...template-1.0.2) (2022-09-01)
+
+
+### 样式更改[style]
+
+* 忽略纯js库 ([dad0920](https://github.com/meadmin-cn/meadmin-template/commit/dad092029d6b04a118b6f6eded3e31328bce6ac0))
+* 加上国内访问及文档地址 ([eb2fc36](https://github.com/meadmin-cn/meadmin-template/commit/eb2fc36f7692b9b1c7bc390c51e37555034e5e15))
+* elint格式修复 ([1e59609](https://github.com/meadmin-cn/meadmin-template/commit/1e596094d89e03799e7f7cab9c33b6f0c5b1944c))
+
+
+### 文档更改[docs]
+
+* 加上仓库说明 ([277d0bb](https://github.com/meadmin-cn/meadmin-template/commit/277d0bbea2ce0e6ba528fcf3db5cdf2f8d60a682))
+
+
+### 重构[refactor]
+
+* 暗黑模式切换的设置项吸入settingStore中 ([ddccfac](https://github.com/meadmin-cn/meadmin-template/commit/ddccfac17923b7f25d9d0ef7cdcb275c974bbdd3))
+* 设置按钮优化 ([7f3e559](https://github.com/meadmin-cn/meadmin-template/commit/7f3e55902acf5ed0d15306c5afba4a85f6c02c40))
+
 ## [1.0.1](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.0...template-1.0.1) (2022-08-28)
 
 

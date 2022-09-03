@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="ComponentLang">
 import { useLocalesI18n } from '@/locales/i18n';
 const { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'compnentLang']);
 </script>
