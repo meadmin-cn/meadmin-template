@@ -27,7 +27,7 @@ const props = defineProps({
   },
   format: {
     type: Function as PropType<(number: number) => string | number>,
-    default: (number: number) => new Intl.NumberFormat('en-IN').format(number),
+    default: new Intl.NumberFormat('zh').format,
   },
 });
 const emit = defineEmits(['finished', 'started']);
