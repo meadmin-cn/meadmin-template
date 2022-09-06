@@ -68,6 +68,7 @@
     "unplugin-vue-components": "^0.22.4",
     "vite": "^3.0.0",
     "vite-plugin-autogeneration-import-file": "^2.1.0",
+    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-mock": "^2.9.6",
     "vite-svg-loader": "^3.4.0",
     "vue-eslint-parser": "^9.0.3",
