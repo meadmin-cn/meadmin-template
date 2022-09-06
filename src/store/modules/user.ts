@@ -5,7 +5,7 @@ import { loginConfig as config } from '@/config';
 import { loading } from '@/utils/loading';
 import { PageEnum } from '@/enums/pageEnum';
 import { loginApi, LoginParams, userInfoApi, UserInfoResult } from '@/api/user';
-import { router } from '@/router';
+import { router, flatteningRoutes2, constantRoutes } from '@/router';
 import useRouteStore from './route';
 interface UserState {
   user: UserInfoResult; // 用户信息
@@ -52,9 +52,9 @@ export default defineStore({
         this.token = token;
         this.user = await userInfoApi(true)();
         this.rules = this.user.rules;
-        useRouteStore()
-          .generateRoutes()
-          .forEach((route) => router.addRoute(route));
+        flatteningRoutes2(useRouteStore().generateRoutes(), constantRoutes.length).forEach((route) =>
+          router.addRoute(route),
+        );
       } else {
         this.token = '';
       }
