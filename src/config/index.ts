@@ -3,6 +3,7 @@ import loginConfig from './login';
 import themeConfig from './theme';
 const settingKey = 'me-config';
 const settingConfig = {
+  version: '1.0.3', //版本当版本改变时会清空localStorage和sessionStorage
   openKeepAlive: true, // 是否开启KeepAlive缓存
 };
 export { loginConfig, localeConfig, themeConfig, settingKey, settingConfig };
