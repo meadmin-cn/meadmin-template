@@ -5,7 +5,7 @@ import { mixColor } from '@/utils/helper';
 const { css } = useStyleTag('');
 const useSettingStore = defineStore('setting', {
   state: () => ({
-    themeConfig: useStorage(`${settingKey}-theme`, themeConfig),
+    themeConfig: useStorage(`${settingKey}-theme`, themeConfig, localStorage, { mergeDefaults: true }),
     locale: useStorage(`${settingKey}-locale`, localeConfig.localeSetting.locale ?? 'zh-cn'),
     elLocale: undefined as Language | undefined,
     isDark: useDark({ storageKey: 'me-color-dark-scheme' }),

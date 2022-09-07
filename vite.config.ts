@@ -6,7 +6,7 @@ import { autoImport, resolver } from 'vite-plugin-autogeneration-import-file';
 import vueSetUpExtend from './plugin/vueSetupExtend';
 import { viteMockServe } from 'vite-plugin-mock';
 import { ConfigEnv, UserConfigExport } from 'vite';
-import { visualizer } from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer'; //打包大小分析（stats.html）
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
@@ -15,6 +15,7 @@ import { splitVendorChunkPlugin } from 'vite';
 import autoprefixer from 'autoprefixer';
 // @ts-ignore
 import px2rem from 'postcss-plugin-px2rem';
+import viteCompression from 'vite-plugin-compression'; //打包压缩
 // @ts-ignore
 import { loadMessageConfig } from './src/config/locale';
 function pathResolve(dir: string) {
@@ -127,6 +128,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
       ]),
       visualizer(),
+      viteCompression(),
     ],
     css: {
       preprocessorOptions: {

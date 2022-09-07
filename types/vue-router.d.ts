@@ -29,6 +29,8 @@ declare module 'vue-router' {
     alwaysShow?: boolean;
     // 是否需要面包屑false不需要 ture或undefined为需要
     breadcrumb?: boolean;
+    //路由在菜单的index deep映射（会动态计算不要设置默认值）
+    menuIndex?: number[];
   }
   export interface _RouteRecordBase {
     // 没有需要展示的子集（会动态计算不要设置默认值）
