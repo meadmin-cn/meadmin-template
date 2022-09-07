@@ -1,5 +1,19 @@
 
 
+## [1.0.4](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.3...template-1.0.4) (2022-09-07)
+
+
+### Bug 修复[fix]
+
+* 修复多级路由下切换的报错问题，扁平化为二级路由 ([9736fb1](https://github.com/meadmin-cn/meadmin-template/commit/9736fb15f75188999c3f943034a5c4d1041d0cf5))
+
+
+### 新功能[feat]
+
+* 加上gzip压缩 ([54ed748](https://github.com/meadmin-cn/meadmin-template/commit/54ed748ae9ef2bd2b5d155faad48c5a43866159c))
+* 加上keepAlive全局开启配置 ([091f9ad](https://github.com/meadmin-cn/meadmin-template/commit/091f9ad03cb6730174bbeb0236b5f53bf2d51e57))
+* 加上version配置以便在版本改变时清空缓存 ([4f0a169](https://github.com/meadmin-cn/meadmin-template/commit/4f0a169e2ff061681dfc5319da046eda29bafb41))
+
 ## [1.0.3](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.2...template-1.0.3) (2022-09-03)
 
 

@@ -13,25 +13,28 @@
 
 <script setup lang="ts" name="LayoutPage">
 import { MeKeepAliveProps } from '@/components/meKeepAlive';
+import { settingConfig } from '@/config';
 import { useRouteStore } from '@/store';
-import { PropType, TransitionProps } from 'vue';
+import { ComputedRef, PropType, TransitionProps } from 'vue';
 const props = defineProps({
   transition: Object as PropType<TransitionProps>,
 });
 const routeStore = useRouteStore();
-const keepAliveProps = computed<MeKeepAliveProps>(() => ({
-  max: 30,
-  includeKey: [...routeStore.cacheFullPath],
-}));
-
-const route = useRoute();
-watch(
-  route,
-  () => {
-    if (!route.meta.noCache) {
-      routeStore.cacheFullPath.add(route.fullPath);
-    }
-  },
-  { immediate: true },
-);
+let keepAliveProps: undefined | ComputedRef<MeKeepAliveProps>;
+if (settingConfig.openKeepAlive) {
+  keepAliveProps = computed<MeKeepAliveProps>(() => ({
+    max: 30,
+    includeKey: [...routeStore.cacheFullPath],
+  }));
+  const route = useRoute();
+  watch(
+    route,
+    () => {
+      if (!route.meta.noCache) {
+        routeStore.cacheFullPath.add(route.fullPath);
+      }
+    },
+    { immediate: true },
+  );
+}
 </script>
