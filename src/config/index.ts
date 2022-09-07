@@ -2,4 +2,7 @@ import * as localeConfig from './locale';
 import loginConfig from './login';
 import themeConfig from './theme';
 const settingKey = 'me-config';
-export { loginConfig, localeConfig, themeConfig, settingKey };
+const settingConfig = {
+  openKeepAlive: true, // 是否开启KeepAlive缓存
+};
+export { loginConfig, localeConfig, themeConfig, settingKey, settingConfig };
