@@ -7,6 +7,9 @@ import Layout from '@/layout/index.vue';
 export const asyncRoutes = concatObjectValue<RouteRecordRaw>(
   import.meta.glob('./routes/*.ts', { eager: true, import: 'routes' }),
 );
+import { isExternal } from '@/utils/validate';
+import { resolve } from 'path-browserify';
+
 export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -46,9 +49,58 @@ export const constantRoutes: RouteRecordRaw[] = [
     meta: { hideMenu: true, title: '404' },
   },
 ];
+
+//路由地址转为绝对地址
+export const resolvePath = (routePath: string, basePath = '') => {
+  if (isExternal(routePath) || isExternal(basePath)) {
+    return routePath;
+  }
+  return resolve(basePath, routePath);
+};
+
+//扁平化路由
+export const flatteningRoutes = (
+  routes: RouteRecordRaw[],
+  basePath = '',
+  menuIndex: number[] = [],
+  newRoutes: RouteRecordRaw[] = [],
+) => {
+  routes.forEach((route, index) => {
+    route.path = resolvePath(route.path, basePath);
+    if (!route.meta) {
+      route.meta = { title: '' };
+    }
+    route.meta.menuIndex = [...menuIndex, index];
+    newRoutes.push(Object.assign({ ...route }, { children: [] }));
+    if (route.children) {
+      flatteningRoutes(route.children, route.path, route.meta.menuIndex, newRoutes);
+    }
+  });
+  return newRoutes;
+};
+//扁平化为2级路由
+export const flatteningRoutes2 = (routes: RouteRecordRaw[], startIndex = 0) => {
+  const newRoutes = [] as RouteRecordRaw[];
+  routes.forEach((route, index) => {
+    if (!route.meta) {
+      route.meta = { title: '' };
+    }
+    route.meta.menuIndex = [index + startIndex];
+    newRoutes.push(
+      Object.assign(
+        { ...route },
+        {
+          children: route.children ? flatteningRoutes(route.children, route.path, [index + startIndex]) : [],
+        },
+      ),
+    );
+  });
+  return newRoutes;
+};
+
 export const router = createRouter({
   history: createWebHashHistory(), //createWebHistory(),
-  routes: constantRoutes,
+  routes: flatteningRoutes2(constantRoutes),
 });
 
 /**

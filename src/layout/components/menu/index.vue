@@ -10,7 +10,7 @@
       :collapse="!globalStore.isMobile && themeConfig.menuCollapse"
     >
       <div class="title">M<span>e - Admin</span></div>
-      <layout-menu-item v-for="route in routeStore.routes" :key="route.path" :item="route" :base-path="route.path" />
+      <layout-menu-item v-for="route in routeStore.routes" :key="route.path" :item="route" />
     </el-menu>
   </el-scrollbar>
 </template>

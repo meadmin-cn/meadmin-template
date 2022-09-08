@@ -22,17 +22,31 @@
 </template>
 <script setup lang="ts" name="Left">
 import { mitter, event } from '@/event';
-import { useSettingStore, useGlobalStore } from '@/store';
+import { useSettingStore, useGlobalStore, useRouteStore } from '@/store';
 import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
 const { themeConfig } = useSettingStore();
 const globalStore = useGlobalStore();
 const setMenuCollapse = () => {
   themeConfig.menuCollapse = !themeConfig.menuCollapse;
 };
-const breadcrumbList = ref([] as RouteRecordRaw[]);
+const breadcrumbList = ref([] as Pick<RouteRecordRaw, 'name' | 'path' | 'meta' | 'redirect'>[]);
 const route = useRoute();
+const { routes } = useRouteStore();
 const setBreadcrumbList = (route: RouteLocationNormalized) => {
-  breadcrumbList.value = route.matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false);
+  const list = [] as Pick<RouteRecordRaw, 'name' | 'path' | 'meta' | 'redirect'>[];
+  let temp = { children: routes } as unknown as RouteRecordRaw;
+  route.meta.menuIndex!.forEach((item) => {
+    temp = temp.children![item];
+    if (temp.meta && temp.meta.title && temp.meta.breadcrumb !== false) {
+      list.push({
+        name: temp.name,
+        path: temp.path,
+        meta: temp.meta,
+        redirect: temp.redirect === route.path ? undefined : temp.redirect,
+      });
+    }
+  });
+  breadcrumbList.value = list;
 };
 setBreadcrumbList(route);
 mitter.on(event.BEFORE_ROUTE_CHANGE, ({ to }) => setBreadcrumbList(to), true);

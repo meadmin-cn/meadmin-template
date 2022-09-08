@@ -10,6 +10,7 @@ export const routes: RouteRecordRaw[] = [
         path: '1-1',
         component: LayoutPage,
         meta: { title: '多级菜单1-1', alwaysShow: true },
+        redirect: '/example/multilevel/1/1-1/1-1-1',
         children: [
           {
             path: '1-1-1',
