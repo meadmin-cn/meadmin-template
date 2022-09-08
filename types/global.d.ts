@@ -1,3 +1,4 @@
+import { Component, AllowedComponentProps, DefineComponent, VNodeProps } from 'vue';
 export {};
 declare global {
   // svg-icon /el-cion-*组件定义
@@ -14,4 +15,11 @@ declare global {
   declare const __FEATURE_PROD_DEVTOOLS__: boolean;
   declare const __FEATURE_SUSPENSE__: boolean;
   /* eslint-disable */
+
+  type ComponentProps<Component> = {
+    -readonly [K in keyof Omit<
+      InstanceType<Component>['$props'],
+      keyof InstanceType<DefineComponent>['$props']
+    >]: InstanceType<Component>['$props'][K];
+  };
 }
