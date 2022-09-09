@@ -32,7 +32,7 @@
             </el-popover>
 
             <el-button icon="mel-icon-download" title="导出" />
-            <el-button icon="mel-icon-printer" title="打印" />
+            <el-button icon="mel-icon-printer" title="打印" @click="print()" />
             <slot name="tools"></slot>
           </el-button-group>
           <el-button>
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <el-table v-bind="$attrs">
+    <el-table v-bind="$attrs" ref="elTable">
       <component :is="children"></component>
     </el-table>
   </div>
@@ -49,6 +49,8 @@
 <script lang="ts">
 import { ElTable } from 'element-plus';
 import customColumn from './hooks/customColumn';
+import printTable from './hooks/print';
+import { toRaw } from 'vue';
 export default defineComponent<ComponentProps<typeof ElTable>>({
   name: 'MeTable',
   props: {} as any,
@@ -61,10 +63,16 @@ export default defineComponent<ComponentProps<typeof ElTable>>({
         checkedLabels.delete(data.value);
       }
     };
-    return { children, labels, checkedLabels, checkChange, toRaw };
-  },
-  mounted() {
-    console.log(this);
+    const elTable = ref<undefined | InstanceType<typeof ElTable>>();
+    return {
+      children,
+      labels,
+      checkedLabels,
+      checkChange,
+      toRaw,
+      elTable,
+      print: () => printTable(elTable.value!.$el, 'myTable'),
+    };
   },
 });
 </script>
