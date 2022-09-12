@@ -1,10 +1,15 @@
-import { VNode } from 'vue';
+import { VNode, Component } from 'vue';
 import { debounce } from 'lodash-es';
 interface Label {
   value: string;
   label?: string;
   children: Label[];
 }
+/* 用于判断 vnode 是否是 el-table-column 组件 */
+function isElTableColumn(vnode: VNode) {
+  return (vnode.type as Component)?.name === 'ElTableColumn';
+}
+
 export default (slot: () => VNode[]) => {
   const labels = [] as Label[];
   let needScreen = false;
@@ -18,11 +23,13 @@ export default (slot: () => VNode[]) => {
           return;
         }
       } else {
-        labels[index] = {
-          value: parentId + '_' + index,
-          label: vNode.props?.label,
-          children: [],
-        };
+        if (isElTableColumn(vNode)) {
+          labels[index] = {
+            value: parentId + '_' + index,
+            label: vNode.props?.label,
+            children: [],
+          };
+        }
         checkedLabels.add(parentId + '_' + index);
       }
       if (vNode.children && (vNode.children as Record<string, () => VNode[]>).default) {
