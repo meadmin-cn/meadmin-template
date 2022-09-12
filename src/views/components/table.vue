@@ -1,6 +1,7 @@
 <template>
   <div class="table">
-    <me-table :data="tableData">
+    <me-table :data="tableData" @quick-search="() => {}" @refresh="() => {}" @add="() => {}">
+      <el-table-column type="selection" label="选择" width="55" />
       <el-table-column prop="date" label="Date" width="150" />
       <el-table-column label="Delivery Info">
         <el-table-column prop="name" label="Name" width="120" />

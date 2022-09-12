@@ -56,8 +56,16 @@ export function handlePrint(content: string, title = '', style: string[] = [], t
   printFrame.src = URL.createObjectURL(blob);
 }
 
-export default async (dom: HTMLElement, title = '', style: string[] = []) => {
+export default async (elTable: ELTable, title = '', style: string[] = []) => {
   style.unshift((await import('@/styles/index.scss')).default);
   style.unshift((await import('element-plus/dist/index.css')).default);
-  handlePrint(dom.outerHTML, title, style);
+  const index = elTable.getSelectionIndexs();
+  if (index.length) {
+    style.push(
+      'tbody>tr:not(' +
+        index.map((item) => 'tr:nth-child(' + (item + 1) + ')').join(',') +
+        '){display:none !important;}',
+    );
+  }
+  handlePrint(elTable.$el.outerHTML, title, style);
 };
