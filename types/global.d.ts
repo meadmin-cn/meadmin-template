@@ -1,5 +1,5 @@
 import { Component, AllowedComponentProps, DefineComponent, VNodeProps } from 'vue';
-import { ElTable, ElTable } from 'element-plus';
+import { ElTable } from 'element-plus';
 export {};
 declare global {
   // svg-icon /el-cion-*组件定义
