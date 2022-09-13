@@ -57,6 +57,13 @@ export function handlePrint(content: string, title = '', style: string[] = [], t
 }
 
 export default async (elTable: ELTable, title = '', style: string[] = []) => {
+  style.unshift(`.el-table{
+    width: max-content;
+    margin: 0 auto;
+  }
+  .el-table__header,.el-table__body{
+    width:auto !important
+  }`);
   style.unshift((await import('@/styles/index.scss')).default);
   style.unshift((await import('element-plus/dist/index.css')).default);
   const index = elTable.getSelectionIndexs();

@@ -1,24 +1,22 @@
 <template>
   <div class="me-table">
-    <div class="me-toolbar">
-      <div class="me-toolbar-search">
+    <div v-if="toolbar" class="me-toolbar">
+      <div v-if="$slots.search" v-show="showSearch" class="me-toolbar-search">
         <slot name="search"></slot>
-      </div>
-      <div class="me-toolbar-content">
-        <slot name="toolbar"></slot>
       </div>
       <div class="me-toolbar-menu">
         <div class="me-toolbar-buttons">
           <el-button v-if="_.vnode.props.onRefresh" @click="$emit('refresh')"><mel-icon-refresh /></el-button>
-          <el-button v-if="_.vnode.props.onAdd" @click="$emit('add')"><mel-icon-plus /></el-button>
+          <el-button v-if="_.vnode.props.onAdd" type="primary" @click="$emit('add')"><mel-icon-plus /></el-button>
           <slot name="buttons"></slot>
         </div>
         <div class="me-toolbar-tools">
           <el-input
             v-if="_.vnode.props.onQuickSearch"
+            v-model="searchText"
             placeholder="快捷搜索"
             prefix-icon="mel-icon-search"
-            @change="$emit('quickSearch', $event.target.value)"
+            @change="$emit('quickSearch', searchText)"
           />
           <el-button-group>
             <el-popover v-if="customColumn" placement="bottom" trigger="click" width="auto">
@@ -30,7 +28,7 @@
                   node-key="value"
                   :data="labels"
                   default-expand-all
-                  :default-checked-keys="[...toRaw(checkedLabels)]"
+                  :default-checked-keys="checkedLabels"
                   :props="{ label: 'label', children: 'children' }"
                   show-checkbox
                   @check-change="checkChange"
@@ -53,7 +51,7 @@
                     v-for="item in exportMenu"
                     :key="item.label"
                     class="el-dropdown-menu__item"
-                    @click="item.handle(elTable)"
+                    @click="handleExport(elTable, item.filename ?? name!)"
                   >
                     {{ item.label }}
                   </li>
@@ -63,7 +61,7 @@
             <el-button v-if="print" icon="mel-icon-printer" title="打印" @click="printTable(elTable)" />
             <slot name="tools"></slot>
           </el-button-group>
-          <el-button>
+          <el-button v-if="$slots.search" @click="showSearch = !showSearch">
             <mel-icon-search></mel-icon-search>
           </el-button>
         </div>
@@ -76,21 +74,31 @@
 </template>
 <script lang="ts">
 import { ElTable } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPropTypes, PropType } from 'vue';
+import { ComponentOptionsMixin, ExtractPropTypes, PropType, renderSlot, toRaw } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
 import printTable from './hooks/print';
 const props = {
+  name: {
+    type: String,
+    default: 'meTable',
+  },
   loading: {
     type: Boolean,
     default: false,
   },
   exportMenu: {
-    type: Array as PropType<{ label: string; handle: (elTable: ELTable) => void }[]>,
+    type: Array as PropType<
+      {
+        label: string;
+        filename?: string;
+        handle: (elTable: ELTable, filename: string) => void | 'xlsx' | 'csv' | 'txt';
+      }[]
+    >,
     default: () => [
-      { label: 'xlsx', handle: (elTable: ELTable) => exportTable(elTable, 'xlsx', 'meTable') },
-      { label: 'csv', handle: (elTable: ELTable) => exportTable(elTable, 'csv', 'meTable') },
-      { label: 'txt', handle: (elTable: ELTable) => exportTable(elTable, 'txt', 'meTable') },
+      { label: 'xlsx', handle: 'xlsx' },
+      { label: 'csv', handle: 'csv' },
+      { label: 'txt', handle: 'txt' },
     ],
   },
   print: {
@@ -98,6 +106,14 @@ const props = {
     default: true,
   },
   customColumn: {
+    type: Boolean as PropType<boolean | { exclude: [] }>,
+    default: true,
+  },
+  defaultShowSearch: {
+    type: Boolean,
+    default: false,
+  },
+  toolbar: {
     type: Boolean,
     default: true,
   },
@@ -105,7 +121,7 @@ const props = {
 const emits = {
   quickSearch(searchText: string) {
     //快捷搜索
-    return searchText.length > 0;
+    return true;
   },
   refresh() {
     return true;
@@ -128,6 +144,8 @@ export default defineComponent<
   props: props as any,
   emits,
   setup(props, { slots }) {
+    const showSearch = ref(props.defaultShowSearch);
+    const searchText = ref('');
     const { children, labels, checkedLabels } = customColumn(slots.default!);
     const checkChange = (data: { value: string }, is: boolean, childrenIs: boolean) => {
       if (is || childrenIs) {
@@ -149,29 +167,36 @@ export default defineComponent<
       };
     });
     return {
+      showSearch,
+      searchText,
       children,
       labels,
-      checkedLabels,
+      checkedLabels: [...checkedLabels],
       checkChange,
-      toRaw,
       elTable,
       exportTable,
       printTable,
+      handleExport: (
+        handle: (elTable: ELTable, filename: string) => void | 'xls' | 'txt' | 'csv',
+        filename: string,
+      ) => {
+        if (typeof handle === 'string') {
+          exportTable(elTable.value!, handle, filename);
+        } else {
+          handle(elTable.value!, filename);
+        }
+      },
     };
-  },
-  mounted() {
-    console.log(this);
   },
 });
 </script>
 <style lang="scss" scoped>
 .me-table {
-  margin-top: -10px;
   .me-toolbar {
-    margin-top: 10px;
+    margin-top: -12px;
+    margin-bottom: 12px;
     .me-toolbar-search {
-    }
-    .me-toolbar-content {
+      margin-top: 12px;
     }
     .me-toolbar-menu {
       display: flex;
@@ -179,16 +204,16 @@ export default defineComponent<
       justify-content: space-between;
       flex-wrap: wrap;
       .me-toolbar-buttons {
-        margin-bottom: 10px;
+        margin-top: 12px;
       }
       .me-toolbar-tools {
-        margin-bottom: 10px;
+        margin-top: 12px;
         display: flex;
         align-items: center;
         > div,
         > span,
         > button {
-          margin-left: 10px;
+          margin-left: 12px;
         }
         > div:first-child,
         > span:first-child,
