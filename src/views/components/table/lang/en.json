@@ -1,0 +1,13 @@
+{
+  "名称": "Name",
+  "类型": "Type",
+  "日期": "Date",
+  "地址": "Address",
+  "查询": "Search",
+  "重置": "Reset",
+  "快递": "Delivery",
+  "详情": "Info",
+  "邮政编码": "Zip",
+  "省": "Province",
+  "市": "City"
+}
