@@ -58,7 +58,7 @@
                 </ul>
               </template>
             </el-popover>
-            <el-button v-if="print" icon="mel-icon-printer" title="打印" @click="printTable(elTable)" />
+            <el-button v-if="print" icon="mel-icon-printer" title="打印" @click="key++" />
             <slot name="tools"></slot>
           </el-button-group>
           <el-button v-if="$slots.search" @click="showSearch = !showSearch">
@@ -73,12 +73,14 @@
   </div>
 </template>
 <script lang="ts">
+import { children } from 'dom7';
 import { ElTable } from 'element-plus';
 import { ComponentOptionsMixin, ExtractPropTypes, PropType, renderSlot, toRaw } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
 import printTable from './hooks/print';
 const props = {
+  parent: Object,
   name: {
     type: String,
     default: 'meTable',
@@ -144,9 +146,13 @@ export default defineComponent<
   props: props as any,
   emits,
   setup(props, { slots }) {
+    watchEffect(() => {
+      slots.default!();
+      console.log(1213);
+    });
     const showSearch = ref(props.defaultShowSearch);
     const searchText = ref('');
-    const { children, labels, checkedLabels } = customColumn(slots.default!);
+    const { children, labels, checkedLabels, key } = customColumn(slots.default!, props.parent);
     const checkChange = (data: { value: string }, is: boolean, childrenIs: boolean) => {
       if (is || childrenIs) {
         checkedLabels.add(data.value);
@@ -166,7 +172,12 @@ export default defineComponent<
         return index;
       };
     });
+    watch(key, () => {
+      console.log(222);
+      elTable.value!.$forceUpdate();
+    });
     return {
+      key,
       showSearch,
       searchText,
       children,
@@ -187,6 +198,9 @@ export default defineComponent<
         }
       },
     };
+  },
+  mounted() {
+    console.log(this.$refs.aa);
   },
 });
 </script>
