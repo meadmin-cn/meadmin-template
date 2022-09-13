@@ -1,6 +1,6 @@
 <template>
   <div class="table">
-    <me-table :data="tableData" @quick-search="() => {}" @refresh="() => {}" @add="() => {}">
+    <me-table :parent="ctx" :data="tableData" @quick-search="() => {}" @refresh="() => {}" @add="() => {}">
       <template #search>
         <el-form ref="searchRef" :model="searchForm" label-width="100px" class="search">
           <el-row :gutter="10">
@@ -71,6 +71,8 @@
 <script setup lang="ts" name="Table">
 import { useLocalesI18n } from '@/locales/i18n';
 import { FormInstance } from 'element-plus';
+const ctx = getCurrentInstance();
+
 const { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'tableLang']);
 const addressInfo = ref(true);
 const tableData = [
