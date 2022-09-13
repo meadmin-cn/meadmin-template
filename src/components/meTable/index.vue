@@ -58,7 +58,7 @@
                 </ul>
               </template>
             </el-popover>
-            <el-button v-if="print" icon="mel-icon-printer" title="打印" @click="key++" />
+            <el-button v-if="print" icon="mel-icon-printer" title="打印" @click="printTable" />
             <slot name="tools"></slot>
           </el-button-group>
           <el-button v-if="$slots.search" @click="showSearch = !showSearch">
@@ -67,20 +67,20 @@
         </div>
       </div>
     </div>
-    <el-table v-bind="$attrs" ref="elTable" v-loading="loading">
-      <component :is="children"></component>
+    <el-table v-bind="$attrs" ref="elTable" v-loading="loading" v-show="showTable">
+      <component :is="children" :key="key"></component>
     </el-table>
   </div>
 </template>
 <script lang="ts">
 import { children } from 'dom7';
 import { ElTable } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPropTypes, PropType, renderSlot, toRaw } from 'vue';
+import { fa } from 'element-plus/es/locale';
+import { ComponentOptionsMixin, ExtractPropTypes, PropType } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
 import printTable from './hooks/print';
 const props = {
-  parent: Object,
   name: {
     type: String,
     default: 'meTable',
@@ -146,13 +146,9 @@ export default defineComponent<
   props: props as any,
   emits,
   setup(props, { slots }) {
-    watchEffect(() => {
-      slots.default!();
-      console.log(1213);
-    });
     const showSearch = ref(props.defaultShowSearch);
     const searchText = ref('');
-    const { children, labels, checkedLabels, key } = customColumn(slots.default!, props.parent);
+    const { children, labels, checkedLabels, key } = customColumn(slots.default!);
     const checkChange = (data: { value: string }, is: boolean, childrenIs: boolean) => {
       if (is || childrenIs) {
         checkedLabels.add(data.value);
@@ -161,22 +157,13 @@ export default defineComponent<
       }
     };
     const elTable = ref<ELTable>();
-    onMounted(() => {
-      elTable.value!.getSelectionIndexs = function () {
-        const index = [] as number[];
-        if (this.data) {
-          this.getSelectionRows()?.forEach((item: unknown) => {
-            index.push(this.data.indexOf(toRaw(item)));
-          });
-        }
-        return index;
-      };
-    });
+    const showTable = ref(true);
     watch(key, () => {
-      console.log(222);
-      elTable.value!.$forceUpdate();
+      showTable.value = false;
+      setTimeout(() => (showTable.value = true), 500);
     });
     return {
+      showTable,
       key,
       showSearch,
       searchText,
@@ -198,9 +185,6 @@ export default defineComponent<
         }
       },
     };
-  },
-  mounted() {
-    console.log(this.$refs.aa);
   },
 });
 </script>
