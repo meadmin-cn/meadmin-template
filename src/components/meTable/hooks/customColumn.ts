@@ -1,40 +1,27 @@
 import { debounce } from 'lodash-es';
-import {
-  VNode,
-  Component,
-  nextTick,
-  computed,
-  watch,
-  reactive,
-  shallowRef,
-  ref,
-  withCtx,
-  cloneVNode,
-  renderSlot,
-} from 'vue';
+import { VNode, Component, watch, reactive, shallowRef, ref, withCtx, renderSlot } from 'vue';
 interface Label {
   value: string;
   label?: string;
   children: Label[];
 }
+const defaultMap = new Map<string, () => VNode[]>();
 /* 用于判断 vnode 是否是 el-table-column 组件 */
 function isElTableColumn(vnode: VNode) {
   return (vnode.type as Component)?.name === 'ElTableColumn';
 }
-const componentMap = new Map<string, VNode>();
-export default (slot: () => VNode[], parent: any) => {
+export default (slot: () => VNode[]) => {
   const labels = [] as Label[];
   let needScreen = false;
   const checkedLabels = reactive(new Set<string>());
   const key = ref(Symbol());
   const children = shallowRef();
   const getVNodes = (vNodes: VNode[], labels: Label[], parentId = '') => {
-    const components = reactive([] as VNode[]);
-    const props = reactive({ key: '' });
+    const components = [] as VNode[];
     vNodes.forEach((vNode, index) => {
       if (needScreen) {
         if (!checkedLabels.has(parentId + '_' + index)) {
-          return components.push();
+          return;
         }
       } else {
         if (isElTableColumn(vNode)) {
@@ -45,36 +32,31 @@ export default (slot: () => VNode[], parent: any) => {
           });
         }
         checkedLabels.add(parentId + '_' + index);
-        componentMap.set(parentId + '_' + index, vNode);
-        vNode.key = parentId + '_' + index;
-        props.key = vNode.key;
       }
       if (vNode.children && (vNode.children as Record<string, () => VNode[]>).default) {
-        const oldDefault = (vNode.children as Record<string, () => VNode[]>).default;
-        watch(
-          computed(() => oldDefault()),
-          (defaultVnode) => {
-            (vNode.children as Record<string, () => VNode[]>).default = getVNodes(
-              defaultVnode,
-              labels[labels.length - 1].children,
-              parentId + '_' + index,
-            ) as any;
-            props.key = vNode.key + new Date();
-            console.log(111);
-          },
-          { immediate: true },
-        );
+        if (!needScreen) {
+          defaultMap.set(parentId + '_' + index, (vNode.children as Record<string, () => VNode[]>)?.default);
+          getVNodes(
+            defaultMap.get(parentId + '_' + index)!(),
+            labels[labels.length - 1].children,
+            parentId + '_' + index,
+          );
+        }
+        const children = computed(() => defaultMap.get(parentId + '_' + index)!());
+        (vNode.children as Record<string, () => VNode[]>).default = () => {
+          return getVNodes(children.value, labels[labels.length - 1].children, parentId + '_' + index)();
+        };
       }
-      components.push(cloneVNode(vNode, props, true));
+      components.push(vNode);
     });
-    return withCtx(() => [renderSlot({ default: () => components }, 'default')], parent);
+    return () => components;
   };
   children.value = getVNodes(slot(), labels);
   watch(
     checkedLabels,
     debounce(() => {
       needScreen = true;
-      children.value = getVNodes(slot(), labels);
+      key.value = Symbol();
     }, 500),
   );
   return { children, key, labels, checkedLabels };

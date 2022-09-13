@@ -1,6 +1,6 @@
 <template>
   <div class="table">
-    <me-table :parent="ctx" :data="tableData" @quick-search="() => {}" @refresh="() => {}" @add="() => {}">
+    <me-table :data="tableData" @quick-search="() => {}" @refresh="() => {}" @add="() => {}">
       <template #search>
         <el-form ref="searchRef" :model="searchForm" label-width="100px" class="search">
           <el-row :gutter="10">
