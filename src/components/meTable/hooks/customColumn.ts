@@ -1,63 +1,92 @@
 import { debounce } from 'lodash-es';
-import { VNode, Component, watch, reactive, shallowRef, ref, withCtx, renderSlot } from 'vue';
+import { VNode, Component, watch, reactive, ref } from 'vue';
+import { useGlobalStore } from '@/store';
+const { i18n } = useGlobalStore();
 interface Label {
   value: string;
   label?: string;
   children: Label[];
 }
-const defaultMap = new Map<string, () => VNode[]>();
+const origionDefault = new Map<string, () => VNode[]>();
 /* 用于判断 vnode 是否是 el-table-column 组件 */
 function isElTableColumn(vnode: VNode) {
   return (vnode.type as Component)?.name === 'ElTableColumn';
 }
 export default (slot: () => VNode[]) => {
-  const labels = [] as Label[];
+  const labels = reactive([]) as Label[];
   let needScreen = false;
-  const checkedLabels = reactive(new Set<string>());
-  const key = ref(Symbol());
-  const children = shallowRef();
+  const checkedLabelsRaw = new Set<string>();
+  let changeLabel = false;
   const getVNodes = (vNodes: VNode[], labels: Label[], parentId = '') => {
     const components = [] as VNode[];
     vNodes.forEach((vNode, index) => {
+      if (!isElTableColumn(vNode)) {
+        components.push(vNode);
+        return;
+      }
+      if (changeLabel) {
+        const label = labels.find((item) => item.value === parentId + '_' + index)!;
+        label.label = vNode.props?.label;
+        origionDefault.has(parentId + '_' + index) &&
+          getVNodes(origionDefault.get(parentId + '_' + index)!(), label.children, parentId + '_' + index);
+        return;
+      }
+      //checkedLabelsRaw不能是动态reactive，否则属性值变换时会触发default渲染造成抖动
       if (needScreen) {
-        if (!checkedLabels.has(parentId + '_' + index)) {
+        if (!checkedLabelsRaw.has(parentId + '_' + index)) {
           return;
         }
       } else {
-        if (isElTableColumn(vNode)) {
-          labels.push({
-            value: parentId + '_' + index,
-            label: vNode.props?.label,
-            children: [],
-          });
-        }
-        checkedLabels.add(parentId + '_' + index);
+        labels.push({
+          value: parentId + '_' + index,
+          label: vNode.props?.label,
+          children: [],
+        });
+        checkedLabelsRaw.add(parentId + '_' + index);
       }
       if (vNode.children && (vNode.children as Record<string, () => VNode[]>).default) {
         if (!needScreen) {
-          defaultMap.set(parentId + '_' + index, (vNode.children as Record<string, () => VNode[]>)?.default);
+          origionDefault.set(parentId + '_' + index, (vNode.children as Record<string, () => VNode[]>)?.default);
           getVNodes(
-            defaultMap.get(parentId + '_' + index)!(),
+            origionDefault.get(parentId + '_' + index)!(),
             labels[labels.length - 1].children,
             parentId + '_' + index,
           );
         }
-        const children = computed(() => defaultMap.get(parentId + '_' + index)!());
-        (vNode.children as Record<string, () => VNode[]>).default = () => {
-          return getVNodes(children.value, labels[labels.length - 1].children, parentId + '_' + index)();
-        };
+        //必须使用函数方式包含 origion default 否则动态渲染会失效
+        (vNode.children as Record<string, () => VNode[]>).default = () =>
+          getVNodes(origionDefault.get(parentId + '_' + index)!(), [], parentId + '_' + index)();
       }
       components.push(vNode);
     });
     return () => components;
   };
-  children.value = getVNodes(slot(), labels);
-  watch(
+  const children = ref(() => getVNodes(slot(), labels)());
+  children.value(); //初始化
+  needScreen = true;
+  const checkedLabels = reactive(checkedLabelsRaw);
+  const localeWacth = watch(
+    //语言变更时更新label
+    i18n.locale,
+    () => {
+      changeLabel = true;
+      getVNodes(slot(), labels);
+      changeLabel = false;
+    },
+  );
+  const checkedLabelsWatch = watch(
     checkedLabels,
     debounce(() => {
-      needScreen = true;
-      key.value = Symbol();
+      children.value = () => getVNodes(slot(), labels)();
     }, 500),
   );
-  return { children, key, labels, checkedLabels };
+  return {
+    children,
+    labels,
+    checkedLabels,
+    clean: (() => {
+      localeWacth();
+      checkedLabelsWatch;
+    }) as (() => void) | undefined,
+  };
 };
