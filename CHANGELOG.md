@@ -1,5 +1,23 @@
 
 
+## [1.0.5](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.4...main-1.0.5) (2022-09-14)
+
+
+### Bug 修复[fix]
+
+* 修复 vue ts类型错误 ([9df571f](https://github.com/meadmin-cn/meadmin-template/commit/9df571fa744ec6a21a10547a5f288a03ef661cba))
+* 修复ts 类型any错误 ([e47193f](https://github.com/meadmin-cn/meadmin-template/commit/e47193f723ebab0c74e3ca74de66d970bc62f92a))
+
+
+### CI发版[ci]
+
+* release 命令加上 tsc check ([4e71820](https://github.com/meadmin-cn/meadmin-template/commit/4e71820ce29cd4ffa5f6db6be10d9cb30ad24a0d))
+
+
+### 其他[chore]
+
+* template-release v1.0.5 ([0183cf8](https://github.com/meadmin-cn/meadmin-template/commit/0183cf856485869e527dcd837603012fe283d21f))
+
 ## [1.0.4](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.3...main-1.0.4) (2022-09-14)
 
 

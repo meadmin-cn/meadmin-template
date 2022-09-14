@@ -7,7 +7,7 @@
       ref="scrollbarRef"
       view-class="list-parent"
       style="flex-grow: 1"
-      @scroll="({ scrollLeft: left }) => (scrollLeft = left)"
+      @scroll="({ scrollLeft: left } : any) => (scrollLeft = left)"
     >
       <div ref="listRef" class="list">
         <div
@@ -51,7 +51,7 @@
     :current="contextmenuCurrent"
     :model-value="tags"
     @update:model-value="
-      ($event) => {
+      ($event:any) => {
         tags.splice(0, tags.length, ...$event);
       }
     "
