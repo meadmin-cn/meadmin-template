@@ -79,9 +79,7 @@
   </div>
 </template>
 <script lang="ts">
-import { children } from 'dom7';
 import { ElTable } from 'element-plus';
-import { VNode } from 'snabbdom';
 import { ComponentOptionsMixin, ExtractPropTypes, PropType } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
@@ -114,7 +112,7 @@ const props = {
     default: true,
   },
   customColumn: {
-    type: Boolean as PropType<boolean | { exclude: [] }>,
+    type: Boolean,
     default: true,
   },
   defaultShowSearch: {
@@ -149,9 +147,10 @@ export default defineComponent<
   typeof emits
 >({
   name: 'MeTable',
+  inheritAttrs: false,
   props: props as any,
   emits,
-  setup(props, { slots }) {
+  setup(props, { slots, expose }) {
     const showSearch = ref(props.defaultShowSearch);
     const searchText = ref('');
     const customColumnProps = ref<ReturnType<typeof customColumn>>();
@@ -193,6 +192,7 @@ export default defineComponent<
         return index;
       };
     });
+    expose({ elTable, customColumnProps });
     return {
       showSearch,
       searchText,
