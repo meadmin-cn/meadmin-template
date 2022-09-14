@@ -13,12 +13,13 @@ export default (elTable: ELTable, type: ExportType, filename?: string, options?:
   const table = new TableExport(elTable.$el as Node, Object.assign({ exportButtons: false, ignoreRows }, options));
   //@ts-ignore
   const tableData = (table.getExportData() as Record<string, any>)[TableExport.prototype.defaultNamespace + '1'][type];
-  //@ts-ignore
+  // @ts-ignore
   table.export2file(
     tableData.data,
     tableData.mimeType,
     filename ?? tableData.filename,
     tableData.fileExtension,
+    // @ts-ignore
     tableData.merges,
     tableData.RTL,
     tableData.sheetname,
