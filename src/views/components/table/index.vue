@@ -1,9 +1,13 @@
 <template>
   <div class="table">
     <me-table
+      ref="meTableRef"
       :data="data"
       :custom-column="customColumn"
       :loading="loading"
+      :header-cell-style="{ textAlign: 'center' }"
+      :cell-style="{ textAlign: 'center' }"
+      stripe
       @quick-search="run"
       @refresh="refresh"
       @add="() => {}"
@@ -52,6 +56,7 @@
         <el-button @click="canDel = !canDel">{{ t('删除切换') }}</el-button>
         <el-button @click="customColumn = !customColumn">{{ t('自定义列') }}</el-button>
         <el-button @click="data = []">{{ t('清空') }}</el-button>
+        <el-button @click="meTableRef!.elTable.toggleAllSelection()">{{ t('全选') }}</el-button>
       </template>
       <el-table-column type="selection" label="选择" width="55" />
       <el-table-column prop="date" :label="t('日期')"> </el-table-column>
@@ -64,7 +69,7 @@
           <el-table-column prop="zip" :label="t('邮政编码')"> </el-table-column>
         </el-table-column>
       </el-table-column>
-      <el-table-column :label="t('操作')">
+      <el-table-column :label="t('操作')" min-width="162px">
         <el-button><mel-icon-edit /></el-button>
         <el-button v-if="canDel" type="danger"><mel-icon-delete /></el-button>
       </el-table-column>
@@ -78,6 +83,8 @@
 import { listApi } from '@/api/table';
 import { useLocalesI18n } from '@/locales/i18n';
 import { FormInstance } from 'element-plus';
+import meTable from '@/components/meTable/index.vue';
+const meTableRef = ref<InstanceType<typeof meTable>>();
 const customColumn = ref(true);
 const { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'tableLang']);
 const canDel = ref(true);
