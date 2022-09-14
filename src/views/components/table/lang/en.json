@@ -9,5 +9,9 @@
   "详情": "Info",
   "邮政编码": "Zip",
   "省": "Province",
-  "市": "City"
+  "市": "City",
+  "操作": "Action",
+  "删除切换": "Del Change",
+  "空空如也": "Absolutely Empty",
+  "清空": "Clear"
 }

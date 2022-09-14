@@ -14,19 +14,19 @@
           <el-input
             v-if="_.vnode.props.onQuickSearch"
             v-model="searchText"
-            placeholder="快捷搜索"
+            :placeholder="$t('快捷搜索')"
             prefix-icon="mel-icon-search"
             @change="$emit('quickSearch', searchText)"
           />
           <el-button-group>
             <el-popover v-if="customColumn" placement="bottom" trigger="click" width="auto">
               <template #reference>
-                <el-button icon="mel-icon-grid" title="自定义列" />
+                <el-button icon="mel-icon-grid" :title="$t('自定义列')" />
               </template>
               <template #default>
                 <el-tree
                   node-key="value"
-                  :data="labels"
+                  :data="customColumnProps.labels"
                   default-expand-all
                   :default-checked-keys="checkedLabels"
                   :props="{ label: 'label', children: 'children' }"
@@ -43,7 +43,7 @@
               popper-class="me-exportmenu-popover el-dropdown__popper"
             >
               <template #reference>
-                <el-button icon="mel-icon-download" title="导出" />
+                <el-button icon="mel-icon-download" :title="$t('导出')" />
               </template>
               <template #default>
                 <ul class="el-dropdown-menu">
@@ -51,31 +51,37 @@
                     v-for="item in exportMenu"
                     :key="item.label"
                     class="el-dropdown-menu__item"
-                    @click="handleExport(elTable, item.filename ?? name!)"
+                    @click="handleExport(item.handle, item.filename ?? name!)"
                   >
                     {{ item.label }}
                   </li>
                 </ul>
               </template>
             </el-popover>
-            <el-button v-if="print" icon="mel-icon-printer" title="打印" @click="printTable" />
+            <el-button v-if="print" icon="mel-icon-printer" :title="$t('打印')" @click="printTable(elTable, name)" />
             <slot name="tools"></slot>
           </el-button-group>
-          <el-button v-if="$slots.search" @click="showSearch = !showSearch">
+          <el-button v-if="$slots.search" :title="$t('更多筛选')" @click="showSearch = !showSearch">
             <mel-icon-search></mel-icon-search>
           </el-button>
         </div>
       </div>
     </div>
-    <el-table v-bind="$attrs" ref="elTable" v-loading="loading" v-show="showTable">
-      <component :is="children" :key="key"></component>
+    <el-table v-bind="$attrs" ref="elTable" v-loading="loading">
+      <component :is="customColumnProps.children"></component>
+      <template #append>
+        <slot name="append"></slot>
+      </template>
+      <template #empty>
+        <slot name="empty"></slot>
+      </template>
     </el-table>
   </div>
 </template>
 <script lang="ts">
 import { children } from 'dom7';
 import { ElTable } from 'element-plus';
-import { fa } from 'element-plus/es/locale';
+import { VNode } from 'snabbdom';
 import { ComponentOptionsMixin, ExtractPropTypes, PropType } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
@@ -148,28 +154,50 @@ export default defineComponent<
   setup(props, { slots }) {
     const showSearch = ref(props.defaultShowSearch);
     const searchText = ref('');
-    const { children, labels, checkedLabels, key } = customColumn(slots.default!);
+    const customColumnProps = ref<ReturnType<typeof customColumn>>();
+    const checkedLabels = shallowRef([] as string[]);
+    watch(
+      () => props.customColumn,
+      (value) => {
+        if (value) {
+          customColumnProps.value = customColumn(slots.default!);
+          checkedLabels.value = [...customColumnProps.value.checkedLabels];
+        } else {
+          customColumnProps.value?.clean?.();
+          customColumnProps.value = {
+            children: slots.default! as any,
+            labels: [],
+            checkedLabels: new Set(),
+            clean: undefined,
+          };
+        }
+      },
+      { immediate: true },
+    );
     const checkChange = (data: { value: string }, is: boolean, childrenIs: boolean) => {
       if (is || childrenIs) {
-        checkedLabels.add(data.value);
+        customColumnProps.value!.checkedLabels.add(data.value);
       } else {
-        checkedLabels.delete(data.value);
+        customColumnProps.value!.checkedLabels.delete(data.value);
       }
     };
     const elTable = ref<ELTable>();
-    const showTable = ref(true);
-    watch(key, () => {
-      showTable.value = false;
-      setTimeout(() => (showTable.value = true), 500);
+    onMounted(() => {
+      elTable.value!.getSelectionIndexs = function () {
+        const index = [] as number[];
+        if (this.data) {
+          this.getSelectionRows()?.forEach((item: unknown) => {
+            index.push(this.data.indexOf(toRaw(item)));
+          });
+        }
+        return index;
+      };
     });
     return {
-      showTable,
-      key,
       showSearch,
       searchText,
-      children,
-      labels,
-      checkedLabels: [...checkedLabels],
+      customColumnProps,
+      checkedLabels,
       checkChange,
       elTable,
       exportTable,
