@@ -8,10 +8,12 @@
         <layout-header></layout-header>
       </el-header>
       <el-main class="right-main">
-        <el-scrollbar view-class="el-main-parent">
+        <el-scrollbar view-class="me-right-main-view">
           <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
-          <div class="el-main">
-            <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
+          <div class="me-main">
+            <div class="me-body">
+              <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
+            </div>
           </div>
         </el-scrollbar>
       </el-main>
@@ -60,14 +62,22 @@ const globalStore = useGlobalStore();
     }
   }
 }
-:deep(.el-main-parent) {
+:deep(.me-right-main-view) {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  .el-main {
+  .me-main {
     flex-grow: 1;
     flex-shrink: 1;
-    padding: $page-padding;
+    display: flex;
+    flex-direction: column;
+    .me-body {
+      position: absolute;
+      left: $page-padding;
+      top: $page-padding;
+      bottom: $page-padding;
+      right: $page-padding;
+    }
   }
 }
 
