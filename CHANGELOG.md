@@ -1,5 +1,47 @@
 
 
+## [1.0.5](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.4...main-1.0.5) (2022-09-14)
+
+
+### Bug 修复[fix]
+
+* 修复 vue ts类型错误 ([9df571f](https://github.com/meadmin-cn/meadmin-template/commit/9df571fa744ec6a21a10547a5f288a03ef661cba))
+* 修复ts 类型any错误 ([e47193f](https://github.com/meadmin-cn/meadmin-template/commit/e47193f723ebab0c74e3ca74de66d970bc62f92a))
+
+
+### CI发版[ci]
+
+* release 命令加上 tsc check ([4e71820](https://github.com/meadmin-cn/meadmin-template/commit/4e71820ce29cd4ffa5f6db6be10d9cb30ad24a0d))
+
+
+### 其他[chore]
+
+* template-release v1.0.5 ([0183cf8](https://github.com/meadmin-cn/meadmin-template/commit/0183cf856485869e527dcd837603012fe283d21f))
+
+## [1.0.4](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.3...main-1.0.4) (2022-09-14)
+
+
+### 新功能[feat]
+
+* 二次elTable封装 meTable ([75af535](https://github.com/meadmin-cn/meadmin-template/commit/75af535b33c2f68dc4318cb468ccd00a6920526c))
+* 加上gzip压缩 ([54ed748](https://github.com/meadmin-cn/meadmin-template/commit/54ed748ae9ef2bd2b5d155faad48c5a43866159c))
+* 加上keepAlive全局开启配置 ([091f9ad](https://github.com/meadmin-cn/meadmin-template/commit/091f9ad03cb6730174bbeb0236b5f53bf2d51e57))
+* 加上version配置以便在版本改变时清空缓存 ([4f0a169](https://github.com/meadmin-cn/meadmin-template/commit/4f0a169e2ff061681dfc5319da046eda29bafb41))
+
+
+### 其他[chore]
+
+* release v1.0.4 ([f69ad85](https://github.com/meadmin-cn/meadmin-template/commit/f69ad85bd556e39bfcd4de13dbcb642bfea84c54))
+* template-release v1.0.4 ([16c4c72](https://github.com/meadmin-cn/meadmin-template/commit/16c4c7289124a683b00500257dc466ebaab976f1))
+
+
+### Bug 修复[fix]
+
+* 格式化后ts忽略错误修复 ([360e7e7](https://github.com/meadmin-cn/meadmin-template/commit/360e7e7005257b3b7319c2e4d163876dc200afc2))
+* 修复多级路由下切换的报错问题，扁平化为二级路由 ([9736fb1](https://github.com/meadmin-cn/meadmin-template/commit/9736fb15f75188999c3f943034a5c4d1041d0cf5))
+* meNumber组件默认格式化函数地区更换为zh ([a719cc6](https://github.com/meadmin-cn/meadmin-template/commit/a719cc6e67f23f459749cb0ce6202e307bc0d5ee))
+* meNumber组件默认格式化函数地区更换为zh ([#20](https://github.com/meadmin-cn/meadmin-template/issues/20)) ([85e6d0d](https://github.com/meadmin-cn/meadmin-template/commit/85e6d0db1cd3747178e7e303d684b0d899c5ba0a))
+
 ## [1.0.3](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.1...main-1.0.3) (2022-09-03)
 
 

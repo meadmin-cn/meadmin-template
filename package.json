@@ -1,7 +1,7 @@
 {
   "name": "meadmin-template",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "scripts": {
     "format": "prettier --write --cache .",
@@ -10,8 +10,8 @@
     "build-github": "vite build -m prod --base=/meadmin-template/ && npm run type-check",
     "type-check": "vue-tsc --noEmit",
     "preview": "vite preview",
-    "release-main": "release-it -c .release-it-main.json",
-    "release-template": "release-it",
+    "release-main": "vue-tsc --noEmit & release-it -c .release-it-main.json",
+    "release-template": "vue-tsc --noEmit & release-it",
     "eslint": "eslint . --cache --ext .vue,.ts,.tsx",
     "eslint:fix": "eslint . --ext .vue,.ts,.tsx --fix",
     "prettier": "prettier --cache  -l \"./**/*\"",
@@ -33,6 +33,7 @@
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",
     "pinia": "^2.0.14",
+    "tableexport": "^5.2.0",
     "vue": "^3.2.25",
     "vue-i18n": "^9.1.10",
     "vue-request": "^2.0.0-rc.2",
