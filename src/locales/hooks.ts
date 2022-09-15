@@ -9,7 +9,7 @@
 import { useI18n, UseI18nOptions } from 'vue-i18n';
 import { loadMessage, MessageImport, setLocaleMessage } from './helper';
 import { mitter, event } from '@/event';
-import { ComponentOptions, VNode } from 'vue';
+import { camelize, capitalize, ComponentOptions, VNode } from 'vue';
 
 /**
  * useI18n 会自动加载locale语言包（语言包加载为异步执行，如果语言包被加载过则执行时效和同步一致）
@@ -64,6 +64,7 @@ export const useLoadMessages = () => {
   if (instance === null) {
     throw new Error('必须在setup中调用');
   }
+  const cache = new Set<any>();
   const app = instance.appContext.app;
   const loadMessages = (
     options: (VNode & { __v_isVNode: true }) | ComponentOptions | string,
@@ -71,11 +72,13 @@ export const useLoadMessages = () => {
     locale: string | undefined = undefined,
     importArr: Array<Promise<any>> = [],
   ) => {
+    if (cache.has(options)) {
+      return importArr;
+    }
+    cache.add(options);
     if (typeof options === 'string') {
-      const component = app.component(options);
-      if (component) {
-        loadMessages(options, isLoading, locale, importArr);
-      }
+      const component = app.component(capitalize(camelize(options)));
+      loadMessages(component as ComponentOptions, isLoading, locale, importArr);
       return importArr;
     }
     if (options.__v_isVNode) {
@@ -97,5 +100,5 @@ export const useLoadMessages = () => {
     }
     return importArr;
   };
-  return loadMessages;
+  return { loadMessages, clearCache: () => cache.clear() };
 };
