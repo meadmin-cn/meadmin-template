@@ -26,6 +26,7 @@
     "dayjs": "^1.11.3",
     "echarts": "^5.3.3",
     "element-plus": "^2.2.8",
+    "format-number": "^3.0.0",
     "jquery": "^3.6.0",
     "js-cookie": "^3.0.1",
     "lodash-es": "^4.17.21",
