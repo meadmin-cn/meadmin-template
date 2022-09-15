@@ -8,9 +8,9 @@
         <layout-header></layout-header>
       </el-header>
       <el-main class="right-main">
-        <el-scrollbar>
+        <el-scrollbar view-class="el-main-parent">
           <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
-          <div class="main">
+          <div class="el-main">
             <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
           </div>
         </el-scrollbar>
@@ -60,10 +60,17 @@ const globalStore = useGlobalStore();
     }
   }
 }
-
-.main {
-  padding: $page-padding;
+:deep(.el-main-parent) {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  .el-main {
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: $page-padding;
+  }
 }
+
 .fixed-setting {
   position: fixed;
   top: 50%;
