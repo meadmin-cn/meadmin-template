@@ -32,7 +32,7 @@
 <script setup lang="ts" name="Number">
 const props = reactive({
   start: 0,
-  end: [3668228.35, '$', '元'] as [number, string, string], //100000000
+  end: [3668228.35, '￥', '元'] as [number, string, string],
   delay: 200,
   disabled: false,
   duration: 1000,
