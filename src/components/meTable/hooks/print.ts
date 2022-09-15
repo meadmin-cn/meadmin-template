@@ -3,14 +3,14 @@ export function getExportBlobByContent(content: string, type = 'text/html') {
   return new Blob([content], { type: `${type};charset=utf-8;` });
 }
 
-export function createHtmlPage(content: string, title = '', style: string[] = []): string {
-  const styleString = style.join(`\n`);
+export function createHtmlPage(content: string, title = '', head: string[] = []): string {
+  const headString = head.join(`\n`);
   return [
     '<!DOCTYPE html><html>',
     '<head>',
     '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">',
     `<title>${title}</title>`,
-    `<style>${styleString}</style>`,
+    `${headString}`,
     '</head>',
     `<body>${content}</body>`,
     '</html>',
@@ -41,8 +41,8 @@ function afterPrintEvent() {
   requestAnimationFrame(removePrintFrame);
 }
 
-export function handlePrint(content: string, title = '', style: string[] = [], type = 'text/html'): void {
-  content = createHtmlPage(content, title, style);
+export function handlePrint(content: string, title = '', head: string[] = [], type = 'text/html'): void {
+  content = createHtmlPage(content, title, head);
   const blob = getExportBlobByContent(content, type);
   removePrintFrame();
   printFrame = createFrame();
@@ -56,23 +56,35 @@ export function handlePrint(content: string, title = '', style: string[] = [], t
   printFrame.src = URL.createObjectURL(blob);
 }
 
-export default async (elTable: ELTable, title = '', style: string[] = []) => {
-  style.unshift(`.el-table{
+export default async (elTable: ELTable, title = '', head: string[] = []) => {
+  head.unshift(`<style>
+  .el-table{
     width: max-content;
     margin: 0 auto;
   }
   .el-table__header,.el-table__body{
     width:auto !important
-  }`);
-  style.unshift((await import('@/styles/index.scss')).default);
-  style.unshift((await import('element-plus/dist/index.css')).default);
+  }
+  </style>`);
+  head.unshift(
+    '<link rel="stylesheet" href="' +
+      window.location.origin +
+      (await import('@/styles/index.scss?url')).default +
+      '"/>',
+  );
+  head.unshift(
+    '<link rel="stylesheet" href="' +
+      window.location.origin +
+      (await import('element-plus/dist/index.css?url')).default +
+      '"/>',
+  );
   const index = elTable.getSelectionIndexs();
   if (index.length) {
-    style.push(
-      'tbody>tr:not(' +
+    head.push(
+      '<style>tbody>tr:not(' +
         index.map((item) => 'tr:nth-child(' + (item + 1) + ')').join(',') +
-        '){display:none !important;}',
+        '){display:none !important;}</style>',
     );
   }
-  handlePrint(elTable.$el.outerHTML, title, style);
+  handlePrint(elTable.$el.outerHTML, title, head);
 };
