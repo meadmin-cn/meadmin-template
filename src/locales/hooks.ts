@@ -82,12 +82,12 @@ export const useLoadMessages = () => {
       loadMessages(component as ComponentOptions, isLoading, locale, importArr);
       return importArr;
     }
-    if (options.__v_isVNode) {
-      loadMessages(options.type, isLoading, locale, importArr);
-      return importArr;
-    }
     if (typeof options === 'object' && !loadComponentCache.has(options)) {
       loadComponentCache.add(options);
+      if (options.__v_isVNode) {
+        loadMessages(options.type, isLoading, locale, importArr);
+        return importArr;
+      }
       if ((<ComponentOptions>options).components) {
         Object.values((<ComponentOptions>options).components!).forEach((component) => {
           loadMessages(component as ComponentOptions, isLoading, locale, importArr);
