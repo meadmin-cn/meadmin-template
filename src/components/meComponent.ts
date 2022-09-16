@@ -15,7 +15,7 @@ export default defineComponent({
     transition: Object as PropType<TransitionProps>,
   },
   setup(props, { attrs }) {
-    const { loadMessages, clearCache } = useLoadMessages();
+    const loadMessages = useLoadMessages();
     const componentIs: Ref<any> = ref(undefined);
     const key = ref(props.componentKey);
     const _attrs = ref(attrs);
@@ -24,7 +24,6 @@ export default defineComponent({
       async (is) => {
         if (is) {
           localeConfig.loadMessageConfig.componentLoad && (await Promise.allSettled(loadMessages(is as any, false))); // 自动加载语言包
-          clearCache();
           componentIs.value = is;
           key.value = props.componentKey;
           _attrs.value = attrs;

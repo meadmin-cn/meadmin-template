@@ -55,6 +55,7 @@ export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI1
   return res;
 };
 
+const loadComponentCache = new WeakSet<ComponentOptions>();
 /**
  * 获取异步导入组件及其子孙的语言包函数
  * @returns
@@ -72,10 +73,6 @@ export const useLoadMessages = () => {
     locale: string | undefined = undefined,
     importArr: Array<Promise<any>> = [],
   ) => {
-    if (cache.has(options)) {
-      return importArr;
-    }
-    cache.add(options);
     if (typeof options === 'string') {
       const component = app.component(capitalize(camelize(options)));
       loadMessages(component as ComponentOptions, isLoading, locale, importArr);
@@ -85,7 +82,8 @@ export const useLoadMessages = () => {
       loadMessages(options.type, isLoading, locale, importArr);
       return importArr;
     }
-    if (typeof options === 'object') {
+    if (typeof options === 'object' && !loadComponentCache.has(options)) {
+      loadComponentCache.add(options);
       if ((<ComponentOptions>options).components) {
         Object.values((<ComponentOptions>options).components!).forEach((component) => {
           loadMessages(component as ComponentOptions, isLoading, locale, importArr);
@@ -100,5 +98,5 @@ export const useLoadMessages = () => {
     }
     return importArr;
   };
-  return { loadMessages, clearCache: () => cache.clear() };
+  return loadMessages;
 };
