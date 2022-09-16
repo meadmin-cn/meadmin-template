@@ -1,5 +1,30 @@
 
 
+## [1.0.6](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.5...template-1.0.6) (2022-09-16)
+
+
+### 新功能[feat]
+
+* 将main高度设置为剩余高度 ([5549c1e](https://github.com/meadmin-cn/meadmin-template/commit/5549c1e223f76fcbe4829a4431c53ae07aa30e0d))
+* 排版布局更改 ([91d4631](https://github.com/meadmin-cn/meadmin-template/commit/91d4631f3a7b3b08effd6ce172e7b7eed7f8e6c6))
+
+
+### 还原提交[revert]
+
+* 恢复布局 ([b522084](https://github.com/meadmin-cn/meadmin-template/commit/b522084fe49b992b96b10d87ce7746027ce2e209))
+
+
+### 性能改进[perf]
+
+* 语言包缓存判断优化 ([4dda883](https://github.com/meadmin-cn/meadmin-template/commit/4dda88326dd2b7ea77b433c72982f90d93a8fc90))
+
+
+### Bug 修复[fix]
+
+* 修复加载顺序问题 ([1699be0](https://github.com/meadmin-cn/meadmin-template/commit/1699be0b95e44dba06e2e66b9c09be50da7a14d6))
+* 修复全局组件不加载语言包问题 ([ccc0f93](https://github.com/meadmin-cn/meadmin-template/commit/ccc0f931757251b33a047b4b82f63c41fcfdae98))
+* 修复语言包组件判断逻辑错误 ([597390a](https://github.com/meadmin-cn/meadmin-template/commit/597390a6a499ee0605fa7e30d5c8ba8518110afe))
+
 ## [1.0.5](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.4...template-1.0.5) (2022-09-14)
 
 
