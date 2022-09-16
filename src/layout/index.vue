@@ -70,6 +70,7 @@ const globalStore = useGlobalStore();
     display: flex;
     flex-direction: column;
     padding: $page-padding;
+    position: relative;
   }
 }
 
