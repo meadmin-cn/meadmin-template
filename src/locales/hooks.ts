@@ -55,6 +55,7 @@ export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI1
   return res;
 };
 
+const loadComponentCache = new WeakSet<ComponentOptions>();
 /**
  * 获取异步导入组件及其子孙的语言包函数
  * @returns
@@ -85,7 +86,8 @@ export const useLoadMessages = () => {
       loadMessages(options.type, isLoading, locale, importArr);
       return importArr;
     }
-    if (typeof options === 'object') {
+    if (typeof options === 'object' && !loadComponentCache.has(options)) {
+      loadComponentCache.add(options);
       if ((<ComponentOptions>options).components) {
         Object.values((<ComponentOptions>options).components!).forEach((component) => {
           loadMessages(component as ComponentOptions, isLoading, locale, importArr);

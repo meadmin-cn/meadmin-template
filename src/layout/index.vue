@@ -11,9 +11,7 @@
         <el-scrollbar view-class="me-right-main-view">
           <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
           <div class="me-main">
-            <div class="me-body">
-              <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
-            </div>
+            <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
           </div>
         </el-scrollbar>
       </el-main>
@@ -71,13 +69,7 @@ const globalStore = useGlobalStore();
     flex-shrink: 1;
     display: flex;
     flex-direction: column;
-    .me-body {
-      position: absolute;
-      left: $page-padding;
-      top: $page-padding;
-      bottom: $page-padding;
-      right: $page-padding;
-    }
+    padding: $page-padding;
   }
 }
 
