@@ -49,17 +49,18 @@ const globalStore = useGlobalStore();
 
   .right-main {
     padding: 0;
-    background-color: rgb(240, 242, 245);
+    // background-color: rgb(240, 242, 245);
+    background-color: var(--el-bg-color-page);
   }
 }
 
-.dark {
-  .layout {
-    .right-main {
-      background-color: var(--el-bg-color);
-    }
-  }
-}
+// .dark {
+//   .layout {
+//     .right-main {
+//       background-color: var(--el-bg-color);
+//     }
+//   }
+// }
 :deep(.me-right-main-view) {
   min-height: 100%;
   display: flex;
