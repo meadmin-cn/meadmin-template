@@ -1,22 +1,27 @@
 <template>
   <div class="custom-form">
-    <el-card class="header">
-      <h3>
-        集成的<el-link type="primary" href="https://github.com/fuchengwei/vue-form-create">vue-form-create</el-link
-        >包,非常感谢
-      </h3>
-      <div>
-        但是此包有以下局限性:全局css入侵、不是用的element样式变量，兼容性差、wangEditor版本过低，不支持对应的自定义配置、不支持扩展自定义组件
-        、不支持多语言。
-      </div>
-      <div>
-        如果想要自定义表单功能，去github提<el-link
-          type="primary"
-          href="https://github.com/meadmin-cn/meadmin-template/issues/26"
-          >issues</el-link
-        >，如果人数多了，后期有精力会考虑做一版。
-      </div>
-    </el-card>
+    <el-collapse>
+      <el-collapse-item class="header">
+        <template #title>
+          <h3>
+            集成的
+            <el-link type="primary" href="https://github.com/fuchengwei/vue-form-create">vue-form-create</el-link>
+            包,非常感谢!
+          </h3>
+        </template>
+        <div>
+          但是此包有以下局限性:全局css入侵、不是用的element样式变量，兼容性差、wangEditor版本过低，不支持对应的自定义配置、不支持扩展自定义组件
+          、不支持多语言。
+        </div>
+        <div>
+          如果想要自定义表单功能，去github提<el-link
+            type="primary"
+            href="https://github.com/meadmin-cn/meadmin-template/issues/26"
+            >issues</el-link
+          >，如果人数多了，后期有精力会考虑做一版。
+        </div>
+      </el-collapse-item>
+    </el-collapse>
     <div class="body">
       <el-design-form class="design-form"></el-design-form>
     </div>
@@ -108,6 +113,10 @@ if (app && !app.config.globalProperties.$initCreate) {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  .header {
+    background: var(--el-bg-color);
+    padding: 0 10px;
+  }
   .body {
     position: relative;
     flex-grow: 1;
