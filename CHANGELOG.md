@@ -1,5 +1,46 @@
 
 
+## [1.0.6](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.5...main-1.0.6) (2022-09-17)
+
+
+### 还原提交[revert]
+
+* 恢复布局 ([b522084](https://github.com/meadmin-cn/meadmin-template/commit/b522084fe49b992b96b10d87ce7746027ce2e209))
+
+
+### 性能改进[perf]
+
+* 语言包缓存判断优化 ([4dda883](https://github.com/meadmin-cn/meadmin-template/commit/4dda88326dd2b7ea77b433c72982f90d93a8fc90))
+
+
+### 其他[chore]
+
+* template-release v1.0.6 ([e64542b](https://github.com/meadmin-cn/meadmin-template/commit/e64542bc7df049082db916bd1cca339f66849a6c))
+
+
+### 新功能[feat]
+
+* 加上数字动画demo ([cf9c3a1](https://github.com/meadmin-cn/meadmin-template/commit/cf9c3a17e6a9a60b2f788942851fc5e3d2f7ecf5))
+* 加上自定义表单 ([bb0d704](https://github.com/meadmin-cn/meadmin-template/commit/bb0d704e0cd5e4386f538e5e3a5bdca04c773d01))
+* 将main高度设置为剩余高度 ([0ee886d](https://github.com/meadmin-cn/meadmin-template/commit/0ee886d4c3bc5024881de4b72cb7b74376b3e137))
+* 将main高度设置为剩余高度 ([5549c1e](https://github.com/meadmin-cn/meadmin-template/commit/5549c1e223f76fcbe4829a4431c53ae07aa30e0d))
+* 排版布局更改 ([af4bf59](https://github.com/meadmin-cn/meadmin-template/commit/af4bf598ff02a05f1c99bf0cbf187855652a6c9e))
+* 自定义表单加上皮肤兼容 ([5e9529d](https://github.com/meadmin-cn/meadmin-template/commit/5e9529d9b3ba88ebe8b5a2fa3ca65d90adb64b01))
+* page 背景色更改 ([ecaa1d9](https://github.com/meadmin-cn/meadmin-template/commit/ecaa1d95ccef5f7eb7e066ef0c4103ac084511c2))
+
+
+### Bug 修复[fix]
+
+* 背景色错误修复 ([24a799d](https://github.com/meadmin-cn/meadmin-template/commit/24a799d1a2892d92979a844818dd328893851cb4))
+* 修复菜单收起时，感觉卡顿问题 ([81a18a3](https://github.com/meadmin-cn/meadmin-template/commit/81a18a31385dc84250e66dce55bf86b52201b4c8))
+* 修复打包后打印样式加载异常错误 ([3730b75](https://github.com/meadmin-cn/meadmin-template/commit/3730b756ae508ed57e64dfc2895748ada6db5876))
+* 修复加载顺序问题 ([d55f537](https://github.com/meadmin-cn/meadmin-template/commit/d55f5375930a55dbca043776bd1d97897a2f35ed))
+* 修复加载顺序问题 ([1699be0](https://github.com/meadmin-cn/meadmin-template/commit/1699be0b95e44dba06e2e66b9c09be50da7a14d6))
+* 修复全局组件不加载语言包问题 ([33ae6fe](https://github.com/meadmin-cn/meadmin-template/commit/33ae6fe604e42f2c476542f6dcf9dd4abd0dedeb))
+* 修复数字动画 end变更后不重新触发的bug、优化格式化函数 ([c9abbf3](https://github.com/meadmin-cn/meadmin-template/commit/c9abbf389a8315bf64ffd9e90cbf22ba52cff475))
+* 修复语言包组件判断逻辑错误 ([597390a](https://github.com/meadmin-cn/meadmin-template/commit/597390a6a499ee0605fa7e30d5c8ba8518110afe))
+* a标签默认样式去除修复 ([f758914](https://github.com/meadmin-cn/meadmin-template/commit/f758914f340b0fd43dcbf5172bb21562740d2b58))
+
 ## [1.0.5](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.4...main-1.0.5) (2022-09-14)
 
 
