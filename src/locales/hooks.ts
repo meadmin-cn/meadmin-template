@@ -9,7 +9,7 @@
 import { useI18n, UseI18nOptions } from 'vue-i18n';
 import { loadMessage, MessageImport, setLocaleMessage } from './helper';
 import { mitter, event } from '@/event';
-import { ComponentOptions, VNode } from 'vue';
+import { camelize, capitalize, ComponentOptions, VNode } from 'vue';
 
 /**
  * useI18n 会自动加载locale语言包（语言包加载为异步执行，如果语言包被加载过则执行时效和同步一致）
@@ -55,6 +55,7 @@ export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI1
   return res;
 };
 
+const loadComponentCache = new WeakSet<ComponentOptions>();
 /**
  * 获取异步导入组件及其子孙的语言包函数
  * @returns
@@ -64,6 +65,7 @@ export const useLoadMessages = () => {
   if (instance === null) {
     throw new Error('必须在setup中调用');
   }
+  const cache = new Set<any>();
   const app = instance.appContext.app;
   const loadMessages = (
     options: (VNode & { __v_isVNode: true }) | ComponentOptions | string,
@@ -72,17 +74,16 @@ export const useLoadMessages = () => {
     importArr: Array<Promise<any>> = [],
   ) => {
     if (typeof options === 'string') {
-      const component = app.component(options);
-      if (component) {
-        loadMessages(options, isLoading, locale, importArr);
+      const component = app.component(capitalize(camelize(options)));
+      loadMessages(component as ComponentOptions, isLoading, locale, importArr);
+      return importArr;
+    }
+    if (typeof options === 'object' && !loadComponentCache.has(options)) {
+      loadComponentCache.add(options);
+      if (options.__v_isVNode) {
+        loadMessages(options.type, isLoading, locale, importArr);
+        return importArr;
       }
-      return importArr;
-    }
-    if (options.__v_isVNode) {
-      loadMessages(options.type, isLoading, locale, importArr);
-      return importArr;
-    }
-    if (typeof options === 'object') {
       if ((<ComponentOptions>options).components) {
         Object.values((<ComponentOptions>options).components!).forEach((component) => {
           loadMessages(component as ComponentOptions, isLoading, locale, importArr);
