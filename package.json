@@ -1,7 +1,7 @@
 {
   "name": "meadmin-template",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.6",
   "type": "module",
   "scripts": {
     "format": "prettier --write --cache .",
@@ -10,8 +10,8 @@
     "build-github": "vite build -m prod --base=/meadmin-template/ && npm run type-check",
     "type-check": "vue-tsc --noEmit",
     "preview": "vite preview",
-    "release-main": "release-it -c .release-it-main.json",
-    "release-template": "release-it",
+    "release-main": "vue-tsc --noEmit & release-it -c .release-it-main.json",
+    "release-template": "vue-tsc --noEmit & release-it",
     "eslint": "eslint . --cache --ext .vue,.ts,.tsx",
     "eslint:fix": "eslint . --ext .vue,.ts,.tsx --fix",
     "prettier": "prettier --cache  -l \"./**/*\"",
@@ -26,6 +26,7 @@
     "dayjs": "^1.11.3",
     "echarts": "^5.3.3",
     "element-plus": "^2.2.8",
+    "format-number": "^3.0.0",
     "jquery": "^3.6.0",
     "js-cookie": "^3.0.1",
     "lodash-es": "^4.17.21",
@@ -33,7 +34,9 @@
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",
     "pinia": "^2.0.14",
+    "tableexport": "^5.2.0",
     "vue": "^3.2.25",
+    "vue-form-create": "^1.2.10",
     "vue-i18n": "^9.1.10",
     "vue-request": "^2.0.0-rc.2",
     "vue-router": "^4.1.1"

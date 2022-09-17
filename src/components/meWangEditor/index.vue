@@ -16,13 +16,14 @@
       @on-max-length="emit('onMaxLength', $event)"
       @on-focus="emit('onFocus', $event)"
       @on-blur="emit('onBlur', $event)"
-      @custom-alert="(...args) => emit('customAlert', ...args)"
-      @custom-paste="(...args) => emit('customPaste', ...args)"
+      @custom-alert="(...args:any[]) => emit('customAlert', ...args)"
+      @custom-paste="(...args:any[]) => emit('customPaste', ...args)"
     />
   </div>
 </template>
 
 <script setup lang="ts" name="MeWangEditor">
+import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import './meWangEditor.scss';
 import { onBeforeUnmount, shallowRef, PropType } from 'vue';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';

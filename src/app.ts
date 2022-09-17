@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import '@/event/module';
 import App from './App.vue';
 import { event, mitter } from './event';
 import layoutMenuItem from '@/layout/components/menu/components/menuItem.vue';
