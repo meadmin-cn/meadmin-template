@@ -43,11 +43,8 @@ html {
 }
 
 //去a标签默认样式
-a:hover,
-a:visited,
-a:link,
-a:active {
-  color: inherit;
+a {
+  color: unset;
   text-decoration: none;
 }
 
