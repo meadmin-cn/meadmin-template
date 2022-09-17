@@ -1,6 +1,25 @@
 <template>
   <div class="custom-form">
-    <el-design-form></el-design-form>
+    <el-card class="header">
+      <h3>
+        集成的<el-link type="primary" href="https://github.com/fuchengwei/vue-form-create">vue-form-create</el-link
+        >包,非常感谢
+      </h3>
+      <div>
+        但是此包有以下局限性:全局css入侵、不是用的element样式变量，兼容性差、wangEditor版本过低，不支持对应的自定义配置、不支持扩展自定义组件
+        、不支持多语言。
+      </div>
+      <div>
+        如果想要自定义表单功能，去github提<el-link
+          type="primary"
+          href="https://github.com/meadmin-cn/meadmin-template/issues/26"
+          >issues</el-link
+        >，如果人数多了，后期有精力会考虑做一版。
+      </div>
+    </el-card>
+    <div class="body">
+      <el-design-form class="design-form"></el-design-form>
+    </div>
   </div>
 </template>
 
@@ -86,12 +105,22 @@ if (app && !app.config.globalProperties.$initCreate) {
 <style lang="scss" scoped>
 @import '../components/meWangEditor/meWangEditor.scss';
 .custom-form {
-  position: absolute;
-  left: $page-padding;
-  right: $page-padding;
-  top: $page-padding;
-  bottom: $page-padding;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  .body {
+    position: relative;
+    flex-grow: 1;
+    .design-form {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
 }
+//为了兼容暗黑模式对create-form样式做的覆盖
 :global(#app) {
   color: unset;
   font-family: unset;
@@ -125,6 +154,39 @@ if (app && !app.config.globalProperties.$initCreate) {
 }
 
 :deep(.fc-style) {
+  .el-dialog__header {
+    border-color: var(--el-border-color);
+  }
+  .ace-tm {
+    background: unset;
+    color: var(--el-text-color-primary);
+    .ace_marker-layer {
+      .ace_active-line {
+        background: var(--el-border-color-dark);
+      }
+    }
+
+    .ace_print-margin {
+      background: var(--el-border-color);
+    }
+    .ace_indent-guide {
+      background: unset;
+      border-right: 1px solid var(--el-border-color);
+    }
+    .ace_cursor {
+      color: var(--el-text-color-primary);
+    }
+    .ace_gutter-active-line {
+      background-color: var(--el-border-color-darker);
+    }
+    .ace_gutter {
+      background: var(--el-fill-color-dark);
+      color: var(--el-text-color-regular);
+    }
+  }
+  .el-dialog__footer {
+    border-color: var(--el-border-color);
+  }
   .widget-config-container {
     .el-header {
       border-color: var(--el-border-color) !important;
