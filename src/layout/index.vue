@@ -8,9 +8,9 @@
         <layout-header></layout-header>
       </el-header>
       <el-main class="right-main">
-        <el-scrollbar>
+        <el-scrollbar view-class="me-right-main-view">
           <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
-          <div class="main">
+          <div class="me-main">
             <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
           </div>
         </el-scrollbar>
@@ -49,21 +49,32 @@ const globalStore = useGlobalStore();
 
   .right-main {
     padding: 0;
-    background-color: rgb(240, 242, 245);
+    // background-color: rgb(240, 242, 245);
+    background-color: var(--el-bg-color-page);
   }
 }
 
-.dark {
-  .layout {
-    .right-main {
-      background-color: var(--el-bg-color);
-    }
+// .dark {
+//   .layout {
+//     .right-main {
+//       background-color: var(--el-bg-color);
+//     }
+//   }
+// }
+:deep(.me-right-main-view) {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  .me-main {
+    flex-grow: 1;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    padding: $page-padding;
+    position: relative;
   }
 }
 
-.main {
-  padding: $page-padding;
-}
 .fixed-setting {
   position: fixed;
   top: 50%;

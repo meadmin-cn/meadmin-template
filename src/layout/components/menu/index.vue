@@ -116,16 +116,18 @@ const menuTextColor = computed(() => mixColor(themeConfig.menuBg, menuActiveColo
 .collapse {
   :deep(.layout-menu-content) {
     width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
-
-    .title {
-      width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
-      text-align: center;
-      margin: 0;
-
-      span {
-        display: none;
-      }
+    span {
+      visibility: hidden;
     }
+    // .title {
+    //   width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
+    //   text-align: center;
+    //   margin: 0;
+
+    //   span {
+    //     display: none;
+    //   }
+    // }
   }
 }
 </style>

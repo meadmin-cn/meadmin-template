@@ -1,14 +1,13 @@
 <template>
   <span>
     <span class="prefix">{{ numberInfo.prefix }}</span>
-    <span class="output">{{
-      props.format ? props.format(+output.toFixed(numberInfo.decimals)) : output.toFixed(numberInfo.decimals)
-    }}</span>
+    <span class="output">{{ format ? format(output, numberInfo.decimals) : output }}</span>
     <span class="suffix">{{ numberInfo.suffix }}</span>
   </span>
 </template>
 
 <script setup lang="ts">
+import formatNumber from 'format-number';
 import { PropType } from 'vue';
 import { TransitionPresets, useTransition, EasingFunction } from '@vueuse/core';
 const props = defineProps({
@@ -26,8 +25,8 @@ const props = defineProps({
     default: 'easeOutExpo',
   },
   format: {
-    type: Function as PropType<(number: number) => string | number>,
-    default: new Intl.NumberFormat('zh').format,
+    type: Function as PropType<(number: number, decimals: number) => string | number>,
+    default: (number: number, decimals: number) => formatNumber({ truncate: decimals, padRight: decimals })(number),
   },
 });
 const emit = defineEmits(['finished', 'started']);
@@ -69,6 +68,6 @@ const getFormatInfo = (value: number | [number, string?, string?]) => {
 watch(
   () => props.end,
   (end) => Object.assign(numberInfo, getFormatInfo(end ?? props.start)),
-  { immediate: true },
+  { immediate: true, deep: true },
 );
 </script>
