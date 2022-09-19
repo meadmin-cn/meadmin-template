@@ -58,7 +58,7 @@
                 </ul>
               </template>
             </el-popover>
-            <el-button v-if="print" icon="mel-icon-printer" :title="$t('打印')" @click="printTable(elTable, name)" />
+            <el-button v-if="print" icon="mel-icon-printer" :title="$t('打印')" @click="printTable(elTableRef, name)" />
             <slot name="tools"></slot>
           </el-button-group>
           <el-button v-if="$slots.search" :title="$t('更多筛选')" @click="showSearch = !showSearch">
@@ -67,7 +67,7 @@
         </div>
       </div>
     </div>
-    <el-table v-bind="$attrs" ref="elTable" v-loading="loading">
+    <el-table v-bind="$attrs" ref="elTableRef" v-loading="loading">
       <component :is="customColumnProps.children"></component>
       <template #append>
         <slot name="append"></slot>
@@ -180,9 +180,9 @@ export default defineComponent<
         customColumnProps.value!.checkedLabels.delete(data.value);
       }
     };
-    const elTable = ref<ELTable>();
+    const elTableRef = ref<ELTable>();
     onMounted(() => {
-      elTable.value!.getSelectionIndexs = function () {
+      elTableRef.value!.getSelectionIndexs = function () {
         const index = [] as number[];
         if (this.data) {
           this.getSelectionRows()?.forEach((item: unknown) => {
@@ -192,14 +192,14 @@ export default defineComponent<
         return index;
       };
     });
-    expose({ elTable, customColumnProps });
+    expose({ elTable: elTableRef, customColumnProps });
     return {
       showSearch,
       searchText,
       customColumnProps,
       checkedLabels,
       checkChange,
-      elTable,
+      elTableRef,
       exportTable,
       printTable,
       handleExport: (
@@ -207,9 +207,9 @@ export default defineComponent<
         filename: string,
       ) => {
         if (typeof handle === 'string') {
-          exportTable(elTable.value!, handle, filename);
+          exportTable(elTableRef.value!, handle, filename);
         } else {
-          handle(elTable.value!, filename);
+          handle(elTableRef.value!, filename);
         }
       },
     };
