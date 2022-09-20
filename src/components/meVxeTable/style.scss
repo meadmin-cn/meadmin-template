@@ -1,26 +1,32 @@
 @import 'vxe-table/lib/style.min.css';
+
 .vxe-table--render-default .vxe-cell--checkbox .vxe-checkbox--icon {
   font-weight: 500 !important;
   font-size: 1em !important;
 }
+
 .vxe-table {
   ::-webkit-scrollbar-corner {
     background: unset;
   }
+
   ::-webkit-scrollbar {
     z-index: 1;
     border-radius: 4px;
     width: 6px;
   }
+
   ::-webkit-scrollbar:horizontal {
     height: 5px;
   }
+
   ::-webkit-scrollbar-thumb {
     background-color: rgba(144, 147, 153, 0.3);
     opacity: 0.3;
     border-radius: 4px;
   }
 }
+
 .vxe-table--body-wrapper,
 .vxe-table--fixed-left-body-wrapper,
 .vxe-table--fixed-right-body-wrapper {
@@ -33,12 +39,15 @@
   overflow-x: hidden !important;
   overflow-y: hidden !important;
 }
+
 .vxe-table--footer-wrapper.body--wrapper {
   overflow-x: overlay !important;
 }
+
 .dark .wxe-table ::-webkit-scrollbar-thumb {
   background-color: rgba(163, 166, 173, 0.3);
 }
+
 //暗黑模式暂时只加上table相关，vxetable不支持css变量 只能写死，后续vxetable升级支持css变量后会更新一版完整的暗黑样式。
 .dark {
   /*font*/
@@ -132,6 +141,13 @@
   $vxe-toolbar-background-color: #141414 !default;
   $vxe-toolbar-custom-active-background-color: #262727 !default;
   $vxe-toolbar-panel-background-color: #141414 !default;
+
+  /*tooltip*/
+  $vxe-tooltip-dark-color: #141414 !default;
+  $vxe-tooltip-dark-background-color: #e5eaf3 !default;
+  $vxe-tooltip-light-background-color: #141414 !default;
+  $vxe-tooltip-validate-error-color: #fff !default;
+  $vxe-tooltip-validate-error-background-color: #f56c6c !default;
 
   @import 'vxe-table/styles/index.scss';
 }

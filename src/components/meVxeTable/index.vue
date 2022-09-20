@@ -22,7 +22,7 @@
             prefix-icon="mel-icon-search"
             @change="$emit('quickSearch', searchText)"
           />
-          <el-button-group>
+          <el-button-group v-if="customColumn || exportMenu?.length || print">
             <el-popover v-if="customColumn" :teleported="false" placement="bottom" trigger="click" width="auto">
               <template #reference>
                 <el-button icon="mel-icon-grid" :title="$t('自定义列')" />
@@ -42,7 +42,7 @@
               </template>
             </el-popover>
             <el-popover
-              v-if="exportMenu"
+              v-if="exportMenu?.length"
               pure
               placement="bottom"
               trigger="click"
