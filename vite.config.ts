@@ -184,5 +184,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
       },
     },
+    optimizeDeps: {
+      //因为项目中很多用到了自动引入和动态加载，所以vite首次扫描依赖项会扫描不全，这里强制扫描全局。
+      entries: ['./src/**/*.{ts,vue}'],
+    },
   };
 };
