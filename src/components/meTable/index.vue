@@ -19,20 +19,22 @@
             @change="$emit('quickSearch', searchText)"
           />
           <el-button-group>
-            <el-popover v-if="customColumn" placement="bottom" trigger="click" width="auto">
+            <el-popover v-if="customColumn" :teleported="false" placement="bottom" trigger="click" width="auto">
               <template #reference>
                 <el-button icon="mel-icon-grid" :title="$t('自定义列')" />
               </template>
               <template #default>
-                <el-tree
-                  node-key="value"
-                  :data="customColumnProps.labels"
-                  default-expand-all
-                  :default-checked-keys="checkedLabels"
-                  :props="{ label: 'label', children: 'children' }"
-                  show-checkbox
-                  @check-change="checkChange"
-                />
+                <el-scrollbar max-height="300px" class="popover-scrollbar-y">
+                  <el-tree
+                    node-key="value"
+                    :data="customColumnProps.labels"
+                    default-expand-all
+                    :default-checked-keys="checkedLabels"
+                    :props="{ label: 'label', children: 'children' }"
+                    show-checkbox
+                    @check-change="checkChange"
+                  />
+                </el-scrollbar>
               </template>
             </el-popover>
             <el-popover
