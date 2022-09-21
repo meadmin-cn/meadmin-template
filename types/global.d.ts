@@ -24,7 +24,7 @@ declare global {
     >]: InstanceType<Component>['$props'][K];
   };
 
-  type ELTable = InstanceType<typeof ElTable> & {
+  type ELTableInstance = InstanceType<typeof ElTable> & {
     getSelectionIndexs: () => number[]; //获取选中行的索引
   };
 }

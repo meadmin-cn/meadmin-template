@@ -56,7 +56,7 @@ export function handlePrint(content: string, title = '', head: string[] = [], ty
   printFrame.src = URL.createObjectURL(blob);
 }
 
-export default async (elTable: ELTable, title = '', head: string[] = []) => {
+export default async (elTable: ELTableInstance, title = '', head: string[] = []) => {
   head.unshift(`<style>
   .el-table{
     width: max-content;
