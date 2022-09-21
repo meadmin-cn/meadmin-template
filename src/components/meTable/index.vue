@@ -82,7 +82,7 @@
 </template>
 <script lang="ts">
 import { ElTable } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPropTypes, PropType } from 'vue';
+import { ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
 import printTable from './hooks/print';
@@ -100,7 +100,7 @@ const props = {
       {
         label: string;
         filename?: string;
-        handle: (elTable: ELTable, filename: string) => void | 'xlsx' | 'csv' | 'txt';
+        handle: (elTable: ELTableInstance, filename: string) => void | 'xlsx' | 'csv' | 'txt';
       }[]
     >,
     default: () => [
@@ -140,7 +140,12 @@ const emits = {
 };
 export default defineComponent<
   ComponentProps<typeof ElTable> & Partial<ExtractPropTypes<typeof props>>,
-  Record<string, any>,
+  {
+    [k: string]: any;
+    elTableRef: Ref<ELTableInstance | undefined>;
+    customColumnProps: Ref<ReturnType<typeof customColumn> | undefined>;
+    searchText: Ref<string>;
+  },
   Record<string, any>,
   Record<string, any>,
   Record<string, any>,
@@ -182,7 +187,7 @@ export default defineComponent<
         customColumnProps.value!.checkedLabels.delete(data.value);
       }
     };
-    const elTableRef = ref<ELTable>();
+    const elTableRef = ref<ELTableInstance>();
     onMounted(() => {
       elTableRef.value!.getSelectionIndexs = function () {
         const index = [] as number[];
@@ -194,7 +199,7 @@ export default defineComponent<
         return index;
       };
     });
-    expose({ elTable: elTableRef, customColumnProps });
+    expose({ elTableRef, customColumnProps, searchText });
     return {
       showSearch,
       searchText,
@@ -205,7 +210,7 @@ export default defineComponent<
       exportTable,
       printTable,
       handleExport: (
-        handle: (elTable: ELTable, filename: string) => void | 'xls' | 'txt' | 'csv',
+        handle: (elTable: ELTableInstance, filename: string) => void | 'xls' | 'txt' | 'csv',
         filename: string,
       ) => {
         if (typeof handle === 'string') {
