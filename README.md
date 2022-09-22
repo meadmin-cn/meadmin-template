@@ -36,7 +36,6 @@ Me-admin template是一个免费开源的中后台模板,基于vue3、vite3、 p
 - clone 代码
 ```
 git clone https://github.com/meadmin-cn/meadmin-template.git
-
 ```
 - 安装依赖
 ```
@@ -73,7 +72,7 @@ git clone https://github.com/meadmin-cn/meadmin-template.git
 7.提交`pull request`
 
 ## Git 贡献提交规范
-- 需符合[commitlint](https://commitlint.js.org/#/concepts-commit-conventions),建议安装`vscode`的`Conventional Commits`扩展
+- 需符合 [commitlint](https://commitlint.js.org/#/concepts-commit-conventions)规范，建议安装`vscode`的`Conventional Commits`扩展
   - `feat`  新功能
   - `fix`  Bug 修复
   - `chore` 其他
