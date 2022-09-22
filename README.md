@@ -63,7 +63,7 @@ git clone https://github.com/meadmin-cn/meadmin-template.git
 
 3.初始化:(`npm run i`) 或( `npm install` `npx husky install`)
 
-4.格式校验:`npm run type-check`、`npm run eslint`
+4.eslint检查：`npm run eslint`(husky 会自动运行eslint、prettier、type-check，但是不会自动修复eslint的warn，需要自己运行解决下warn)
 
 5.提交修改: git commit -am 'feat: add xxxxx'
 
