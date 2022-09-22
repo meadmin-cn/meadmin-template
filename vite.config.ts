@@ -89,7 +89,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           toFile: 'types/meIconComments.d.ts',
           name: 'MeIcon_{{name}}',
           template: fs.readFileSync('./template/meIconComments.d.ts', 'utf-8'),
-          codeTemplates: [{ key: '//code', template: '{{name}}: Icon;\n   ' }],
+          codeTemplates: [{ key: '//code', template: '{{name}}: Icon;\n    ' }],
         },
         {
           // pinia module

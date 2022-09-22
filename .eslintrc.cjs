@@ -46,16 +46,15 @@ module.exports = {
     'vue/no-parsing-error': 'off',
     'vue/require-default-prop': 'off',
     'vue/no-v-html': 'off',
-    'no-unused-vars': [
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-unused-vars': [
       'error',
       // we are only using this rule to check for unused arguments since TS
       // catches unused variables but not args.
       { varsIgnorePattern: '.*', args: 'none' },
     ],
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
     'no-undef': 'off', // ts(2304)
     '@typescript-eslint/naming-convention': [
       'error',
