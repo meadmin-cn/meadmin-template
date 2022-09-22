@@ -4,6 +4,8 @@ const group = [
   {
     id: 1,
     name: '超级管理员',
+    status: 1,
+    parentId: 0,
     rules: [
       'example',
       'permission',
@@ -30,6 +32,8 @@ const group = [
       {
         id: 2,
         name: '一级管理员1',
+        status: 1,
+        parentId: 1,
         rules: [
           'example',
           'permission',
@@ -48,16 +52,22 @@ const group = [
           {
             id: 21,
             name: '二级管理员1-1',
+            parentId: 2,
+            status: 1,
             rules: ['example', 'permission', 'example/request'],
           },
           {
             id: 22,
             name: '二级管理员1-2',
+            parentId: 2,
+            status: 1,
             rules: ['example', 'componentLang'],
           },
           {
             id: 23,
             name: '二级管理员1-3',
+            parentId: 2,
+            status: 0,
             rules: [
               'example',
               'moreMenu',
@@ -71,26 +81,36 @@ const group = [
               {
                 id: 231,
                 name: '三级管理员1-3-1',
+                parentId: 23,
+                status: 1,
                 rules: ['example', 'moreMenu', 'moreMenu1', 'moreMenu1-1', 'moreMenu1-1-1'],
               },
               {
                 id: 232,
                 name: '三级管理员1-3-2',
+                parentId: 23,
+                status: 1,
                 rules: ['example', 'moreMenu', 'moreMenu1', 'moreMenu1-1', 'moreMenu1-1-lang'],
               },
               {
                 id: 233,
                 name: '三级管理员1-3-3',
+                parentId: 23,
+                status: 1,
                 rules: ['example', 'moreMenu', 'moreMenu1', 'moreMenu1-2'],
               },
               {
                 id: 234,
                 name: '三级管理员1-3-4',
+                parentId: 23,
+                status: 1,
                 rules: ['example', 'moreMenu', 'moreMenu1', 'moreMenu1-1', 'moreMenu1-1-1', 'moreMenu1-1-lang'],
                 children: [
                   {
                     id: 2341,
                     name: '四级管理员1-3-4-1',
+                    parentId: 234,
+                    status: 1,
                     rules: ['example', 'moreMenu', 'moreMenu1', 'moreMenu1-1', 'moreMenu1-1-1'],
                   },
                 ],
@@ -100,26 +120,36 @@ const group = [
           {
             id: 24,
             name: '二级管理员1-4',
+            parentId: 2,
+            status: 1,
             rules: ['example', 'permission', 'componentLang', 'example/request', 'pagePermission'],
           },
           {
             id: 25,
             name: '二级管理员1-5',
+            parentId: 2,
+            status: 1,
             rules: ['example', 'permission', 'componentLang', 'example/request', 'link', 'pagePermission'],
             children: [
               {
                 id: 251,
                 name: '三级管理员1-5-1',
+                parentId: 25,
+                status: 1,
                 rules: ['example', 'permission', 'componentLang'],
               },
               {
                 id: 252,
                 name: '三级管理员1-5-2',
+                parentId: 25,
+                status: 1,
                 rules: ['example', 'link', 'componentLang'],
               },
               {
                 id: 253,
                 name: '三级管理员1-5-3',
+                parentId: 25,
+                status: 1,
                 rules: ['example', 'pagePermission'],
               },
             ],
@@ -127,50 +157,68 @@ const group = [
           {
             id: 26,
             name: '二级管理员1-6',
+            parentId: 2,
+            status: 0,
             rules: ['example', 'permission', 'componentLang', 'example/request'],
           },
           {
             id: 27,
             name: '二级管理员1-7',
+            parentId: 2,
+            status: 1,
             rules: ['example', 'example/request'],
           },
         ],
       },
       {
         id: 3,
+        parentId: 1,
         name: '一级管理员2',
+        status: 1,
         rules: ['component', 'meNumber', 'editor', 'wangEditor', 'table', 'vxeTable'],
         children: [
           {
             id: 31,
+            parentId: 3,
             name: '二级管理员2-1',
+            status: 1,
             rules: ['component', 'meNumber'],
           },
           {
             id: 32,
+            parentId: 3,
             name: '二级管理员2-2',
+            status: 1,
             rules: ['component', 'table'],
           },
           {
             id: 33,
+            parentId: 3,
             name: '二级管理员2-3',
+            status: 1,
             rules: ['component', 'vxeTable'],
           },
           {
             id: 34,
+            parentId: 3,
             name: '二级管理员2-4',
+            status: 1,
             rules: ['component', 'editor', 'wangEditor'],
           },
           {
             id: 35,
+            parentId: 3,
             name: '二级管理员2-5',
+            status: 1,
             rules: ['component', 'table', 'vxeTable'],
           },
         ],
       },
       {
         id: 4,
+        parentId: 1,
         name: '一级管理员3',
+        status: 1,
         rules: ['customComponent', 'roleRule', 'roleRuleIndex', 'roleRuleAdd', 'roleRuleEdit', 'roleRuleDel'],
       },
     ],

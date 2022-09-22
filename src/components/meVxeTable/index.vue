@@ -34,7 +34,7 @@
                     :default-checked-keys="defaultChecked"
                     :data="collectColumn"
                     default-expand-all
-                    :props="{ label: (item:VxeTableDefines.ColumnInfo)=>item.type==='seq'?'#':item.title, children: 'children' }"
+                    :props="{ label: (item:any)=>item.type==='seq'?'#':item.title, children: 'children' }"
                     show-checkbox
                     @check-change="checkChange"
                   />
@@ -85,7 +85,7 @@
 </template>
 <script lang="ts">
 import './install';
-import { ComponentOptionsMixin, ExtractPropTypes, PropType } from 'vue';
+import { ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
 import {
   VXEComponent,
   VxeTableDefines,
@@ -151,7 +151,7 @@ const emits = {
 };
 export default defineComponent<
   ComponentProps<VXEComponent<VxeTableProps, VxeTableEventProps>> & Partial<ExtractPropTypes<typeof props>>,
-  Record<string, any>,
+  { [k: string]: any; vxeTableRef: Ref<VxeTableInstance | undefined>; searchText: Ref<string> },
   Record<string, any>,
   Record<string, any>,
   Record<string, any>,
@@ -188,7 +188,7 @@ export default defineComponent<
         }, [] as string[]);
       });
     });
-    expose({ vxeTable: vxeTableRef });
+    expose({ vxeTableRef, searchText });
     return {
       vxeTableRef,
       collectColumn,

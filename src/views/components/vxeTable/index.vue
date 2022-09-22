@@ -79,7 +79,7 @@
         <vxe-colgroup title="Group2">
           <vxe-column field="sex" title="ElSelect" width="140" :edit-render="{}">
             <template #edit="scope">
-              <el-select v-model="scope.row.sex" @change="xTable.updateStatus(scope)">
+              <el-select v-model="scope.row.sex" @change="xTable!.updateStatus(scope)">
                 <el-option
                   v-for="item in demo1.sexList"
                   :key="item.value"
@@ -154,10 +154,9 @@
 <script setup lang="ts" name="VxeTableDemo">
 import { VxeTableInstance, VxeTablePropTypes } from 'vxe-table';
 import XEUtils from 'xe-utils';
-import meVxeTable from '@/components/meVxeTable/index.vue';
 import { FormInstance } from 'element-plus';
-const meVxeTableRef = ref<typeof meVxeTable>();
-const xTable = computed<VxeTableInstance>(() => meVxeTableRef.value?.vxeTable);
+const meVxeTableRef = ref<MeVxeTableInstance>();
+const xTable = computed(() => meVxeTableRef.value?.vxeTableRef);
 const restaurants = [
   { value: 'Designer', name: 'Designer' },
   { value: 'Develop', name: 'Develop' },

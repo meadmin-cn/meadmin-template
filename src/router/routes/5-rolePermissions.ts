@@ -7,7 +7,7 @@ export const routes: RouteRecordRaw[] = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/rolePermissions.vue'),
+        component: () => import('@/views/rolePermissions/rolePermissions.vue'),
         meta: { title: '角色权限', icon: 'mel-icon-set-up' },
       },
     ],
