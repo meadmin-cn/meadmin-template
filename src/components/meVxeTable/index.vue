@@ -70,6 +70,7 @@
           <el-button v-if="$slots.search" :title="$t('更多筛选')" @click="showSearch = !showSearch">
             <mel-icon-search></mel-icon-search>
           </el-button>
+          <slot name="toolsButton"></slot>
         </div>
       </div>
     </div>
@@ -252,10 +253,12 @@ export default defineComponent<
         display: flex;
         align-items: center;
 
-        > div,
-        > span,
-        > button {
-          margin-left: 12px;
+        > {
+          :deep(div),
+          :deep(span),
+          :deep(button) {
+            margin-left: 12px;
+          }
         }
 
         > div:first-child,
