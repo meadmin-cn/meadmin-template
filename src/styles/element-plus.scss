@@ -1,9 +1,11 @@
+@import 'element-plus/dist/index.css';
+@import 'element-plus/theme-chalk/dark/css-vars.css';
 //自定义 element-ui 样式
-.me-large {
+.me-large:root {
   //这里强制将font-size-base设置为large
   --el-font-size-base: var(--el-font-size-large);
 }
-.me-small {
+.me-small:root {
   //这里强制将font-size-base设置为small
   --el-font-size-base: var(--el-font-size-small);
 }

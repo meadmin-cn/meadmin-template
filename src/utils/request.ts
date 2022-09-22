@@ -42,9 +42,10 @@ service.interceptors.response.use(
 );
 
 type RequestOptions<R, P extends unknown[]> = {
-  needAll?: boolean; // 需要所有的
+  needAll?: boolean; // 需要所有的格式，而不仅仅是data
   noLoading?: boolean; // 不需要加载特效
   noError?: boolean; // 不需要错误提示
+  success?: boolean; //成功后提示
 } & Options<R, P>;
 
 setGlobalOptions({
@@ -89,7 +90,9 @@ function request<R, P extends unknown[] = [], T = true>(
       if (res.code !== '200') {
         throw Error(res.msg);
       }
-
+      if (options?.success) {
+        ElMessage.success({ message: res.msg });
+      }
       !options?.noLoading && closeLoading();
       return options?.needAll ? res : res.data;
     } catch (e) {
