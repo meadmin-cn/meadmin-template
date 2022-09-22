@@ -27,7 +27,7 @@
                 <el-scrollbar max-height="300px" class="popover-scrollbar-y">
                   <el-tree
                     node-key="value"
-                    :data="customColumnProps.labels"
+                    :data="customColumnProps!.labels"
                     default-expand-all
                     :default-checked-keys="checkedLabels"
                     :props="{ label: 'label', children: 'children' }"
@@ -66,11 +66,12 @@
           <el-button v-if="$slots.search" :title="$t('更多筛选')" @click="showSearch = !showSearch">
             <mel-icon-search></mel-icon-search>
           </el-button>
+          <slot name="toolsButton"></slot>
         </div>
       </div>
     </div>
     <el-table v-bind="$attrs" ref="elTableRef" v-loading="loading">
-      <component :is="customColumnProps.children"></component>
+      <component :is="customColumnProps!.children"></component>
       <template #append>
         <slot name="append"></slot>
       </template>
@@ -243,10 +244,12 @@ export default defineComponent<
         margin-top: 12px;
         display: flex;
         align-items: center;
-        > div,
-        > span,
-        > button {
-          margin-left: 12px;
+        > {
+          :deep(div),
+          :deep(span),
+          :deep(button) {
+            margin-left: 12px;
+          }
         }
         > div:first-child,
         > span:first-child,
