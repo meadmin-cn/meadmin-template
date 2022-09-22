@@ -23,8 +23,8 @@
         </el-form-item>
       </el-form>
       <div class="footer">
-        <el-button @click="start()" type="success">开始</el-button>
-        <el-button @click="props.disabled = true" type="danger">停止</el-button>
+        <el-button type="success" @click="start()">开始</el-button>
+        <el-button type="danger" @click="props.disabled = true">停止</el-button>
       </div>
     </el-card>
   </div>
