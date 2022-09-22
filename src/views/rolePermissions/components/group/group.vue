@@ -80,11 +80,13 @@ const del = (id: number) => {
 };
 const setGroupRules = async (rules?: string[]) => {
   if (!rules) {
-    return;
+    return false;
   }
   const row = groupRef.value!.vxeTableRef!.getCurrentRecord();
   if (row) {
-    return await editGroupApi().runAsync(row.id, { rules });
+    await editGroupApi().runAsync(row.id, { rules });
+    row.rules = rules;
+    return true;
   }
   ElMessage.error('请先选择分组');
 };
