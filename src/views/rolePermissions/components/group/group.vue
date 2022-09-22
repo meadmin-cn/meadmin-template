@@ -10,7 +10,7 @@
       :print="false"
       :export-menu="[]"
       show-overflow
-      height="800px"
+      :height="height"
       me-class="group"
       @current-change="groupChange"
       @add="showAddOrEditor()"
@@ -47,6 +47,7 @@ import { omit } from 'lodash-es';
 const emit = defineEmits({
   currentChange: (row: string[]) => true,
 });
+const height = Math.max(window.innerHeight - 180, 600);
 const showAdd = ref(false);
 const groupRef = ref<MeVxeTableInstance>();
 const group = groupListApi();

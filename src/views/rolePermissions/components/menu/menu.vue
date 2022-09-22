@@ -10,7 +10,7 @@
       :row-config="{ keyField: 'rule', useKey: true }"
       align="center"
       border="full"
-      height="800px"
+      :height="height"
       show-overflow
       @refresh="getMenu"
       @quick-search="search"
@@ -68,6 +68,7 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(['subRules']);
+const height = Math.max(window.innerHeight - 180, 600);
 const showAdd = ref(false);
 const menuRef = ref<MeVxeTableInstance>();
 const menu = menuListApi();
