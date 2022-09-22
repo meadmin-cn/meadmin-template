@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div clss="menu">
     <me-vxe-table
       ref="menuRef"
       :data="menu.data.value ?? []"
@@ -9,8 +9,9 @@
       :checkbox-config="{ labelField: 'id' }"
       :row-config="{ keyField: 'rule', useKey: true }"
       align="center"
-      border="full"
-      :height="height"
+      border
+      me-class="table-menu"
+      height="auto"
       show-overflow
       @refresh="getMenu"
       @quick-search="search"
@@ -51,7 +52,7 @@
         >
       </template>
     </me-vxe-table>
-    <add v-model:show="showAdd" :data="editorInfo"></add>
+    <add v-model:show="showAdd" :data="editorInfo" @success="getMenu()"></add>
   </div>
 </template>
 <script setup lang="ts" name="Menu">
@@ -68,7 +69,6 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(['subRules']);
-const height = Math.max(window.innerHeight - 180, 600);
 const showAdd = ref(false);
 const menuRef = ref<MeVxeTableInstance>();
 const menu = menuListApi();
@@ -117,3 +117,15 @@ const del = (id: number) => {
     });
 };
 </script>
+<style lang="scss" scoped>
+.menu {
+  .table-menu {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    :deep(.me-vxe-body) {
+      flex-grow: 1;
+    }
+  }
+}
+</style>

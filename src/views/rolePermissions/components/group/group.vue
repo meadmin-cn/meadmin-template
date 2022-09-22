@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="group">
     <me-vxe-table
       ref="groupRef"
       :data="group.data.value ?? []"
@@ -10,8 +10,8 @@
       :print="false"
       :export-menu="[]"
       show-overflow
-      :height="height"
-      me-class="group"
+      height="auto"
+      me-class="table-group"
       @current-change="groupChange"
       @add="showAddOrEditor()"
       @refresh="getGroup"
@@ -47,7 +47,6 @@ import { omit } from 'lodash-es';
 const emit = defineEmits({
   currentChange: (row: string[]) => true,
 });
-const height = Math.max(window.innerHeight - 180, 600);
 const showAdd = ref(false);
 const groupRef = ref<MeVxeTableInstance>();
 const group = groupListApi();
@@ -93,18 +92,26 @@ defineExpose({ setGroupRules });
 </script>
 <style lang="scss" scoped>
 .group {
-  .group-item {
+  .table-group {
+    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    .group-item-btn {
-      display: none;
+    flex-direction: column;
+    :deep(.me-vxe-body) {
+      flex-grow: 1;
     }
-  }
-  :deep(.row--current) {
-    .group-item-btn {
-      display: block;
+    .group-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .group-item-btn {
+        display: none;
+      }
+    }
+    :deep(.row--current) {
+      .group-item-btn {
+        display: block;
+      }
     }
   }
 }

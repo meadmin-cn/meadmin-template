@@ -1,7 +1,9 @@
 <template>
   <div class="role-permissions">
-    <group class="group" @current-change="checkedRules = $event" ref="group"></group>
-    <Menu class="menu" :checked-rules="checkedRules" @subRules="($refs.group as any).setGroupRules($event)"></Menu>
+    <el-scrollbar always view-class="body">
+      <group class="group" @current-change="checkedRules = $event" ref="group"></group>
+      <Menu class="menu" :checked-rules="checkedRules" @subRules="($refs.group as any).setGroupRules($event)"></Menu>
+    </el-scrollbar>
   </div>
 </template>
 <script lang="ts" setup name="RulePermissions">
@@ -11,23 +13,33 @@ const checkedRules = shallowRef([] as string[]);
 </script>
 <style lang="scss" scoped>
 .role-permissions {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -10px;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  :deep(.body) {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100%;
+    padding: calc($page-padding - 10px);
+    .group {
+      flex: 1;
+      margin: 10px;
+      min-width: 300px;
+      min-height: 600px;
+    }
 
-  .group {
-    flex: 1;
-    margin: 10px;
-    min-width: 300px;
-  }
+    .menu {
+      flex: 3;
+      margin: 10px;
+      min-height: 600px;
+    }
 
-  .menu {
-    flex: 3;
-    margin: 10px;
-  }
-
-  :deep(.keyword-lighten) {
-    background-color: var(--el-color-warning-light-3);
+    :deep(.keyword-lighten) {
+      background-color: var(--el-color-warning-light-3);
+    }
   }
 }
 </style>

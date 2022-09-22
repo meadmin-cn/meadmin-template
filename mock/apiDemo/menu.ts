@@ -306,9 +306,17 @@ export default [
     timeout: 500 + Math.floor(Math.random() * 1000),
     response: (req: any) => {
       const id = +req.url.replace('/api/admin/menu/', '');
+      const info = req.body;
+      delete info._X_ROW_KEY;
+      const item = getMenuItem(id, menu);
+      if (!item) {
+        return fail('错误的id');
+      }
+      if (item?.parentId === info.parentId) {
+        Object.assign(item, info);
+        return success('操作成功');
+      }
       try {
-        const info = req.body;
-        delete info._X_ROW_KEY;
         const item = delMenu(id);
         Object.assign(item, info);
         addMenu(item);
