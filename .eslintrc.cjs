@@ -65,7 +65,7 @@ module.exports = {
         leadingUnderscore: 'allow',
         filter: {
           // you can expand this regex to add more allowed names
-          regex: '^__v_.*$',
+          regex: '^((__v_.*)|[0-9]+)$',
           match: false,
         },
       },
@@ -81,7 +81,7 @@ module.exports = {
         leadingUnderscore: 'allow',
         filter: {
           // you can expand this regex to add more allowed names
-          regex: '^__v_.*$',
+          regex: '^((__v_.*)|[0-9]+)$',
           match: false,
         },
       },

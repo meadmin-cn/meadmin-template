@@ -123,6 +123,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               key: '//code',
               template: '{{name}}: typeof import("{{path}}")["default"];\n    ',
             },
+            {
+              key: '//typeCode',
+              template: 'type {{name}}Instance = InstanceType<typeof import("{{path}}")["default"]>;\n  ',
+            },
           ],
           name: '_{{name}}',
         },
