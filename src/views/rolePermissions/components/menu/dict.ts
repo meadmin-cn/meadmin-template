@@ -1,6 +1,7 @@
 export const type = {
   '1': '菜单',
-  '2': '按钮',
+  '2': '页面',
+  '3': '按钮',
 };
 export const status = {
   '0': '关闭',

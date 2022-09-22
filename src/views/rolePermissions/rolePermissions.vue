@@ -1,16 +1,16 @@
 <template>
-  <div class="rule-permissions">
-    <group class="group" @current-change="checkedRules = $event"></group>
-    <rule class="rule" :checked-rules="checkedRules"></rule>
+  <div class="role-permissions">
+    <group class="group" @current-change="checkedRules = $event" ref="group"></group>
+    <Menu class="menu" :checked-rules="checkedRules" @subRules="($refs.group as any).setGroupRules($event)"></Menu>
   </div>
 </template>
-<script lang="ts" setup name="rulePermissions">
+<script lang="ts" setup name="RulePermissions">
 import Group from './components/group/group.vue';
-import Rule from './components/rule/rule.vue';
+import Menu from './components/menu/menu.vue';
 const checkedRules = shallowRef([] as string[]);
 </script>
 <style lang="scss" scoped>
-.rule-permissions {
+.role-permissions {
   display: flex;
   flex-wrap: wrap;
   margin: -10px;
@@ -21,7 +21,7 @@ const checkedRules = shallowRef([] as string[]);
     min-width: 300px;
   }
 
-  .rule {
+  .menu {
     flex: 3;
     margin: 10px;
   }

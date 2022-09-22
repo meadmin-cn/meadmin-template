@@ -1,7 +1,10 @@
 import request from '@/utils/request';
 
 const enum Api {
-  GROUP = '/api/admin/group',
+  GROUP = '/api/admin/group/index',
+  ADD_GROUP = '/api/admin/group/add',
+  EDIT_GROUP = '/api/admin/group/{id}',
+  DEL_GROUP = '/api/admin/group/{id}',
 }
 
 // 管理员组
@@ -14,16 +17,38 @@ export class GroupInfo {
 }
 export function addGroupApi() {
   return request<number, [GroupInfo]>(
-    () => ({
-      url: Api.GROUP,
-      method: 'get',
+    (info) => ({
+      url: Api.ADD_GROUP,
+      method: 'POST',
+      data: info,
     }),
-    { noLoading: true },
+    { success: true },
+  );
+}
+
+export function editGroupApi() {
+  return request<number, [number, Partial<GroupInfo>]>(
+    (id, info) => ({
+      url: Api.EDIT_GROUP.replace('{id}', id + ''),
+      method: 'POST',
+      data: info,
+    }),
+    { success: true },
+  );
+}
+
+export function delGroupApi() {
+  return request<number, [number]>(
+    (id) => ({
+      url: Api.DEL_GROUP.replace('{id}', id + ''),
+      method: 'DELETE',
+    }),
+    { success: true },
   );
 }
 
 export type GroupListResult = (Required<GroupInfo> & {
-  children: Required<GroupInfo>[];
+  children: GroupListResult;
 })[];
 
 export function groupListApi() {
@@ -32,6 +57,6 @@ export function groupListApi() {
       url: Api.GROUP,
       method: 'get',
     }),
-    { noLoading: true },
+    { noLoading: true, cacheKey: 'groupList', cacheTime: 5 * 60 * 1000 },
   );
 }

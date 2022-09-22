@@ -4,9 +4,8 @@
       <el-form-item label="父级" prop="parentId">
         <el-tree-select
           v-model="formData.parentId"
-          :disabled="data !== undefined"
-          :props="{ label: 'name', value: 'id',disabled:({id}:Required<GroupInfo>)=>id<=0}"
-          :data="groupData"
+          :props="{ label: 'name', value: 'id' }"
+          :data="menuData"
           :render-after-expand="false"
           filterable
           check-strictly
@@ -15,10 +14,20 @@
       <el-form-item label="名称" prop="name">
         <el-input v-model="formData.name"></el-input>
       </el-form-item>
+      <el-form-item label="规则" prop="rule">
+        <el-input v-model="formData.rule"></el-input>
+      </el-form-item>
+      <el-form-item label="排序" prop="sort">
+        <el-input-number v-model="formData.sort"></el-input-number>
+      </el-form-item>
+      <el-form-item label="类型" prop="type">
+        <el-radio-group v-model="formData.type">
+          <el-radio v-for="(item, key) in type" :key="key" :label="+key">{{ item }}</el-radio>
+        </el-radio-group>
+      </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="formData.status">
-          <el-radio :label="1">启用</el-radio>
-          <el-radio :label="0">禁用</el-radio>
+          <el-radio v-for="(item, key) in status" :key="key" :label="+key">{{ item }}</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
@@ -29,40 +38,43 @@
   </el-dialog>
 </template>
 <script setup lang="ts" name="Add">
-import { GroupInfo, addGroupApi, editGroupApi, groupListApi } from '@/api/admin';
+import { addMenuApi, MenuInfo, editMenuApi, menuListApi } from '@/api/menu';
 import { FormInstance, FormRules } from 'element-plus';
 import { PropType } from 'vue';
+import { type, status } from '../dict';
 const props = defineProps({
   show: {
     type: Boolean,
     required: true,
   },
-  data: Object as PropType<Required<GroupInfo>>,
+  data: Object as PropType<Required<MenuInfo>>,
 });
 const emit = defineEmits({
   ['update:show']: (show: boolean) => true,
   success: () => true,
 });
 const formRef = ref<FormInstance>();
-const formData = ref(new GroupInfo());
+const formData = ref(new MenuInfo());
 const rules = reactive<FormRules>({
   parentId: [{ required: true, message: '父级必须选择', trigger: 'blur' }],
   name: [{ required: true, message: '名称必须填写', trigger: 'blur' }],
+  rule: [{ required: true, message: '规则必须填写', trigger: 'blur' }],
+  type: [{ required: true, message: '类型必须选择', trigger: 'blur' }],
   status: [{ required: true, message: '状态必须选择', trigger: 'blur' }],
 });
 const resetFormData = () => {
   if (props.data) {
     formData.value = { ...props.data };
   } else {
-    formData.value = new GroupInfo();
+    formData.value = new MenuInfo();
   }
 };
 watch(() => props.data, resetFormData);
-const list = groupListApi();
+const list = menuListApi();
 list.run();
-const groupData = computed(() => {
+const menuData = computed(() => {
   if (list.data.value) {
-    return [{ id: 0, name: '无', parentId: 0, children: [], rules: [], status: 0 }, ...list.data.value];
+    return [{ id: 0, name: '无', parentId: 0, children: [], status: 1 }, ...list.data.value];
   }
   return [];
 });
@@ -75,9 +87,9 @@ watch(
 const onSubmit = async () => {
   if (await formRef.value!.validate()) {
     if (formData.value.id) {
-      await editGroupApi().runAsync(formData.value.id, formData.value);
+      await editMenuApi().runAsync(formData.value.id, formData.value);
     } else {
-      await addGroupApi().runAsync(formData.value);
+      await addMenuApi().runAsync(formData.value);
     }
     emit('success');
     emit('update:show', false);

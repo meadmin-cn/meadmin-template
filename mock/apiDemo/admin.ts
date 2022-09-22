@@ -1,5 +1,6 @@
 import { success, fail } from '../helper';
 
+let id = 10000;
 const group = [
   {
     id: 1,
@@ -27,6 +28,10 @@ const group = [
       'vxeTable',
       'customComponent',
       'roleRule',
+      'roleRuleIndex',
+      'roleRuleAdd',
+      'roleRuleEdit',
+      'roleRuleDel',
     ],
     children: [
       {
@@ -224,11 +229,84 @@ const group = [
     ],
   },
 ];
+function getGroupItem(id: number, groupList?: typeof group) {
+  if (!groupList) {
+    return;
+  }
+  for (const key in groupList) {
+    if (groupList[key].id === id) {
+      return groupList[key];
+    }
+    const item = getGroupItem(id, groupList[key].children as any) as typeof group[number];
+    if (item) {
+      return item;
+    }
+  }
+}
 export default [
   {
-    url: '/api/admin/group',
+    url: '/api/admin/group/index',
     method: 'get',
     timeout: 500 + Math.floor(Math.random() * 1000),
     response: () => success(group),
+  },
+  {
+    url: '/api/admin/group/add',
+    method: 'post',
+    timeout: 500 + Math.floor(Math.random() * 1000),
+    response: (req: any) => {
+      const info = req.body;
+      delete info._X_ROW_KEY;
+      info.id = id++;
+      let item = group as any;
+      if (info.parentId) {
+        item = getGroupItem(info.parentId, group);
+        if (!item) {
+          return fail('错误的父级');
+        }
+        if (!item.children) {
+          item.children = [];
+        }
+        item = item.children;
+      }
+      item.push({ ...info });
+      return success('操作成功');
+    },
+  },
+  {
+    url: /\/api\/admin\/group\/[0-9]+/,
+    method: 'post',
+    timeout: 500 + Math.floor(Math.random() * 1000),
+    response: (req: any) => {
+      const info = req.body;
+      delete info._X_ROW_KEY;
+      const item = getGroupItem(+req.url.replace('/api/admin/group/', ''), group);
+      if (!item) {
+        return fail('错误的id');
+      }
+      Object.assign(item, info);
+      return success('操作成功');
+    },
+  },
+  {
+    url: /\/api\/admin\/group\/[0-9]+/,
+    method: 'DELETE',
+    timeout: 500 + Math.floor(Math.random() * 1000),
+    response: (req: any) => {
+      const id = +req.url.replace('/api/admin/group/', '');
+      const item = getGroupItem(id, group);
+      if (!item) {
+        return fail('错误的id');
+      }
+      let parent = group;
+      if (item.parentId) {
+        parent = getGroupItem(item.parentId, group)?.children as any;
+      }
+      parent.splice(
+        parent.findIndex((item) => item.id === id),
+        1,
+      );
+      return success('操作成功');
+    },
   },
 ];
