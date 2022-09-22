@@ -1,0 +1,98 @@
+$vxe-table-validate-error-color: #f56c6c;
+
+%ResetBorder {
+  border: 0;
+}
+
+%SliderStyle {
+  .el-slider__runway {
+    margin: 8px 0;
+    .el-slider__button-wrapper {
+      z-index: auto;
+    }
+  }
+}
+
+%CompWidth {
+  & > .el-input,
+  & > .el-autocomplete,
+  & > .el-input-number,
+  & > .el-select,
+  & > .el-cascader,
+  & > .el-date-editor,
+  & > .el-slider {
+    width: 100%;
+  }
+  & > .el-color-picker {
+    vertical-align: middle;
+  }
+}
+.vxe-form {
+  .vxe-form--item-content {
+    @extend %CompWidth;
+  }
+}
+.vxe-table--filter-element-wrapper {
+  padding: 0.8em 1em;
+  & > .el-input,
+  & > .el-input-number,
+  & > .el-autocomplete,
+  & > .el-select,
+  & > .el-rate,
+  & > .el-slider {
+    width: 180px;
+  }
+  & > .el-slider {
+    @extend %SliderStyle;
+  }
+}
+.vxe-table {
+  .vxe-cell,
+  .vxe-tree-cell {
+    @extend %CompWidth;
+    & > .el-slider {
+      @extend %SliderStyle;
+    }
+  }
+}
+.col--valid-error {
+  & > .vxe-cell,
+  & > .vxe-tree-cell {
+    & > .el-input .el-input__inner,
+    & > .el-autocomplete .el-input__inner,
+    & > .el-input-number .el-input__inner,
+    & > .el-select .el-input__inner,
+    & > .el-cascader .el-input__inner,
+    & > .el-date-picker .el-input__inner {
+      border-color: $vxe-table-validate-error-color;
+    }
+  }
+}
+.vxe-table.cell--highlight {
+  .vxe-cell,
+  .vxe-tree-cell {
+    & > .el-input:not(.el-date-editor),
+    & > .el-autocomplete,
+    & > .el-select,
+    & > .el-cascader {
+      .el-input__inner {
+        padding: 0;
+        @extend %ResetBorder;
+      }
+    }
+    & > .el-input-number {
+      .el-input-number__decrease,
+      .el-input-number__increase {
+        @extend %ResetBorder;
+      }
+      .el-input__inner {
+        @extend %ResetBorder;
+      }
+    }
+    & > .el-date-editor {
+      .el-input__inner {
+        @extend %ResetBorder;
+      }
+    }
+  }
+}
