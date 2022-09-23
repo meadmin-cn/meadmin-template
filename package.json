@@ -1,17 +1,17 @@
 {
   "name": "meadmin-template",
   "private": true,
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "scripts": {
     "format": "prettier --write --cache .",
     "dev": "vite",
     "build": "vite build -m prod && npm run type-check",
     "build-github": "vite build -m prod --base=/meadmin-template/ && npm run type-check",
-    "type-check": "vue-tsc --noEmit",
+    "type-check": "vue-tsc --noEmit --skipLibCheck",
     "preview": "vite preview",
-    "release-main": "vue-tsc --noEmit & release-it -c .release-it-main.json",
-    "release-template": "vue-tsc --noEmit & release-it",
+    "release-main": "release-it -c .release-it-main.json",
+    "release-template": "release-it",
     "eslint": "eslint . --cache --ext .vue,.ts,.tsx",
     "eslint:fix": "eslint . --ext .vue,.ts,.tsx --fix",
     "prettier": "prettier --cache  -l \"./**/*\"",
@@ -19,6 +19,7 @@
     "i": "npm install --registry=https://registry.npm.taobao.org && npx husky install"
   },
   "dependencies": {
+    "@meadmin-cn/vite-plugin-mock": "^2.9.7",
     "@vueuse/core": "^9.1.0",
     "@wangeditor/editor": "^5.1.15",
     "@wangeditor/editor-for-vue": "^5.1.12",
@@ -39,7 +40,8 @@
     "vue-form-create": "^1.2.10",
     "vue-i18n": "^9.1.10",
     "vue-request": "^2.0.0-rc.2",
-    "vue-router": "^4.1.1"
+    "vue-router": "^4.1.1",
+    "vxe-table": "^4.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
@@ -75,7 +77,6 @@
     "vite": "^3.0.0",
     "vite-plugin-autogeneration-import-file": "^2.1.0",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-mock": "^2.9.6",
     "vite-svg-loader": "^3.4.0",
     "vue-eslint-parser": "^9.0.3",
     "vue-tsc": "^0.34.7",

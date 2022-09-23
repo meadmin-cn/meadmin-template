@@ -1,3 +1,6 @@
+import { default as XEUtils, SearchTreeOptions } from 'xe-utils';
+import { cloneDeep } from 'lodash-es';
+
 /**
  * 对象中的每个可便利元素按序执行一个由您提供的 reducer 函数，
  * 每一次运行 reducer 会将先前元素的计算结果作为参数传入，
@@ -93,4 +96,39 @@ export const getColorLuma = function (color: string) {
   const green = parseInt(color.slice(3, 5), 16);
   const blue = parseInt(color.slice(5, 7), 16);
   return red * 0.299 + green * 0.587 + blue * 0.114;
+};
+
+type TreeData<Key extends string[]> = {
+  [k in Key[number]]: string | number;
+} & { [k: string]: any };
+export const searchTreeTable = function <Key extends string[], T extends TreeData<Key>>(
+  searchText: number | string,
+  searchProps: Key,
+  data: T[],
+  options: SearchTreeOptions = { children: 'children' },
+) {
+  const search = XEUtils.toValueString(searchText).trim().toLowerCase();
+  if (search) {
+    const filterRE = new RegExp(search, 'gi');
+    const rest = XEUtils.searchTree(
+      data,
+      (item) => searchProps.some((key) => XEUtils.toValueString(item[key]).toLowerCase().indexOf(search) > -1),
+      options,
+    );
+    XEUtils.eachTree(
+      rest,
+      (item) => {
+        searchProps.forEach((key: Key[number]) => {
+          //@ts-ignore 这里我感觉是对的但是类型检查过不去 😂
+          item[key] = XEUtils.toValueString(item[key]).replace(
+            filterRE,
+            (match) => `<span class="keyword-lighten">${match}</span>`,
+          );
+        });
+      },
+      options,
+    );
+    return rest;
+  }
+  return cloneDeep(data);
 };

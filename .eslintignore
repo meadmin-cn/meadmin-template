@@ -2,3 +2,4 @@ template
 src/components/meKeepAlive
 dist
 vite.config.ts.*
+src/components/meVxeTable/vxe-table-plugin-element

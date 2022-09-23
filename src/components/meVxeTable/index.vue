@@ -1,20 +1,24 @@
 <template>
-  <div class="me-table">
-    <div v-if="toolbar" class="me-toolbar">
-      <div v-if="$slots.search" v-show="showSearch" class="me-toolbar-search">
+  <div class="me-vxe-table" :class="meClass">
+    <div v-if="toolbar" class="me-vxe-toolbar">
+      <div v-if="$slots.search" v-show="showSearch" class="me-vxe-toolbar-search">
         <slot name="search"></slot>
       </div>
-      <div class="me-toolbar-menu">
-        <div class="me-toolbar-buttons">
-          <el-button v-if="_.vnode.props.onRefresh" @click="$emit('refresh')"><mel-icon-refresh /></el-button>
-          <el-button v-if="_.vnode.props.onAdd" type="primary" @click="$emit('add')"><mel-icon-plus /></el-button>
+      <div class="me-vxe-toolbar-menu">
+        <div class="me-vxe-toolbar-buttons">
+          <el-button v-if="_.vnode.props.onRefresh" @click="$emit('refresh')">
+            <mel-icon-refresh />
+          </el-button>
+          <el-button v-if="_.vnode.props.onAdd" type="primary" @click="$emit('add')">
+            <mel-icon-plus />
+          </el-button>
           <slot name="buttons"></slot>
         </div>
-        <div class="me-toolbar-tools">
+        <div class="me-vxe-toolbar-tools">
           <el-input
             v-if="_.vnode.props.onQuickSearch"
             v-model="searchText"
-            :placeholder="$t('快捷搜索')"
+            :placeholder="$t(quickSearchPlaceholder!)"
             prefix-icon="mel-icon-search"
             @change="$emit('quickSearch', searchText)"
           />
@@ -26,11 +30,11 @@
               <template #default>
                 <el-scrollbar max-height="300px" class="popover-scrollbar-y">
                   <el-tree
-                    node-key="value"
-                    :data="customColumnProps!.labels"
+                    node-key="id"
+                    :default-checked-keys="defaultChecked"
+                    :data="collectColumn"
                     default-expand-all
-                    :default-checked-keys="checkedLabels"
-                    :props="{ label: 'label', children: 'children' }"
+                    :props="{ label: (item:any)=>item.type==='seq'?'#':item.title, children: 'children' }"
                     show-checkbox
                     @check-change="checkChange"
                   />
@@ -42,7 +46,7 @@
               pure
               placement="bottom"
               trigger="click"
-              popper-class="me-exportmenu-popover el-dropdown__popper"
+              popper-class="me-vxe-exportmenu-popover el-dropdown__popper"
             >
               <template #reference>
                 <el-button icon="mel-icon-download" :title="$t('导出')" />
@@ -60,7 +64,7 @@
                 </ul>
               </template>
             </el-popover>
-            <el-button v-if="print" icon="mel-icon-printer" :title="$t('打印')" @click="printTable(elTableRef, name)" />
+            <el-button v-if="print" icon="mel-icon-printer" :title="$t('打印')" @click="printTable()" />
             <slot name="tools"></slot>
           </el-button-group>
           <el-button v-if="$slots.search" :title="$t('更多筛选')" @click="showSearch = !showSearch">
@@ -70,49 +74,52 @@
         </div>
       </div>
     </div>
-    <el-table v-bind="$attrs" ref="elTableRef" v-loading="loading">
-      <component :is="customColumnProps!.children"></component>
-      <template #append>
-        <slot name="append"></slot>
-      </template>
-      <template #empty>
-        <slot name="empty"></slot>
-      </template>
-    </el-table>
+    <div class="me-vxe-body">
+      <vxe-table ref="vxeTableRef" v-bind="$attrs">
+        <slot></slot>
+        <template #empty>
+          <slot name="empty"></slot>
+        </template>
+      </vxe-table>
+    </div>
   </div>
 </template>
 <script lang="ts">
-import { ElTable } from 'element-plus';
+import './install';
 import { ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
-import customColumn from './hooks/customColumn';
-import exportTable from './hooks/exportTable';
-import printTable from './hooks/print';
+import {
+  VXEComponent,
+  VxeTableDefines,
+  VxeTableEventProps,
+  VxeTableInstance,
+  VxeTableProps,
+  VxeTablePropTypes,
+} from 'vxe-table';
+import { debounce } from 'lodash-es';
 const props = {
+  meClass: [String, Array as PropType<string[]>],
   name: {
     type: String,
-    default: 'meTable',
-  },
-  loading: {
-    type: Boolean,
-    default: false,
+    default: 'meVxeTable',
   },
   exportMenu: {
     type: Array as PropType<
       {
         label: string;
         filename?: string;
-        handle: (elTable: ELTableInstance, filename: string) => void | 'xlsx' | 'csv' | 'txt';
+        handle: (vxeTable: VxeTableInstance, filename: string) => void | 'csv' | 'html' | 'xml' | 'txt';
       }[]
     >,
     default: () => [
-      { label: 'xlsx', handle: 'xlsx' },
       { label: 'csv', handle: 'csv' },
+      { label: 'html', handle: 'html' },
+      { label: 'xml', handle: 'xml' },
       { label: 'txt', handle: 'txt' },
     ],
   },
   print: {
-    type: Boolean,
-    default: true,
+    type: [Object as PropType<VxeTablePropTypes.PrintConfig>, Boolean],
+    default: () => ({}),
   },
   customColumn: {
     type: Boolean,
@@ -125,6 +132,10 @@ const props = {
   toolbar: {
     type: Boolean,
     default: true,
+  },
+  quickSearchPlaceholder: {
+    type: String,
+    default: '快捷搜索',
   },
 };
 const emits = {
@@ -140,13 +151,8 @@ const emits = {
   },
 };
 export default defineComponent<
-  ComponentProps<typeof ElTable> & Partial<ExtractPropTypes<typeof props>>,
-  {
-    [k: string]: any;
-    elTableRef: Ref<ELTableInstance | undefined>;
-    customColumnProps: Ref<ReturnType<typeof customColumn> | undefined>;
-    searchText: Ref<string>;
-  },
+  ComponentProps<VXEComponent<VxeTableProps, VxeTableEventProps>> & Partial<ExtractPropTypes<typeof props>>,
+  { [k: string]: any; vxeTableRef: Ref<VxeTableInstance | undefined>; searchText: Ref<string> },
   Record<string, any>,
   Record<string, any>,
   Record<string, any>,
@@ -154,96 +160,99 @@ export default defineComponent<
   ComponentOptionsMixin,
   typeof emits
 >({
-  name: 'MeTable',
+  name: 'MeVxeTable',
   inheritAttrs: false,
   props: props as any,
   emits,
   setup(props, { slots, expose }) {
-    const showSearch = ref(props.defaultShowSearch);
+    const vxeTableRef = ref<VxeTableInstance>();
     const searchText = ref('');
-    const customColumnProps = ref<ReturnType<typeof customColumn>>();
-    const checkedLabels = shallowRef([] as string[]);
-    watch(
-      () => props.customColumn,
-      (value) => {
-        if (value) {
-          customColumnProps.value = customColumn(slots.default!);
-          checkedLabels.value = [...customColumnProps.value.checkedLabels];
-        } else {
-          customColumnProps.value?.clean?.();
-          customColumnProps.value = {
-            children: slots.default! as any,
-            labels: [],
-            checkedLabels: new Set(),
-            clean: undefined,
-          };
-        }
-      },
-      { immediate: true },
-    );
-    const checkChange = (data: { value: string }, is: boolean, childrenIs: boolean) => {
-      if (is || childrenIs) {
-        customColumnProps.value!.checkedLabels.add(data.value);
-      } else {
-        customColumnProps.value!.checkedLabels.delete(data.value);
-      }
+    const showSearch = ref(props.defaultShowSearch);
+    const collectColumn = ref([] as VxeTableDefines.ColumnInfo[]);
+    const defaultChecked = ref([] as string[]);
+    const refreshColumn = debounce(() => {
+      vxeTableRef.value?.refreshColumn();
+    }, 500);
+    const checkChange = (data: VxeTableDefines.ColumnInfo, is: boolean) => {
+      data.visible = is;
+      refreshColumn();
     };
-    const elTableRef = ref<ELTableInstance>();
     onMounted(() => {
-      elTableRef.value!.getSelectionIndexs = function () {
-        const index = [] as number[];
-        if (this.data) {
-          this.getSelectionRows()?.forEach((item: unknown) => {
-            index.push(this.data.indexOf(toRaw(item)));
-          });
-        }
-        return index;
-      };
+      nextTick(() => {
+        const { collectColumn: origionCollectColumn, fullColumn } = vxeTableRef.value!.getTableColumn();
+        collectColumn.value = origionCollectColumn;
+        defaultChecked.value = fullColumn.reduce((previousValue, currentValue) => {
+          if (currentValue.visible) {
+            previousValue.push(currentValue.id);
+          }
+          return previousValue;
+        }, [] as string[]);
+      });
     });
-    expose({ elTableRef, customColumnProps, searchText });
+    expose({ vxeTableRef, searchText });
     return {
-      showSearch,
-      searchText,
-      customColumnProps,
-      checkedLabels,
+      vxeTableRef,
+      collectColumn,
+      defaultChecked,
       checkChange,
-      elTableRef,
-      exportTable,
-      printTable,
       handleExport: (
-        handle: (elTable: ELTableInstance, filename: string) => void | 'xls' | 'txt' | 'csv',
+        handle: (vxeTable: VxeTableInstance, filename: string) => void | 'csv' | 'html' | 'xml' | 'txt',
         filename: string,
       ) => {
         if (typeof handle === 'string') {
-          exportTable(elTableRef.value!, handle, filename);
+          vxeTableRef.value!.exportData({
+            type: handle,
+            filename,
+            data: vxeTableRef.value!.getCheckboxRecords().length ? vxeTableRef.value!.getCheckboxRecords() : undefined,
+          });
         } else {
-          handle(elTableRef.value!, filename);
+          handle(vxeTableRef.value!, filename);
         }
       },
+      printTable: () => {
+        vxeTableRef.value!.print(
+          Object.assign(
+            {
+              sheetName: props.name,
+              data: vxeTableRef.value!.getCheckboxRecords().length
+                ? vxeTableRef.value!.getCheckboxRecords()
+                : undefined,
+            },
+            props.print === true,
+          ),
+        );
+      },
+      searchText,
+      showSearch,
     };
   },
 });
 </script>
 <style lang="scss" scoped>
-.me-table {
-  .me-toolbar {
+.me-vxe-table {
+  .me-vxe-toolbar {
     margin-top: -12px;
     margin-bottom: 12px;
-    .me-toolbar-search {
+
+    .me-vxe-toolbar-search {
       margin-top: 12px;
     }
-    .me-toolbar-menu {
+
+    .me-vxe-toolbar-menu {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      .me-toolbar-buttons {
+
+      .me-vxe-toolbar-buttons {
         margin-top: 12px;
       }
-      .me-toolbar-tools {
+
+      .me-vxe-toolbar-tools {
         margin-top: 12px;
         display: flex;
         align-items: center;
+
         > {
           :deep(div),
           :deep(span),
@@ -251,11 +260,13 @@ export default defineComponent<
             margin-left: 12px;
           }
         }
+
         > div:first-child,
         > span:first-child,
         > button:first-child {
           margin-left: 0;
         }
+
         > .el-button-group {
           flex-shrink: 0;
         }
@@ -263,11 +274,13 @@ export default defineComponent<
     }
   }
 }
-:global(.me-exportmenu-popover) {
+
+:global(.me-vxe-exportmenu-popover) {
   width: max-content !important;
   min-width: unset !important;
 }
-:global(.me-exportmenu-popover .el-dropdown-menu__item:not(.is-disabled):hover) {
+
+:global(.me-vxe-exportmenu-popover .el-dropdown-menu__item:not(.is-disabled):hover) {
   background-color: var(--el-dropdown-menuItem-hover-fill);
   color: var(--el-dropdown-menuItem-hover-color);
 }

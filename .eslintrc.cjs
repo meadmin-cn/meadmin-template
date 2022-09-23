@@ -46,16 +46,15 @@ module.exports = {
     'vue/no-parsing-error': 'off',
     'vue/require-default-prop': 'off',
     'vue/no-v-html': 'off',
-    'no-unused-vars': [
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-unused-vars': [
       'error',
       // we are only using this rule to check for unused arguments since TS
       // catches unused variables but not args.
       { varsIgnorePattern: '.*', args: 'none' },
     ],
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
     'no-undef': 'off', // ts(2304)
     '@typescript-eslint/naming-convention': [
       'error',
@@ -65,7 +64,7 @@ module.exports = {
         leadingUnderscore: 'allow',
         filter: {
           // you can expand this regex to add more allowed names
-          regex: '^__v_.*$',
+          regex: '^((__v_.*)|[0-9]+)$',
           match: false,
         },
       },
@@ -81,7 +80,7 @@ module.exports = {
         leadingUnderscore: 'allow',
         filter: {
           // you can expand this regex to add more allowed names
-          regex: '^__v_.*$',
+          regex: '^((__v_.*)|[0-9]+)$',
           match: false,
         },
       },

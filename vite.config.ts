@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import * as fs from 'fs';
 import { autoImport, resolver } from 'vite-plugin-autogeneration-import-file';
 import vueSetUpExtend from './plugin/vueSetupExtend';
-import { viteMockServe } from 'vite-plugin-mock';
+import { viteMockServe } from '@meadmin-cn/vite-plugin-mock';
 import { ConfigEnv, UserConfigExport } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer'; //打包大小分析（stats.html）
 import AutoImport from 'unplugin-auto-import/vite';
@@ -89,7 +89,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           toFile: 'types/meIconComments.d.ts',
           name: 'MeIcon_{{name}}',
           template: fs.readFileSync('./template/meIconComments.d.ts', 'utf-8'),
-          codeTemplates: [{ key: '//code', template: '{{name}}: Icon;\n   ' }],
+          codeTemplates: [{ key: '//code', template: '{{name}}: Icon;\n    ' }],
         },
         {
           // pinia module
@@ -122,6 +122,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             {
               key: '//code',
               template: '{{name}}: typeof import("{{path}}")["default"];\n    ',
+            },
+            {
+              key: '//typeCode',
+              template: 'type {{name}}Instance = InstanceType<typeof import("{{path}}")["default"]>;\n  ',
             },
           ],
           name: '_{{name}}',
@@ -183,6 +187,16 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           },
         },
       },
+    },
+    optimizeDeps: {
+      //因为项目中很多用到了自动引入和动态加载，所以vite首次扫描依赖项会扫描不全，这里强制扫描全局。
+      entries: ['./src/**/*.{ts,tsx,vue}'],
+      include: [
+        'element-plus/es/components/loading/style/css',
+        'element-plus/es/components/message/style/css',
+        'element-plus/es/components/message-box/style/css',
+        'element-plus/es/components/notification/style/css',
+      ],
     },
   };
 };

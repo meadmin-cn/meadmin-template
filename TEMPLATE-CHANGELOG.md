@@ -1,5 +1,54 @@
 
 
+## [1.0.7](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.6...template-1.0.7) (2022-09-23)
+
+
+### 新功能[feat]
+
+* 加上请求成功提示 ([683c69a](https://github.com/meadmin-cn/meadmin-template/commit/683c69af8716bfc3cb39212fdbcaaadab2268b40))
+* 加上全局popover-scrollbar-y 类 ([af84a4b](https://github.com/meadmin-cn/meadmin-template/commit/af84a4bc06b06ad09ab20eca6edcbdd227647744))
+* 全局语言包支持引入ts、json格式，支持子孙文件夹引入 ([b92081a](https://github.com/meadmin-cn/meadmin-template/commit/b92081a5c9f7a2b3970fd80fd0c4a8bf9fa9b2d6))
+* 自动生成加载组件类型 ([9d7f3d9](https://github.com/meadmin-cn/meadmin-template/commit/9d7f3d93906f8a63df376e9a97dd9bc30d452f16))
+* page 背景色更改 ([ecaa1d9](https://github.com/meadmin-cn/meadmin-template/commit/ecaa1d95ccef5f7eb7e066ef0c4103ac084511c2))
+
+
+### CI发版[ci]
+
+* 去掉无用eslint规则，加上提交自动vue-tsc ([32f2bfe](https://github.com/meadmin-cn/meadmin-template/commit/32f2bfec1710b97e5365d09ed1ff960e66a073e5))
+
+
+### 文档更改[docs]
+
+* 格式优化 ([e612861](https://github.com/meadmin-cn/meadmin-template/commit/e612861fe93491e637c1c320b39337c029565f02))
+* 加上贡献说明 ([2e8472b](https://github.com/meadmin-cn/meadmin-template/commit/2e8472b05d5f2e1bf108c2ef0dd1a684007b2e08))
+* 说明更改 ([99569c4](https://github.com/meadmin-cn/meadmin-template/commit/99569c4927b65e4f81b2fb8f46b472859fbadc43))
+
+
+### 其他[chore]
+
+* 加上element函数声明 ([a1b08a6](https://github.com/meadmin-cn/meadmin-template/commit/a1b08a6e3bda3da9e732c90ed318bf4e5b7998c7))
+
+
+### 性能改进[perf]
+
+* 加上element动态函数默认缓存 ([34da538](https://github.com/meadmin-cn/meadmin-template/commit/34da538019ddfa77ee65f15caf6af7d647305edc))
+* 强制依赖项扫描src,会导致首次启动变慢，但是不会每次第一次打开新页面都刷新 ([5635d36](https://github.com/meadmin-cn/meadmin-template/commit/5635d36df0c12dcdfa75a9a9130f09c6a697d570))
+
+
+### Bug 修复[fix]
+
+* 修复菜单收起时，感觉卡顿问题 ([81a18a3](https://github.com/meadmin-cn/meadmin-template/commit/81a18a31385dc84250e66dce55bf86b52201b4c8))
+* 修复跟字体不生效bug ([fe8c558](https://github.com/meadmin-cn/meadmin-template/commit/fe8c558f76378d1c9266016989713d34aabfcaf1))
+* 修复两个组件引入通一子组件热更新报错问题 ([add16a9](https://github.com/meadmin-cn/meadmin-template/commit/add16a923c320c8dce0ee82c38ba5ce64c47df1d))
+* a标签默认样式去除修复 ([f758914](https://github.com/meadmin-cn/meadmin-template/commit/f758914f340b0fd43dcbf5172bb21562740d2b58))
+* eslint检查支持数字属性 ([e0e5a4b](https://github.com/meadmin-cn/meadmin-template/commit/e0e5a4bc074759534b96744d06701d769fbec692))
+
+
+### 重构[refactor]
+
+* 移除vite-plugin-mock包改为@meadmin-cn/vite-plugin-mock ([8fd1bf6](https://github.com/meadmin-cn/meadmin-template/commit/8fd1bf65d3c4bd16ebae6311f621a7970ca54700))
+* logo ico添加，登录页背景色设为page color ([f292910](https://github.com/meadmin-cn/meadmin-template/commit/f2929100aaaa2fde01ba9db2a01f3326194f4bff))
+
 ## [1.0.6](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.5...template-1.0.6) (2022-09-16)
 
 
