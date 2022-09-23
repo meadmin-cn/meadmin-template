@@ -19,6 +19,7 @@
     "i": "npm install --registry=https://registry.npm.taobao.org && npx husky install"
   },
   "dependencies": {
+    "@meadmin-cn/vite-plugin-mock": "^2.9.7",
     "@vueuse/core": "^9.1.0",
     "axios": "^0.27.2",
     "dayjs": "^1.11.3",
@@ -69,7 +70,6 @@
     "vite": "^3.0.0",
     "vite-plugin-autogeneration-import-file": "^2.1.0",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-mock": "^2.9.6",
     "vite-svg-loader": "^3.4.0",
     "vue-eslint-parser": "^9.0.3",
     "vue-tsc": "^0.34.7",

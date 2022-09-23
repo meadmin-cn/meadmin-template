@@ -1,5 +1,5 @@
 //  mockProdServer.ts
-import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer';
+import { createProdMockServer } from '@meadmin-cn/vite-plugin-mock/es/createProdMockServer';
 
 export function setupProdMockServer() {
   const modules = import.meta.glob('./apiDemo/*.ts', {
