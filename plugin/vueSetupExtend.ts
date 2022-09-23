@@ -83,10 +83,10 @@ export function supportScript(code: string, options: ExtendOptions) {
         attrs.langImport = `{{${langImport}}}`;
       }
     }
-    if (options.setComponents) {
+    if (options.setComponents && !attrs.getComponents) {
       const components = getComponent(descriptor);
       if (components.length) {
-        attrs.components = `{{[${components}]}}`;
+        attrs.getComponents = `{{()=>[${components}]}}`;
       }
     }
     let scriptStr = '';

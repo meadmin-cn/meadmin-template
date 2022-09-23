@@ -93,6 +93,11 @@ export const useLoadMessages = () => {
           loadMessages(component as ComponentOptions, isLoading, locale, importArr);
         });
       }
+      if ((<ComponentOptions>options).getComponents) {
+        (<ComponentOptions>options).getComponents().forEach((component: ComponentOptions) => {
+          loadMessages(component, isLoading, locale, importArr);
+        });
+      }
       if ((<ComponentOptions>options).langImport) {
         const res = loadMessage((<ComponentOptions>options).langImport!, locale, isLoading);
         if (res instanceof Promise) {

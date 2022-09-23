@@ -11,9 +11,6 @@
 </template>
 <script setup lang="ts" name="Right">
 import { localeConfig } from '@/config';
-import MeDarkSwitch from '@/components/meDarkSwitch.vue';
-import MeLocaleSelect from '@/components/meLocaleSelect.vue';
-import MeSizeSelect from '@/components/meSizeSelect.vue';
 import MessageBox from './components/messageBox.vue';
 import { useSettingStore } from '@/store';
 import User from './components/user.vue';
