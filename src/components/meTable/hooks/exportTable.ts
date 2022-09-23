@@ -1,6 +1,6 @@
 import { Defaults, TableExport } from 'tableexport';
 type ExportType = 'csv' | 'txt' | 'xlsx';
-export default (elTable: ELTable, type: ExportType, filename?: string, options?: Defaults) => {
+export default (elTable: ELTableInstance, type: ExportType, filename?: string, options?: Defaults) => {
   const selectionIndexs = elTable.getSelectionIndexs();
   const ignoreRows = [] as number[];
   if (selectionIndexs.length) {

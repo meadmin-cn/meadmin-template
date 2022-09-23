@@ -130,27 +130,12 @@ if (app && !app.config.globalProperties.$initCreate) {
   }
 }
 //为了兼容暗黑模式对create-form样式做的覆盖
-:global(#app) {
+:global(body #app) {
   color: unset;
   font-family: unset;
   min-height: unset;
 }
-:global(::-webkit-scrollbar) {
-  width: unset;
-  height: unset;
-}
-:global(::-webkit-scrollbar-thumb) {
-  border-radius: unset;
-  background-color: unset;
-}
-:global(::-webkit-scrollbar-track) {
-  border-radius: unset;
-  background-color: unset;
-}
-:global(.fc-style ::-webkit-scrollbar) {
-  width: 5px;
-  height: 5px;
-}
+
 :global(.fc-style ::-webkit-scrollbar-thumb) {
   border-radius: 1rem;
   background-color: rgba(144, 147, 153, 0.3);

@@ -1,0 +1,155 @@
+@import 'vxe-table/lib/style.min.css';
+
+.vxe-table--render-default .vxe-cell--checkbox .vxe-checkbox--icon {
+  font-weight: 500 !important;
+  font-size: 1em !important;
+}
+
+.vxe-table {
+  ::-webkit-scrollbar-corner {
+    background: unset;
+  }
+
+  ::-webkit-scrollbar {
+    z-index: 1;
+    border-radius: 4px;
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar:horizontal {
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(144, 147, 153, 0.3);
+    opacity: 0.3;
+    border-radius: 4px;
+  }
+}
+[class*='vxe-'] .el-checkbox__inner::after {
+  box-sizing: content-box !important;
+}
+.vxe-table--body-wrapper,
+.vxe-table--fixed-left-body-wrapper,
+.vxe-table--fixed-right-body-wrapper {
+  overflow-y: overlay !important;
+  overflow-x: overlay !important;
+}
+
+.vxe-table--render-default .vxe-table--footer-wrapper,
+.vxe-table--render-default .vxe-table--header-wrapper {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.vxe-table--footer-wrapper.body--wrapper {
+  overflow-x: overlay !important;
+}
+
+.dark .wxe-table ::-webkit-scrollbar-thumb {
+  background-color: rgba(163, 166, 173, 0.3);
+}
+
+//暗黑模式暂时只加上table相关，vxetable不支持css变量 只能写死，后续vxetable升级支持css变量后会更新一版完整的暗黑样式。
+.dark {
+  /*font*/
+  $vxe-font-color: #cfd3dc !default;
+
+  /*color*/
+  $vxe-primary-color: #409eff !default;
+  $vxe-success-color: #67c23a !default;
+  $vxe-info-color: #909399 !default;
+  $vxe-warning-color: #e6a23c !default;
+  $vxe-danger-color: #f56c6c !default;
+  $vxe-disabled-color: #2b2b2c !default;
+  $vxe-primary-disabled-color: #6c6e72 !default;
+
+  /*input/radio/checkbox*/
+  $vxe-input-border-color: #4c4d4f !default;
+  $vxe-input-disabled-color: #4c4d4f !default;
+  $vxe-input-disabled-background-color: #262727 !default;
+  $vxe-input-placeholder-color: #8d9095 !default;
+
+  /*table*/
+  $vxe-table-font-color: #cfd3dc !default;
+  $vxe-table-header-font-color: #a3a6ad !default;
+  $vxe-table-footer-font-color: #cfd3dc !default;
+  // $vxe-table-border-radius: $vxe-border-radius !default;
+  $vxe-table-border-width: 1px !default;
+  $vxe-table-border-color: #414243 !default;
+  $vxe-table-resizable-line-color: #363637 !default;
+  $vxe-table-resizable-drag-line-color: #363637 !default;
+  $vxe-table-header-background-color: #262727 !default;
+  $vxe-table-body-background-color: transparent !default;
+  $vxe-table-footer-background-color: transparent !default;
+  $vxe-table-tree-node-line-color: #414243 !default;
+  $vxe-table-tree-node-line-style: dotted !default;
+  $vxe-table-header-font-weight: bold !default;
+
+  $vxe-table-row-height-default: 48px !default;
+  $vxe-table-row-height-medium: 44px !default;
+  $vxe-table-row-height-small: 40px !default;
+  $vxe-table-row-height-mini: 36px !default;
+  $vxe-table-row-line-height: 22px !default;
+  $vxe-table-row-hover-background-color: #262727 !default;
+  $vxe-table-row-striped-background-color: #1d1d1d !default;
+  $vxe-table-row-hover-striped-background-color: #262727 !default;
+  $vxe-table-row-radio-checked-background-color: #7d5b28 !default;
+  $vxe-table-row-hover-radio-checked-background-color: #e6a23c !default;
+  $vxe-table-row-checkbox-checked-background-color: #7d5b28 !default;
+  $vxe-table-row-hover-checkbox-checked-background-color: #e6a23c !default;
+  $vxe-table-row-current-background-color: #18222c !default;
+  $vxe-table-row-hover-current-background-color: #213d5b !default;
+
+  $vxe-table-column-padding-default: 13px 0 !default;
+  $vxe-table-column-padding-medium: 11px 0 !default;
+  $vxe-table-column-padding-small: 9px 0 !default;
+  $vxe-table-column-padding-mini: 7px 0 !default;
+  $vxe-table-column-hover-background-color: #213d5b !default;
+  $vxe-table-column-current-background-color: #18222c !default;
+  $vxe-table-column-icon-border-color: #6c6e72 !default;
+  $vxe-table-column-icon-border-hover-color: #a3a6ad !default;
+
+  $vxe-table-cell-placeholder-color: #8d9095 !default;
+  $vxe-table-cell-padding-left: 10px !default;
+  $vxe-table-cell-padding-right: 10px !default;
+  $vxe-table-cell-input-height-default: $vxe-table-row-height-default - 6 !default;
+  $vxe-table-cell-input-height-medium: $vxe-table-row-height-medium - 6 !default;
+  $vxe-table-cell-input-height-small: $vxe-table-row-height-small - 6 !default;
+  $vxe-table-cell-input-height-mini: $vxe-table-row-height-mini - 6 !default;
+  $vxe-table-cell-dirty-width: 5px !default;
+  $vxe-table-cell-dirty-update-color: #f56c6c !default;
+  $vxe-table-cell-dirty-insert-color: #67c23a !default;
+  $vxe-table-cell-area-border-color: $vxe-primary-color !default;
+  $vxe-table-cell-area-border-width: 1px !default;
+  $vxe-table-cell-main-area-extension-border-color: #141414;
+  $vxe-table-cell-main-area-extension-background-color: $vxe-primary-color !default;
+  $vxe-table-cell-extend-area-border-width: 2px !default;
+  $vxe-table-cell-copy-area-border-width: 3px !default;
+  $vxe-table-cell-active-area-border-width: 2px !default;
+  $vxe-table-cell-copy-area-border-color: $vxe-table-cell-area-border-color !default;
+  $vxe-table-cell-extend-area-border-color: $vxe-table-cell-area-border-color !default;
+  $vxe-table-cell-active-area-border-color: $vxe-table-cell-area-border-color !default;
+  $vxe-table-cell-area-background-color: rgba(64, 158, 255, 0.2) !default;
+
+  $vxe-table-checkbox-range-border-width: 1px !default;
+  $vxe-table-checkbox-range-border-color: #006af1 !default;
+  $vxe-table-checkbox-range-background-color: rgba(50, 128, 252, 0.2) !default;
+
+  $vxe-table-fixed-left-scrolling-box-shadow: 4px 3px 4px 0px rgba(0, 0, 0, 0.12) !default;
+  $vxe-table-fixed-right-scrolling-box-shadow: -4px 3px 4px 0px rgba(0, 0, 0, 0.12) !default;
+
+  /*toolbar*/
+  $vxe-toolbar-background-color: #141414 !default;
+  $vxe-toolbar-custom-active-background-color: #262727 !default;
+  $vxe-toolbar-panel-background-color: #141414 !default;
+
+  /*tooltip*/
+  $vxe-tooltip-dark-color: #141414 !default;
+  $vxe-tooltip-dark-background-color: #e5eaf3 !default;
+  $vxe-tooltip-light-background-color: #141414 !default;
+  $vxe-tooltip-validate-error-color: #fff !default;
+  $vxe-tooltip-validate-error-background-color: #f56c6c !default;
+
+  @import 'vxe-table/styles/index.scss';
+}

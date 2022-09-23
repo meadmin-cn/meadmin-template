@@ -99,14 +99,8 @@ const login = async () => {
 };
 </script>
 <style lang="scss" scoped>
-.dark {
-  .login {
-    background-color: var(--el-bg-color);
-  }
-}
-
 .login {
-  background-color: #efeeee;
+  background-color: var(--el-bg-color-page);
   width: 100%;
   height: 100%;
   position: relative;

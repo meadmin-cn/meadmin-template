@@ -56,7 +56,7 @@
         <el-button @click="canDel = !canDel">{{ t('删除切换') }}</el-button>
         <el-button @click="customColumn = !customColumn">{{ t('自定义列') }}</el-button>
         <el-button @click="data = []">{{ t('清空') }}</el-button>
-        <el-button @click="meTableRef!.elTable.toggleAllSelection()">{{ t('全选') }}</el-button>
+        <el-button @click="meTableRef!.elTableRef!.toggleAllSelection()">{{ t('全选') }}</el-button>
       </template>
       <el-table-column type="selection" label="选择" width="55" />
       <el-table-column prop="date" :label="t('日期')"> </el-table-column>
@@ -83,8 +83,7 @@
 import { listApi } from '@/api/table';
 import { useLocalesI18n } from '@/locales/i18n';
 import { FormInstance } from 'element-plus';
-import meTable from '@/components/meTable/index.vue';
-const meTableRef = ref<InstanceType<typeof meTable>>();
+const meTableRef = ref<MeTableInstance>();
 const customColumn = ref(true);
 const { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'tableLang']);
 const canDel = ref(true);
