@@ -1,8 +1,8 @@
 import { app } from '@/app';
 import VXETable from 'vxe-table';
-import VXETablePluginElement from './vxe-table-plugin-element';
+import VXETablePluginElement from 'vxe-table-plugin-element';
+import 'vxe-table-plugin-element/dist/style.css';
 import './style.scss';
-import './vxe-table-plugin-element/style.scss';
 VXETable.use(VXETablePluginElement);
 if (app.config.globalProperties.$t) {
   //为了兼容热更新重新拉取
