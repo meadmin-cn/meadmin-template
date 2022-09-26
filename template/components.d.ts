@@ -3,4 +3,7 @@ declare module '@vue/runtime-core' {
     //code
   }
 }
+declare global {
+  //typeCode
+}
 export {};

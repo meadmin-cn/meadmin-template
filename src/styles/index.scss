@@ -43,11 +43,8 @@ html {
 }
 
 //去a标签默认样式
-a:hover,
-a:visited,
-a:link,
-a:active {
-  color: inherit;
+a {
+  color: unset;
   text-decoration: none;
 }
 
@@ -74,4 +71,8 @@ a:active {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+}
+.popover-scrollbar-y {
+  margin: 0 -12px;
+  padding: 0 12px;
 }
