@@ -1,8 +1,13 @@
 {
   "name": "meadmin-template",
   "private": true,
-  "version": "1.0.7",
+  "version": "1.0.9",
   "type": "module",
+  "author": {
+    "name": "meadmin-cn",
+    "email": "yuntian001z@qq.com",
+    "url": "https://github.com/yuntian001"
+  },
   "scripts": {
     "format": "prettier --write --cache .",
     "dev": "vite",
@@ -39,9 +44,12 @@
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@babel/eslint-parser": "^7.18.9",
+    "@babel/plugin-transform-runtime": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@release-it/conventional-changelog": "^5.0.0",
+    "@rollup/plugin-babel": "^5.3.1",
     "@types/jquery": "^3.5.14",
     "@types/js-cookie": "^3.0.2",
     "@types/mockjs": "^1.0.6",
@@ -53,6 +61,7 @@
     "@vitejs/plugin-vue": "^3.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "autoprefixer": "^10.4.8",
+    "core-js": "^3.25.3",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^9.3.0",
@@ -75,6 +84,15 @@
     "vue-tsc": "^0.34.7",
     "xregexp": "^5.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meadmin-cn/meadmin-template.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meadmin-cn/meadmin-template/issues"
+  },
+  "homepage": "https://github.com/meadmin-cn/meadmin-template",
   "lint-staged": {
     "**/*": "prettier --cache --write --ignore-unknown",
     "*.{vue,ts,tsx}": "eslint --cache"
