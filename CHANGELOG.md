@@ -1,5 +1,108 @@
 
 
+## [1.0.9](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.8...main-1.0.9) (2022-09-27)
+
+
+### Bug 修复[fix]
+
+* 加上漏掉的包 ([1e725a7](https://github.com/meadmin-cn/meadmin-template/commit/1e725a742db5b5403b1d40e6859696bf21bf4860))
+
+
+### 其他[chore]
+
+* template-release v1.0.9 ([842dda0](https://github.com/meadmin-cn/meadmin-template/commit/842dda017e978048205ec1a1a782fbfe51384004))
+
+## [1.0.8](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.7...main-1.0.8) (2022-09-27)
+
+
+### 重构[refactor]
+
+* 将vxeatab 兼容性改为使用vxe-table-plugin-element插件 ([ee56698](https://github.com/meadmin-cn/meadmin-template/commit/ee56698346d73dfa026c7082d05d8373a7f4d53a))
+
+
+### 新功能[feat]
+
+* 加上图片预览函数调用 ([4d10803](https://github.com/meadmin-cn/meadmin-template/commit/4d1080337cfa73976a13288863d3b4bc64246f6f))
+* 加上babel支持打包浏览器版本为'chrome 87', 'safari 13', 'firefox 78', 'edge 88' ([18bfbf1](https://github.com/meadmin-cn/meadmin-template/commit/18bfbf10fe87f667e16e2296843f8c364507ef55))
+
+
+### 其他[chore]
+
+* 完善说明 ([fed6280](https://github.com/meadmin-cn/meadmin-template/commit/fed6280e4830551afdf5ed5201d6a16d1a37a8e3))
+* template-release v1.0.8 ([8051d04](https://github.com/meadmin-cn/meadmin-template/commit/8051d046d6d3f2bb6ef2cf1e3afb71938861792f))
+
+## [1.0.7](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.6...main-1.0.7) (2022-09-23)
+
+
+### 样式更改[style]
+
+* 格式问题 ([ce865e1](https://github.com/meadmin-cn/meadmin-template/commit/ce865e1adaa4af6d2b1cc4fbff67a24d69d39aad))
+
+
+### 新功能[feat]
+
+* 加上菜单权限示例 ([453ed89](https://github.com/meadmin-cn/meadmin-template/commit/453ed899810c14790c6a38c4692fe3c430188b11))
+* 加上请求成功提示 ([683c69a](https://github.com/meadmin-cn/meadmin-template/commit/683c69af8716bfc3cb39212fdbcaaadab2268b40))
+* 加上全局popover-scrollbar-y 类 ([af84a4b](https://github.com/meadmin-cn/meadmin-template/commit/af84a4bc06b06ad09ab20eca6edcbdd227647744))
+* 加上自定义vxeTable ([2206494](https://github.com/meadmin-cn/meadmin-template/commit/2206494debbdc93696a3e3e3334d1b42bf2fc0e4))
+* 角色权限demo高度自动初始化时计算 ([ebedfb3](https://github.com/meadmin-cn/meadmin-template/commit/ebedfb392ea20b2559af43b7705174b3c6cff72a))
+* 角色权限demo优化更新接口，优化样式 ([7815394](https://github.com/meadmin-cn/meadmin-template/commit/7815394c4c1750b15f015b9c0975070da5caf758))
+* 全局语言包支持引入ts、json格式，支持子孙文件夹引入 ([b92081a](https://github.com/meadmin-cn/meadmin-template/commit/b92081a5c9f7a2b3970fd80fd0c4a8bf9fa9b2d6))
+* 自定义列加上高度限制和滚动条 ([d0216ef](https://github.com/meadmin-cn/meadmin-template/commit/d0216ef4f636dfb9af471b6ff99e188aab2d0449))
+* 自动生成加载组件类型 ([9d7f3d9](https://github.com/meadmin-cn/meadmin-template/commit/9d7f3d93906f8a63df376e9a97dd9bc30d452f16))
+* meTable、加上toolsButton ([1af2f9b](https://github.com/meadmin-cn/meadmin-template/commit/1af2f9b981d98ed11bc665f17834b061d2a6451b))
+* meVxeTable加上toolsButton ([eb0aaab](https://github.com/meadmin-cn/meadmin-template/commit/eb0aaabfc9f3a02a39d6a4b7128bdd7b82ebe5cb))
+
+
+### CI发版[ci]
+
+* 去掉无用eslint规则，加上提交自动vue-tsc ([39963ef](https://github.com/meadmin-cn/meadmin-template/commit/39963ef53833980812bd9c18f9e0aebd9934636a))
+* 去掉无用eslint规则，加上提交自动vue-tsc ([32f2bfe](https://github.com/meadmin-cn/meadmin-template/commit/32f2bfec1710b97e5365d09ed1ff960e66a073e5))
+
+
+### 文档更改[docs]
+
+* 格式优化 ([a138eb2](https://github.com/meadmin-cn/meadmin-template/commit/a138eb2d81c8821cc96083f946c72e73340608cb))
+* 格式优化 ([e612861](https://github.com/meadmin-cn/meadmin-template/commit/e612861fe93491e637c1c320b39337c029565f02))
+* 加上贡献说明 ([2e8472b](https://github.com/meadmin-cn/meadmin-template/commit/2e8472b05d5f2e1bf108c2ef0dd1a684007b2e08))
+* 说明更改 ([f22b0a7](https://github.com/meadmin-cn/meadmin-template/commit/f22b0a7cb8405b805cbeb6296657f454c74a7862))
+* 说明更改 ([99569c4](https://github.com/meadmin-cn/meadmin-template/commit/99569c4927b65e4f81b2fb8f46b472859fbadc43))
+
+
+### 性能改进[perf]
+
+* 加上element动态函数默认缓存 ([292de0a](https://github.com/meadmin-cn/meadmin-template/commit/292de0a3871c90398c336ebdebe26ec066ab09b5))
+* 加上element动态函数默认缓存 ([34da538](https://github.com/meadmin-cn/meadmin-template/commit/34da538019ddfa77ee65f15caf6af7d647305edc))
+* 强制依赖项扫描src,会导致首次启动变慢，但是不会每次第一次打开新页面都刷新 ([5635d36](https://github.com/meadmin-cn/meadmin-template/commit/5635d36df0c12dcdfa75a9a9130f09c6a697d570))
+
+
+### Bug 修复[fix]
+
+* 加上导出按钮展示判断，加上tooltip暗黑样式 ([1806291](https://github.com/meadmin-cn/meadmin-template/commit/1806291d48e0016d33a5fc03c6788ea0ed439e1c))
+* 去掉vxe-table-plugin-element改为内部编写，以修复tsc检查错误 ([a193611](https://github.com/meadmin-cn/meadmin-template/commit/a19361158447009bac6c9eded1b3465bb7d1e8fa))
+* 修复打包后自定义表单样式问题 ([eb5a77d](https://github.com/meadmin-cn/meadmin-template/commit/eb5a77d35daf3f7f094ab27935ec9db3dfd646a1))
+* 修复跟字体不生效bug ([fe8c558](https://github.com/meadmin-cn/meadmin-template/commit/fe8c558f76378d1c9266016989713d34aabfcaf1))
+* 修复更新完权限组不更新bug ([64f8c3a](https://github.com/meadmin-cn/meadmin-template/commit/64f8c3aa2a68ad5867ea96ff1dc71b39daf76535))
+* 修复两个组件引入通一子组件热更新报错问题 ([add16a9](https://github.com/meadmin-cn/meadmin-template/commit/add16a923c320c8dce0ee82c38ba5ce64c47df1d))
+* 右侧按钮组权限判断错误 ([1854dfc](https://github.com/meadmin-cn/meadmin-template/commit/1854dfc59f070c6f306fdb23c7c55a364019b8ab))
+* eslint检查支持数字属性 ([e0e5a4b](https://github.com/meadmin-cn/meadmin-template/commit/e0e5a4bc074759534b96744d06701d769fbec692))
+
+
+### 重构[refactor]
+
+* 命名规范化ELTable改为ELTableInstance ([8775dab](https://github.com/meadmin-cn/meadmin-template/commit/8775dab4f4844bc566708a4d2fa7c1e66434a7a9))
+* 移除vite-plugin-mock包改为@meadmin-cn/vite-plugin-mock ([8fd1bf6](https://github.com/meadmin-cn/meadmin-template/commit/8fd1bf65d3c4bd16ebae6311f621a7970ca54700))
+* logo ico添加，登录页背景色设为page color ([f292910](https://github.com/meadmin-cn/meadmin-template/commit/f2929100aaaa2fde01ba9db2a01f3326194f4bff))
+* meTable 类型提示增强，导出字段 elTable改为elTableRef ([0ca430a](https://github.com/meadmin-cn/meadmin-template/commit/0ca430a8225d2fc9979dba0988dc3c3ea159cc81))
+* metable命名修复 ([eec04d3](https://github.com/meadmin-cn/meadmin-template/commit/eec04d36443382a9fa16870567fcdb7d4c785584))
+
+
+### 其他[chore]
+
+* 加上element函数声明 ([09d3e59](https://github.com/meadmin-cn/meadmin-template/commit/09d3e59659217cc6a84ea64e931613b944e84176))
+* 加上element函数声明 ([a1b08a6](https://github.com/meadmin-cn/meadmin-template/commit/a1b08a6e3bda3da9e732c90ed318bf4e5b7998c7))
+* template-release v1.0.7 ([ca785dd](https://github.com/meadmin-cn/meadmin-template/commit/ca785dd16dfb4a01040041df9a6f017fdc4a33c0))
+
 ## [1.0.6](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.5...main-1.0.6) (2022-09-17)
 
 
