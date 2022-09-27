@@ -1,5 +1,17 @@
 
 
+## [1.0.9](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.8...main-1.0.9) (2022-09-27)
+
+
+### Bug 修复[fix]
+
+* 加上漏掉的包 ([1e725a7](https://github.com/meadmin-cn/meadmin-template/commit/1e725a742db5b5403b1d40e6859696bf21bf4860))
+
+
+### 其他[chore]
+
+* template-release v1.0.9 ([842dda0](https://github.com/meadmin-cn/meadmin-template/commit/842dda017e978048205ec1a1a782fbfe51384004))
+
 ## [1.0.8](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.7...main-1.0.8) (2022-09-27)
 
 
