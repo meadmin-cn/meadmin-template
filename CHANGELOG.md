@@ -1,5 +1,24 @@
 
 
+## [1.0.8](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.7...main-1.0.8) (2022-09-27)
+
+
+### 重构[refactor]
+
+* 将vxeatab 兼容性改为使用vxe-table-plugin-element插件 ([ee56698](https://github.com/meadmin-cn/meadmin-template/commit/ee56698346d73dfa026c7082d05d8373a7f4d53a))
+
+
+### 新功能[feat]
+
+* 加上图片预览函数调用 ([4d10803](https://github.com/meadmin-cn/meadmin-template/commit/4d1080337cfa73976a13288863d3b4bc64246f6f))
+* 加上babel支持打包浏览器版本为'chrome 87', 'safari 13', 'firefox 78', 'edge 88' ([18bfbf1](https://github.com/meadmin-cn/meadmin-template/commit/18bfbf10fe87f667e16e2296843f8c364507ef55))
+
+
+### 其他[chore]
+
+* 完善说明 ([fed6280](https://github.com/meadmin-cn/meadmin-template/commit/fed6280e4830551afdf5ed5201d6a16d1a37a8e3))
+* template-release v1.0.8 ([8051d04](https://github.com/meadmin-cn/meadmin-template/commit/8051d046d6d3f2bb6ef2cf1e3afb71938861792f))
+
 ## [1.0.7](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.6...main-1.0.7) (2022-09-23)
 
 
