@@ -1,5 +1,17 @@
 
 
+## [1.0.8](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.7...template-1.0.8) (2022-09-27)
+
+
+### 新功能[feat]
+
+* 加上babel支持打包浏览器版本为'chrome 87', 'safari 13', 'firefox 78', 'edge 88' ([18bfbf1](https://github.com/meadmin-cn/meadmin-template/commit/18bfbf10fe87f667e16e2296843f8c364507ef55))
+
+
+### 其他[chore]
+
+* 完善说明 ([fed6280](https://github.com/meadmin-cn/meadmin-template/commit/fed6280e4830551afdf5ed5201d6a16d1a37a8e3))
+
 ## [1.0.7](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.6...template-1.0.7) (2022-09-23)
 
 
