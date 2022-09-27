@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
 import { resolve } from 'path';
@@ -16,6 +17,8 @@ import autoprefixer from 'autoprefixer';
 // @ts-ignore
 import px2rem from 'postcss-plugin-px2rem';
 import viteCompression from 'vite-plugin-compression'; //打包压缩
+import { babel } from '@rollup/plugin-babel';
+
 // @ts-ignore
 import { loadMessageConfig } from './src/config/locale';
 function pathResolve(dir: string) {
@@ -25,6 +28,28 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   return {
     envPrefix: 'ME_',
     plugins: [
+      babel({
+        babelrc: false,
+        extensions: ['.ts', '.tsx'],
+        plugins: [['@babel/plugin-transform-runtime', { useESModules: true }]],
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              targets: ['chrome 87', 'safari 13', 'firefox 78', 'edge 88'],
+              useBuiltIns: 'usage',
+              bugfixes: true,
+              loose: false,
+              modules: false,
+              corejs: createRequire(import.meta.url)('core-js/package.json').version,
+              shippedProposals: true,
+              ignoreBrowserslistConfig: true,
+            },
+          ],
+        ],
+        exclude: 'node_modules/**',
+        babelHelpers: 'runtime',
+      }),
       vueSetUpExtend({
         exclude: ['steup', 'lang'],
         setLangImport: loadMessageConfig.componentLoad,
@@ -184,6 +209,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             // 打包优化
             core: ['vue', 'vue-router', 'pinia', 'vue-request', 'vue-i18n/dist/vue-i18n.cjs.js', 'jquery', 'lodash-es'],
             elIcon: ['@element-plus/icons-vue'],
+            mock: ['./mock'],
           },
         },
       },
