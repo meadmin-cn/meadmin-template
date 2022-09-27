@@ -3,6 +3,11 @@
   "private": true,
   "version": "1.0.7",
   "type": "module",
+  "author": {
+    "name": "meadmin-cn",
+    "email": "yuntian001z@qq.com",
+    "url": "https://github.com/yuntian001"
+  },
   "scripts": {
     "format": "prettier --write --cache .",
     "dev": "vite",
@@ -75,6 +80,15 @@
     "vue-tsc": "^0.34.7",
     "xregexp": "^5.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meadmin-cn/meadmin-template.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meadmin-cn/meadmin-template/issues"
+  },
+  "homepage": "https://github.com/meadmin-cn/meadmin-template",
   "lint-staged": {
     "**/*": "prettier --cache --write --ignore-unknown",
     "*.{vue,ts,tsx}": "eslint --cache"
