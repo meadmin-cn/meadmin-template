@@ -1,5 +1,10 @@
+import Layout from '@/layout/index.vue';
+import LayoutPage from '@/layout/components/page.vue';
+import Page404 from '@/views/404.vue';
 import { useUserStore } from '@/store';
 import { RouteRecordRaw } from 'vue-router';
+import { DefineComponent } from 'vue';
+import log from './log';
 
 /**
  * 用户是否具有权限
@@ -16,13 +21,35 @@ export function permission(rules?: string | string[]) {
   return useUserStore().rules!.some((rule) => rule === '*' || rules!.includes(rule));
 }
 
+let dynamicViewsModules: Record<string, () => Promise<DefineComponent>>;
+export function initDynamicViewsModules() {
+  dynamicViewsModules = dynamicViewsModules || import.meta.glob('../views/**/*.{vue,tsx}');
+}
+//动态转换组件
+export function transitionComponent(component: string) {
+  if (component === 'Layout') {
+    return Layout;
+  }
+  if (component === 'LayoutPage') {
+    return LayoutPage;
+  }
+  const res =
+    dynamicViewsModules['../views/' + component + '.vue'] || dynamicViewsModules['../views/' + component + '.tsx'];
+  if (res) {
+    return res;
+  } else {
+    log.warn('在src/views/下找不到`' + component + '.vue` 或 `' + component + '.tsx`, 请自行创建!');
+    return Page404;
+  }
+}
+
 /**
  * 过滤动态路由
  * @param routes
  * @param activeMenu
  * @returns
  */
-export function filterAsyncRoutes(routes: RouteRecordRaw[], activeMenu?: string) {
+export function filterAsyncRoutes(routes: RouteRecordRaw[], activeMenu?: string, dynamicImport?: boolean) {
   const res: RouteRecordRaw[] = [];
   routes.forEach((route) => {
     const tmp = { ...route };
@@ -34,12 +61,14 @@ export function filterAsyncRoutes(routes: RouteRecordRaw[], activeMenu?: string)
       } else {
         activeMenu = route.meta?.activeMenu ?? route.path;
       }
+      if (dynamicImport) {
+        tmp.component = transitionComponent(route.component as unknown as string);
+      }
       if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, activeMenu);
+        tmp.children = filterAsyncRoutes(tmp.children, activeMenu, dynamicImport);
       }
       res.push(tmp);
     }
   });
-
   return res;
 }
