@@ -5,8 +5,8 @@ import { loginConfig as config } from '@/config';
 import { loading } from '@/utils/loading';
 import { PageEnum } from '@/enums/pageEnum';
 import { loginApi, LoginParams, userInfoApi, UserInfoResult } from '@/api/user';
-import { router, flatteningRoutes2, constantRoutes } from '@/router';
 import useRouteStore from './route';
+import { router } from '@/router';
 interface UserState {
   user: UserInfoResult; // 用户信息
   rules: string[] | undefined; // 用户权限信息
@@ -50,11 +50,9 @@ export default defineStore({
       const token = tokenValue ?? cookies.get(config.tokenName);
       if (token) {
         this.token = token;
-        this.user = await userInfoApi(true)();
+        this.user = await userInfoApi(true, !tokenValue)();
         this.rules = this.user.rules;
-        flatteningRoutes2(useRouteStore().generateRoutes(), constantRoutes.length).forEach((route) =>
-          router.addRoute(route),
-        );
+        await useRouteStore().initRoutes(); //初始化路由
       } else {
         this.token = '';
       }

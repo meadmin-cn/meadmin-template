@@ -1,8 +1,10 @@
-import { filterAsyncRoutes } from '@/utils/permission';
+import MenuModeEnum from '@/enums/menuModeEnum';
+import { filterAsyncRoutes, initDynamicViewsModules } from '@/utils/permission';
 import useUserStore from './user';
-import { constantRoutes, asyncRoutes } from '@/router';
+import { router, constantRoutes, asyncRoutes, flatteningRoutes2 } from '@/router';
 import { RouteRecordRaw } from 'vue-router';
-
+import { settingConfig } from '@/config';
+import { menuApi } from '@/api/routeMenu';
 export default defineStore('route', {
   state: () => ({
     addRoutes: [] as RouteRecordRaw[],
@@ -12,11 +14,24 @@ export default defineStore('route', {
     routes: (state) => constantRoutes.concat(state.addRoutes),
   },
   actions: {
-    generateRoutes() {
+    //生成权限过滤后的动态路由
+    async generateRoutes() {
       if (useUserStore().rules) {
-        this.addRoutes = markRaw(filterAsyncRoutes(asyncRoutes));
+        switch (settingConfig.menuMode) {
+          case MenuModeEnum.STATIC:
+            this.addRoutes = markRaw(filterAsyncRoutes(asyncRoutes));
+            break;
+          case MenuModeEnum.API:
+            initDynamicViewsModules();
+            this.addRoutes = markRaw(filterAsyncRoutes(await menuApi()(), undefined, true));
+            break;
+        }
       }
       return this.addRoutes;
+    },
+    //初始化路由
+    async initRoutes() {
+      flatteningRoutes2(await this.generateRoutes(), constantRoutes.length).forEach((route) => router.addRoute(route));
     },
   },
 });
