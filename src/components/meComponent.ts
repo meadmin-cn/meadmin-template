@@ -3,6 +3,7 @@ import { MeKeepAliveProps, default as MeKeepAlive } from './meKeepAlive';
 import { useLoadMessages } from '@/locales/i18n';
 import { done } from '@/utils/nProgress';
 import { localeConfig } from '@/config';
+import { closeLoading } from '@/utils/loading';
 export default defineComponent({
   name: 'MeComponent',
   props: {
@@ -12,6 +13,7 @@ export default defineComponent({
     keepAlive: Object as PropType<MeKeepAliveProps>,
     componentKey: [Number, String, Symbol],
     doneProgress: Boolean,
+    closeLoading: Boolean,
     transition: Object as PropType<TransitionProps>,
   },
   setup(props, { attrs }) {
@@ -28,9 +30,8 @@ export default defineComponent({
           componentIs.value = is;
           key.value = props.componentKey;
           _attrs.value = attrs;
-          if (props.doneProgress) {
-            done();
-          }
+          props.doneProgress && done();
+          props.closeLoading && closeLoading();
         }
       },
       { immediate: true },

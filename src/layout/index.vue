@@ -10,7 +10,7 @@
       <el-main class="right-main">
         <el-scrollbar view-class="me-right-main-view">
           <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
-          <div class="me-main">
+          <div v-loading="globalStore.layoutLoading" class="me-main" v-bind="globalStore.layoutLoadingOptions">
             <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
           </div>
         </el-scrollbar>
@@ -38,6 +38,9 @@ import LayoutPage from './components/page.vue';
 import { useSettingStore, useGlobalStore } from '@/store';
 const { themeConfig } = useSettingStore();
 const globalStore = useGlobalStore();
+onMounted(() => {
+  nextTick(() => (globalStore.layoutLoaded = true));
+});
 </script>
 <style lang="scss" scoped>
 .layout {
