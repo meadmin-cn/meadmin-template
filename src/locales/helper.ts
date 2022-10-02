@@ -4,6 +4,7 @@ import { event, mitter } from '@/event';
 import { loading, closeLoading } from '@/utils/loading';
 import { Language } from 'element-plus/es/locale';
 import { useGlobalStore, useSettingStore } from '@/store';
+import log from '@/utils/log';
 type GlobaleI18n = Composer<unknown, unknown, unknown, any>;
 const messageMap: Map<string, Record<any, any>> = new Map();
 export type MessageImport = [(locale: string) => Promise<{ default: LocaleMessages<VueMessageType> }>, string?];
@@ -33,7 +34,7 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
     let timeOut: NodeJS.Timeout;
     if (config.loadMessageConfig.timeOut) {
       timeOut = setTimeout(() => {
-        console.warn('加载语言包超时');
+        log.warn('加载语言包超时');
         isLoading && closeLoading();
         resolve(null);
       }, config.loadMessageConfig.timeOut);
@@ -50,7 +51,7 @@ export const loadMessage = <P extends Record<any, any> = { default: LocaleMessag
       .catch((e) => {
         timeOut && clearTimeout(timeOut);
         if (import.meta.env.DEV && config.loadMessageConfig.errorWarning) {
-          console.warn(`语言包${mapName}加载失败:`, e);
+          log.warn(`语言包${mapName}加载失败:`, e);
         }
         isLoading && closeLoading();
         resolve(null);

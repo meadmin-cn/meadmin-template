@@ -9,5 +9,6 @@ const enum EventEnum {
   AFTER_LOGOUT = 'aftreLogout', // 退出成功后
   BEFORE_LOCAL_CHANGE = 'beforeLocalChange', // 全局语言变更前
   RESIZE = 'resize', // window变化时触发
+  INIT_DYNAMIC_VIEWS_MODULES = 'initDynamicViewsModules', //初始化动态路由页面视图
 }
 export default EventEnum;
