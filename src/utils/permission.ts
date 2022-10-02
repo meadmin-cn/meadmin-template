@@ -5,6 +5,8 @@ import { useUserStore } from '@/store';
 import { RouteRecordRaw } from 'vue-router';
 import { DefineComponent } from 'vue';
 import log from './log';
+import { mitter } from '@/event';
+import EventEnum from '@/enums/eventEnmu';
 
 /**
  * 用户是否具有权限
@@ -21,9 +23,13 @@ export function permission(rules?: string | string[]) {
   return useUserStore().rules!.some((rule) => rule === '*' || rules!.includes(rule));
 }
 
-let dynamicViewsModules: Record<string, () => Promise<DefineComponent>>;
+export type DynamicViewsModules = Record<string, () => Promise<DefineComponent>>;
+let dynamicViewsModules: DynamicViewsModules;
 export function initDynamicViewsModules() {
-  dynamicViewsModules = dynamicViewsModules || import.meta.glob('../views/**/*.{vue,tsx}');
+  if (!dynamicViewsModules) {
+    dynamicViewsModules = import.meta.glob('../views/**/*.{vue,tsx}') as Record<string, () => Promise<DefineComponent>>;
+    mitter.emit(EventEnum.INIT_DYNAMIC_VIEWS_MODULES, dynamicViewsModules);
+  }
 }
 //动态转换组件
 export function transitionComponent(component: string) {
