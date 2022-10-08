@@ -4,7 +4,7 @@ import svgLoader from 'vite-svg-loader';
 import { resolve } from 'path';
 import * as fs from 'fs';
 import { autoImport, resolver } from 'vite-plugin-autogeneration-import-file';
-import vueSetUpExtend from './plugin/vueSetupExtend';
+import {vueSetUpExtend} from '@yuntian001/vue-setup-extend';
 import { viteMockServe } from '@meadmin-cn/vite-plugin-mock';
 import { ConfigEnv, UserConfigExport } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer'; //打包大小分析（stats.html）
