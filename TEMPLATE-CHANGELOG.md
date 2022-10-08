@@ -1,5 +1,17 @@
 
 
+## [1.0.11](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.10...template-1.0.11) (2022-10-08)
+
+
+### 重构[refactor]
+
+* vueSetUpExtend 改完使用外部包 ([d763c63](https://github.com/meadmin-cn/meadmin-template/commit/d763c631581168c6e2e0798f6e504400d05c9cb4))
+
+
+### Bug 修复[fix]
+
+* 将请求loading改为使用全局loading ([6781d61](https://github.com/meadmin-cn/meadmin-template/commit/6781d6179fb5e0e4f5bf86c6f91ea588078e3c71))
+
 ## [1.0.10](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.9...template-1.0.10) (2022-10-02)
 
 
