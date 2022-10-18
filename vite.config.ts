@@ -22,7 +22,7 @@ import { babel } from '@rollup/plugin-babel';
 // @ts-ignore
 import { loadMessageConfig } from './src/config/locale';
 function pathResolve(dir: string) {
-  return resolve(process.cwd(), '.', dir);
+  return resolve(__dirname, '.', dir);
 }
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   return {
@@ -55,14 +55,14 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         setLangImport: loadMessageConfig.componentLoad,
         setComponents: loadMessageConfig.componentLoad,
       }),
-      splitVendorChunkPlugin(),
+      splitVendorChunkPlugin(),//打包分析，会生成stats.html展示打包情况
       // VueI18nPlugin({
       //   /* options */
       //   // locale messages resource pre-compile option
       //   include: ['./src/**/lang/**/*.json', './src/**/lang/*.json'],
       // }),
       viteMockServe({
-        mockPath: 'mock/apiDemo',
+        mockPath: pathResolve('mock/apiDemo'),
         localEnabled: command === 'serve',
         prodEnabled: command !== 'serve',
         //  这样可以控制关闭mock的时候不让mock打包到最终代码内
@@ -75,7 +75,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         // 自动加载API
         imports: ['vue', 'vue-router', 'pinia', '@vueuse/core'],
         // 可以选择auto-imports.d.ts生成的位置，使用ts建议设置为'src/auto-imports.d.ts'
-        dts: 'types/auto-imports.d.ts',
+        dts: pathResolve('types/auto-imports.d.ts'),
         resolvers: [ElementPlusResolver()],
       }),
       Components({
@@ -110,25 +110,25 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         {
           // svg icon type
           pattern: ['*.svg'],
-          dir: 'src/icons/svg',
-          toFile: 'types/meIconComments.d.ts',
+          dir: pathResolve('src/icons/svg'),
+          toFile: pathResolve('types/meIconComments.d.ts'),
           name: 'MeIcon_{{name}}',
-          template: fs.readFileSync('./template/meIconComments.d.ts', 'utf-8'),
+          template: fs.readFileSync(pathResolve('./template/meIconComments.d.ts'), 'utf-8'),
           codeTemplates: [{ key: '//code', template: '{{name}}: Icon;\n    ' }],
         },
         {
           // pinia module
           pattern: ['**/*.{ts,js}', '*.{ts,js}'],
-          dir: 'src/store/modules',
-          toFile: 'src/store/module.ts',
+          dir: pathResolve('src/store/modules'),
+          toFile: pathResolve('src/store/module.ts'),
           name: 'use_{{name}}_store',
         },
         {
           // auto import directives
           pattern: ['*.ts', '**/index.ts'],
-          dir: 'src/directives',
-          toFile: 'types/directives.d.ts',
-          template: fs.readFileSync('./template/directives.d.ts', 'utf-8'),
+          dir: pathResolve('src/directives'),
+          toFile: pathResolve('types/directives.d.ts'),
+          template: fs.readFileSync(pathResolve('./template/directives.d.ts'), 'utf-8'),
           codeTemplates: [
             {
               key: '//code',
@@ -140,9 +140,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         {
           // auto import components
           pattern: ['*.{vue,ts}', '**/index.{vue,ts}'],
-          dir: 'src/components',
-          toFile: 'types/components.d.ts',
-          template: fs.readFileSync('./template/components.d.ts', 'utf-8'),
+          dir: pathResolve('src/components'),
+          toFile: pathResolve('types/components.d.ts'),
+          template: fs.readFileSync(pathResolve('./template/components.d.ts'), 'utf-8'),
           codeTemplates: [
             {
               key: '//code',
@@ -209,14 +209,14 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             // 打包优化
             core: ['vue', 'vue-router', 'pinia', 'vue-request', 'vue-i18n/dist/vue-i18n.cjs.js', 'jquery', 'lodash-es'],
             elIcon: ['@element-plus/icons-vue'],
-            mock: ['./mock'],
+            mock: [pathResolve('./mock')],
           },
         },
       },
     },
     optimizeDeps: {
       //因为项目中很多用到了自动引入和动态加载，所以vite首次扫描依赖项会扫描不全，这里强制扫描全局。
-      entries: ['./src/**/*.{ts,tsx,vue}'],
+      entries: [pathResolve('./src/**/*.{ts,tsx,vue}')],
       include: [
         'element-plus/es/components/loading/style/css',
         'element-plus/es/components/message/style/css',
