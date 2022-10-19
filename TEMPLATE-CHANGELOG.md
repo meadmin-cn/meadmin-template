@@ -1,5 +1,12 @@
 
 
+## [1.0.13](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.12...template-1.0.13) (2022-10-19)
+
+
+### Bug 修复[fix]
+
+* 修复optimizeDeps.entries设置错误（应为相对于项目根的相对路径） ([962ae3b](https://github.com/meadmin-cn/meadmin-template/commit/962ae3b9a964289f42e1b48cb94e889527a9e7cd))
+
 ## [1.0.12](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.11...template-1.0.12) (2022-10-19)
 
 
