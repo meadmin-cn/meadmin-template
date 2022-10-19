@@ -1,5 +1,54 @@
 
 
+## [1.0.11](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.10...main-1.0.11) (2022-10-08)
+
+
+### 重构[refactor]
+
+* vueSetUpExtend 改完使用外部包 ([d763c63](https://github.com/meadmin-cn/meadmin-template/commit/d763c631581168c6e2e0798f6e504400d05c9cb4))
+
+
+### Bug 修复[fix]
+
+* 将请求loading改为使用全局loading ([6781d61](https://github.com/meadmin-cn/meadmin-template/commit/6781d6179fb5e0e4f5bf86c6f91ea588078e3c71))
+
+
+### 其他[chore]
+
+* 包版本变更为正式版本 ([d2df17e](https://github.com/meadmin-cn/meadmin-template/commit/d2df17eb043fea4ce5a96652ad856029858208dc))
+* 提交日志还原 ([74ee344](https://github.com/meadmin-cn/meadmin-template/commit/74ee344c667a6396fa5154b8dd5c3dd39aee082d))
+* 提交日志和版本还原 ([2e94319](https://github.com/meadmin-cn/meadmin-template/commit/2e9431999603e96fc33195f8bb4cc861e6270ff3))
+* release v1.0.11 ([377f687](https://github.com/meadmin-cn/meadmin-template/commit/377f6870ca477fd3ce7d3bcc86f30792dffea81b))
+* template-release v1.0.11 ([717e71e](https://github.com/meadmin-cn/meadmin-template/commit/717e71efbe97b5762b15dde4e5719c99ac112b3c))
+* template-release v1.0.11 ([547cd8e](https://github.com/meadmin-cn/meadmin-template/commit/547cd8e608c5c7bd755ecb4cf516429c1f6e2be8))
+
+## [1.0.10](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.9...main-1.0.10) (2022-10-02)
+
+
+### 重构[refactor]
+
+* 404页面样式更改 ([54c8108](https://github.com/meadmin-cn/meadmin-template/commit/54c8108bda9f84ebe2ae4b72105b73734888bb05))
+* log改为用统一类打印，便于注释掉error和warn打印 ([ed33ffe](https://github.com/meadmin-cn/meadmin-template/commit/ed33ffe90e51bb490a9aadcc41bf0a942cd06e3d))
+
+
+### 还原提交[revert]
+
+* 忽略vscode设置 ([f624985](https://github.com/meadmin-cn/meadmin-template/commit/f6249854e091c5606b1cf696cb68eb38e1f81e18))
+
+
+### 新功能[feat]
+
+* 加上页面切换loading,loading改为加在page上 ([53b16ab](https://github.com/meadmin-cn/meadmin-template/commit/53b16ab88e339205e2a930e61b21d1b4cf6553c6))
+* 加上注册动态路由视图模块监听 ([ea40981](https://github.com/meadmin-cn/meadmin-template/commit/ea4098172a5365bf4e25530f1818c062ebb56529))
+* 加上api获取路由菜单模式 ([d079cb3](https://github.com/meadmin-cn/meadmin-template/commit/d079cb30aeeb78a93b977e550290117459f501c8))
+
+
+### 其他[chore]
+
+* 将菜单模式默认值改为静态 ([ad852ff](https://github.com/meadmin-cn/meadmin-template/commit/ad852ff092c693c2b05f01e6f56e3b0d8ad451e2))
+* git加上工作区设置 ([179694f](https://github.com/meadmin-cn/meadmin-template/commit/179694f76014f29541b8743e2f068bf8af6ef552))
+* template-release v1.0.10 ([e5e5004](https://github.com/meadmin-cn/meadmin-template/commit/e5e50047260a290c7f6948ed46efd2492deb2117))
+
 ## [1.0.9](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.8...main-1.0.9) (2022-09-27)
 
 
