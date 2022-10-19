@@ -37,7 +37,7 @@ const checkedRules = shallowRef([] as string[]);
       min-height: 600px;
     }
 
-    :deep(.keyword-lighten) {
+    .keyword-lighten {
       background-color: var(--el-color-warning-light-3);
     }
   }

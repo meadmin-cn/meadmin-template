@@ -32,7 +32,7 @@ function createPermissionGuard(router: Router) {
 function createProgressGuard(router: Router) {
   router.beforeEach(async (to) => {
     start(to.matched.length);
-    loading({}, to.matched.length);
+    loading({}, to.matched.length,'layout');
     return true;
   });
 }

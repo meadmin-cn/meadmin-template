@@ -6,7 +6,7 @@
       :keep-alive="keepAliveProps"
       :component-key="route.fullPath"
       done-progress
-      close-loading
+      close-loading="layout"
     >
     </me-component>
   </router-view>

@@ -1,9 +1,9 @@
+import { closeLoading, loading } from '@/utils/loading';
 import { useUserStore } from '@/store';
 import axios, { AxiosRequestConfig } from 'axios';
 import { ElMessage } from 'element-plus';
 import log from './log';
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
-import { globalLoading } from './loading';
 
 const service = axios.create({
   baseURL: '/', // url = base url + request url
@@ -78,7 +78,7 @@ function request<R, P extends unknown[] = [], T = boolean>(
 ) {
   const axiosService = async (...args: P): Promise<R> => {
     try {
-      !options?.noLoading && globalLoading.loading();
+      !options?.noLoading && loading();
       const { data: res } = await service(await axiosConfig(...args));
       if (!res || res.code === undefined) {
         throw Error('返回值解析失败');
@@ -94,10 +94,10 @@ function request<R, P extends unknown[] = [], T = boolean>(
       if (options?.success) {
         ElMessage.success({ message: res.msg });
       }
-      !options?.noLoading && globalLoading.close();
+      !options?.noLoading && closeLoading();
       return options?.needAll ? res : res.data;
     } catch (e) {
-      !options?.noLoading && globalLoading.close();
+      !options?.noLoading && closeLoading();
       !options?.noError &&
         ElMessage.error({
           message: e instanceof Error ? e.message : String(e),
