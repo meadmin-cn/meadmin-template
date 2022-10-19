@@ -20,6 +20,7 @@ export function createHtmlPage(content: string, title = '', head: string[] = [])
 export function createFrame(): HTMLIFrameElement {
   const frame = document.createElement('iframe');
   frame.className = 'me--print-frame';
+  frame.style.cssText='display:none';
   return frame;
 }
 
