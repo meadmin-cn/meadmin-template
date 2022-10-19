@@ -1,5 +1,44 @@
 
 
+## [1.0.13](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.12...main-1.0.13) (2022-10-19)
+
+
+### Bug 修复[fix]
+
+* 首页设置修复 ([697d75f](https://github.com/meadmin-cn/meadmin-template/commit/697d75fdcfc7c5612b77442a32d8dd873e4dea9d))
+* 修复optimizeDeps.entries设置错误（应为相对于项目根的相对路径） ([962ae3b](https://github.com/meadmin-cn/meadmin-template/commit/962ae3b9a964289f42e1b48cb94e889527a9e7cd))
+
+
+### 其他[chore]
+
+* template-release v1.0.13 ([1a1d21e](https://github.com/meadmin-cn/meadmin-template/commit/1a1d21e2324eddb0d0a7128fbda1555541eff36a))
+
+## [1.0.12](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.11...main-1.0.12) (2022-10-19)
+
+
+### 新功能[feat]
+
+* 忽略resolveComponent can only be used in render() or setup().的警告 ([9c228c5](https://github.com/meadmin-cn/meadmin-template/commit/9c228c53944d7e6d02ac8e4088f32a02a5b15e99))
+
+
+### 重构[refactor]
+
+* 路由注册组件函数去除多余的async ([9ef5d98](https://github.com/meadmin-cn/meadmin-template/commit/9ef5d98ec92f10d0f59a47ca2d6b78ad6ff00b1e))
+* vite.ts配置项文件路径改为绝对路径 ([674d849](https://github.com/meadmin-cn/meadmin-template/commit/674d8493383433e8a1d3c4f8e5c6c95cffcb6f01))
+
+
+### Bug 修复[fix]
+
+* 修复表格打印时的抖动问题 ([9d4da74](https://github.com/meadmin-cn/meadmin-template/commit/9d4da742e10cf68a78fe94b44d0be13f9a193032))
+* 修复角色权限搜索样式 ([77a83bf](https://github.com/meadmin-cn/meadmin-template/commit/77a83bf93973c660d51724d193aaba57da050fcd))
+* 修复请求loading异常和mock异常问题 ([11afdc4](https://github.com/meadmin-cn/meadmin-template/commit/11afdc4acc2ab614d2e1a2cd768a8aba9174c2d1))
+* 已登录情况下访问时loading无法消除问题。 ([b928655](https://github.com/meadmin-cn/meadmin-template/commit/b928655101283ba5a110c5c77321a474c7629044))
+
+
+### 其他[chore]
+
+* template-release v1.0.12 ([ed9141e](https://github.com/meadmin-cn/meadmin-template/commit/ed9141ea31bd2bb8934ae836ff8bc4722811d5f1))
+
 ## [1.0.11](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.10...main-1.0.11) (2022-10-08)
 
 
