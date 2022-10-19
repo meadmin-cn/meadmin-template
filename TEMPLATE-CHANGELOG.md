@@ -1,5 +1,24 @@
 
 
+## [1.0.12](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.11...template-1.0.12) (2022-10-19)
+
+
+### 新功能[feat]
+
+* 忽略resolveComponent can only be used in render() or setup().的警告 ([9c228c5](https://github.com/meadmin-cn/meadmin-template/commit/9c228c53944d7e6d02ac8e4088f32a02a5b15e99))
+
+
+### 重构[refactor]
+
+* 路由注册组件函数去除多余的async ([9ef5d98](https://github.com/meadmin-cn/meadmin-template/commit/9ef5d98ec92f10d0f59a47ca2d6b78ad6ff00b1e))
+* vite.ts配置项文件路径改为绝对路径 ([674d849](https://github.com/meadmin-cn/meadmin-template/commit/674d8493383433e8a1d3c4f8e5c6c95cffcb6f01))
+
+
+### Bug 修复[fix]
+
+* 修复请求loading异常和mock异常问题 ([11afdc4](https://github.com/meadmin-cn/meadmin-template/commit/11afdc4acc2ab614d2e1a2cd768a8aba9174c2d1))
+* 已登录情况下访问时loading无法消除问题。 ([b928655](https://github.com/meadmin-cn/meadmin-template/commit/b928655101283ba5a110c5c77321a474c7629044))
+
 ## [1.0.11](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.10...template-1.0.11) (2022-10-08)
 
 
