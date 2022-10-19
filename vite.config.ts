@@ -62,7 +62,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       //   include: ['./src/**/lang/**/*.json', './src/**/lang/*.json'],
       // }),
       viteMockServe({
-        mockPath: pathResolve('mock/apiDemo'),
+        mockPath: 'mock/apiDemo',
         localEnabled: command === 'serve',
         prodEnabled: command !== 'serve',
         //  这样可以控制关闭mock的时候不让mock打包到最终代码内
