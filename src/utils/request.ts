@@ -1,8 +1,9 @@
+import { closeLoading, loading } from '@/utils/loading';
 import { useUserStore } from '@/store';
 import axios, { AxiosRequestConfig } from 'axios';
 import { ElMessage } from 'element-plus';
+import log from './log';
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
-import { loading, closeLoading } from './loading';
 
 const service = axios.create({
   baseURL: '/', // url = base url + request url
@@ -23,7 +24,7 @@ service.interceptors.request.use(
   },
   (error) => {
     // 对请求错误做些什么
-    console.error(error); // for debug
+    log.error(error); // for debug
     throw Error('请求异常，请联系管理员'); // 改写错误信息
   },
 );
@@ -36,7 +37,7 @@ service.interceptors.response.use(
   (error) => {
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
-    console.error(error); // for debug
+    log.error(error); // for debug
     throw Error('操作失败，请稍后重试');
   },
 );
@@ -58,11 +59,11 @@ function request<R, P extends unknown[] = []>(
   axiosConfig: (...args: P) => AxiosRequestConfig,
   options?: RequestOptions<R, P>,
 ): ReturnType<typeof useRequest<R, P>>;
-function request<R, P extends unknown[] = [], T extends true | undefined = true | undefined>(
+function request<R, P extends unknown[] = [], T extends boolean | undefined = boolean | undefined>(
   axiosConfig: (...args: P) => AxiosRequestConfig,
   options: RequestOptions<R, P>,
   returnAxios?: T,
-): T extends true ? (...args: P) => Promise<R> : ReturnType<typeof useRequest<R, P>>;
+): T extends boolean ? (...args: P) => Promise<R> : ReturnType<typeof useRequest<R, P>>;
 /**
  * 请求函数
  * @param axiosConfig  axios的配置项
@@ -70,7 +71,7 @@ function request<R, P extends unknown[] = [], T extends true | undefined = true 
  * @param returnAxios
  * @returns
  */
-function request<R, P extends unknown[] = [], T = true>(
+function request<R, P extends unknown[] = [], T = boolean>(
   axiosConfig: (...args: P) => AxiosRequestConfig,
   options?: RequestOptions<R, P>,
   returnAxios?: T,

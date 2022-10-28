@@ -1,7 +1,7 @@
 <template>
   <el-config-provider :locale="settingStore.elLocale" :size="settingStore.themeConfig.size">
     <router-view v-slot="{ Component }">
-      <me-component :is="Component" done-progress></me-component>
+      <me-component :is="Component" done-progress close-loading="layout"></me-component>
     </router-view>
   </el-config-provider>
 </template>

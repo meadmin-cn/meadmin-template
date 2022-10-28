@@ -1,37 +1,62 @@
+import { useGlobalStore } from '@/store';
+import { LoadingOptions } from 'element-plus';
 import { throttle } from 'lodash-es';
-
-let number = 0;
 let loadingInstance: ReturnType<typeof ElLoading.service>;
-
-// 全局加载
-export function loading(options?: Parameters<typeof ElLoading.service>[0]): void {
-  number++;
-  loadingInstance = ElLoading.service(options);
+class Loading {
+  constructor(private execLoading: (options?: LoadingOptions) => void, private execClose: () => void) {
+    this.execLoading = execLoading;
+    this.execClose = execClose;
+  }
+  private number = 0;
+  loading(options?: LoadingOptions, number = 1) {
+    this.number += number;
+    this.execLoading(options);
+  }
+  throttleClose = throttle(
+    function (this: Loading) {
+      if (this.number <= 0) {
+        this.execClose();
+        this.number = 0;
+      }
+    },
+    220,
+    { leading: false },
+  );
+  close(number = 1) {
+    if (this.number > 0) {
+      this.number -= number;
+      this.throttleClose();
+    }
+  }
+  forceClose() {
+    this.number = 0;
+    loadingInstance.close();
+    this.throttleClose.cancel();
+  }
 }
 
-// 关闭操作
-const close = throttle(
-  () => {
-    if (number <= 0) {
-      loadingInstance.close();
-      number = 0;
-    }
-  },
-  220,
-  { leading: false },
-); // 220毫秒后关闭防闪烁
+export const loadingObject = {
+  global: new Loading(
+    (options?: LoadingOptions) => (loadingInstance = ElLoading.service(options)),
+    () => loadingInstance.close(),
+  ),
+  layout:new Loading(
+    (options?: LoadingOptions) => (useGlobalStore().loadingOptions = options ? reactive(options) : {}),
+    () => (useGlobalStore().loadingOptions = undefined),
+  ),
+}
 
-// 关闭加载会判断已展示加载次数 当全部关闭后执行关闭操作
-export function closeLoading(force = false): void {
-  if (number <= 0) {
-    return;
-  }
+export function loading(options?: LoadingOptions, number = 1, mode:keyof typeof loadingObject = 'global') {
+  const loading = loadingObject[mode]
+  loading.loading(options, number);
+  return loading;
+}
+
+export function closeLoading(force = false, number = 1, mode:keyof typeof loadingObject = 'global'): void {
+  const loading = loadingObject[mode]
   if (force) {
-    loadingInstance.close();
-    number = 0;
-    close.cancel();
+    loading.forceClose();
     return;
   }
-  number--;
-  close();
+  loading.close(number);
 }
