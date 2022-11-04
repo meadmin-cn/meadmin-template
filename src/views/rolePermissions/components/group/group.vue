@@ -44,9 +44,9 @@ import { VxeTableEvents } from 'vxe-table';
 import { searchTreeTable } from '@/utils/helper';
 import Add from './components/add.vue';
 import { omit } from 'lodash-es';
-const emit = defineEmits({
-  currentChange: (row: string[]) => true,
-});
+const emit = defineEmits<{
+  (e:'currentChange',row: string[]):void
+}>();
 const showAdd = ref(false);
 const groupRef = ref<MeVxeTableInstance>();
 const group = groupListApi();

@@ -2,7 +2,7 @@
   <div class="role-permissions">
     <el-scrollbar always view-class="body">
       <group ref="group" class="group" @current-change="checkedRules = $event"></group>
-      <Menu class="menu" :checked-rules="checkedRules" @sub-rules="($refs.group as any).setGroupRules($event)"></Menu>
+      <Menu class="menu" :checked-rules="checkedRules" @sub-rules="($refs.group as InstanceType<typeof Group>).setGroupRules($event)"></Menu>
     </el-scrollbar>
   </div>
 </template>
