@@ -18,7 +18,6 @@
 <script setup lang="ts" name="MarkdwonEditor">
 import 'md-editor-v3/lib/style.css';
 import MdEditor from 'md-editor-v3';
-import { useSettingStore } from '@/store';
 const setting = useSettingStore();
 const md = ref(`## 😲 md-editor-v3
 
