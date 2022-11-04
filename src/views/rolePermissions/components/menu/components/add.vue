@@ -42,17 +42,14 @@ import { addMenuApi, MenuInfo, editMenuApi, menuListApi } from '@/api/menu';
 import { FormInstance, FormRules } from 'element-plus';
 import { PropType } from 'vue';
 import { type, status } from '../dict';
-const props = defineProps({
-  show: {
-    type: Boolean,
-    required: true,
-  },
-  data: Object as PropType<Required<MenuInfo>>,
-});
-const emit = defineEmits({
-  ['update:show']: (show: boolean) => true,
-  success: () => true,
-});
+const props = defineProps<{
+  show:boolean,
+  data?:Required<MenuInfo>
+}>();
+const emit = defineEmits<{
+  (e:'update:show',show: boolean):void,
+  (e:'success'):void
+}>();
 const formRef = ref<FormInstance>();
 const formData = ref(new MenuInfo());
 const rules = reactive<FormRules>({

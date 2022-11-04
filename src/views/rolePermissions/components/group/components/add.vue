@@ -31,18 +31,14 @@
 <script setup lang="ts" name="Add">
 import { GroupInfo, addGroupApi, editGroupApi, groupListApi } from '@/api/admin';
 import { FormInstance, FormRules } from 'element-plus';
-import { PropType } from 'vue';
-const props = defineProps({
-  show: {
-    type: Boolean,
-    required: true,
-  },
-  data: Object as PropType<Required<GroupInfo>>,
-});
-const emit = defineEmits({
-  ['update:show']: (show: boolean) => true,
-  success: () => true,
-});
+const props = defineProps<{
+  show:boolean,
+  data?:Required<GroupInfo>
+}>();
+const emit = defineEmits<{
+  (e:'update:show',show: boolean):void,
+  (e:'success'):void
+}>();
 const formRef = ref<FormInstance>();
 const formData = ref(new GroupInfo());
 const rules = reactive<FormRules>({
