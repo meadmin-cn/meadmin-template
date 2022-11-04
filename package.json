@@ -90,7 +90,7 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-svg-loader": "^3.4.0",
     "vue-eslint-parser": "^9.0.3",
-    "vue-tsc": "^0.34.7",
+    "vue-tsc": "^1.0.9",
     "xregexp": "^5.1.1"
   },
   "repository": {

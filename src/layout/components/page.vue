@@ -16,10 +16,10 @@
 import { MeKeepAliveProps } from '@/components/meKeepAlive';
 import { settingConfig } from '@/config';
 import { useRouteStore } from '@/store';
-import { ComputedRef, PropType, TransitionProps } from 'vue';
-const props = defineProps({
-  transition: Object as PropType<TransitionProps>,
-});
+import { ComputedRef, TransitionProps } from 'vue';
+const props = defineProps<{
+  transition?:TransitionProps
+}>();
 const routeStore = useRouteStore();
 let keepAliveProps: undefined | ComputedRef<MeKeepAliveProps>;
 if (settingConfig.openKeepAlive) {
