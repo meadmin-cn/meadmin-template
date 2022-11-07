@@ -1,10 +1,10 @@
 import { closeLoading, loading } from '@/utils/loading';
-import { useUserStore } from '@/store';
+import { useUserStore,useGlobalStore } from '@/store';
 import axios, { AxiosRequestConfig } from 'axios';
 import { ElMessage } from 'element-plus';
 import log from './log';
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
-
+const t = (...args:[string|number])=>useGlobalStore().i18n.t(...args);
 const service = axios.create({
   baseURL: '/', // url = base url + request url
   timeout: 10000, // request timeout
@@ -25,7 +25,7 @@ service.interceptors.request.use(
   (error) => {
     // 对请求错误做些什么
     log.error(error); // for debug
-    throw Error('请求异常，请联系管理员'); // 改写错误信息
+    throw Error(t('请求异常，请联系管理员')); // 改写错误信息
   },
 );
 service.interceptors.response.use(
@@ -38,7 +38,7 @@ service.interceptors.response.use(
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
     log.error(error); // for debug
-    throw Error('操作失败，请稍后重试');
+    throw Error(t('操作失败，请稍后重试'));
   },
 );
 
@@ -81,7 +81,7 @@ function request<R, P extends unknown[] = [], T = boolean>(
       !options?.noLoading && loading();
       const { data: res } = await service(await axiosConfig(...args));
       if (!res || res.code === undefined) {
-        throw Error('返回值解析失败');
+        throw Error(t('返回值解析失败'));
       }
       // 401：认证失败
       if (res.code === '401') {
