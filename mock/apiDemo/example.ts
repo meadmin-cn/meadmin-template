@@ -24,7 +24,7 @@ export default [
           total: 30,
           list,
         },
-        '登录成功',
+        '操作成功',
       );
     },
   },
