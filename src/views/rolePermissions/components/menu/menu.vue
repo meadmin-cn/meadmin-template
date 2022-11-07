@@ -68,7 +68,9 @@ const props = defineProps({
     default: () => [],
   },
 });
-const emit = defineEmits(['subRules']);
+const emit = defineEmits<{
+  (e:'subRules',rules:string[]):void
+}>();
 const showAdd = ref(false);
 const menuRef = ref<MeVxeTableInstance>();
 const menu = menuListApi();

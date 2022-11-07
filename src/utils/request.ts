@@ -1,10 +1,10 @@
 import { closeLoading, loading } from '@/utils/loading';
-import { useUserStore } from '@/store';
+import { useUserStore, useGlobalStore } from '@/store';
 import axios, { AxiosRequestConfig } from 'axios';
 import { ElMessage } from 'element-plus';
 import log from './log';
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
-
+const t = (...args: [string | number]) => useGlobalStore().i18n.t(...args);
 const service = axios.create({
   baseURL: '/', // url = base url + request url
   timeout: 10000, // request timeout
@@ -25,7 +25,7 @@ service.interceptors.request.use(
   (error) => {
     // 对请求错误做些什么
     log.error(error); // for debug
-    throw Error('请求异常，请联系管理员'); // 改写错误信息
+    throw Error(t('请求异常，请联系管理员')); // 改写错误信息
   },
 );
 service.interceptors.response.use(
@@ -38,11 +38,11 @@ service.interceptors.response.use(
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
     log.error(error); // for debug
-    throw Error('操作失败，请稍后重试');
+    throw Error(t('操作失败，请稍后重试'));
   },
 );
 
-type RequestOptions<R, P extends unknown[]> = {
+export type RequestOptions<R, P extends unknown[]> = {
   needAll?: boolean; // 需要所有的格式，而不仅仅是data
   noLoading?: boolean; // 不需要加载特效
   noError?: boolean; // 不需要错误提示
@@ -55,12 +55,12 @@ setGlobalOptions({
 });
 
 // 请求函数，当请求失败时直接抛出异常;
-function request<R, P extends unknown[] = []>(
-  axiosConfig: (...args: P) => AxiosRequestConfig,
+export function request<R, P extends unknown[] = []>(
+  axiosConfig: (...args: P) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
   options?: RequestOptions<R, P>,
 ): ReturnType<typeof useRequest<R, P>>;
-function request<R, P extends unknown[] = [], T extends boolean | undefined = boolean | undefined>(
-  axiosConfig: (...args: P) => AxiosRequestConfig,
+export function request<R, P extends unknown[] = [], T extends boolean | undefined = boolean | undefined>(
+  axiosConfig: (...args: P) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
   options: RequestOptions<R, P>,
   returnAxios?: T,
 ): T extends boolean ? (...args: P) => Promise<R> : ReturnType<typeof useRequest<R, P>>;
@@ -71,17 +71,18 @@ function request<R, P extends unknown[] = [], T extends boolean | undefined = bo
  * @param returnAxios
  * @returns
  */
-function request<R, P extends unknown[] = [], T = boolean>(
-  axiosConfig: (...args: P) => AxiosRequestConfig,
+export function request<R, P extends unknown[] = [], T = boolean>(
+  axiosConfig: (...args: P) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
   options?: RequestOptions<R, P>,
   returnAxios?: T,
 ) {
   const axiosService = async (...args: P): Promise<R> => {
     try {
-      !options?.noLoading && loading();
+      //loading放到微任务中去执行以确保在自动调用请求时等待所有的宏任务中的生命周期函数执行完再创建loading实例 以规避currentInstance的相关警告
+      !options?.noLoading && Promise.resolve(undefined).then(loading);
       const { data: res } = await service(await axiosConfig(...args));
       if (!res || res.code === undefined) {
-        throw Error('返回值解析失败');
+        throw Error(t('返回值解析失败'));
       }
       // 401：认证失败
       if (res.code === '401') {

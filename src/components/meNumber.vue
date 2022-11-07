@@ -29,7 +29,10 @@ const props = defineProps({
     default: (number: number, decimals: number) => formatNumber({ truncate: decimals, padRight: decimals })(number),
   },
 });
-const emit = defineEmits(['finished', 'started']);
+const emit = defineEmits<{
+  (e:'finished'):void,
+  (e:'started'):void
+}>();
 const numberInfo = reactive({
   number: props.start,
   prefix: '',

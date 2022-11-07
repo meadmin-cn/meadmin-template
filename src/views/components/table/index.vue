@@ -1,55 +1,32 @@
 <template>
   <div class="table">
-    <me-table
-      ref="meTableRef"
-      :data="data"
-      :custom-column="customColumn"
-      :loading="loading"
-      :header-cell-style="{ textAlign: 'center' }"
-      :cell-style="{ textAlign: 'center' }"
-      stripe
-      @quick-search="run"
-      @refresh="refresh"
-      @add="() => {}"
-    >
+    <me-table ref="meTableRef" :data="data" :custom-column="customColumn" :loading="loading"
+      :header-cell-style="{ textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" stripe @quick-search="run"
+      @refresh="refresh" @add="() => {}">
       <template #search>
-        <el-form ref="searchRef" :model="searchForm" label-width="100px" class="search">
-          <el-row :gutter="10">
-            <el-col :xs="24" :sm="12" :md="8" :lg="6">
-              <el-form-item :label="t('名称')" prop="name">
-                <el-input v-model="searchForm.name" />
-              </el-form-item>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="8" :lg="6">
-              <el-form-item :label="t('类型')" prop="type">
-                <el-select v-model="searchForm.type" clearable>
-                  <el-option :label="t('类型') + '1'" value="1" />
-                  <el-option :label="t('类型') + '2'" value="2" />
-                </el-select>
-              </el-form-item>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="8" :lg="6">
-              <el-form-item :label="t('日期')" prop="date">
-                <el-date-picker v-model="searchForm.date" type="date" />
-              </el-form-item>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="8" :lg="6">
-              <el-form-item :label="t('地址')" prop="address">
-                <el-input v-model="searchForm.address" />
-              </el-form-item>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="8" :lg="6">
-              <el-form-item :label="t('邮政编码')" prop="zip">
-                <el-input v-model="searchForm.zip" />
-              </el-form-item>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="8" :lg="6">
-              <el-form-item>
-                <el-button type="primary" @click="run()">{{ t('查询') }}</el-button>
-                <el-button @click="()=>($refs.searchRef as FormInstance).resetFields()">{{ t('重置') }}</el-button>
-              </el-form-item>
-            </el-col>
-          </el-row>
+        <el-form ref="searchRef" :model="searchForm" inline label-width="100px" class="search">
+          <el-form-item :label="t('名称')" prop="name">
+            <el-input v-model="searchForm.name" />
+          </el-form-item>
+          <el-form-item :label="t('类型')" prop="type">
+            <el-select v-model="searchForm.type" clearable>
+              <el-option :label="t('类型') + '1'" value="1" />
+              <el-option :label="t('类型') + '2'" value="2" />
+            </el-select>
+          </el-form-item>
+          <el-form-item :label="t('日期')" prop="date">
+            <el-date-picker v-model="searchForm.date" type="date" />
+          </el-form-item>
+          <el-form-item :label="t('地址')" prop="address">
+            <el-input v-model="searchForm.address" />
+          </el-form-item>
+          <el-form-item :label="t('邮政编码')" prop="zip">
+            <el-input v-model="searchForm.zip" />
+          </el-form-item>
+          <el-form-item label=" ">
+            <el-button type="primary" @click="run()">{{ t('查询') }}</el-button>
+            <el-button @click="()=>($refs.searchRef as FormInstance).resetFields()">{{ t('重置') }}</el-button>
+          </el-form-item>
         </el-form>
       </template>
       <template #buttons>
@@ -70,8 +47,12 @@
         </el-table-column>
       </el-table-column>
       <el-table-column :label="t('操作')" min-width="162px">
-        <el-button><mel-icon-edit /></el-button>
-        <el-button v-if="canDel" type="danger"><mel-icon-delete /></el-button>
+        <el-button>
+          <mel-icon-edit />
+        </el-button>
+        <el-button v-if="canDel" type="danger">
+          <mel-icon-delete />
+        </el-button>
       </el-table-column>
       <template #empty>
         {{ t('空空如也') }}
@@ -101,8 +82,9 @@ const searchForm = reactive({
 .table {
   .search {
     margin-bottom: -8px;
+
     :deep(.el-input) {
-      width: 220px;
+      width: 319px;
     }
   }
 }

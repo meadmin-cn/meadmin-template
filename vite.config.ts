@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
 import { resolve } from 'path';
 import * as fs from 'fs';
-import { autoImport, resolver } from 'vite-plugin-autogeneration-import-file';
+import { createPlugin } from 'vite-plugin-autogeneration-import-file';
 import {vueSetUpExtend} from '@yuntian001/vue-setup-extend';
 import { viteMockServe } from '@meadmin-cn/vite-plugin-mock';
 import { ConfigEnv, UserConfigExport } from 'vite';
@@ -24,6 +24,8 @@ import { loadMessageConfig } from './src/config/locale';
 function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir);
 }
+
+const {autoImport, resolver} = createPlugin();
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   return {
     envPrefix: 'ME_',

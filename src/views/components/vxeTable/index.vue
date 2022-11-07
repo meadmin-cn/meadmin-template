@@ -59,7 +59,7 @@
       <vxe-colgroup title="Group1">
         <vxe-column field="name" title="ElInput" min-width="140" :edit-render="{}">
           <template #edit="scope">
-            <el-input v-model="scope.row.name" @input="xTable.updateStatus(scope)"></el-input>
+            <el-input v-model="scope.row.name" @input="xTable!.updateStatus(scope)"></el-input>
           </template>
         </vxe-column>
         <vxe-column field="role" title="ElAutocomplete" min-width="160" :edit-render="{}">

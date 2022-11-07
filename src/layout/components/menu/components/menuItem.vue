@@ -28,14 +28,8 @@
 </template>
 
 <script setup lang="ts" name="MenuItem">
-import { PropType } from 'vue';
 import { RouteRecordRaw } from 'vue-router';
-const props = defineProps({
-  item: {
-    type: Object as PropType<RouteRecordRaw>,
-    required: true,
-  },
-});
+const props = defineProps<{item:RouteRecordRaw}>();
 let onlyOneChild = ref<RouteRecordRaw>();
 const hasOneShowingChild = (children = [] as RouteRecordRaw[], parent: RouteRecordRaw) => {
   const showingChildren = children.filter((item) => item.meta && !item.meta.hideMenu);

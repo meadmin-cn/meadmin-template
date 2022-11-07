@@ -16,8 +16,8 @@
       @on-max-length="emit('onMaxLength', $event)"
       @on-focus="emit('onFocus', $event)"
       @on-blur="emit('onBlur', $event)"
-      @custom-alert="(...args:any[]) => emit('customAlert', ...args)"
-      @custom-paste="(...args:any[]) => emit('customPaste', ...args)"
+      @custom-alert="(...args:[string,string]) => emit('customAlert', ...args)"
+      @custom-paste="(...args:[IDomEditor,ClipboardEvent]) => emit('customPaste', ...args)"
     />
   </div>
 </template>
@@ -52,17 +52,17 @@ const props = defineProps({
     default: '',
   },
 });
-const emit = defineEmits([
-  'update:modelValue',
-  'onCreated',
-  'onChange',
-  'onDestroyed',
-  'onMaxLength',
-  'onFocus',
-  'onBlur',
-  'customAlert',
-  'customPaste',
-]);
+const emit = defineEmits<{
+  (e:'update:modelValue',valueHtml :string):void,
+  (e:'onCreated',editor: IDomEditor):void,
+  (e:'onChange',editor: IDomEditor):void,
+  (e:'onDestroyed',editor: IDomEditor):void,
+  (e:'onMaxLength',editor: IDomEditor):void,
+  (e:'onFocus',editor: IDomEditor):void,
+  (e:'onBlur',editor: IDomEditor):void,
+  (e:'customAlert',s: string, t: string):void,
+  (e:'customPaste',editor: IDomEditor, event: ClipboardEvent):void,
+}>();
 const { i18n } = useGlobalStore();
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef<IDomEditor | undefined>();
