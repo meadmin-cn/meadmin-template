@@ -1,39 +1,5 @@
 
 
-## [1.1.0](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.13...main-1.1.0) (2022-11-07)
-
-
-### Bug 修复[fix]
-
-* 全局变量命名加上$ ([a3b5a75](https://github.com/meadmin-cn/meadmin-template/commit/a3b5a7594fe3aa8d21fb8e28e1d54d3c01f95527))
-
-
-### 性能改进[perf]
-
-* 升级auto 插件版本 ([c96e736](https://github.com/meadmin-cn/meadmin-template/commit/c96e7361430556a340c6de515bee197b0cf114db))
-* 优化meTable表格查询书写方式 ([a9c19b7](https://github.com/meadmin-cn/meadmin-template/commit/a9c19b70e97d246f5e2761e26df2ede55298e6b3))
-
-
-### 重构[refactor]
-
-* 判断改为用全局变量$start ([fcdf5aa](https://github.com/meadmin-cn/meadmin-template/commit/fcdf5aa36a581956349f61a3a1adf7f285692377))
-* 优化ts类型写法 ([a2a6083](https://github.com/meadmin-cn/meadmin-template/commit/a2a6083083130f6c7ac5aa1b67e3ede4702a8c3c))
-* emit 和props type声明优化 ([577f106](https://github.com/meadmin-cn/meadmin-template/commit/577f1065f3ee5bb6e99ce8d7c5cacd48bfc0e3bc))
-
-
-### 新功能[feat]
-
-* 加上app create start 表示以便判断是否是热更新引用拿到 ([cb1a17b](https://github.com/meadmin-cn/meadmin-template/commit/cb1a17bd1ff672f174d89b519340f49c08ccef6a))
-* 加上markdown编辑器demo ([6da110c](https://github.com/meadmin-cn/meadmin-template/commit/6da110c81eef7c7f55408a4c501c6c6001fc7450))
-* 接口请求公共提示加上国际化支持 ([dc3d1d0](https://github.com/meadmin-cn/meadmin-template/commit/dc3d1d0d66a1f42907c1fda38a79f1b0effe17bb))
-* 请求示例加上自动请求示例 ([446b3da](https://github.com/meadmin-cn/meadmin-template/commit/446b3dad02cf9bd2692ecacb19c328b611433776))
-* 优化markdown示例：加上文件上传优化展示demo ([15b3163](https://github.com/meadmin-cn/meadmin-template/commit/15b316327a257571bf027d422da5c8b7942ee5a8))
-
-
-### 其他[chore]
-
-* template-release v1.1.0 ([706d9e8](https://github.com/meadmin-cn/meadmin-template/commit/706d9e85afa836fee6e9039393ff3473c33f2e0c))
-
 ## [1.0.13](https://github.com/meadmin-cn/meadmin-template/compare/main-1.0.12...main-1.0.13) (2022-10-19)
 
 
