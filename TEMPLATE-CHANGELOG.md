@@ -1,5 +1,29 @@
 
 
+## [1.1.0](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.13...template-1.1.0) (2022-11-07)
+
+
+### 性能改进[perf]
+
+* 升级auto 插件版本 ([091d675](https://github.com/meadmin-cn/meadmin-template/commit/091d67557da35bb936746f0a6d921fdfcd87d6cd))
+
+
+### Bug 修复[fix]
+
+* 全局变量命名加上$ ([dd4c537](https://github.com/meadmin-cn/meadmin-template/commit/dd4c537472745ef255cc808b48e2941dfc819e0e))
+
+
+### 重构[refactor]
+
+* 优化ts类型写法 ([12159b3](https://github.com/meadmin-cn/meadmin-template/commit/12159b331ad7fbec042e899e6768c22e824d9b65))
+
+
+### 新功能[feat]
+
+* 加上app create start 表示以便判断是否是热更新引用拿到 ([417d82f](https://github.com/meadmin-cn/meadmin-template/commit/417d82f1e4d5dab5a72eb190ac9389164af7ca62))
+* 接口请求公共提示加上国际化支持 ([dfaeb8b](https://github.com/meadmin-cn/meadmin-template/commit/dfaeb8b3f44a3e938924aa248366ec28487ed855))
+* 请求示例加上自动请求示例 ([5c01ed5](https://github.com/meadmin-cn/meadmin-template/commit/5c01ed522b0080deac654c5719f8175fc169e8ce))
+
 ## [1.0.13](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.12...template-1.0.13) (2022-10-19)
 
 
