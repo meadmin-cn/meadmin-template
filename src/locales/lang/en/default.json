@@ -43,8 +43,14 @@
   "退出登录": "Logout",
   "页面不见了": "The page is gone",
   "去": "Go",
+<<<<<<< HEAD
   "清除": "Clear",
   "内容": "Conent",
   "请输入": "Please input",
   "获取": "Get"
+=======
+  "操作失败，请稍后重试":"Operation failed, please try again later",
+  "返回值解析失败":"Failed to parse the return value",
+  "请求异常，请联系管理员":"The request is abnormal, Please contact the administrator"
+>>>>>>> dfaeb8b (feat: 接口请求公共提示加上国际化支持)
 }
