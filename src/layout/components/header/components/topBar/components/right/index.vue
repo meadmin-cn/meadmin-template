@@ -1,6 +1,7 @@
 <template>
   <div class="right">
     <div></div>
+    <me-search-menu v-if="themeConfig.showSearchMenu" class="item"></me-search-menu>
     <me-dark-switch v-if="themeConfig.showDark" class="item no-hover"></me-dark-switch>
     <me-locale-select v-if="localeConfig.localeList.length > 1" class="item"></me-locale-select>
     <me-size-select v-if="themeConfig.showSize" class="item"></me-size-select>

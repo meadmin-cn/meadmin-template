@@ -46,7 +46,7 @@ const isDot = ref(true);
     .message-icon {
       height: 25px;
       line-height: 25px;
-      font-size: 1.2em;
+      font-size: 1.3em;
     }
   }
 }

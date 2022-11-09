@@ -1,5 +1,5 @@
-import { RouteRecordRaw, RouterView } from 'vue-router';
-import LayoutPage from '@/layout/components/page.vue';
+import { RouteRecordRaw } from 'vue-router';
+import { LayoutPage } from '@/router/constant';
 export const routes: RouteRecordRaw[] = [
   {
     path: '1',
