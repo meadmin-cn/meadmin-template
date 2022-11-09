@@ -197,11 +197,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     },
     /* eslint-disable */
     define: {
-      __SSR__: `true`,
-      __DEV__: mode === 'development' ? `true` : `false`,
-      __COMPAT__: `false`,
-      __FEATURE_SUSPENSE__: `true`,
-      __FEATURE_PROD_DEVTOOLS__: `false`,
+      // __SSR__: `true`,
+      // __DEV__: mode === 'development' ? `true` : `false`,
+      // __COMPAT__: `false`,
+      // __FEATURE_SUSPENSE__: `true`,
+      // __FEATURE_PROD_DEVTOOLS__: `false`,
     },
     /* eslint-disable */
     build: {
