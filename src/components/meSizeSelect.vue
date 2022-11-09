@@ -27,7 +27,7 @@ const { themeConfig } = useSettingStore();
     padding: 0 10px;
 
     .icon {
-      font-size: 1.2em;
+      font-size: 1.3em;
     }
   }
 }

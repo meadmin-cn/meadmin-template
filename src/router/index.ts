@@ -103,6 +103,14 @@ export const router = createRouter({
   routes: flatteningRoutes2(constantRoutes),
 });
 
+export const jump = (route:Pick<RouteRecordRaw,"path"|"meta">)=>{
+  if(route.meta?.isLink){
+      window.open(route.path,'_blank');
+  }else{
+      router.push(route.path);
+  }
+}
+
 /**
  *
  * @param app
