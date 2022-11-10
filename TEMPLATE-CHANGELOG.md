@@ -1,5 +1,18 @@
 
 
+## [1.1.1](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.0...template-1.1.1) (2022-11-10)
+
+
+### 新功能[feat]
+
+* 菜单栏头部标题固定顶部 ([7a141c6](https://github.com/meadmin-cn/meadmin-template/commit/7a141c6a57c3640df38ae370135167667179fc0a))
+* 添加菜单搜索功能 ([f42271c](https://github.com/meadmin-cn/meadmin-template/commit/f42271c1cde311a5986ce5558298ad26378f395a))
+
+
+### Bug 修复[fix]
+
+* 修复layout及子组件更改时热更新报错问题(将layout layoutPage改为动态引入) ([3a96bb6](https://github.com/meadmin-cn/meadmin-template/commit/3a96bb6fc0bba6419d82f36d889488ae8b374651))
+
 ## [1.1.0](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.13...template-1.1.0) (2022-11-07)
 
 
