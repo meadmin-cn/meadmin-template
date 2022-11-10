@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import Layout from '@/layout/index.vue';
+import { Layout } from '@/router/constant';
 export const routes: RouteRecordRaw[] = [
   {
     path: '/page404',

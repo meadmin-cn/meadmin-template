@@ -1,6 +1,6 @@
 import { PageEnum } from '@/enums/pageEnum';
 import { RouteRecordRaw } from 'vue-router';
-import Layout from '@/layout/index.vue';
+import { Layout } from '@/router/constant';
 import { concatObjectValue } from '@/utils/helper';
 export const routes: RouteRecordRaw[] = [
   {

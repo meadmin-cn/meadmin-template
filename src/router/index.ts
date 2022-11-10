@@ -3,12 +3,13 @@ import { PageEnum } from '@/enums/pageEnum';
 import { App } from 'vue';
 import { setupRouterGuard } from './guard';
 import { concatObjectValue } from '@/utils/helper';
-import Layout from '@/layout/index.vue';
+import { Layout } from '@/router/constant';
 export const asyncRoutes = concatObjectValue<RouteRecordRaw>(
   import.meta.glob('./routes/*.ts', { eager: true, import: 'routes' }),
 );
 import { isExternal } from '@/utils/validate';
 import { resolve } from 'path-browserify';
+
 
 export const constantRoutes: RouteRecordRaw[] = [
   {
@@ -102,6 +103,14 @@ export const router = createRouter({
   history: createWebHashHistory(), //createWebHistory(),
   routes: flatteningRoutes2(constantRoutes),
 });
+
+export const jump = (route:Pick<RouteRecordRaw,"path"|"meta">)=>{
+  if(route.meta?.isLink){
+      window.open(route.path,'_blank');
+  }else{
+      router.push(route.path);
+  }
+}
 
 /**
  *

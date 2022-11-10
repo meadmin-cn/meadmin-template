@@ -19,6 +19,9 @@
       <el-form-item :label="$t('顶栏')">
         <el-switch v-model="themeConfig.topBar"></el-switch>
       </el-form-item>
+      <el-form-item :label="$t('菜单') + $t(' ') + $t('搜索')">
+        <el-switch v-model="themeConfig.showSearchMenu"></el-switch>
+      </el-form-item>
       <el-form-item :label="$t('模式') + $t(' ') + $t('切换')">
         <el-switch v-model="themeConfig.showDark"></el-switch>
       </el-form-item>

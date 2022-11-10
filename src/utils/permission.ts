@@ -1,5 +1,4 @@
-import Layout from '@/layout/index.vue';
-import LayoutPage from '@/layout/components/page.vue';
+import { Layout,LayoutPage } from '@/router/constant';
 import Page404 from '@/views/404.vue';
 import { useUserStore } from '@/store';
 import { RouteRecordRaw } from 'vue-router';
