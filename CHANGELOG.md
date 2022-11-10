@@ -1,5 +1,39 @@
 
 
+## [1.1.1](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.0...main-1.1.1) (2022-11-10)
+
+
+### 重构[refactor]
+
+* 优化ts类型写法 ([12159b3](https://github.com/meadmin-cn/meadmin-template/commit/12159b331ad7fbec042e899e6768c22e824d9b65))
+
+
+### 新功能[feat]
+
+* 菜单栏头部标题固定顶部 ([7a141c6](https://github.com/meadmin-cn/meadmin-template/commit/7a141c6a57c3640df38ae370135167667179fc0a))
+* 加上app create start 表示以便判断是否是热更新引用拿到 ([417d82f](https://github.com/meadmin-cn/meadmin-template/commit/417d82f1e4d5dab5a72eb190ac9389164af7ca62))
+* 接口请求公共提示加上国际化支持 ([dfaeb8b](https://github.com/meadmin-cn/meadmin-template/commit/dfaeb8b3f44a3e938924aa248366ec28487ed855))
+* 请求示例加上自动请求示例 ([5c01ed5](https://github.com/meadmin-cn/meadmin-template/commit/5c01ed522b0080deac654c5719f8175fc169e8ce))
+* 添加菜单搜索功能 ([f42271c](https://github.com/meadmin-cn/meadmin-template/commit/f42271c1cde311a5986ce5558298ad26378f395a))
+
+
+### Bug 修复[fix]
+
+* 全局变量命名加上$ ([dd4c537](https://github.com/meadmin-cn/meadmin-template/commit/dd4c537472745ef255cc808b48e2941dfc819e0e))
+* 修复layout及子组件更改时热更新报错问题(将layout layoutPage改为动态引入) ([3a96bb6](https://github.com/meadmin-cn/meadmin-template/commit/3a96bb6fc0bba6419d82f36d889488ae8b374651))
+
+
+### 其他[chore]
+
+* template-release v1.1.0 ([932f8af](https://github.com/meadmin-cn/meadmin-template/commit/932f8af224e787fe1e17fbf2ec042db83d01ef86))
+* template-release v1.1.1 ([d2a563f](https://github.com/meadmin-cn/meadmin-template/commit/d2a563f134a5e3866a17445bc024f625329abd9a))
+
+
+### 性能改进[perf]
+
+* 升级auto 插件版本 ([091d675](https://github.com/meadmin-cn/meadmin-template/commit/091d67557da35bb936746f0a6d921fdfcd87d6cd))
+* 示例路由layout改完动态引入 ([f9b05b5](https://github.com/meadmin-cn/meadmin-template/commit/f9b05b573a4284e8aa259550e184e40dadabb926))
+
 ## [1.1.0](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.0...main-1.1.0) (2022-11-07)
 
 
