@@ -1,5 +1,28 @@
 
 
+## [1.1.2](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.1...main-1.1.2) (2022-11-17)
+
+
+### 性能改进[perf]
+
+* **request:** 优化 request类型及使用示例以更好的提示返回值 ([f3f4079](https://github.com/meadmin-cn/meadmin-template/commit/f3f4079cdc0ff060c60654cb1d5d2ae24956411d))
+
+
+### Bug 修复[fix]
+
+* **api:** 修复userInfoApi类型检查错误 ([d82d9fe](https://github.com/meadmin-cn/meadmin-template/commit/d82d9fe22a7ec71f46f369e8463555ef71a7fb8a))
+* svg image 引入修改规避警告 ([4e166dd](https://github.com/meadmin-cn/meadmin-template/commit/4e166dda5febdfab48a34cc4fbbbab054171c12f))
+
+
+### 文档更改[docs]
+
+* **README:** 文档介绍更改 ([c77a402](https://github.com/meadmin-cn/meadmin-template/commit/c77a402486286e8b78198bd4f8518f3623a24368))
+
+
+### 其他[chore]
+
+* template-release v1.1.2 ([6b2b845](https://github.com/meadmin-cn/meadmin-template/commit/6b2b845e448cfa38b561844ff7a5c1ec13e1e53b))
+
 ## [1.1.1](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.0...main-1.1.1) (2022-11-10)
 
 
