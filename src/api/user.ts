@@ -30,8 +30,8 @@ export interface UserInfoResult {
   name: string; // 名称
   username: string; // 用户名
 }
-export function userInfoApi(returnAxios = false, noLoading = true) {
-  return request<UserInfoResult, [], typeof returnAxios>(
+export function userInfoApi<T extends boolean = false>(returnAxios:T = false as T, noLoading = true) {
+  return request<UserInfoResult, [], T>(
     () => ({
       url: Api.USER_INFO,
       method: 'get',
