@@ -1,6 +1,8 @@
 # Me-admin template
 ## 简介
-Me-admin template是一个免费开源的中后台模板,基于vue3、vite3、 pinia、 elment-plus构建，开箱即用。
+Me-admin template是一个免费开源的中后台模板,基于vue3、vite3、 pinia、 elment-plus构建，开箱即用，本项目的开源协议为最宽松的MIT协议，使用无任何限制，本项目采用最新技术栈，可以作为项目的启动模版，以帮助你快速搭建企业级中后台，也是一个很好的学习项目。
+
+如果能帮到您，麻烦在[Github](https://github.com/meadmin-cn/meadmin-template)中点个star，以发展更好的开源生态
 
 **中文** | [English](./README_EN.md)
 
@@ -13,7 +15,7 @@ Me-admin template是一个免费开源的中后台模板,基于vue3、vite3、 p
  - **自定义keepAlive缓存** 可根据key进行vue keep-alive,解决不同路由统一组件不能独立刷新缓存问题
  - **权限** 内置完善的动态路由权限生成方案
  - **Mock 数据** 内置mock数据方案便于测试
- - **组件自动引入** 自动按需引入components下的组件定义
+ - **组件自动引入** 自动按需引入components下的组件定义，可以自定义引入模式和模板，真正的按需引入
  - **便捷的类型自动生成** 自动生成ts type 最大程度减少工作量
 
 ## 预览

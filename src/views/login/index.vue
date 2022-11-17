@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <img src="/logo.svg" class="bg" />
+    <img src="/logo.svg?url" class="bg" />
     <login-header class="header"></login-header>
     <div class="form" @keyup.enter.exact="login">
       <div class="title">ME-Admin</div>
