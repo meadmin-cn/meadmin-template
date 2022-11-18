@@ -8,11 +8,11 @@ class Loading {
     this.execClose = execClose;
   }
   private number = 0;
-  loading(options?: LoadingOptions, number = 1) {
+  public loading(options?: LoadingOptions, number = 1) {
     this.number += number;
     this.execLoading(options);
   }
-  throttleClose = throttle(
+  public throttleClose = throttle(
     function (this: Loading) {
       if (this.number <= 0) {
         this.execClose();
@@ -22,13 +22,13 @@ class Loading {
     220,
     { leading: false },
   );
-  close(number = 1) {
+  public close(number = 1) {
     if (this.number > 0) {
-      this.number -= number;
+      this.number -= Math.min(this.number, number);
       this.throttleClose();
     }
   }
-  forceClose() {
+  public forceClose() {
     this.number = 0;
     loadingInstance.close();
     this.throttleClose.cancel();
@@ -40,20 +40,20 @@ export const loadingObject = {
     (options?: LoadingOptions) => (loadingInstance = ElLoading.service(options)),
     () => loadingInstance.close(),
   ),
-  layout:new Loading(
+  layout: new Loading(
     (options?: LoadingOptions) => (useGlobalStore().loadingOptions = options ? reactive(options) : {}),
     () => (useGlobalStore().loadingOptions = undefined),
   ),
-}
+};
 
-export function loading(options?: LoadingOptions, number = 1, mode:keyof typeof loadingObject = 'global') {
-  const loading = loadingObject[mode]
+export function loading(options?: LoadingOptions, number = 1, mode: keyof typeof loadingObject = 'global') {
+  const loading = loadingObject[mode];
   loading.loading(options, number);
   return loading;
 }
 
-export function closeLoading(force = false, number = 1, mode:keyof typeof loadingObject = 'global'): void {
-  const loading = loadingObject[mode]
+export function closeLoading(force = false, number = 1, mode: keyof typeof loadingObject = 'global'): void {
+  const loading = loadingObject[mode];
   if (force) {
     loading.forceClose();
     return;
