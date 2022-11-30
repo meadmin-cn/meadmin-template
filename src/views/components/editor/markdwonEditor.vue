@@ -3,7 +3,9 @@
     <div class="header">
       当前示例使用的md-editor-v3,文档地址：
       <el-link type="primary" href="https://imzbf.github.io/md-editor-v3/docs">md-editor-v3</el-link>
-      github地址：<el-link type="primary" href="https://github.com/imzbf/md-editor-v3">https://github.com/imzbf/md-editor-v3</el-link>
+      github地址：<el-link type="primary" href="https://github.com/imzbf/md-editor-v3"
+        >https://github.com/imzbf/md-editor-v3</el-link
+      >
     </div>
     <md-editor
       v-model="md"
@@ -20,6 +22,7 @@ import 'md-editor-v3/lib/style.css';
 import MdEditor from 'md-editor-v3';
 import { useSettingStore } from '@/store';
 const setting = useSettingStore();
+/* eslint-disable */
 const md = ref(`## 😲 md-editor-v3
 
 Markdown 编辑器，vue3 版本，使用 jsx 模板 和 typescript 开发，支持切换主题、prettier 美化文本等。
@@ -74,6 +77,8 @@ flowchart TD
 \`\`\`
 
 ## ☘️ 占个坑@！`);
+/* eslint-disable */
+
 const language = computed(
   () =>
     ({
@@ -90,7 +95,7 @@ const onUploadImg = async (files: File[], callback: (urls: string[]) => void) =>
         reader.addEventListener(
           'load',
           function () {
-            console.log( reader.result)
+            console.log(reader.result);
             rev({
               data: {
                 url: reader.result as string,
