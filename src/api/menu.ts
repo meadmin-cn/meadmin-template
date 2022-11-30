@@ -1,10 +1,10 @@
 import request from '@/utils/request';
 
 const enum Api {
-  LIST = '/api/menu/index',
-  ADD = '/api/admin/menu/add',
-  EDIT = '/api/admin/menu/{id}',
-  DEL = '/api/admin/menu/{id}',
+  LIST = 'menu/index',
+  ADD = 'admin/menu/add',
+  EDIT = 'admin/menu/{id}',
+  DEL = 'admin/menu/{id}',
 }
 
 // 菜单列表

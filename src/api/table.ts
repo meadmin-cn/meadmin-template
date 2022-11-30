@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 
 const enum Api {
-  LIST = '/api/table/list/',
+  LIST = 'table/list/',
 }
 export type ListResult = {
   date: string;
