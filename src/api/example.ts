@@ -1,7 +1,7 @@
 import { request, RequestOptions } from '@/utils/request';
 const enum Api {
-  LIST = '/api/list',
-  INFO = '/api/list/info/',
+  LIST = 'list',
+  INFO = 'list/info',
 }
 
 //列表接口
