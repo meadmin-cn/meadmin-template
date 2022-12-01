@@ -12,11 +12,14 @@
         </div>
         <div class="me-toolbar-tools">
           <el-input
-            v-if="_.vnode.props.onQuickSearch"
-            v-model="searchText"
-            :placeholder="$t('快捷搜索')"
+            v-if="quickSearch !== undefined"
+            :model-value="quickSearch"
+            :placeholder="
+              typeof quickSearchPlaceholder === 'function' ? quickSearchPlaceholder($t) : quickSearchPlaceholder
+            "
             prefix-icon="mel-icon-search"
-            @change="$emit('quickSearch', searchText)"
+            @update:model-value="$emit('update:quickSearch', $event)"
+            @change="$emit('quickSearch', $event)"
           />
           <el-button-group v-if="customColumn || exportMenu?.length || print">
             <el-popover v-if="customColumn" :teleported="false" placement="bottom" trigger="click" width="auto">
@@ -93,7 +96,7 @@
 <script lang="ts">
 import { useGlobalStore } from '@/store';
 import { ElPagination, ElTable } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
+import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
 import printTable from './hooks/print';
@@ -136,6 +139,11 @@ const props = {
     type: Boolean,
     default: true,
   },
+  quickSearch: String, //快捷搜索关键词
+  quickSearchPlaceholder: {
+    type: [String, Function] as PropType<string | ((t: ComponentCustomProperties['$t']) => string)>,
+    default: () => (t: ComponentCustomProperties['$t']) => t('快捷搜索'),
+  },
   paginationOptions: Object as PropType<
     {
       noAutoLayout?: boolean; //关闭手机模式自动更改
@@ -154,6 +162,9 @@ const emits = {
   add() {
     return true;
   },
+  ['update:quickSearch'](searchText: string) {
+    return true;
+  },
 };
 export default defineComponent<
   ComponentProps<typeof ElTable> & Partial<ExtractPropTypes<typeof props>>,
@@ -161,7 +172,6 @@ export default defineComponent<
     [k: string]: any;
     elTableRef: Ref<ELTableInstance | undefined>;
     customColumnProps: Ref<ReturnType<typeof customColumn> | undefined>;
-    searchText: Ref<string>;
   },
   Record<string, any>,
   Record<string, any>,
@@ -176,7 +186,6 @@ export default defineComponent<
   emits,
   setup(props, { slots, expose }) {
     const showSearch = ref(props.defaultShowSearch);
-    const searchText = ref('');
     const customColumnProps = ref<ReturnType<typeof customColumn>>();
     const checkedLabels = shallowRef([] as string[]);
     watch(
@@ -231,10 +240,9 @@ export default defineComponent<
       );
     }
 
-    expose({ elTableRef, customColumnProps, searchText });
+    expose({ elTableRef, customColumnProps });
     return {
       showSearch,
-      searchText,
       customColumnProps,
       checkedLabels,
       checkChange,
@@ -259,12 +267,13 @@ export default defineComponent<
 </script>
 <style lang="scss" scoped>
 .me-table {
-  $me-table-margin: 15px;
+  $margin-top: 15px;
+  $margin-left: 12px;
   .me-toolbar {
-    margin-top: -$me-table-margin;
-    margin-bottom: $me-table-margin;
+    margin-top: -$margin-top;
+    margin-bottom: $margin-top;
     .me-toolbar-search {
-      margin-top: $me-table-margin;
+      margin-top: $margin-top;
     }
     .me-toolbar-menu {
       display: flex;
@@ -272,23 +281,20 @@ export default defineComponent<
       justify-content: space-between;
       flex-wrap: wrap;
       .me-toolbar-buttons {
-        margin-top: $me-table-margin;
+        > {
+          :deep(*) {
+            margin-top: $margin-top;
+          }
+        }
       }
       .me-toolbar-tools {
-        margin-top: $me-table-margin;
+        margin-top: $margin-top;
         display: flex;
         align-items: center;
         > {
-          :deep(div),
-          :deep(span),
-          :deep(button) {
-            margin-left: 12px;
+          :deep(*:not(:first-child)) {
+            margin-left: $margin-left;
           }
-        }
-        > div:first-child,
-        > span:first-child,
-        > button:first-child {
-          margin-left: 0;
         }
         > .el-button-group {
           flex-shrink: 0;
@@ -297,7 +303,7 @@ export default defineComponent<
     }
   }
   .pagination {
-    margin-top: $me-table-margin;
+    margin-top: $margin-top;
     justify-content: center;
   }
 }

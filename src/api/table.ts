@@ -1,7 +1,7 @@
 import { request, RequestOptions } from '@/utils/request';
 
 const enum Api {
-  LIST = 'table/list/',
+  LIST = 'table/list',
 }
 export type ListResult = BasePageResult<{
   date: string;

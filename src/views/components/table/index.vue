@@ -2,6 +2,7 @@
   <el-card shadow="never" class="table">
     <me-table
       ref="meTableRef"
+      v-model:quick-search="searchForm.search"
       :data="data?.list"
       :pagination-options="paginationOptions"
       :custom-column="customColumn"
@@ -9,7 +10,7 @@
       :header-cell-style="{ textAlign: 'center' }"
       :cell-style="{ textAlign: 'center' }"
       stripe
-      @quick-search="() => run({ page: 1, size: 10 })"
+      @quick-search="getData(1)"
       @refresh="refresh"
       @add="() => {}"
     >
@@ -34,7 +35,7 @@
             <el-input v-model="searchForm.zip" />
           </el-form-item>
           <el-form-item label=" ">
-            <el-button type="primary" @click="run({ page: 1, size: 10 })">{{ t('查询') }}</el-button>
+            <el-button type="primary" @click="getData(1)">{{ t('查询') }}</el-button>
             <el-button @click="()=>($refs.searchRef as FormInstance).resetFields()">{{ t('重置') }}</el-button>
           </el-form-item>
         </el-form>
@@ -73,28 +74,33 @@
 </template>
 <script setup lang="ts" name="Table">
 import { listApi } from '@/api/table';
+import computedProxy from '@/hooks/core/computedProxy';
 import { useLocalesI18n } from '@/locales/i18n';
 import { FormInstance } from 'element-plus';
 const meTableRef = ref<MeTableInstance>();
 const customColumn = ref(true);
 const { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'tableLang']);
 const canDel = ref(true);
-const defaultParams = { page: 1, size: 10 };
-const { loading, run, data, refresh } = listApi({ defaultParams: [defaultParams], manual: false });
-const paginationOptions = reactive({
-  currentPage: defaultParams.page,
-  pageSize: defaultParams.size,
-  total: computed(() => data.value?.count ?? 0),
-  onChange: function (page = defaultParams.page, size = defaultParams.size) {
-    run({ page, size });
-  },
-});
 const searchForm = reactive({
+  search: '',
   name: '',
   type: undefined,
   date: '',
   address: '',
   zip: '',
+  page: 1,
+  size: 10,
+});
+const { loading, run, data, refresh } = listApi({ defaultParams: [searchForm], manual: false });
+const getData = (page = searchForm.page) => {
+  run(Object.assign(searchForm, { page }));
+};
+const paginationOptions = reactive({
+  currentPage: computedProxy(searchForm, 'page'),
+  pageSize: computedProxy(searchForm, 'size'),
+  total: computed(() => data.value?.count ?? 0),
+  layout: 'sizes, prev, pager, next, jumper, ->, total',
+  onChange: getData,
 });
 </script>
 <style lang="scss" scoped>
