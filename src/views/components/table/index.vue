@@ -1,8 +1,18 @@
 <template>
-  <div class="table">
-    <me-table ref="meTableRef" :data="data" :custom-column="customColumn" :loading="loading"
-      :header-cell-style="{ textAlign: 'center' }" :cell-style="{ textAlign: 'center' }" stripe @quick-search="run"
-      @refresh="refresh" @add="() => {}">
+  <el-card shadow="never" class="table">
+    <me-table
+      ref="meTableRef"
+      :data="data?.list"
+      :pagination-options="paginationOptions"
+      :custom-column="customColumn"
+      :loading="loading"
+      :header-cell-style="{ textAlign: 'center' }"
+      :cell-style="{ textAlign: 'center' }"
+      stripe
+      @quick-search="() => run({ page: 1, size: 10 })"
+      @refresh="refresh"
+      @add="() => {}"
+    >
       <template #search>
         <el-form ref="searchRef" :model="searchForm" inline label-width="100px" class="search">
           <el-form-item :label="t('名称')" prop="name">
@@ -24,7 +34,7 @@
             <el-input v-model="searchForm.zip" />
           </el-form-item>
           <el-form-item label=" ">
-            <el-button type="primary" @click="run()">{{ t('查询') }}</el-button>
+            <el-button type="primary" @click="run({ page: 1, size: 10 })">{{ t('查询') }}</el-button>
             <el-button @click="()=>($refs.searchRef as FormInstance).resetFields()">{{ t('重置') }}</el-button>
           </el-form-item>
         </el-form>
@@ -32,8 +42,9 @@
       <template #buttons>
         <el-button @click="canDel = !canDel">{{ t('删除切换') }}</el-button>
         <el-button @click="customColumn = !customColumn">{{ t('自定义列') }}</el-button>
-        <el-button @click="data = []">{{ t('清空') }}</el-button>
         <el-button @click="meTableRef!.elTableRef!.toggleAllSelection()">{{ t('全选') }}</el-button>
+        <el-button @click="paginationOptions.currentPage--">{{ t('上一页') }}</el-button>
+        <el-button @click="paginationOptions.currentPage++">{{ t('下一页') }}</el-button>
       </template>
       <el-table-column type="selection" label="选择" width="55" />
       <el-table-column prop="date" :label="t('日期')"> </el-table-column>
@@ -58,7 +69,7 @@
         {{ t('空空如也') }}
       </template>
     </me-table>
-  </div>
+  </el-card>
 </template>
 <script setup lang="ts" name="Table">
 import { listApi } from '@/api/table';
@@ -68,8 +79,16 @@ const meTableRef = ref<MeTableInstance>();
 const customColumn = ref(true);
 const { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'tableLang']);
 const canDel = ref(true);
-const { loading, run, data, refresh } = listApi();
-run();
+const defaultParams = { page: 1, size: 10 };
+const { loading, run, data, refresh } = listApi({ defaultParams: [defaultParams], manual: false });
+const paginationOptions = reactive({
+  currentPage: defaultParams.page,
+  pageSize: defaultParams.size,
+  total: computed(() => data.value?.count ?? 0),
+  onChange: function (page = defaultParams.page, size = defaultParams.size) {
+    run({ page, size });
+  },
+});
 const searchForm = reactive({
   name: '',
   type: undefined,
@@ -81,7 +100,7 @@ const searchForm = reactive({
 <style lang="scss" scoped>
 .table {
   .search {
-    margin-bottom: -8px;
+    margin-bottom: -18px;
 
     :deep(.el-input) {
       width: 319px;

@@ -79,10 +79,20 @@
         <slot name="empty"></slot>
       </template>
     </el-table>
+    <el-pagination
+      v-if="paginationOptions"
+      v-bind="paginationOptions"
+      v-model:current-page="paginationOptions.currentPage"
+      v-model:page-size="paginationOptions.pageSize"
+      :layout="pageLayout"
+      :pager-count="pagerCount"
+      class="pagination"
+    ></el-pagination>
   </div>
 </template>
 <script lang="ts">
-import { ElTable } from 'element-plus';
+import { useGlobalStore } from '@/store';
+import { ElPagination, ElTable } from 'element-plus';
 import { ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
@@ -126,6 +136,12 @@ const props = {
     type: Boolean,
     default: true,
   },
+  paginationOptions: Object as PropType<
+    {
+      noAutoLayout?: boolean; //关闭手机模式自动更改
+      onChange: (page: number, size: number) => void; //page或size改变是触发
+    } & ComponentProps<typeof ElPagination>
+  >,
 };
 const emits = {
   quickSearch(searchText: string) {
@@ -200,6 +216,21 @@ export default defineComponent<
         return index;
       };
     });
+    const globalStore = useGlobalStore();
+    const pageLayout = computed(() =>
+      !props.paginationOptions?.noAutoLayout && globalStore.isMobile
+        ? 'prev, pager, next'
+        : props.paginationOptions?.layout,
+    );
+    const pagerCount = computed(() =>
+      !props.paginationOptions?.noAutoLayout && globalStore.isMobile ? 5 : props.paginationOptions?.pagerCount,
+    );
+    if (props.paginationOptions?.onChange) {
+      watch([() => props.paginationOptions!.currentPage, () => props.paginationOptions!.pageSize], ([page, size]) =>
+        props.paginationOptions?.onChange(page!, size!),
+      );
+    }
+
     expose({ elTableRef, customColumnProps, searchText });
     return {
       showSearch,
@@ -220,17 +251,20 @@ export default defineComponent<
           handle(elTableRef.value!, filename);
         }
       },
+      pageLayout,
+      pagerCount,
     };
   },
 });
 </script>
 <style lang="scss" scoped>
 .me-table {
+  $me-table-margin: 15px;
   .me-toolbar {
-    margin-top: -12px;
-    margin-bottom: 12px;
+    margin-top: -$me-table-margin;
+    margin-bottom: $me-table-margin;
     .me-toolbar-search {
-      margin-top: 12px;
+      margin-top: $me-table-margin;
     }
     .me-toolbar-menu {
       display: flex;
@@ -238,10 +272,10 @@ export default defineComponent<
       justify-content: space-between;
       flex-wrap: wrap;
       .me-toolbar-buttons {
-        margin-top: 12px;
+        margin-top: $me-table-margin;
       }
       .me-toolbar-tools {
-        margin-top: 12px;
+        margin-top: $me-table-margin;
         display: flex;
         align-items: center;
         > {
@@ -261,6 +295,10 @@ export default defineComponent<
         }
       }
     }
+  }
+  .pagination {
+    margin-top: $me-table-margin;
+    justify-content: center;
   }
 }
 :global(.me-exportmenu-popover) {

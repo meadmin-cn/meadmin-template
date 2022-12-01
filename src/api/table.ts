@@ -1,22 +1,23 @@
-import request from '@/utils/request';
+import { request, RequestOptions } from '@/utils/request';
 
 const enum Api {
   LIST = 'table/list/',
 }
-export type ListResult = {
+export type ListResult = BasePageResult<{
   date: string;
   name: string;
   province: string;
   city: string;
   address: string;
   zip: string;
-}[];
-export function listApi() {
-  return request<ListResult>(
-    () => ({
+}>;
+export function listApi(options: RequestOptions<ListResult, [BasePageParams]> = {}) {
+  return request(
+    (params) => ({
       url: Api.LIST,
       method: 'get',
+      params: params,
     }),
-    { noLoading: true },
+    Object.assign({ noLoading: true }, options),
   );
 }
