@@ -1,5 +1,28 @@
 
 
+## [1.1.3](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.2...template-1.1.3) (2022-12-01)
+
+
+### Bug 修复[fix]
+
+* **router:** 修复 连续跳转两个路由菜单 loading不关闭的问题 ([caba383](https://github.com/meadmin-cn/meadmin-template/commit/caba3839f764dff85359cb445515ca53f456876b))
+
+
+### 文档更改[docs]
+
+* **README:** 说明描述更改 ([06eac69](https://github.com/meadmin-cn/meadmin-template/commit/06eac69b706f93372c82b2b71bea87d14488c4b9))
+
+
+### 重构[refactor]
+
+* 更换el-drawer custom-class 为class ([753a534](https://github.com/meadmin-cn/meadmin-template/commit/753a53433c217930dce750976b7d932212537401))
+* **request:** 将/api/设置为前缀 ([29223fd](https://github.com/meadmin-cn/meadmin-template/commit/29223fd29ff1dbcf678fc0e6bafd654dfd8df614))
+
+
+### 其他[chore]
+
+* **package:** element-plus 依赖版本更新 ([ea392e7](https://github.com/meadmin-cn/meadmin-template/commit/ea392e7b76145a558e61e248ab36e6470fc3b83f))
+
 ## [1.1.2](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.1...template-1.1.2) (2022-11-17)
 
 
