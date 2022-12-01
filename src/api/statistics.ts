@@ -2,8 +2,8 @@
 import request from '@/utils/request';
 
 const enum Api {
-  STATISTICS = '/api/statistics/index',
-  CHART = '/api/statistics/chart',
+  STATISTICS = 'statistics/index',
+  CHART = 'statistics/chart',
 }
 
 // 获取用户详细信息

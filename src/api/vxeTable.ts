@@ -1,15 +1,32 @@
 import { request, RequestOptions } from '@/utils/request';
 
 const enum Api {
-  LIST = 'table/list',
+  LIST = 'vxeTable/list',
 }
 export type ListResult = BasePageResult<{
-  date: string;
+  id: number;
   name: string;
-  province: string;
-  city: string;
+  nickname: string;
+  role: string;
+  sex: string;
+  sex1: string[];
+  state: string;
+  region: string[];
+  age: number;
+  date: string;
+  date1: string;
+  date2: string;
+  date3: string;
+  date4: string[];
+  date5: string;
+  date7: string;
+  color1: string;
+  tree1: string;
+  tree2: string[];
+  rate: number;
+  rate1: number;
+  flag: boolean;
   address: string;
-  zip: string;
 }>;
 export function listApi(options: RequestOptions<ListResult, [BasePageParams]> = {}) {
   return request(

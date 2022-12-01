@@ -12,11 +12,14 @@
         </div>
         <div class="me-toolbar-tools">
           <el-input
-            v-if="_.vnode.props.onQuickSearch"
-            v-model="searchText"
-            :placeholder="$t('快捷搜索')"
+            v-if="quickSearch !== undefined"
+            :model-value="quickSearch"
+            :placeholder="
+              typeof quickSearchPlaceholder === 'function' ? quickSearchPlaceholder($t) : quickSearchPlaceholder
+            "
             prefix-icon="mel-icon-search"
-            @change="$emit('quickSearch', searchText)"
+            @update:model-value="$emit('update:quickSearch', $event)"
+            @change="$emit('quickSearch', $event)"
           />
           <el-button-group v-if="customColumn || exportMenu?.length || print">
             <el-popover v-if="customColumn" :teleported="false" placement="bottom" trigger="click" width="auto">
@@ -79,11 +82,21 @@
         <slot name="empty"></slot>
       </template>
     </el-table>
+    <el-pagination
+      v-if="paginationOptions"
+      v-bind="paginationOptions"
+      v-model:current-page="paginationOptions.currentPage"
+      v-model:page-size="paginationOptions.pageSize"
+      :layout="pageLayout"
+      :pager-count="pagerCount"
+      class="pagination"
+    ></el-pagination>
   </div>
 </template>
 <script lang="ts">
-import { ElTable } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
+import { useGlobalStore } from '@/store';
+import { ElPagination, ElTable } from 'element-plus';
+import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
 import printTable from './hooks/print';
@@ -126,6 +139,17 @@ const props = {
     type: Boolean,
     default: true,
   },
+  quickSearch: String, //快捷搜索关键词
+  quickSearchPlaceholder: {
+    type: [String, Function] as PropType<string | ((t: ComponentCustomProperties['$t']) => string)>,
+    default: () => (t: ComponentCustomProperties['$t']) => t('快捷搜索'),
+  },
+  paginationOptions: Object as PropType<
+    {
+      noAutoLayout?: boolean; //关闭手机模式自动更改
+      onChange: (page: number, size: number) => void; //page或size改变是触发
+    } & ComponentProps<typeof ElPagination>
+  >,
 };
 const emits = {
   quickSearch(searchText: string) {
@@ -138,6 +162,9 @@ const emits = {
   add() {
     return true;
   },
+  ['update:quickSearch'](searchText: string) {
+    return true;
+  },
 };
 export default defineComponent<
   ComponentProps<typeof ElTable> & Partial<ExtractPropTypes<typeof props>>,
@@ -145,7 +172,6 @@ export default defineComponent<
     [k: string]: any;
     elTableRef: Ref<ELTableInstance | undefined>;
     customColumnProps: Ref<ReturnType<typeof customColumn> | undefined>;
-    searchText: Ref<string>;
   },
   Record<string, any>,
   Record<string, any>,
@@ -160,7 +186,6 @@ export default defineComponent<
   emits,
   setup(props, { slots, expose }) {
     const showSearch = ref(props.defaultShowSearch);
-    const searchText = ref('');
     const customColumnProps = ref<ReturnType<typeof customColumn>>();
     const checkedLabels = shallowRef([] as string[]);
     watch(
@@ -200,10 +225,24 @@ export default defineComponent<
         return index;
       };
     });
-    expose({ elTableRef, customColumnProps, searchText });
+    const globalStore = useGlobalStore();
+    const pageLayout = computed(() =>
+      !props.paginationOptions?.noAutoLayout && globalStore.isMobile
+        ? 'prev, pager, next'
+        : props.paginationOptions?.layout,
+    );
+    const pagerCount = computed(() =>
+      !props.paginationOptions?.noAutoLayout && globalStore.isMobile ? 5 : props.paginationOptions?.pagerCount,
+    );
+    if (props.paginationOptions?.onChange) {
+      watch([() => props.paginationOptions!.currentPage, () => props.paginationOptions!.pageSize], ([page, size]) =>
+        props.paginationOptions?.onChange(page!, size!),
+      );
+    }
+
+    expose({ elTableRef, customColumnProps });
     return {
       showSearch,
-      searchText,
       customColumnProps,
       checkedLabels,
       checkChange,
@@ -220,17 +259,21 @@ export default defineComponent<
           handle(elTableRef.value!, filename);
         }
       },
+      pageLayout,
+      pagerCount,
     };
   },
 });
 </script>
 <style lang="scss" scoped>
 .me-table {
+  $margin-top: 15px;
+  $margin-left: 12px;
   .me-toolbar {
-    margin-top: -12px;
-    margin-bottom: 12px;
+    margin-top: -$margin-top;
+    margin-bottom: $margin-top;
     .me-toolbar-search {
-      margin-top: 12px;
+      margin-top: $margin-top;
     }
     .me-toolbar-menu {
       display: flex;
@@ -238,29 +281,30 @@ export default defineComponent<
       justify-content: space-between;
       flex-wrap: wrap;
       .me-toolbar-buttons {
-        margin-top: 12px;
+        > {
+          :deep(*) {
+            margin-top: $margin-top;
+          }
+        }
       }
       .me-toolbar-tools {
-        margin-top: 12px;
+        margin-top: $margin-top;
         display: flex;
         align-items: center;
         > {
-          :deep(div),
-          :deep(span),
-          :deep(button) {
-            margin-left: 12px;
+          :deep(*:not(:first-child)) {
+            margin-left: $margin-left;
           }
-        }
-        > div:first-child,
-        > span:first-child,
-        > button:first-child {
-          margin-left: 0;
         }
         > .el-button-group {
           flex-shrink: 0;
         }
       }
     }
+  }
+  .pagination {
+    margin-top: $margin-top;
+    justify-content: center;
   }
 }
 :global(.me-exportmenu-popover) {

@@ -19,7 +19,7 @@
   </el-container>
   <el-drawer
     v-if="globalStore.isMobile"
-    custom-class="me-sidebar-drawer"
+    class="me-sidebar-drawer"
     :model-value="!themeConfig.menuCollapse"
     :with-header="false"
     :size="themeConfig.menuWidth"

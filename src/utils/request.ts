@@ -6,7 +6,7 @@ import log from './log';
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
 const t = (...args: [string | number]) => useGlobalStore().i18n.t(...args);
 const service = axios.create({
-  baseURL: '/', // url = base url + request url
+  baseURL: '/api/', // url = base url + request url
   timeout: 10000, // request timeout
 });
 // 请求拦截器
