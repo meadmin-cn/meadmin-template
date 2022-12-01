@@ -2,7 +2,7 @@ import { request, RequestOptions } from '@/utils/request';
 import { RouteRecordRaw } from 'vue-router';
 
 const enum Api {
-  MENU = '/api/menu/list',
+  MENU = 'menu/list',
 }
 
 export function menuApi<T extends boolean = true>(

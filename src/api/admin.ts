@@ -1,10 +1,10 @@
 import request from '@/utils/request';
 
 const enum Api {
-  GROUP = '/api/admin/group/index',
-  ADD_GROUP = '/api/admin/group/add',
-  EDIT_GROUP = '/api/admin/group/{id}',
-  DEL_GROUP = '/api/admin/group/{id}',
+  GROUP = 'admin/group/index',
+  ADD_GROUP = 'admin/group/add',
+  EDIT_GROUP = 'admin/group/{id}',
+  DEL_GROUP = 'admin/group/{id}',
 }
 
 // 管理员组

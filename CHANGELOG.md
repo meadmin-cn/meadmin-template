@@ -1,5 +1,52 @@
 
 
+## [1.1.3](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.2...main-1.1.3) (2022-12-01)
+
+
+### 性能改进[perf]
+
+* **request:** 优化 request类型及使用示例以更好的提示返回值 ([3c23293](https://github.com/meadmin-cn/meadmin-template/commit/3c2329331f0fa03fc23f47e40554e69267e01b98))
+
+
+### 文档更改[docs]
+
+* **README:** 说明描述更改 ([93dcc05](https://github.com/meadmin-cn/meadmin-template/commit/93dcc053c55ad58fa7783dc602a16a301c6bffcb))
+* **README:** 说明描述更改 ([06eac69](https://github.com/meadmin-cn/meadmin-template/commit/06eac69b706f93372c82b2b71bea87d14488c4b9))
+* **README:** 文档介绍更改 ([25edd80](https://github.com/meadmin-cn/meadmin-template/commit/25edd80e1183496075554a08c9b07f831199e289))
+
+
+### Bug 修复[fix]
+
+* **api:** 修复userInfoApi类型检查错误 ([77229f6](https://github.com/meadmin-cn/meadmin-template/commit/77229f6e78c628896b37b3841fa2a6ec13755fd2))
+* **request:** 将请求地址/api/改为公共前缀 ([a417ef8](https://github.com/meadmin-cn/meadmin-template/commit/a417ef8437b048f8d245db6a9b4f524dde884af5))
+* **router:** 修复 连续跳转两个路由菜单 loading不关闭的问题 ([caba383](https://github.com/meadmin-cn/meadmin-template/commit/caba3839f764dff85359cb445515ca53f456876b))
+* **router:** 修复 连续跳转两个路由菜单 loading不关闭的问题 ([#41](https://github.com/meadmin-cn/meadmin-template/issues/41)) ([ae14db5](https://github.com/meadmin-cn/meadmin-template/commit/ae14db5bfa456ea08d7d292e33aa23d309961109))
+* **router:** 修复 连续跳转两个路由菜单 loading不关闭的问题 ([#41](https://github.com/meadmin-cn/meadmin-template/issues/41)) ([d452ded](https://github.com/meadmin-cn/meadmin-template/commit/d452dede76206c277043a578e1d2fc7aace4b039))
+* svg image 引入修改规避警告 ([cd4d985](https://github.com/meadmin-cn/meadmin-template/commit/cd4d985886d9db3c41b26c4031f355440976d952))
+
+
+### 重构[refactor]
+
+* 更换el-drawer custom-class 为class ([753a534](https://github.com/meadmin-cn/meadmin-template/commit/753a53433c217930dce750976b7d932212537401))
+* 快捷搜索重构 ([4034dae](https://github.com/meadmin-cn/meadmin-template/commit/4034dae508c243d14052c9b2002b5d4c6e6a0eac))
+* **request:** 将/api/设置为前缀 ([29223fd](https://github.com/meadmin-cn/meadmin-template/commit/29223fd29ff1dbcf678fc0e6bafd654dfd8df614))
+
+
+### 新功能[feat]
+
+* 关闭eslint错误检测 ([337fdea](https://github.com/meadmin-cn/meadmin-template/commit/337fdea66f31a54f5d7d760fcab419ac9087220b))
+* **meTable:** 加上分页支持 ([2d6e446](https://github.com/meadmin-cn/meadmin-template/commit/2d6e4462f9e17d7d97c46609ae7c1a3e27743c40))
+* **meVxeTable:** 加上分页支持、快捷搜索重构 ([9bb99ca](https://github.com/meadmin-cn/meadmin-template/commit/9bb99ca894f7806972160dcb2ae9bb306adb0d72))
+
+
+### 其他[chore]
+
+* **package:** element-plus 依赖版本更新 ([ea392e7](https://github.com/meadmin-cn/meadmin-template/commit/ea392e7b76145a558e61e248ab36e6470fc3b83f))
+* release v1.1.1 ([70143bc](https://github.com/meadmin-cn/meadmin-template/commit/70143bc373b957d7d96f6b2909fd70cd049eab16))
+* release v1.1.2 ([8b2641a](https://github.com/meadmin-cn/meadmin-template/commit/8b2641af936b9cd7b41f67b2db587e31e97d7d0b))
+* template-release v1.1.2 ([3a124ea](https://github.com/meadmin-cn/meadmin-template/commit/3a124ea8afdfd3b781876239adae76430cd9211c))
+* template-release v1.1.3 ([96303cd](https://github.com/meadmin-cn/meadmin-template/commit/96303cd6ca9bb7e10fed741a2a4d7e71575efad9))
+
 ## [1.1.2](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.1...main-1.1.2) (2022-11-17)
 
 

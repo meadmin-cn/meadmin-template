@@ -16,11 +16,14 @@
         </div>
         <div class="me-vxe-toolbar-tools">
           <el-input
-            v-if="_.vnode.props.onQuickSearch"
-            v-model="searchText"
-            :placeholder="$t(quickSearchPlaceholder!)"
+            v-if="quickSearch !== undefined"
+            :model-value="quickSearch"
+            :placeholder="
+              typeof quickSearchPlaceholder === 'function' ? quickSearchPlaceholder($t) : quickSearchPlaceholder
+            "
             prefix-icon="mel-icon-search"
-            @change="$emit('quickSearch', searchText)"
+            @update:model-value="$emit('update:quickSearch', $event)"
+            @change="$emit('quickSearch', $event)"
           />
           <el-button-group v-if="customColumn || exportMenu?.length || print">
             <el-popover v-if="customColumn" :teleported="false" placement="bottom" trigger="click" width="auto">
@@ -82,11 +85,20 @@
         </template>
       </vxe-table>
     </div>
+    <el-pagination
+      v-if="paginationOptions"
+      v-bind="paginationOptions"
+      v-model:current-page="paginationOptions.currentPage"
+      v-model:page-size="paginationOptions.pageSize"
+      :layout="pageLayout"
+      :pager-count="pagerCount"
+      class="pagination me-vxe-footer"
+    ></el-pagination>
   </div>
 </template>
 <script lang="ts">
 import './install';
-import { ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
+import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
 import {
   VXEComponent,
   VxeTableDefines,
@@ -96,6 +108,8 @@ import {
   VxeTablePropTypes,
 } from 'vxe-table';
 import { debounce } from 'lodash-es';
+import { ElPagination } from 'element-plus';
+import { useGlobalStore } from '@/store';
 const props = {
   meClass: [String, Array as PropType<string[]>],
   name: {
@@ -133,10 +147,17 @@ const props = {
     type: Boolean,
     default: true,
   },
+  quickSearch: String,
   quickSearchPlaceholder: {
-    type: String,
-    default: '快捷搜索',
+    type: [String, Function] as PropType<string | ((t: ComponentCustomProperties['$t']) => string)>,
+    default: () => (t: ComponentCustomProperties['$t']) => t('快捷搜索'),
   },
+  paginationOptions: Object as PropType<
+    {
+      noAutoLayout?: boolean; //关闭手机模式自动更改
+      onChange: (page: number, size: number) => void; //page或size改变是触发
+    } & ComponentProps<typeof ElPagination>
+  >,
 };
 const emits = {
   quickSearch(searchText: string) {
@@ -149,10 +170,13 @@ const emits = {
   add() {
     return true;
   },
+  ['update:quickSearch'](searchText: string) {
+    return true;
+  },
 };
 export default defineComponent<
   ComponentProps<VXEComponent<VxeTableProps, VxeTableEventProps>> & Partial<ExtractPropTypes<typeof props>>,
-  { [k: string]: any; vxeTableRef: Ref<VxeTableInstance | undefined>; searchText: Ref<string> },
+  { [k: string]: any; vxeTableRef: Ref<VxeTableInstance | undefined> },
   Record<string, any>,
   Record<string, any>,
   Record<string, any>,
@@ -164,9 +188,8 @@ export default defineComponent<
   inheritAttrs: false,
   props: props as any,
   emits,
-  setup(props, { slots, expose }) {
+  setup(props, { expose }) {
     const vxeTableRef = ref<VxeTableInstance>();
-    const searchText = ref('');
     const showSearch = ref(props.defaultShowSearch);
     const collectColumn = ref([] as VxeTableDefines.ColumnInfo[]);
     const defaultChecked = ref([] as string[]);
@@ -189,7 +212,23 @@ export default defineComponent<
         }, [] as string[]);
       });
     });
-    expose({ vxeTableRef, searchText });
+
+    const globalStore = useGlobalStore();
+    const pageLayout = computed(() =>
+      !props.paginationOptions?.noAutoLayout && globalStore.isMobile
+        ? 'prev, pager, next'
+        : props.paginationOptions?.layout,
+    );
+    const pagerCount = computed(() =>
+      !props.paginationOptions?.noAutoLayout && globalStore.isMobile ? 5 : props.paginationOptions?.pagerCount,
+    );
+    if (props.paginationOptions?.onChange) {
+      watch([() => props.paginationOptions!.currentPage, () => props.paginationOptions!.pageSize], ([page, size]) =>
+        props.paginationOptions?.onChange(page!, size!),
+      );
+    }
+
+    expose({ vxeTableRef });
     return {
       vxeTableRef,
       collectColumn,
@@ -222,20 +261,24 @@ export default defineComponent<
           ),
         );
       },
-      searchText,
       showSearch,
+      pageLayout,
+      pagerCount,
     };
   },
 });
 </script>
 <style lang="scss" scoped>
 .me-vxe-table {
+  $margin-top: 15px;
+  $margin-left: 12px;
+
   .me-vxe-toolbar {
-    margin-top: -12px;
-    margin-bottom: 12px;
+    margin-top: -$margin-top;
+    margin-bottom: $margin-top;
 
     .me-vxe-toolbar-search {
-      margin-top: 12px;
+      margin-top: $margin-top;
     }
 
     .me-vxe-toolbar-menu {
@@ -245,26 +288,22 @@ export default defineComponent<
       flex-wrap: wrap;
 
       .me-vxe-toolbar-buttons {
-        margin-top: 12px;
+        > {
+          :deep(*) {
+            margin-top: $margin-top;
+          }
+        }
       }
 
       .me-vxe-toolbar-tools {
-        margin-top: 12px;
+        margin-top: $margin-top;
         display: flex;
         align-items: center;
 
         > {
-          :deep(div),
-          :deep(span),
-          :deep(button) {
-            margin-left: 12px;
+          :deep(*:not(:first-child)) {
+            margin-left: $margin-left;
           }
-        }
-
-        > div:first-child,
-        > span:first-child,
-        > button:first-child {
-          margin-left: 0;
         }
 
         > .el-button-group {
@@ -272,6 +311,11 @@ export default defineComponent<
         }
       }
     }
+  }
+
+  .pagination {
+    margin-top: $margin-top;
+    justify-content: center;
   }
 }
 
