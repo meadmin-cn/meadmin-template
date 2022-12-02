@@ -209,7 +209,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         output: {
           manualChunks: {
             // 打包优化
-            core: ['vue', 'vue-router', 'pinia', 'vue-request', 'vue-i18n/dist/vue-i18n.cjs.js', 'jquery', 'lodash-es'],
+            core: ['vue', 'vue-router', 'pinia', 'vue-request', 'vue-i18n/dist/vue-i18n.cjs.js', 'jquery', 'axios'],
             elIcon: ['@element-plus/icons-vue'],
             mock: [pathResolve('./mock')],
           },
