@@ -1,5 +1,18 @@
 
 
+## [1.1.4](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.3...template-1.1.4) (2022-12-19)
+
+
+### 其他[chore]
+
+* **vite.config:** 手动设置core-js/modules预构建, ([3a0de1b](https://github.com/meadmin-cn/meadmin-template/commit/3a0de1b11c13a3be47bd815b00b826f24eb7bc58))
+* **vite.config:** chunks打包优化 ([899f20d](https://github.com/meadmin-cn/meadmin-template/commit/899f20dca0cb25b38cbb6e8c8c1419aab707447e))
+
+
+### Bug 修复[fix]
+
+* **router:** 修复 连续跳转两个路由菜单progress进度条不关闭的问题 ([1c25234](https://github.com/meadmin-cn/meadmin-template/commit/1c25234f9477fe700a24fff1b16e661c00f3a079))
+
 ## [1.1.3](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.2...template-1.1.3) (2022-12-01)
 
 
