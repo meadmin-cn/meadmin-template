@@ -1,5 +1,24 @@
 
 
+## [1.1.4](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.3...main-1.1.4) (2022-12-19)
+
+
+### 性能改进[perf]
+
+* meTable和meVxeTable事件声明优化 ([d9968e9](https://github.com/meadmin-cn/meadmin-template/commit/d9968e98a0284995ab9ec949c78847e9044b00a2))
+
+
+### Bug 修复[fix]
+
+* **router:** 修复 连续跳转两个路由菜单progress进度条不关闭的问题 ([1c25234](https://github.com/meadmin-cn/meadmin-template/commit/1c25234f9477fe700a24fff1b16e661c00f3a079))
+
+
+### 其他[chore]
+
+* template-release v1.1.4 ([2fe9f33](https://github.com/meadmin-cn/meadmin-template/commit/2fe9f33d47ed7a9aa512bc04405214936297df49))
+* **vite.config:** 手动设置core-js/modules预构建, ([3a0de1b](https://github.com/meadmin-cn/meadmin-template/commit/3a0de1b11c13a3be47bd815b00b826f24eb7bc58))
+* **vite.config:** chunks打包优化 ([899f20d](https://github.com/meadmin-cn/meadmin-template/commit/899f20dca0cb25b38cbb6e8c8c1419aab707447e))
+
 ## [1.1.3](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.2...main-1.1.3) (2022-12-01)
 
 
