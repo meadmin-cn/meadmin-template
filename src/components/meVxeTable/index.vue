@@ -159,20 +159,11 @@ const props = {
     } & ComponentProps<typeof ElPagination>
   >,
 };
-const emits = {
-  quickSearch(searchText: string) {
-    //快捷搜索
-    return true;
-  },
-  refresh() {
-    return true;
-  },
-  add() {
-    return true;
-  },
-  ['update:quickSearch'](searchText: string) {
-    return true;
-  },
+const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown as {
+  quickSearch: (searchText: string) => void;
+  refresh: () => void;
+  add: () => void;
+  ['update:quickSearch']: (searchText: string) => void;
 };
 export default defineComponent<
   ComponentProps<VXEComponent<VxeTableProps, VxeTableEventProps>> & Partial<ExtractPropTypes<typeof props>>,
