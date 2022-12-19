@@ -1,5 +1,12 @@
 
 
+## [1.1.5](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.4...main-1.1.5) (2022-12-19)
+
+
+### 重构[refactor]
+
+* 优化写法 以通过最新版本typescript 的tsc 检测 ([ed7df24](https://github.com/meadmin-cn/meadmin-template/commit/ed7df2463c5cdc776f0dcef69814f51a22c3be17))
+
 ## [1.1.4](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.3...main-1.1.4) (2022-12-19)
 
 
