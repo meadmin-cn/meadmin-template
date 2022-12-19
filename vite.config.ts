@@ -4,7 +4,7 @@ import svgLoader from 'vite-svg-loader';
 import { resolve } from 'path';
 import * as fs from 'fs';
 import { createPlugin } from 'vite-plugin-autogeneration-import-file';
-import {vueSetUpExtend} from '@yuntian001/vue-setup-extend';
+import { vueSetUpExtend } from '@yuntian001/vue-setup-extend';
 import { viteMockServe } from '@meadmin-cn/vite-plugin-mock';
 import { ConfigEnv, UserConfigExport } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer'; //打包大小分析（stats.html）
@@ -25,7 +25,7 @@ function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir);
 }
 
-const {autoImport, resolver} = createPlugin();
+const { autoImport, resolver } = createPlugin();
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   return {
     envPrefix: 'ME_',
@@ -57,7 +57,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         setLangImport: loadMessageConfig.componentLoad,
         setComponents: loadMessageConfig.componentLoad,
       }),
-      splitVendorChunkPlugin(),//打包分析，会生成stats.html展示打包情况
+      splitVendorChunkPlugin(), //打包分析，会生成stats.html展示打包情况
       // VueI18nPlugin({
       //   /* options */
       //   // locale messages resource pre-compile option
@@ -209,7 +209,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         output: {
           manualChunks: {
             // 打包优化
-            core: ['vue', 'vue-router', 'pinia', 'vue-request', 'vue-i18n/dist/vue-i18n.cjs.js', 'jquery', 'lodash-es'],
+            core: ['vue', 'vue-router', 'pinia', 'vue-request', 'vue-i18n/dist/vue-i18n.cjs.js', 'jquery', 'axios'],
             elIcon: ['@element-plus/icons-vue'],
             mock: [pathResolve('./mock')],
           },
@@ -224,6 +224,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         'element-plus/es/components/message/style/css',
         'element-plus/es/components/message-box/style/css',
         'element-plus/es/components/notification/style/css',
+        //因为core-js为babel动态引入,这里手动设置core-js/modules预构建,如果babelHelpers不是runtime模式可忽略此选项
+        ...fs.readdirSync(pathResolve('node_modules/core-js/modules')).map((name) => 'core-js/modules/' + name),
       ],
     },
   };

@@ -24,3 +24,8 @@ export const set = (n: number) => {
     nProgress.set(n);
   }
 };
+
+export const remove = () => {
+  number = 0;
+  nProgress.remove();
+};
