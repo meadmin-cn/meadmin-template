@@ -60,7 +60,7 @@ export default defineStore({
     // 登录
     login: async function (params: LoginParams) {
       mitter.emit(event.BEFORE_LOGIN);
-      const res = await loginApi().runAsync(params);
+      const res = await loginApi()(params);
       await this.init(res.token);
       mitter.emit(event.AFTER_LOGIN);
     },

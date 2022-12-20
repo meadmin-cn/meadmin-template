@@ -2,6 +2,7 @@
   <div class="group">
     <me-vxe-table
       ref="groupRef"
+      v-model:quick-search="searchText"
       :data="group.data.value ?? []"
       :loading="group.loading.value"
       :row-config="{ isCurrent: true, useKey: true }"
@@ -45,12 +46,13 @@ import { searchTreeTable } from '@/utils/helper';
 import Add from './components/add.vue';
 import { omit } from 'lodash-es';
 const emit = defineEmits<{
-  (e:'currentChange',row: string[]):void
+  (e: 'currentChange', row: string[]): void;
 }>();
 const showAdd = ref(false);
 const groupRef = ref<MeVxeTableInstance>();
 const group = groupListApi();
 let groupDataCopy = [] as GroupListResult;
+const searchText = ref('');
 const search = (searchText: string) => {
   group.data.value = searchTreeTable(searchText, ['name'] as ['name'], groupDataCopy);
   nextTick(() => groupRef.value!.vxeTableRef!.setAllTreeExpand(true));
