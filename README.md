@@ -17,7 +17,8 @@ Me-admin template是一个免费开源的中后台模板,基于vue3、vite3、 p
  - **Mock 数据** 内置mock数据方案便于测试
  - **组件自动引入** 自动按需引入components下的组件定义，可以自定义引入模式和模板，真正的按需引入
  - **便捷的类型自动生成** 自动生成ts type 最大程度减少工作量
-
+ - **友好的request封装** 基于vue-request+axios的request api封装和vue3响应式语法糖深度耦合。
+  
 ## 预览
 - 完整版国外访问：[https://meadmin-cn.github.io/meadmin-template](https://meadmin-cn.github.io/meadmin-template)
 - 完整版国内访问：[https://meadmin-cn.gitee.io/meadmin-template](https://meadmin-cn.gitee.io/meadmin-template)
