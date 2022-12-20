@@ -1,5 +1,22 @@
 
 
+## [1.1.6](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.4...template-1.1.6) (2022-12-20)
+
+
+### 重构[refactor]
+
+* loginApi直接返回axios规避vue-request非setup警告 ([eb036b6](https://github.com/meadmin-cn/meadmin-template/commit/eb036b6488f42afca9c150e42f298e448416a723))
+
+
+### Bug 修复[fix]
+
+* 修复热更新后偶现页面loading无法关闭的bug ([8a9e731](https://github.com/meadmin-cn/meadmin-template/commit/8a9e731ad8c0708f7e7fe53270ad50503c531a8c))
+
+
+### 文档更改[docs]
+
+* 特性介绍添加 ([67fd3c4](https://github.com/meadmin-cn/meadmin-template/commit/67fd3c40b0df4693378a138582da8206192f47ec))
+
 ## [1.1.4](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.3...template-1.1.4) (2022-12-19)
 
 
