@@ -1,5 +1,55 @@
 
 
+## [1.1.6](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.5...main-1.1.6) (2022-12-20)
+
+
+### 重构[refactor]
+
+* loginApi直接返回axios规避vue-request非setup警告 ([eb036b6](https://github.com/meadmin-cn/meadmin-template/commit/eb036b6488f42afca9c150e42f298e448416a723))
+
+
+### Bug 修复[fix]
+
+* 修复热更新后偶现页面loading无法关闭的bug ([8a9e731](https://github.com/meadmin-cn/meadmin-template/commit/8a9e731ad8c0708f7e7fe53270ad50503c531a8c))
+* **rolePermissions:** 修复快捷搜索不展示bug ([09ae420](https://github.com/meadmin-cn/meadmin-template/commit/09ae42072929edc090ec338f7f8f311c3e1c2b58))
+* **rolePermissions:** 修复页面绑定函数错误bug ([fb10e90](https://github.com/meadmin-cn/meadmin-template/commit/fb10e909fcca10b949f9908e69326a5e65d0b22d))
+
+
+### 文档更改[docs]
+
+* 特性介绍添加 ([67fd3c4](https://github.com/meadmin-cn/meadmin-template/commit/67fd3c40b0df4693378a138582da8206192f47ec))
+
+
+### 其他[chore]
+
+* template-release v1.1.6 ([4b0a3fc](https://github.com/meadmin-cn/meadmin-template/commit/4b0a3fcfced7d2f6e051e8b2ecd45e8b1ed0adb0))
+
+## [1.1.5](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.4...main-1.1.5) (2022-12-19)
+
+
+### 重构[refactor]
+
+* 优化写法 以通过最新版本typescript 的tsc 检测 ([ed7df24](https://github.com/meadmin-cn/meadmin-template/commit/ed7df2463c5cdc776f0dcef69814f51a22c3be17))
+
+## [1.1.4](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.3...main-1.1.4) (2022-12-19)
+
+
+### 性能改进[perf]
+
+* meTable和meVxeTable事件声明优化 ([d9968e9](https://github.com/meadmin-cn/meadmin-template/commit/d9968e98a0284995ab9ec949c78847e9044b00a2))
+
+
+### Bug 修复[fix]
+
+* **router:** 修复 连续跳转两个路由菜单progress进度条不关闭的问题 ([1c25234](https://github.com/meadmin-cn/meadmin-template/commit/1c25234f9477fe700a24fff1b16e661c00f3a079))
+
+
+### 其他[chore]
+
+* template-release v1.1.4 ([2fe9f33](https://github.com/meadmin-cn/meadmin-template/commit/2fe9f33d47ed7a9aa512bc04405214936297df49))
+* **vite.config:** 手动设置core-js/modules预构建, ([3a0de1b](https://github.com/meadmin-cn/meadmin-template/commit/3a0de1b11c13a3be47bd815b00b826f24eb7bc58))
+* **vite.config:** chunks打包优化 ([899f20d](https://github.com/meadmin-cn/meadmin-template/commit/899f20dca0cb25b38cbb6e8c8c1419aab707447e))
+
 ## [1.1.3](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.2...main-1.1.3) (2022-12-01)
 
 

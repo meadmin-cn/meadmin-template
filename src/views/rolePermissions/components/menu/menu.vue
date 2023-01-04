@@ -2,6 +2,7 @@
   <div clss="menu">
     <me-vxe-table
       ref="menuRef"
+      v-model:quick-search="searchText"
       :data="menu.data.value ?? []"
       :loading="menu.loading.value"
       :custom-column="false"
@@ -69,7 +70,7 @@ const props = defineProps({
   },
 });
 const emit = defineEmits<{
-  (e:'subRules',rules:string[]):void
+  (e: 'subRules', rules: string[]): void;
 }>();
 const showAdd = ref(false);
 const menuRef = ref<MeVxeTableInstance>();
@@ -94,6 +95,7 @@ watch(
   },
 );
 let menuDataCopy = [] as MenuListResult;
+const searchText = ref('');
 const search = (searchText: string) => {
   menu.data.value = searchTreeTable(searchText, ['name', 'rule'] as ['name', 'rule'], menuDataCopy);
   nextTick(() => menuRef.value!.vxeTableRef!.setAllTreeExpand(true));

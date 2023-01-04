@@ -1,7 +1,7 @@
 <template>
   <span>
     <span class="prefix">{{ numberInfo.prefix }}</span>
-    <span class="output">{{ format ? format(output, numberInfo.decimals) : output }}</span>
+    <span class="output">{{ format(output, numberInfo.decimals) }}</span>
     <span class="suffix">{{ numberInfo.suffix }}</span>
   </span>
 </template>
@@ -30,8 +30,8 @@ const props = defineProps({
   },
 });
 const emit = defineEmits<{
-  (e:'finished'):void,
-  (e:'started'):void
+  (e: 'finished'): void;
+  (e: 'started'): void;
 }>();
 const numberInfo = reactive({
   number: props.start,

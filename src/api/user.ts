@@ -14,12 +14,16 @@ export class LoginParams {
 export interface LoginResult {
   token: string;
 }
-export function loginApi() {
-  return request<LoginResult, [LoginParams]>((params) => ({
-    url: Api.LOGIN,
-    method: 'post',
-    data: params,
-  }));
+export function loginApi<T extends boolean = true>(returnAxios: T = true as T) {
+  return request<LoginResult, [LoginParams], T>(
+    (params) => ({
+      url: Api.LOGIN,
+      method: 'post',
+      data: params,
+    }),
+    {},
+    returnAxios,
+  );
 }
 
 // 获取用户详细信息

@@ -1,13 +1,12 @@
-import { useGlobalStore } from '@/store';
 import { LoadingOptions } from 'element-plus';
 import { throttle } from 'lodash-es';
-let loadingInstance: ReturnType<typeof ElLoading.service>;
+const loadingInstance: Record<string, ReturnType<typeof ElLoading.service>> = {};
 class Loading {
   constructor(private execLoading: (options?: LoadingOptions) => void, private execClose: () => void) {
     this.execLoading = execLoading;
     this.execClose = execClose;
   }
-  private number = 0;
+  public number = 0;
   public loading(options?: LoadingOptions, number = 1) {
     this.number += number;
     this.execLoading(options);
@@ -26,23 +25,26 @@ class Loading {
     if (this.number > 0) {
       this.number -= Math.min(this.number, number);
       this.throttleClose();
+    } else {
+      this.forceClose();
     }
   }
   public forceClose() {
     this.number = 0;
-    loadingInstance.close();
+    this.execClose();
     this.throttleClose.cancel();
   }
 }
 
 export const loadingObject = {
   global: new Loading(
-    (options?: LoadingOptions) => (loadingInstance = ElLoading.service(options)),
-    () => loadingInstance.close(),
+    (options?: LoadingOptions) => (loadingInstance.global = ElLoading.service(options)),
+    () => loadingInstance.global?.close(),
   ),
   layout: new Loading(
-    (options?: LoadingOptions) => (useGlobalStore().loadingOptions = options ? reactive(options) : {}),
-    () => (useGlobalStore().loadingOptions = undefined),
+    (options?: LoadingOptions) =>
+      (loadingInstance.layout = ElLoading.service(Object.assign({ target: '#me-main' }, options))),
+    () => loadingInstance.layout?.close(),
   ),
 };
 
