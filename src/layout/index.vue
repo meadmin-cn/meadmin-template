@@ -10,7 +10,7 @@
       <el-main class="right-main">
         <el-scrollbar view-class="me-right-main-view">
           <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
-          <div v-loading="globalStore.layoutLoading" class="me-main" v-bind="globalStore.layoutLoadingOptions">
+          <div class="me-main" id="me-main">
             <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
           </div>
         </el-scrollbar>
@@ -19,7 +19,7 @@
   </el-container>
   <el-drawer
     v-if="globalStore.isMobile"
-    custom-class="me-sidebar-drawer"
+    class="me-sidebar-drawer"
     :model-value="!themeConfig.menuCollapse"
     :with-header="false"
     :size="themeConfig.menuWidth"

@@ -1,5 +1,89 @@
 
 
+## [1.1.6](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.4...template-1.1.6) (2022-12-20)
+
+
+### 重构[refactor]
+
+* loginApi直接返回axios规避vue-request非setup警告 ([eb036b6](https://github.com/meadmin-cn/meadmin-template/commit/eb036b6488f42afca9c150e42f298e448416a723))
+
+
+### Bug 修复[fix]
+
+* 修复热更新后偶现页面loading无法关闭的bug ([8a9e731](https://github.com/meadmin-cn/meadmin-template/commit/8a9e731ad8c0708f7e7fe53270ad50503c531a8c))
+
+
+### 文档更改[docs]
+
+* 特性介绍添加 ([67fd3c4](https://github.com/meadmin-cn/meadmin-template/commit/67fd3c40b0df4693378a138582da8206192f47ec))
+
+## [1.1.4](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.3...template-1.1.4) (2022-12-19)
+
+
+### 其他[chore]
+
+* **vite.config:** 手动设置core-js/modules预构建, ([3a0de1b](https://github.com/meadmin-cn/meadmin-template/commit/3a0de1b11c13a3be47bd815b00b826f24eb7bc58))
+* **vite.config:** chunks打包优化 ([899f20d](https://github.com/meadmin-cn/meadmin-template/commit/899f20dca0cb25b38cbb6e8c8c1419aab707447e))
+
+
+### Bug 修复[fix]
+
+* **router:** 修复 连续跳转两个路由菜单progress进度条不关闭的问题 ([1c25234](https://github.com/meadmin-cn/meadmin-template/commit/1c25234f9477fe700a24fff1b16e661c00f3a079))
+
+## [1.1.3](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.2...template-1.1.3) (2022-12-01)
+
+
+### Bug 修复[fix]
+
+* **router:** 修复 连续跳转两个路由菜单 loading不关闭的问题 ([caba383](https://github.com/meadmin-cn/meadmin-template/commit/caba3839f764dff85359cb445515ca53f456876b))
+
+
+### 文档更改[docs]
+
+* **README:** 说明描述更改 ([06eac69](https://github.com/meadmin-cn/meadmin-template/commit/06eac69b706f93372c82b2b71bea87d14488c4b9))
+
+
+### 重构[refactor]
+
+* 更换el-drawer custom-class 为class ([753a534](https://github.com/meadmin-cn/meadmin-template/commit/753a53433c217930dce750976b7d932212537401))
+* **request:** 将/api/设置为前缀 ([29223fd](https://github.com/meadmin-cn/meadmin-template/commit/29223fd29ff1dbcf678fc0e6bafd654dfd8df614))
+
+
+### 其他[chore]
+
+* **package:** element-plus 依赖版本更新 ([ea392e7](https://github.com/meadmin-cn/meadmin-template/commit/ea392e7b76145a558e61e248ab36e6470fc3b83f))
+
+## [1.1.2](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.1...template-1.1.2) (2022-11-17)
+
+
+### 性能改进[perf]
+
+* **request:** 优化 request类型及使用示例以更好的提示返回值 ([f3f4079](https://github.com/meadmin-cn/meadmin-template/commit/f3f4079cdc0ff060c60654cb1d5d2ae24956411d))
+
+
+### Bug 修复[fix]
+
+* **api:** 修复userInfoApi类型检查错误 ([d82d9fe](https://github.com/meadmin-cn/meadmin-template/commit/d82d9fe22a7ec71f46f369e8463555ef71a7fb8a))
+* svg image 引入修改规避警告 ([4e166dd](https://github.com/meadmin-cn/meadmin-template/commit/4e166dda5febdfab48a34cc4fbbbab054171c12f))
+
+
+### 文档更改[docs]
+
+* **README:** 文档介绍更改 ([c77a402](https://github.com/meadmin-cn/meadmin-template/commit/c77a402486286e8b78198bd4f8518f3623a24368))
+
+## [1.1.1](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.0...template-1.1.1) (2022-11-10)
+
+
+### 新功能[feat]
+
+* 菜单栏头部标题固定顶部 ([7a141c6](https://github.com/meadmin-cn/meadmin-template/commit/7a141c6a57c3640df38ae370135167667179fc0a))
+* 添加菜单搜索功能 ([f42271c](https://github.com/meadmin-cn/meadmin-template/commit/f42271c1cde311a5986ce5558298ad26378f395a))
+
+
+### Bug 修复[fix]
+
+* 修复layout及子组件更改时热更新报错问题(将layout layoutPage改为动态引入) ([3a96bb6](https://github.com/meadmin-cn/meadmin-template/commit/3a96bb6fc0bba6419d82f36d889488ae8b374651))
+
 ## [1.1.0](https://github.com/meadmin-cn/meadmin-template/compare/template-1.0.13...template-1.1.0) (2022-11-07)
 
 

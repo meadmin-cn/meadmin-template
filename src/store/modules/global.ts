@@ -27,21 +27,7 @@ export default defineStore('global', {
         };
       }),
       isMobile,
-      loadingOptions: undefined as undefined | LoadingOptions,
       layoutLoaded: false,
     };
-  },
-  getters: {
-    layoutLoading: (state) => Boolean(state.loadingOptions),
-    layoutLoadingOptions() {
-      if (!this.loadingOptions) {
-        return {};
-      }
-      const options = {} as { [key in keyof LoadingOptions as `element-loading-${key}`]: LoadingOptions[key] };
-      forOwn(this.loadingOptions, function (value, key) {
-        options[('element-loading-' + key) as keyof typeof options] = value as any;
-      });
-      return options;
-    },
   },
 });

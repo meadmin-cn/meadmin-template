@@ -6,7 +6,7 @@ import log from './log';
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
 const t = (...args: [string | number]) => useGlobalStore().i18n.t(...args);
 const service = axios.create({
-  baseURL: '/', // url = base url + request url
+  baseURL: '/api/', // url = base url + request url
   timeout: 10000, // request timeout
 });
 // 请求拦截器
@@ -59,11 +59,11 @@ export function request<R, P extends unknown[] = []>(
   axiosConfig: (...args: P) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
   options?: RequestOptions<R, P>,
 ): ReturnType<typeof useRequest<R, P>>;
-export function request<R, P extends unknown[] = [], T extends boolean | undefined = boolean | undefined>(
+export function request<R, P extends unknown[] = [], T extends boolean = boolean>(
   axiosConfig: (...args: P) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
   options: RequestOptions<R, P>,
-  returnAxios?: T,
-): T extends boolean ? (...args: P) => Promise<R> : ReturnType<typeof useRequest<R, P>>;
+  returnAxios: T,
+): T extends true ? (...args: P) => Promise<R> : ReturnType<typeof useRequest<R, P>>;
 /**
  * 请求函数
  * @param axiosConfig  axios的配置项

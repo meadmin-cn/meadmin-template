@@ -1,17 +1,20 @@
-import request from '@/utils/request';
+import { request, RequestOptions } from '@/utils/request';
 import { RouteRecordRaw } from 'vue-router';
 
 const enum Api {
-  MENU = '/api/menu/list',
+  MENU = 'menu/list',
 }
 
-export function menuApi(returnAxios = true) {
-  return request<RouteRecordRaw[], [], typeof returnAxios>(
+export function menuApi<T extends boolean = true>(
+  options: RequestOptions<RouteRecordRaw[], []> = {},
+  returnAxios: T = true as T,
+) {
+  return request(
     () => ({
       url: Api.MENU,
       method: 'get',
     }),
-    {},
+    options,
     returnAxios,
   );
 }

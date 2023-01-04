@@ -1,8 +1,8 @@
 import request from '@/utils/request';
 
 const enum Api {
-  LOGIN = '/api/user/login',
-  USER_INFO = '/api/user/info',
+  LOGIN = 'user/login',
+  USER_INFO = 'user/info',
 }
 
 // 登录
@@ -14,12 +14,16 @@ export class LoginParams {
 export interface LoginResult {
   token: string;
 }
-export function loginApi() {
-  return request<LoginResult, [LoginParams]>((params) => ({
-    url: Api.LOGIN,
-    method: 'post',
-    data: params,
-  }));
+export function loginApi<T extends boolean = true>(returnAxios: T = true as T) {
+  return request<LoginResult, [LoginParams], T>(
+    (params) => ({
+      url: Api.LOGIN,
+      method: 'post',
+      data: params,
+    }),
+    {},
+    returnAxios,
+  );
 }
 
 // 获取用户详细信息
@@ -30,8 +34,8 @@ export interface UserInfoResult {
   name: string; // 名称
   username: string; // 用户名
 }
-export function userInfoApi(returnAxios = false, noLoading = true) {
-  return request<UserInfoResult, [], typeof returnAxios>(
+export function userInfoApi<T extends boolean = false>(returnAxios: T = false as T, noLoading = true) {
+  return request<UserInfoResult, [], T>(
     () => ({
       url: Api.USER_INFO,
       method: 'get',
