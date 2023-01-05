@@ -8,5 +8,5 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts", "./plugin/vueSetupExtend.ts"]
+  "include": ["vite.config.ts", "./plugins/*.ts"]
 }
