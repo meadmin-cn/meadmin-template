@@ -1,4 +1,4 @@
-import { SizeEnum } from '@/enums/configEnum';
+import { SizeEnum } from '@/dict/configEnum';
 export default {
   primaryColor: '#409eff', // 主题颜色
   menuBg: '#1d1e1f', // 菜单背景颜色

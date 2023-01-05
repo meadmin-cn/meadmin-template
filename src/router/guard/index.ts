@@ -1,5 +1,5 @@
 import type { NavigationFailure, Router } from 'vue-router';
-import { PageEnum } from '@/enums/pageEnum';
+import { PageEnum } from '@/dict/pageEnum';
 import { useUserStore } from '@/store';
 import { event, mitter } from '@/event';
 import { remove, start } from '@/utils/nProgress';

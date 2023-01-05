@@ -5,7 +5,7 @@ import { RouteRecordRaw } from 'vue-router';
 import { DefineComponent } from 'vue';
 import log from './log';
 import { mitter } from '@/event';
-import EventEnum from '@/enums/eventEnmu';
+import EventEnum from '@/dict/eventEnmu';
 
 /**
  * 用户是否具有权限

@@ -3,7 +3,7 @@
  */
 import Mitt from '@/utils/mitt';
 import { NavigationFailure, RouteLocationNormalized } from 'vue-router';
-import EventEnum from '@/enums/eventEnmu';
+import EventEnum from '@/dict/eventEnmu';
 import { App } from 'vue';
 import { Composer } from 'vue-i18n';
 import { DynamicViewsModules } from '@/utils/permission';
