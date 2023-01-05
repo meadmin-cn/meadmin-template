@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import {LayoutPage} from '@/router/constant';
+import { LayoutPage } from '@/router/constant';
 import { concatObjectValue } from '@/utils/helper';
 export const routes: RouteRecordRaw[] = [
   {

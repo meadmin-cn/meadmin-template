@@ -43,8 +43,8 @@
   "退出登录": "Logout",
   "页面不见了": "The page is gone",
   "去": "Go",
-  "操作失败，请稍后重试":"Operation failed, please try again later",
-  "返回值解析失败":"Failed to parse the return value",
-  "请求异常，请联系管理员":"The request is abnormal, Please contact the administrator",
-  "搜索":"Search"
+  "操作失败，请稍后重试": "Operation failed, please try again later",
+  "返回值解析失败": "Failed to parse the return value",
+  "请求异常，请联系管理员": "The request is abnormal, Please contact the administrator",
+  "搜索": "Search"
 }

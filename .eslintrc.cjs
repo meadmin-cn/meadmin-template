@@ -65,7 +65,7 @@ module.exports = {
         leadingUnderscore: 'allow',
         filter: {
           // you can expand this regex to add more allowed names
-          regex: '^((__v_.*)|[0-9]+)$',
+          regex: '^((__v_.*)|([0-9]+)|(__.*))$',
           match: false,
         },
       },
@@ -74,6 +74,11 @@ module.exports = {
         modifiers: ['const'],
         format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
         leadingUnderscore: 'allow',
+        filter: {
+          // you can expand this regex to add more allowed names
+          regex: '^__.*$',
+          match: false,
+        },
       },
       {
         selector: ['memberLike'],

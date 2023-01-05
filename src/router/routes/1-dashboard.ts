@@ -1,4 +1,4 @@
-import { PageEnum } from '@/enums/pageEnum';
+import { PageEnum } from '@/dict/pageEnum';
 import { RouteRecordRaw } from 'vue-router';
 import { Layout } from '@/router/constant';
 import { concatObjectValue } from '@/utils/helper';

@@ -1,4 +1,4 @@
-import MenuModeEnum from '@/enums/menuModeEnum';
+import MenuModeEnum from '@/dict/menuModeEnum';
 import * as localeConfig from './locale';
 import loginConfig from './login';
 import themeConfig from './theme';

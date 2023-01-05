@@ -7,7 +7,7 @@
 </template>
 <script setup lang="ts">
 import { useSettingStore } from '@/store';
-import { SizeEnum } from '@/enums/configEnum';
+import { SizeEnum } from '@/dict/configEnum';
 const settingStore = useSettingStore();
 const htmlDom = document.getElementsByTagName('html')[0];
 watchEffect(() => {

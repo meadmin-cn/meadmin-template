@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { PageEnum } from '@/enums/pageEnum';
+import { PageEnum } from '@/dict/pageEnum';
 import { App } from 'vue';
 import { setupRouterGuard } from './guard';
 import { concatObjectValue } from '@/utils/helper';
@@ -9,7 +9,6 @@ export const asyncRoutes = concatObjectValue<RouteRecordRaw>(
 );
 import { isExternal } from '@/utils/validate';
 import { resolve } from 'path-browserify';
-
 
 export const constantRoutes: RouteRecordRaw[] = [
   {
@@ -104,13 +103,13 @@ export const router = createRouter({
   routes: flatteningRoutes2(constantRoutes),
 });
 
-export const jump = (route:Pick<RouteRecordRaw,"path"|"meta">)=>{
-  if(route.meta?.isLink){
-      window.open(route.path,'_blank');
-  }else{
-      router.push(route.path);
+export const jump = (route: Pick<RouteRecordRaw, 'path' | 'meta'>) => {
+  if (route.meta?.isLink) {
+    window.open(route.path, '_blank');
+  } else {
+    router.push(route.path);
   }
-}
+};
 
 /**
  *
