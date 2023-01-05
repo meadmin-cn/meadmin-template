@@ -4,7 +4,7 @@ import { createPlugin } from 'vite-plugin-autogeneration-import-file';
 import { fileURLToPath } from 'url';
 const { autoImport, resolver: resolverFn } = createPlugin();
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(filename);
+const __dirname = dirname(__filename);
 function pathResolve(dir: string) {
   return resolve(__dirname, '../', dir);
 }
