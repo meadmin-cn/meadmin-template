@@ -69,13 +69,11 @@ git clone https://github.com/meadmin-cn/meadmin-template.git
 
 3.初始化:(`npm run i`) 或( `npm install` `npx husky install`)
 
-4.eslint检查：`npm run eslint`(husky 会自动运行eslint、prettier、type-check，但是不会自动修复eslint的warn，需要自己运行解决下warn)
+4.提交修改: `git commit -am 'feat: add xxxxx'` (husky 会自动运行eslint --fix、prettier、type-check)
 
-5.提交修改: git commit -am 'feat: add xxxxx'
+5.推送: `git push origin feat/xxxx`
 
-6.推送: `git push origin feat/xxxx`
-
-7.提交`pull request`
+6.提交`pull request`
 
 ## Git 贡献提交规范
 - 需符合 [commitlint](https://commitlint.js.org/#/concepts-commit-conventions)规范，建议安装`vscode`的`Conventional Commits`扩展
