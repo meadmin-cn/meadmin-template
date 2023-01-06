@@ -66,13 +66,11 @@ git clone https://github.com/meadmin-cn/meadmin-template.git
 
 3.initialize:(`npm run i`) or ( `npm install` `npx husky install`)
 
-4.eslint check：`npm run eslint`(Husky automatically runs ESLint, Prettier, and type-check, but it does not automatically fix ESLint WARN. You need to run WARN for editing )
+4.Commit: `git commit -am 'feat: add xxxxx'` (Husky automatically runs ESLint --fix, Prettier, and type-check)
 
-5.Commit: git commit -am 'feat: add xxxxx'
+5.push: `git push origin feat/xxxx`
 
-6.push: `git push origin feat/xxxx`
-
-7.submit: `pull request`
+6.submit: `pull request`
 
 ## Git Contribution Submission Specification
 - must comply with [commitlint](https://commitlint.js.org/#/concepts-commit-conventions) regulations，It is recommended that `vscode`'s `Conventional Commits` extension be installed

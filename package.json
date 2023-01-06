@@ -106,6 +106,6 @@
   "homepage": "https://github.com/meadmin-cn/meadmin-template",
   "lint-staged": {
     "**/*": "prettier --cache --write --ignore-unknown",
-    "*.{vue,ts,tsx}": "eslint --cache"
+    "*.{vue,ts,tsx}": "eslint --cache --fix"
   }
 }
