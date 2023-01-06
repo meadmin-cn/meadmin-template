@@ -1,8 +1,6 @@
 //扩展 el-dailog 最大化最小化可移动
 export default (el: HTMLDivElement & { fullscreen: boolean }) => {
-  console.log(222);
   if (el.fullscreen !== undefined) {
-    console.log(111);
     return;
   }
   //初始化不最大化

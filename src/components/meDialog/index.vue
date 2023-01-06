@@ -17,7 +17,9 @@ const props = {
 };
 export default defineComponent<
   ComponentProps<typeof ElDialog> & Partial<ExtractPropTypes<typeof props>>,
-  Record<string, any>,
+  {
+    elDialogRef: Ref<InstanceType<typeof ElDialog> | undefined>;
+  },
   Record<string, any>,
   Record<string, any>,
   Record<string, any>,
@@ -27,7 +29,7 @@ export default defineComponent<
 >({
   name: 'MeDialog',
   props: props as any,
-  setup(props) {
+  setup(props, { expose }) {
     const elDialogRef = ref<InstanceType<typeof ElDialog>>();
     watch(
       [() => elDialogRef.value?.dialogContentRef, () => props.full],
@@ -39,12 +41,10 @@ export default defineComponent<
       },
       { immediate: true },
     );
+    expose({ elDialogRef });
     return {
       elDialogRef,
     };
-  },
-  created() {
-    console.log(this);
   },
 });
 </script>
