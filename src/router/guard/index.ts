@@ -33,7 +33,7 @@ function createProgressGuard(router: Router) {
   router.beforeEach(async (to, from) => {
     remove();
     start(to.matched.length);
-    closeLoading(false, from.matched.length, 'layout');
+    closeLoading(true, from.matched.length, 'layout');
     loading({}, to.matched.length, 'layout');
     return true;
   });
