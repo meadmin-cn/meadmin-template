@@ -1,5 +1,5 @@
 import type { NavigationFailure, Router } from 'vue-router';
-import { PageEnum } from '@/enums/pageEnum';
+import { PageEnum } from '@/dict/pageEnum';
 import { useUserStore } from '@/store';
 import { event, mitter } from '@/event';
 import { remove, start } from '@/utils/nProgress';
@@ -33,7 +33,7 @@ function createProgressGuard(router: Router) {
   router.beforeEach(async (to, from) => {
     remove();
     start(to.matched.length);
-    closeLoading(false, from.matched.length, 'layout');
+    closeLoading(true, from.matched.length, 'layout');
     loading({}, to.matched.length, 'layout');
     return true;
   });

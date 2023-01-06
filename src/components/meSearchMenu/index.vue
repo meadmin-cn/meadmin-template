@@ -6,13 +6,16 @@
       :show-close="false"
       @keydown.down="handleDown() && srollToIndex()"
       @keyup.up="handleUp() && srollToIndex()"
-      @keyup.enter="handleEnter();close();"
+      @keyup.enter="
+        handleEnter();
+        close();
+      "
     >
       <div class="search">
         <el-input
           v-model="searchText"
           size="large"
-          :placeholder="$t('搜索')+$t(' ')+$t('菜单')"
+          :placeholder="$t('搜索') + $t(' ') + $t('菜单')"
           :prefix-icon="Search"
           clearable
           @input="search(searchText)"
@@ -25,7 +28,10 @@
               :key="index"
               class="item"
               :class="{ active: activeIndex === index }"
-              @click.stop="jump(item);close()"
+              @click.stop="
+                jump(item);
+                close();
+              "
               @mouseenter="activeIndex = index"
             >
               {{ item.meta.title }}
@@ -50,11 +56,11 @@ const srollToIndex = () => {
     behavior: 'smooth',
   });
 };
-const close = ()=>{
+const close = () => {
   showSearch.value = false;
   searchText.value = '';
   filteredMenu.value = [];
-}
+};
 </script>
 <style lang="scss" scoped>
 .me-search-menu {
@@ -80,7 +86,7 @@ const close = ()=>{
       padding: 10px 32px 10px 20px;
       line-height: 1.2em;
     }
-     .active {
+    .active {
       color: var(--el-color-primary);
       background-color: var(--el-fill-color-light);
     }

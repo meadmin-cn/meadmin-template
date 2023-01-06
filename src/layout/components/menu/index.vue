@@ -2,9 +2,7 @@
   <div class="layout-menu" :class="{ collapse: !globalStore.isMobile && themeConfig.menuCollapse }">
     <div class="title">M<span>e - Admin</span></div>
     <div class="menu-box">
-      <el-scrollbar
-        view-class="layout-menu-content"
-      >
+      <el-scrollbar view-class="layout-menu-content">
         <el-menu
           class="el-menu-vertical-demo"
           :default-active="activeMenu"
@@ -68,7 +66,7 @@ const menuTextColor = computed(() => mixColor(themeConfig.menuBg, menuActiveColo
     left: 0;
     right: 0;
     top: 0;
-    box-shadow:0 1px v-bind(menuBg1) ;
+    box-shadow: 0 1px v-bind(menuBg1);
   }
   .menu-box {
     height: 100%;
@@ -124,20 +122,20 @@ const menuTextColor = computed(() => mixColor(themeConfig.menuBg, menuActiveColo
   }
 }
 .collapse {
-    :deep(.layout-menu-content) {
-      width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2) !important;
-      span {
-        visibility: hidden;
-      }
-      // .title {
-      //   width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
-      //   text-align: center;
-      //   margin: 0;
-
-      //   span {
-      //     display: none;
-      //   }
-      // }
+  :deep(.layout-menu-content) {
+    width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2) !important;
+    span {
+      visibility: hidden;
     }
+    // .title {
+    //   width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
+    //   text-align: center;
+    //   margin: 0;
+
+    //   span {
+    //     display: none;
+    //   }
+    // }
   }
+}
 </style>

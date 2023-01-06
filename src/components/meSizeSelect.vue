@@ -17,7 +17,7 @@
   </el-dropdown>
 </template>
 <script setup lang="ts" name="MeSizeSelect">
-import { SizeEnum } from '@/enums/configEnum';
+import { SizeEnum } from '@/dict/configEnum';
 import { useSettingStore } from '@/store';
 const { themeConfig } = useSettingStore();
 </script>

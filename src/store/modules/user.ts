@@ -3,7 +3,7 @@ import { Ref } from 'vue';
 import cookies from 'js-cookie';
 import { loginConfig as config } from '@/config';
 import { loading } from '@/utils/loading';
-import { PageEnum } from '@/enums/pageEnum';
+import { PageEnum } from '@/dict/pageEnum';
 import { loginApi, LoginParams, userInfoApi, UserInfoResult } from '@/api/user';
 import useRouteStore from './route';
 import { router } from '@/router';
