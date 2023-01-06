@@ -1,5 +1,30 @@
 
 
+## [1.1.7](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.6...template-1.1.7) (2023-01-06)
+
+
+### 重构[refactor]
+
+* 将vite plugin 提取到plugins目录中优化目录结构 ([d121f11](https://github.com/meadmin-cn/meadmin-template/commit/d121f119d7e1174230d6801190527dd11f338a5c))
+* enums 更换为dict ([58c6f8d](https://github.com/meadmin-cn/meadmin-template/commit/58c6f8dbad246e04a379c7c382fa308a8b26d84c))
+
+
+### 性能改进[perf]
+
+* 升级vite版本为4 typescript为4.9 ([4174cda](https://github.com/meadmin-cn/meadmin-template/commit/4174cda2dd9623f0132cf8611b6a19e5e1f4f3a0))
+* 优化tsc校验 ([ea23ee4](https://github.com/meadmin-cn/meadmin-template/commit/ea23ee428d0e6eb32c3e6846a4ce08e77ff874c0))
+
+
+### 文档更改[docs]
+
+* vite版本改为4版本 ([f733260](https://github.com/meadmin-cn/meadmin-template/commit/f7332606f0fb929605401a444bbfc4eca566c36c))
+
+
+### Bug 修复[fix]
+
+* 变量错误修复 ([89f2e91](https://github.com/meadmin-cn/meadmin-template/commit/89f2e91f9e64cb452409104691661529daabfd2b))
+* 修复 加载路由组件异常后切换路由loading不关闭bug ([dba02e2](https://github.com/meadmin-cn/meadmin-template/commit/dba02e221a4d314b161b7809bc81362f4ea6d0d5))
+
 ## [1.1.6](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.4...template-1.1.6) (2022-12-20)
 
 
