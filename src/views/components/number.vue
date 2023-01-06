@@ -1,7 +1,7 @@
 <template>
   <div class="number">
     <el-card header="数字动画">
-      <h1><me-number v-bind="props"></me-number></h1>
+      <h1><me-number v-bind="props" v-if="has"></me-number></h1>
       <el-form label-width="150px" inline>
         <el-form-item label="起始值">
           <el-input-number v-model="props.start"></el-input-number>
@@ -37,13 +37,12 @@ const props = reactive({
   disabled: false,
   duration: 1000,
 });
+const has = ref(true);
 const start = async () => {
-  const endNumber = props.end[0];
-  props.disabled = true;
-  props.end[0] = props.start;
+  has.value = false;
   await nextTick();
   props.disabled = false;
-  props.end[0] = endNumber;
+  has.value = true;
 };
 </script>
 <style lang="scss" scoped>
