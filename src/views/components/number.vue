@@ -1,7 +1,7 @@
 <template>
   <div class="number">
     <el-card header="数字动画">
-      <h1><me-number v-bind="props" v-if="has"></me-number></h1>
+      <h1><me-number v-if="has" v-bind="props"></me-number></h1>
       <el-form label-width="150px" inline>
         <el-form-item label="起始值">
           <el-input-number v-model="props.start"></el-input-number>
