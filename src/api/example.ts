@@ -8,6 +8,7 @@ const enum Api {
 export interface ListParams {
   page: number;
   size: number;
+  createTime?: [string, string];
 }
 export interface ListResult {
   total: number;
