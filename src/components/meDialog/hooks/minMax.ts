@@ -3,7 +3,7 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
   if (el.fullscreen !== undefined) {
     return;
   }
-  //初始化不最大化
+  //自定义尺寸变化事件
   const resizeEvent = new CustomEvent('drag-resize', { detail: '尺寸变化', bubbles: false });
   el.fullscreen = false;
   //当前宽高
@@ -19,7 +19,6 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
   let hasSetBodyHight = false;
   //弹窗
   const dragDom = el;
-  dragDom.className += ' el-drag-dialog';
   //清除选择头部文字效果
   dialogHeaderEl.onselectstart = () => false;
   //头部加上可拖动cursor
@@ -37,11 +36,11 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
   maxMinButton.className = 'el-dialog__headerbtn';
   maxMinButton.style.color = 'var(--el-color-info)';
   maxMinButton.onmouseover = function () {
-    //设置其背景颜色为黄色
+    //设置其背景颜色为主色
     maxMinButton.style.color = 'var(--el-color-primary)';
   };
   maxMinButton.onmouseout = function (e) {
-    //设置其背景颜色为黄色
+    //设置其背景颜色为默认色
     maxMinButton.style.color = 'var(--el-color-info)';
   };
   if (dialogHeaderEl.querySelector('.el-dialog__close')) {
@@ -57,10 +56,8 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
     // 鼠标按下，计算当前元素距离可视区的距离
     const disX = e.clientX ?? 0 - dialogHeaderEl.offsetLeft;
     const disY = e.clientY ?? 0 - dialogHeaderEl.offsetTop;
-
     // 获取到的值带px 正则匹配替换
     let styL: number, styT: number;
-
     // 注意在ie中 第一次获取到的值为组件自带50% 移动之后赋值为px
     if (sty.left.includes('%')) {
       styL = +document.body.clientWidth * (+sty.left.replace(/%/g, '') / 100);
@@ -73,7 +70,6 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
       // 通过事件委托，计算移动的距离
       const l = e.clientX - disX;
       const t = e.clientY - disY;
-
       // 移动当前元素
       dragDom.style.left = `${l + styL}px`;
       dragDom.style.top = `${t + styT}px`;
@@ -125,6 +121,7 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
         hasSetBodyHight = true;
       }
     }
+    maxMinButton.style.color = 'var(--el-color-info)';
     el.dispatchEvent(resizeEvent);
   };
 
