@@ -85,19 +85,12 @@
         </template>
       </vxe-table>
     </div>
-    <el-pagination
-      v-if="paginationOptions"
-      v-bind="paginationOptions"
-      v-model:current-page="paginationOptions.currentPage"
-      v-model:page-size="paginationOptions.pageSize"
-      :layout="pageLayout"
-      :pager-count="pagerCount"
-      class="pagination me-vxe-footer"
-    ></el-pagination>
+    <pagination v-if="paginationOptions" :options="paginationOptions" class="pagination me-vxe-footer"></pagination>
   </div>
 </template>
 <script lang="ts">
 import './install';
+import pagination from './components/pagination.vue';
 import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
 import {
   VXEComponent,
@@ -152,12 +145,7 @@ const props = {
     type: [String, Function] as PropType<string | ((t: ComponentCustomProperties['$t']) => string)>,
     default: () => (t: ComponentCustomProperties['$t']) => t('快捷搜索'),
   },
-  paginationOptions: Object as PropType<
-    {
-      noAutoLayout?: boolean; //关闭手机模式自动更改
-      onChange: (page: number, size: number) => void; //page或size改变是触发
-    } & ComponentProps<typeof ElPagination>
-  >,
+  paginationOptions: Object as PropType<InstanceType<typeof pagination>['options']>,
 };
 const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown as {
   quickSearch: (searchText: string) => void;
@@ -167,7 +155,7 @@ const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown
 };
 export default defineComponent<
   ComponentProps<VXEComponent<VxeTableProps, VxeTableEventProps>> & Partial<ExtractPropTypes<typeof props>>,
-  { [k: string]: any; vxeTableRef: Ref<VxeTableInstance | undefined> },
+  { vxeTableRef: Ref<VxeTableInstance | undefined> },
   Record<string, any>,
   Record<string, any>,
   Record<string, any>,
@@ -176,6 +164,7 @@ export default defineComponent<
   typeof emits
 >({
   name: 'MeVxeTable',
+  components: { pagination },
   inheritAttrs: false,
   props: props as any,
   emits,
@@ -203,22 +192,6 @@ export default defineComponent<
         }, [] as string[]);
       });
     });
-
-    const globalStore = useGlobalStore();
-    const pageLayout = computed(() =>
-      !props.paginationOptions?.noAutoLayout && globalStore.isMobile
-        ? 'prev, pager, next'
-        : props.paginationOptions?.layout,
-    );
-    const pagerCount = computed(() =>
-      !props.paginationOptions?.noAutoLayout && globalStore.isMobile ? 5 : props.paginationOptions?.pagerCount,
-    );
-    if (props.paginationOptions?.onChange) {
-      watch([() => props.paginationOptions!.currentPage, () => props.paginationOptions!.pageSize], ([page, size]) =>
-        props.paginationOptions?.onChange(page!, size!),
-      );
-    }
-
     expose({ vxeTableRef });
     return {
       vxeTableRef,
@@ -253,8 +226,6 @@ export default defineComponent<
         );
       },
       showSearch,
-      pageLayout,
-      pagerCount,
     };
   },
 });

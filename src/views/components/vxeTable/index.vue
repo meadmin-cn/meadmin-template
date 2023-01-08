@@ -295,14 +295,14 @@ const searchForm = reactive({
   size: 10,
 });
 const { loading, run, data } = listApi({ defaultParams: [searchForm], manual: false });
-const getData = (page = searchForm.page) => {
-  run(Object.assign(searchForm, { page }));
+const getData = (page = searchForm.page, size = searchForm.size) => {
+  run(Object.assign(searchForm, { page, size }));
 };
 const paginationOptions = reactive({
-  currentPage: computedProxy(searchForm, 'page'),
-  pageSize: computedProxy(searchForm, 'size'),
+  currentPage: computed(() => searchForm.page),
+  pageSize: computed(() => searchForm.size),
   total: computed(() => data.value?.count ?? 0),
-  onChange: getData,
+  change: getData,
 });
 const print = ref({} as object | boolean);
 </script>
