@@ -62,10 +62,10 @@ module.exports = {
       {
         selector: 'default',
         format: ['camelCase'],
-        leadingUnderscore: 'allow',
+        leadingUnderscore: 'allowSingleOrDouble',
         filter: {
           // you can expand this regex to add more allowed names
-          regex: '^((__v_.*)|([0-9]+)|(__.*))$',
+          regex: '^((__v_.*)|([0-9]+))$',
           match: false,
         },
       },
@@ -73,31 +73,27 @@ module.exports = {
         selector: 'variable',
         modifiers: ['const'],
         format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
-        leadingUnderscore: 'allow',
-        filter: {
-          // you can expand this regex to add more allowed names
-          regex: '^__.*$',
-          match: false,
-        },
+        leadingUnderscore: 'allowSingleOrDouble',
       },
       {
         selector: ['memberLike'],
         format: ['camelCase', 'PascalCase'],
-        leadingUnderscore: 'allow',
+        leadingUnderscore: 'allowSingleOrDouble',
         filter: {
           // you can expand this regex to add more allowed names
-          regex: '^((__v_.*)|[0-9]+)$',
+          regex: '^((__v_.*)|([0-9]+))$',
           match: false,
         },
       },
       {
         selector: 'enumMember',
-        format: ['UPPER_CASE'],
+        format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
+        leadingUnderscore: 'allowSingleOrDouble',
       },
       {
-        selector: 'typeLike',
+        selector: ['typeLike', 'enum'],
         format: ['PascalCase'],
-        leadingUnderscore: 'allow',
+        leadingUnderscore: 'allowSingleOrDouble',
       },
       {
         selector: ['default'],
