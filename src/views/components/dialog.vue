@@ -3,6 +3,26 @@
     <el-button @click="show = true"> 弹窗 </el-button>
     <me-dialog ref="dailog" v-model="show" title="Title">
       <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
+      <div>content</div>
       <template #footer>
         <el-button @click="show = false"> 关闭 </el-button>
       </template>

@@ -7,8 +7,8 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
   const resizeEvent = new CustomEvent('drag-resize', { detail: '尺寸变化', bubbles: false });
   el.fullscreen = false;
   //当前宽高
-  let nowWidth = el.clientWidth;
-  let nowHight = el.clientHeight;
+  let nowWidth = el.offsetWidth;
+  let nowHight = el.offsetHeight;
   //弹框可拉伸最小宽高
   const minWidth = Math.min(nowWidth, 300);
   const minHeight = Math.min(nowHight, 300);
@@ -16,9 +16,11 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
   let nowMarginTop = '0';
   //获取弹框头部（这部分可双击全屏）
   const dialogHeaderEl = el.querySelector('.el-dialog__header') as HTMLDivElement;
-  let hasSetBodyHight = false;
   //弹窗
   const dragDom = el;
+  dragDom.style.maxHeight = 'unset';
+  dragDom.style.width = nowWidth + 'px';
+  dragDom.style.height = nowHight + 'px';
   //清除选择头部文字效果
   dialogHeaderEl.onselectstart = () => false;
   //头部加上可拖动cursor
@@ -84,22 +86,18 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
     };
   };
   dialogHeaderEl.onmousedown = moveDown;
-  let bodyHeight = 'auto';
   const setMaxMin = () => {
     if (el.fullscreen) {
       maxMin.innerHTML = fullscreenSvg;
-      dragDom.style.height = 'auto';
+      dragDom.style.height = nowHight + 'px';
       dragDom.style.width = nowWidth + 'px';
       dragDom.style.marginTop = nowMarginTop;
       dragDom.style.position = 'relative';
       el.fullscreen = false;
       dialogHeaderEl.style.cursor = 'move';
       dialogHeaderEl.onmousedown = moveDown;
-      (dragDom.querySelector('.el-dialog__body') as HTMLDivElement).style.height = bodyHeight;
-      hasSetBodyHight = false;
     } else {
       maxMin.innerHTML = cropSvg;
-      bodyHeight = (dragDom.querySelector('.el-dialog__body') as HTMLDivElement).offsetHeight + 'px';
       nowHight = dragDom.clientHeight;
       nowWidth = dragDom.clientWidth;
       nowMarginTop = dragDom.style.marginTop;
@@ -112,14 +110,6 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
       el.fullscreen = true;
       dialogHeaderEl.style.cursor = 'initial';
       dialogHeaderEl.onmousedown = null;
-      if (!hasSetBodyHight) {
-        const footerHeight =
-          dragDom.querySelector('.el-dialog__footer') &&
-          (dragDom.querySelector('.el-dialog__footer') as HTMLDivElement).offsetHeight;
-        (dragDom.querySelector('.el-dialog__body') as HTMLDivElement).style.height =
-          'calc(100% - ' + (dialogHeaderEl.offsetHeight + footerHeight!) + 'px)';
-        hasSetBodyHight = true;
-      }
     }
     maxMinButton.style.color = 'var(--el-color-info)';
     el.dispatchEvent(resizeEvent);
@@ -139,6 +129,8 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
   resizeEl.style.width = '10px';
   resizeEl.style.right = '0px';
   resizeEl.style.bottom = '0px';
+  resizeEl.style.zIndex = '1999';
+
   //鼠标拉伸弹窗
   resizeEl.onmousedown = (e) => {
     // 记录初始x位置
@@ -154,14 +146,6 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
       //比较是否小于最小宽高
       dragDom.style.width = x > minWidth ? `${x}px` : minWidth + 'px';
       dragDom.style.height = y > minHeight ? `${y}px` : minHeight + 'px';
-      if (!hasSetBodyHight) {
-        const footerHeight =
-          dragDom.querySelector('.el-dialog__footer') &&
-          (dragDom.querySelector('.el-dialog__footer') as HTMLDivElement).offsetHeight;
-        (dragDom.querySelector('.el-dialog__body') as HTMLDivElement).style.height =
-          'calc(100% - ' + (dialogHeaderEl.offsetHeight + footerHeight!) + 'px)';
-        hasSetBodyHight = true;
-      }
     };
     //拉伸结束
     document.onmouseup = function (e) {

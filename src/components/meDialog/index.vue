@@ -1,5 +1,5 @@
 <template>
-  <el-dialog ref="elDialogRef" class="me-dialog">
+  <el-dialog ref="elDialogRef" class="me-dialog" :style="{ maxHeight }">
     <template v-for="(item, key) in $slots" :key="key" #[key]>
       <component :is="item"></component>
     </template>
@@ -13,6 +13,10 @@ const props = {
   full: {
     type: Boolean,
     default: true,
+  },
+  maxHeight: {
+    type: String,
+    default: '60vh',
   },
 };
 export default defineComponent<
@@ -50,8 +54,31 @@ export default defineComponent<
 </script>
 <style lang="scss">
 .me-dialog {
+  display: flex;
+  flex-direction: column;
   .el-dialog__headerbtn {
     width: 40px;
+  }
+  .el-dialog__header {
+    position: sticky;
+    top: 0;
+    z-index: $z-index-top;
+    background-color: inherit;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 80px;
+  }
+  .el-dialog__body {
+    overflow-y: auto;
+    flex: 1;
+  }
+  .el-dialog__footer {
+    position: sticky;
+    bottom: 0;
+    z-index: $z-index-top;
+    background-color: inherit;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
 }
 </style>
