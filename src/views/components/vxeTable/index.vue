@@ -157,7 +157,6 @@ import { VxeTablePropTypes } from 'vxe-table';
 import XEUtils from 'xe-utils';
 import { FormInstance } from 'element-plus';
 import { listApi } from '@/api/vxeTable';
-import computedProxy from '@/hooks/core/computedProxy';
 const meVxeTableRef = ref<MeVxeTableInstance>();
 const xTable = computed(() => meVxeTableRef.value?.vxeTableRef);
 const restaurants = [

@@ -14,6 +14,7 @@ import { useGlobalStore } from '@/store';
 import { ElPagination } from 'element-plus';
 import { PropType } from 'vue';
 export default defineComponent({
+  name: 'Pagination',
   props: {
     options: {
       type: Object as PropType<
