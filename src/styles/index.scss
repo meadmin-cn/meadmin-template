@@ -1,5 +1,6 @@
 @import './element-plus.scss';
 @import './transition.scss';
+
 html {
   body {
     margin: 0;
@@ -72,7 +73,39 @@ a {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+
 .popover-scrollbar-y {
   margin: 0 -12px;
   padding: 0 12px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0003;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  background-color: #0000004d;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #fff3;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #fff6;
 }
