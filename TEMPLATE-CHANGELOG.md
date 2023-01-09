@@ -1,5 +1,30 @@
 
 
+## [1.1.8](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.7...template-1.1.8) (2023-01-09)
+
+
+### 其他[chore]
+
+* 移除meKeepAlive 需要的define常量 （从vue自动获取） ([b5ee3ea](https://github.com/meadmin-cn/meadmin-template/commit/b5ee3ea2e52613fa7a62f65bc08e875b9a22004c))
+
+
+### 重构[refactor]
+
+* 禁用autoImport ts类型自动生成（已放到git中无需再次生成） ([31f3566](https://github.com/meadmin-cn/meadmin-template/commit/31f3566858fddf4cf41ca300e1bbf8f617981547))
+
+
+### CI发版[ci]
+
+* eslint name 校验规则更宽松 ([c7341a7](https://github.com/meadmin-cn/meadmin-template/commit/c7341a736d169ac6df9036407d485e4268d85721))
+* husky校验 esint 设置为自动修复 ([ba826aa](https://github.com/meadmin-cn/meadmin-template/commit/ba826aa478cf40934c960058fc212e61fa53e96d))
+
+
+### 新功能[feat]
+
+* 加上全局滚动条样式 ([365e065](https://github.com/meadmin-cn/meadmin-template/commit/365e065aca58e9a4a6bafe410a56d802506824ac))
+* 请求函数加上数组query 转换 ([39fa3f9](https://github.com/meadmin-cn/meadmin-template/commit/39fa3f91374019d7349159fef79636cf1fad5439))
+* reqest query参数 删除null值 ([26a989c](https://github.com/meadmin-cn/meadmin-template/commit/26a989c6d237263c8356f47a51278b5d5f92b2ec))
+
 ## [1.1.7](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.6...template-1.1.7) (2023-01-06)
 
 
