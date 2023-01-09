@@ -9,7 +9,7 @@ const t = (...args: [string | number]) => useGlobalStore().i18n.t(...args);
 const service = axios.create({
   baseURL: '/api/', // url = base url + request url
   timeout: 10000, // request timeout
-  paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }), // 数组query参数转换为repeat a=1&a=2
+  paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat', skipNulls: true }), // 数组query参数转换为repeat a=1&a=2,null值会被删除
 });
 // 请求拦截器
 service.interceptors.request.use(
