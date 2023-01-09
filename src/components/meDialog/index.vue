@@ -25,7 +25,7 @@ export default defineComponent<
   Record<string, any>,
   ComponentOptionsMixin,
   ComponentOptionsMixin,
-  Record<string, never>
+  Record<string, any>
 >({
   name: 'MeDialog',
   props: props as any,
