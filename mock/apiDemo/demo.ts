@@ -303,7 +303,7 @@ const list = [
 export default [
   {
     url: '/api/demo', //
-    method: 'GET',
+    method: 'get',
     timeout: 500 + Math.floor(Math.random() * 300),
     response: (req: { query: any }) => {
       const query = req.query;
@@ -358,7 +358,7 @@ export default [
   },
   {
     url: '/api/demo', //新增
-    method: 'POST',
+    method: 'post',
     timeout: 500 + Math.floor(Math.random() * 300),
     response: (req: { body: any }) => {
       list.push(
@@ -372,7 +372,7 @@ export default [
   },
   {
     url: /\/api\/demo\/[0-9]+/, //编辑
-    method: 'PUT',
+    method: 'put',
     timeout: 500 + Math.floor(Math.random() * 300),
     response: (req: { url: string; body: any }) => {
       const id = req.url.replace('/api/demo/', '');
@@ -386,7 +386,7 @@ export default [
   },
   {
     url: /\/api\/demo\/[0-9]+/, //删除
-    method: 'DELETE',
+    method: 'delete',
     timeout: 500 + Math.floor(Math.random() * 300),
     response: (req: { url: string }) => {
       const id = req.url.replace('/api/demo/', '');
