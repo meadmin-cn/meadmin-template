@@ -1,9 +1,9 @@
 <template>
   <el-form ref="elFormRef" class="me-search-form" :inline="inline">
     <slot></slot>
-    <div v-if="$slots.more" v-show="showAll" class="me-search-form-more">
+    <span v-if="$slots.more" v-show="showAll" class="me-search-form-more">
       <slot name="more"></slot>
-    </div>
+    </span>
     <el-form-item>
       <slot name="button"></slot>
       <el-button v-if="searchText !== undefined" type="primary" @click="$emit('search')">
@@ -16,8 +16,8 @@
         {{ resetText ? resetText : $t('重置') }}
       </el-button>
       <el-button v-if="$slots.more" text @click="showAll = !showAll">
-        {{ $t(showAll ? '展开' : '收起') }}
-        <mel-icon-arrow-up class="more-icon" :class="{ reversal: showAll }"></mel-icon-arrow-up>
+        {{ $t(showAll ? '收起' : '展开') }}
+        <mel-icon-arrow-down class="more-icon" :class="{ reversal: showAll }"></mel-icon-arrow-down>
       </el-button>
     </el-form-item>
   </el-form>
@@ -77,9 +77,6 @@ export default defineComponent<
 </script>
 <style lang="scss" scoped>
 .me-search-form {
-  .me-search-form-more {
-    display: inline-block;
-  }
   .more-icon {
     transition: transform 0.35s;
     margin-left: 5px;
