@@ -10,7 +10,7 @@
       <el-main class="right-main">
         <el-scrollbar view-class="me-right-main-view">
           <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
-          <div class="me-main" id="me-main">
+          <div id="me-main" class="me-main">
             <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
           </div>
         </el-scrollbar>

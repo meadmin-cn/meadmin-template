@@ -1,7 +1,7 @@
 <template>
   <div class="request">
     请求示例 1
-    <el-button @click="run({ page: 2, size: 2 })">请求</el-button>
+    <el-button @click="run({ page: 2, size: 2, createTime: ['2023-01-07', '2023-01-08'] })">请求</el-button>
     <el-button @click="run({ page: 0, size: 10 })">error请求</el-button>
     <div>
       loading:<code>{{ loading }}</code> error:<code>{{ JSON.stringify(error) }}</code> data:<code>{{

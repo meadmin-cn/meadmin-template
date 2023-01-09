@@ -18,7 +18,7 @@ import {
 import { getComponentName } from './core/component';
 import { invokeVNodeHook } from './core/vnode';
 import { warn } from './core/warning';
-import { isString, isArray, invokeArrayFns } from '@vue/shared';
+import { isString, isArray, invokeArrayFns, getGlobalThis } from '@vue/shared';
 import { ShapeFlags } from './core/shapeFlags';
 import { RendererInternals, queuePostRenderEffect, MoveType } from './core/renderer';
 import { ComponentRenderContext } from './core/componentPublicInstance';
@@ -26,7 +26,7 @@ import { devtoolsComponentAdded } from './core/devtools';
 import { isAsyncWrapper } from './core/apiAsyncComponent';
 import { isSuspense } from './core/Suspense';
 type MatchPattern = string | RegExp | Array<string | RegExp>;
-
+const globalThis = getGlobalThis();
 export interface MeKeepAliveProps {
   include?: MatchPattern;
   exclude?: MatchPattern;
@@ -77,7 +77,7 @@ const KeepAliveImpl: ComponentOptions = {
 
     // if the internal renderer is not registered, it indicates that this is server-side rendering,
     // for KeepAlive, we just need to render its children
-    if (__SSR__ && !sharedContext.renderer) {
+    if (globalThis.__SSR__ && !sharedContext.renderer) {
       return () => {
         const children = slots.default && slots.default();
         return children && children.length === 1 ? children[0] : children;
@@ -88,7 +88,7 @@ const KeepAliveImpl: ComponentOptions = {
     const keys: Keys = new Set();
     let current: VNode | null = null;
 
-    if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
+    if (globalThis.__DEV__ || globalThis.__FEATURE_PROD_DEVTOOLS__) {
       (instance as any).__v_cache = cache;
     }
 
@@ -120,7 +120,7 @@ const KeepAliveImpl: ComponentOptions = {
         }
       }, parentSuspense);
 
-      if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
+      if (globalThis.__DEV__ || globalThis.__FEATURE_PROD_DEVTOOLS__) {
         // Update components tree
         devtoolsComponentAdded(instance);
       }
@@ -140,7 +140,7 @@ const KeepAliveImpl: ComponentOptions = {
         instance.isDeactivated = true;
       }, parentSuspense);
 
-      if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
+      if (globalThis.__DEV__ || globalThis.__FEATURE_PROD_DEVTOOLS__) {
         // Update components tree
         devtoolsComponentAdded(instance);
       }
@@ -241,7 +241,7 @@ const KeepAliveImpl: ComponentOptions = {
       const children = slots.default();
       const rawVNode = children[0];
       if (children.length > 1) {
-        if (__DEV__) {
+        if (globalThis.__DEV__) {
           warn(`KeepAlive should contain exactly one component child.`, current);
         }
         current = null;
@@ -318,7 +318,7 @@ const KeepAliveImpl: ComponentOptions = {
   },
 };
 
-if (__COMPAT__) {
+if (globalThis.__COMPAT__) {
   KeepAliveImpl.__isBuildIn = true;
 }
 

@@ -1,5 +1,64 @@
 
 
+## [1.1.8](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.6...main-1.1.8) (2023-01-09)
+
+
+### 文档更改[docs]
+
+* vite版本改为4版本 ([f733260](https://github.com/meadmin-cn/meadmin-template/commit/f7332606f0fb929605401a444bbfc4eca566c36c))
+
+
+### CI发版[ci]
+
+* eslint name 校验规则更宽松 ([c7341a7](https://github.com/meadmin-cn/meadmin-template/commit/c7341a736d169ac6df9036407d485e4268d85721))
+* husky校验 esint 设置为自动修复 ([ba826aa](https://github.com/meadmin-cn/meadmin-template/commit/ba826aa478cf40934c960058fc212e61fa53e96d))
+
+
+### 重构[refactor]
+
+* 将vite plugin 提取到plugins目录中优化目录结构 ([d121f11](https://github.com/meadmin-cn/meadmin-template/commit/d121f119d7e1174230d6801190527dd11f338a5c))
+* 禁用autoImport ts类型自动生成（已放到git中无需再次生成） ([31f3566](https://github.com/meadmin-cn/meadmin-template/commit/31f3566858fddf4cf41ca300e1bbf8f617981547))
+* enums 更换为dict ([58c6f8d](https://github.com/meadmin-cn/meadmin-template/commit/58c6f8dbad246e04a379c7c382fa308a8b26d84c))
+* meTable 分页重构 ([cee5c12](https://github.com/meadmin-cn/meadmin-template/commit/cee5c125a3cf00407400b46f34c0820ac9c297f4))
+* meVxeTable  分页重构 ([5e74c66](https://github.com/meadmin-cn/meadmin-template/commit/5e74c669a4354c91f130e121581094c82df97708))
+
+
+### Bug 修复[fix]
+
+* 变量错误修复 ([89f2e91](https://github.com/meadmin-cn/meadmin-template/commit/89f2e91f9e64cb452409104691661529daabfd2b))
+* 修复 加载路由组件异常后切换路由loading不关闭bug ([dba02e2](https://github.com/meadmin-cn/meadmin-template/commit/dba02e221a4d314b161b7809bc81362f4ea6d0d5))
+* 修复表格打印样式错误 ([925e857](https://github.com/meadmin-cn/meadmin-template/commit/925e85712d9b7f7a6e3cb7b910086b0b1813fc6f))
+* 修复点击弹窗后图标不变回默认色bug ([73096d2](https://github.com/meadmin-cn/meadmin-template/commit/73096d25c7179345a6392971d51407864a830655))
+* 修复数字动画demo开始按钮不生效bug ([ecb1457](https://github.com/meadmin-cn/meadmin-template/commit/ecb14571590e06581bb0798054364e603411855f))
+* 修复meDialog事件类型错误bug ([245a242](https://github.com/meadmin-cn/meadmin-template/commit/245a242663ceedf2d9dc5bfa555843c81a8255ae))
+
+
+### 性能改进[perf]
+
+* 删除打印测试代码,优化导出属性 ([9b6d701](https://github.com/meadmin-cn/meadmin-template/commit/9b6d7017e93910d76c72d7ac792316ca049bf63a))
+* 删除多余引入加上缺少的组件名声明 ([816c941](https://github.com/meadmin-cn/meadmin-template/commit/816c941c13e0d7835d03eab3792c9d8e38136bfb))
+* 升级vite版本为4 typescript为4.9 ([4174cda](https://github.com/meadmin-cn/meadmin-template/commit/4174cda2dd9623f0132cf8611b6a19e5e1f4f3a0))
+* 搜索表单组件优化样式 ([8edad77](https://github.com/meadmin-cn/meadmin-template/commit/8edad773ff7342344a640303609b72e3735f9026))
+* 优化tsc校验 ([ea23ee4](https://github.com/meadmin-cn/meadmin-template/commit/ea23ee428d0e6eb32c3e6846a4ce08e77ff874c0))
+
+
+### 新功能[feat]
+
+* 弹窗组件优化弹窗滚动条 ([62f4b65](https://github.com/meadmin-cn/meadmin-template/commit/62f4b65446abeb1bee290d7793e988a6300d1e7c))
+* 加上查询表单组件 ([6bad7bf](https://github.com/meadmin-cn/meadmin-template/commit/6bad7bf0633a7a9a52d852c696aba217f528b99c))
+* 加上全局滚动条样式 ([365e065](https://github.com/meadmin-cn/meadmin-template/commit/365e065aca58e9a4a6bafe410a56d802506824ac))
+* 加上完整示例demo ([1707f46](https://github.com/meadmin-cn/meadmin-template/commit/1707f464e2bc62527e8b91cb2b75b7fda2f15be1))
+* 加上MeDialog ([e3a5ebd](https://github.com/meadmin-cn/meadmin-template/commit/e3a5ebde21872f2462155a14b1d227c0b6a7d399))
+* 请求函数加上数组query 转换 ([39fa3f9](https://github.com/meadmin-cn/meadmin-template/commit/39fa3f91374019d7349159fef79636cf1fad5439))
+* reqest query参数 删除null值 ([26a989c](https://github.com/meadmin-cn/meadmin-template/commit/26a989c6d237263c8356f47a51278b5d5f92b2ec))
+
+
+### 其他[chore]
+
+* 移除meKeepAlive 需要的define常量 （从vue自动获取） ([b5ee3ea](https://github.com/meadmin-cn/meadmin-template/commit/b5ee3ea2e52613fa7a62f65bc08e875b9a22004c))
+* template-release v1.1.7 ([342ff32](https://github.com/meadmin-cn/meadmin-template/commit/342ff32220c7f59a053566565b659d0df998ba3a))
+* template-release v1.1.8 ([ca60dc4](https://github.com/meadmin-cn/meadmin-template/commit/ca60dc4d8272061e10676f768426a26cd4c12f60))
+
 ## [1.1.6](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.5...main-1.1.6) (2022-12-20)
 
 

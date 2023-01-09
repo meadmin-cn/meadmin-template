@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import {LayoutPage} from '@/router/constant';
+import { LayoutPage } from '@/router/constant';
 export const routes: RouteRecordRaw[] = [
   {
     path: '1',

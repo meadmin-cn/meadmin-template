@@ -33,19 +33,20 @@ export const useSearchMenu = (debounceTime = 500) => {
   const search = debounce((searchText: string) => {
     filteredMenu.value = [];
     activeIndex.value = 0;
-    searchText && menuList.forEach((item) => {
-      const title = item.title.map((v) => i18n.t(v)).join(' > ');
-      if (title.search(searchText) > -1) {
-        filteredMenu.value.push({
-          path: item.path,
-          meta: {
-            title,
-            isLink: item.isLink,
-          },
-        });
-      }
-      return filteredMenu.value;
-    });
+    searchText &&
+      menuList.forEach((item) => {
+        const title = item.title.map((v) => i18n.t(v)).join(' > ');
+        if (title.search(searchText) > -1) {
+          filteredMenu.value.push({
+            path: item.path,
+            meta: {
+              title,
+              isLink: item.isLink,
+            },
+          });
+        }
+        return filteredMenu.value;
+      });
   }, debounceTime);
 
   // Arrow key up
@@ -81,6 +82,6 @@ export const useSearchMenu = (debounceTime = 500) => {
     activeIndex,
     handleUp,
     handleDown,
-    handleEnter
+    handleEnter,
   };
 };

@@ -44,8 +44,8 @@
         <el-button @click="canDel = !canDel">{{ t('删除切换') }}</el-button>
         <el-button @click="customColumn = !customColumn">{{ t('自定义列') }}</el-button>
         <el-button @click="meTableRef!.elTableRef!.toggleAllSelection()">{{ t('全选') }}</el-button>
-        <el-button @click="paginationOptions.currentPage--">{{ t('上一页') }}</el-button>
-        <el-button @click="paginationOptions.currentPage++">{{ t('下一页') }}</el-button>
+        <el-button @click="getData(searchForm.page - 1)">{{ t('上一页') }}</el-button>
+        <el-button @click="getData(searchForm.page + 1)">{{ t('下一页') }}</el-button>
       </template>
       <el-table-column type="selection" label="选择" width="55" />
       <el-table-column prop="date" :label="t('日期')"> </el-table-column>
@@ -74,7 +74,6 @@
 </template>
 <script setup lang="ts" name="Table">
 import { listApi } from '@/api/table';
-import computedProxy from '@/hooks/core/computedProxy';
 import { useLocalesI18n } from '@/locales/i18n';
 import { FormInstance } from 'element-plus';
 const meTableRef = ref<MeTableInstance>();
@@ -92,15 +91,15 @@ const searchForm = reactive({
   size: 10,
 });
 const { loading, run, data, refresh } = listApi({ defaultParams: [searchForm], manual: false });
-const getData = (page = searchForm.page) => {
-  run(Object.assign(searchForm, { page }));
+const getData = (page = searchForm.page, size = searchForm.size) => {
+  run(Object.assign(searchForm, { page, size }));
 };
 const paginationOptions = reactive({
-  currentPage: computedProxy(searchForm, 'page'),
-  pageSize: computedProxy(searchForm, 'size'),
+  currentPage: computed(() => searchForm.page),
+  pageSize: computed(() => searchForm.size),
   total: computed(() => data.value?.count ?? 0),
   layout: 'sizes, prev, pager, next, jumper, ->, total',
-  onChange: getData,
+  change: getData,
 });
 </script>
 <style lang="scss" scoped>

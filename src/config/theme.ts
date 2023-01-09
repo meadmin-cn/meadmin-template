@@ -1,4 +1,4 @@
-import { SizeEnum } from '@/enums/configEnum';
+import { SizeEnum } from '@/dict/configEnum';
 export default {
   primaryColor: '#409eff', // 主题颜色
   menuBg: '#1d1e1f', // 菜单背景颜色
@@ -14,5 +14,5 @@ export default {
   tagBarMenu: true, // 标签栏快捷菜单
   tagBarRefresh: true, // 标签栏刷新按钮
   showSetting: true, // 展示设置按钮
-  showSearchMenu: true,//菜单搜索
+  showSearchMenu: true, //菜单搜索
 };

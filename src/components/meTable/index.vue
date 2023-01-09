@@ -82,20 +82,12 @@
         <slot name="empty"></slot>
       </template>
     </el-table>
-    <el-pagination
-      v-if="paginationOptions"
-      v-bind="paginationOptions"
-      v-model:current-page="paginationOptions.currentPage"
-      v-model:page-size="paginationOptions.pageSize"
-      :layout="pageLayout"
-      :pager-count="pagerCount"
-      class="pagination"
-    ></el-pagination>
+    <pagination v-if="paginationOptions" :options="paginationOptions" class="pagination"></pagination>
   </div>
 </template>
 <script lang="ts">
-import { useGlobalStore } from '@/store';
-import { ElPagination, ElTable } from 'element-plus';
+import pagination from './components/pagination.vue';
+import { ElTable } from 'element-plus';
 import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
@@ -144,12 +136,7 @@ const props = {
     type: [String, Function] as PropType<string | ((t: ComponentCustomProperties['$t']) => string)>,
     default: () => (t: ComponentCustomProperties['$t']) => t('快捷搜索'),
   },
-  paginationOptions: Object as PropType<
-    {
-      noAutoLayout?: boolean; //关闭手机模式自动更改
-      onChange: (page: number, size: number) => void; //page或size改变是触发
-    } & ComponentProps<typeof ElPagination>
-  >,
+  paginationOptions: Object as PropType<InstanceType<typeof pagination>['options']>,
 };
 const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown as {
   quickSearch: (searchText: string) => void;
@@ -160,7 +147,6 @@ const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown
 export default defineComponent<
   ComponentProps<typeof ElTable> & Partial<ExtractPropTypes<typeof props>>,
   {
-    [k: string]: any;
     elTableRef: Ref<ELTableInstance | undefined>;
     customColumnProps: Ref<ReturnType<typeof customColumn> | undefined>;
   },
@@ -172,6 +158,7 @@ export default defineComponent<
   typeof emits
 >({
   name: 'MeTable',
+  components: { pagination },
   inheritAttrs: false,
   props: props as any,
   emits,
@@ -216,21 +203,6 @@ export default defineComponent<
         return index;
       };
     });
-    const globalStore = useGlobalStore();
-    const pageLayout = computed(() =>
-      !props.paginationOptions?.noAutoLayout && globalStore.isMobile
-        ? 'prev, pager, next'
-        : props.paginationOptions?.layout,
-    );
-    const pagerCount = computed(() =>
-      !props.paginationOptions?.noAutoLayout && globalStore.isMobile ? 5 : props.paginationOptions?.pagerCount,
-    );
-    if (props.paginationOptions?.onChange) {
-      watch([() => props.paginationOptions!.currentPage, () => props.paginationOptions!.pageSize], ([page, size]) =>
-        props.paginationOptions?.onChange(page!, size!),
-      );
-    }
-
     expose({ elTableRef, customColumnProps });
     return {
       showSearch,
@@ -250,8 +222,6 @@ export default defineComponent<
           handle(elTableRef.value!, filename);
         }
       },
-      pageLayout,
-      pagerCount,
     };
   },
 });

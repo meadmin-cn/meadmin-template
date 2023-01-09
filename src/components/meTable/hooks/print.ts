@@ -20,7 +20,7 @@ export function createHtmlPage(content: string, title = '', head: string[] = [])
 export function createFrame(): HTMLIFrameElement {
   const frame = document.createElement('iframe');
   frame.className = 'me--print-frame';
-  frame.style.cssText='display:none';
+  frame.style.cssText = 'display:none';
   return frame;
 }
 
@@ -67,12 +67,7 @@ export default async (elTable: ELTableInstance, title = '', head: string[] = [])
     width:auto !important
   }
   </style>`);
-  head.unshift(
-    '<link rel="stylesheet" href="' +
-      window.location.origin +
-      (await import('@/styles/index.scss?url')).default +
-      '"/>',
-  );
+  head.unshift('<style>' + (await import('@/styles/index.scss?inline')).default + '</style>');
   head.unshift(
     '<link rel="stylesheet" href="' +
       window.location.origin +
