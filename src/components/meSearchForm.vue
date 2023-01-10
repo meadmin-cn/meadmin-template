@@ -6,13 +6,10 @@
     </span>
     <el-form-item>
       <slot name="button"></slot>
-      <el-button v-if="searchText !== undefined" type="primary" @click="$emit('search')">
+      <el-button v-if="searchText !== undefined" type="primary" :loading="loading" @click="search()">
         {{ searchText ? searchText : $t('查询') }}
       </el-button>
-      <el-button
-        v-if="resetText !== undefined"
-        @click="_.vnode.props.onReset ? $emit('reset') : elFormRef!.resetFields()"
-      >
+      <el-button v-if="resetText !== undefined" @click="onReset ? onReset() : elFormRef!.resetFields()">
         {{ resetText ? resetText : $t('重置') }}
       </el-button>
       <el-button v-if="$slots.more" text @click="showAll = !showAll">
@@ -25,8 +22,9 @@
 
 <script lang="ts">
 import { ElForm } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPropTypes, Ref } from 'vue';
+import { ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
 import type { FormInstance } from 'element-plus';
+import { emit } from 'process';
 const props = {
   inline: {
     type: Boolean,
@@ -44,10 +42,8 @@ const props = {
     type: String,
     default: '',
   },
-};
-const emits = ['search', 'reset'] as unknown as {
-  search: () => void;
-  reset: () => void;
+  onSearch: Function as PropType<() => void>,
+  onReset: Function as PropType<() => void>,
 };
 export default defineComponent<
   ComponentProps<typeof ElForm> & Partial<ExtractPropTypes<typeof props>>,
@@ -59,18 +55,28 @@ export default defineComponent<
   Record<string, any>,
   ComponentOptionsMixin,
   ComponentOptionsMixin,
-  typeof emits
+  Record<string, any>
 >({
   name: 'MeDialog',
   props: props as any,
-  emits,
   setup(props, { expose }) {
     const elFormRef = ref<FormInstance>();
     const showAll = ref(props.defaultAll);
     expose({ elFormRef });
+    const loading = ref(false);
+    const search = async () => {
+      loading.value = true;
+      try {
+        await props.onSearch?.();
+      } finally {
+        loading.value = false;
+      }
+    };
     return {
       showAll,
       elFormRef,
+      search,
+      loading,
     };
   },
 });

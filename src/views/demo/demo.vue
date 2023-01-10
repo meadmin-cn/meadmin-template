@@ -86,9 +86,7 @@ import add from './components/add.vue';
 let { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'demo']);
 const params = reactive(new ListParams());
 const { loading, data, runAsync } = listApi();
-const search = (page = params.page, size = params.size) => {
-  runAsync(Object.assign(params, { page, size }));
-};
+const search = (page = params.page, size = params.size) => runAsync(Object.assign(params, { page, size }));
 search(1);
 const { runAsync: delRun, loading: delLoading } = delApi();
 const delId = ref<number>();
