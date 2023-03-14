@@ -1,5 +1,17 @@
 
 
+## [1.1.9](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.8...template-1.1.9) (2023-03-14)
+
+
+### CI发版[ci]
+
+* github hook 加上自动创建nojekll ([5391f33](https://github.com/meadmin-cn/meadmin-template/commit/5391f333f53d5e3483ca892c0b6f2b7eba5d2fe4))
+
+
+### Bug 修复[fix]
+
+* 修复vue-i18n文件打包引入错误bug ([26225f8](https://github.com/meadmin-cn/meadmin-template/commit/26225f8539e6df0a98f47446cb2a2c6c270baa4b))
+
 ## [1.1.8](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.7...template-1.1.8) (2023-01-09)
 
 
