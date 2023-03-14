@@ -1,5 +1,29 @@
 
 
+## [1.1.9](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.8...main-1.1.9) (2023-03-14)
+
+
+### CI发版[ci]
+
+* github hook 加上自动创建nojekll ([52f2500](https://github.com/meadmin-cn/meadmin-template/commit/52f25004d789e9fab4b01e426fbc9db3e9be1622))
+* github hook 加上自动创建nojekll ([5391f33](https://github.com/meadmin-cn/meadmin-template/commit/5391f333f53d5e3483ca892c0b6f2b7eba5d2fe4))
+
+
+### 新功能[feat]
+
+* meSearchForm查询按钮加上loading效果 ([bea9b55](https://github.com/meadmin-cn/meadmin-template/commit/bea9b550e2e5ef76a2c0b7920b4d45d023e8eaa3))
+
+
+### Bug 修复[fix]
+
+* 修复mock接口无法请求错误 ([ade3830](https://github.com/meadmin-cn/meadmin-template/commit/ade3830a0475b0b8f23a18ff142b16b01ffdb2c7))
+* 修复vue-i18n文件打包引入错误bug ([26225f8](https://github.com/meadmin-cn/meadmin-template/commit/26225f8539e6df0a98f47446cb2a2c6c270baa4b))
+
+
+### 其他[chore]
+
+* template-release v1.1.9 ([51f6f83](https://github.com/meadmin-cn/meadmin-template/commit/51f6f83fd5dd1b1174687bb5c3c018596b023089))
+
 ## [1.1.8](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.6...main-1.1.8) (2023-01-09)
 
 
