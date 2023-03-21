@@ -19,7 +19,7 @@
 <script setup lang="ts" name="MeSizeSelect">
 import { SizeEnum } from '@/dict/configEnum';
 import { useSettingStore } from '@/store';
-const { themeConfig } = useSettingStore();
+const { themeConfig } = storeToRefs(useSettingStore());
 </script>
 <style lang="scss" scoped>
 .me-size-select {
