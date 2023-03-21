@@ -1,5 +1,17 @@
 
 
+## [1.1.10](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.9...main-1.1.10) (2023-03-21)
+
+
+### Bug 修复[fix]
+
+* 修复字体切换无效问题 ([134dae5](https://github.com/meadmin-cn/meadmin-template/commit/134dae5c02de1bfa3402b7484301efcd5d3a8dcc))
+
+
+### 其他[chore]
+
+* template-release v1.1.10 ([04caa07](https://github.com/meadmin-cn/meadmin-template/commit/04caa0739eedd397bebf71e641d4b4b4c73322f1))
+
 ## [1.1.9](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.8...main-1.1.9) (2023-03-14)
 
 
