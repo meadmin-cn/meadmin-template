@@ -1,5 +1,12 @@
 
 
+## [1.1.11](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.10...template-1.1.11) (2023-03-29)
+
+
+### 新功能[feat]
+
+* 优化全局类型 ([1f07048](https://github.com/meadmin-cn/meadmin-template/commit/1f07048713d979ec8920c0bd637876ba449b5286))
+
 ## [1.1.10](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.9...template-1.1.10) (2023-03-21)
 
 
