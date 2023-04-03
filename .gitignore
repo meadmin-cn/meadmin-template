@@ -30,3 +30,4 @@ stats.html
 vite.config.ts.timestamp*
 types/components.d.ts
 .eslintcache
+pnpm-lock.yaml
