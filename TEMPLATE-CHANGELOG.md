@@ -1,5 +1,17 @@
 
 
+## [1.1.12](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.11...template-1.1.12) (2023-04-03)
+
+
+### Bug 修复[fix]
+
+* meKeepAlive常量改为动态获取(因为@vue/share在里面删除了) ([6d2380d](https://github.com/meadmin-cn/meadmin-template/commit/6d2380d493004aadb5b76e5478f39cda5a2cf814))
+
+
+### 新功能[feat]
+
+* 加上缺少的幽灵依赖，解决pnpm启动和打包问题 ([4f878ec](https://github.com/meadmin-cn/meadmin-template/commit/4f878ec350464e4247f389a086f3b082a94875d8))
+
 ## [1.1.11](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.10...template-1.1.11) (2023-03-29)
 
 

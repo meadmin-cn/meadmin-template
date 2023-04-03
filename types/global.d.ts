@@ -12,6 +12,16 @@ declare global {
     color: StringConstructor;
   }>;
 
+  /* eslint-disable */
+  declare const __SSR__: boolean;
+  declare const __DEV__: boolean;
+  declare const __COMPAT__: boolean;
+
+  // Feature flags
+  declare const __FEATURE_PROD_DEVTOOLS__: boolean;
+  declare const __FEATURE_SUSPENSE__: boolean;
+  /* eslint-disable */
+
   type ComponentProps<Component> = {
     -readonly [K in keyof Omit<
       InstanceType<Component>['$props'],
