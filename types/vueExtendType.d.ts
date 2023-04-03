@@ -1,5 +1,5 @@
 import { MessageImport } from '@/locales/I18n';
-declare module '@vue/runtime-core' {
+declare module 'vue' {
   /* eslint-disable */
   type LifecycleHook<TFn = Function> = TFn[] | null;
   export declare interface ComponentOptionsBase {

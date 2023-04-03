@@ -18,7 +18,7 @@ import { settingConfig } from '@/config';
 import { useRouteStore } from '@/store';
 import { ComputedRef, TransitionProps } from 'vue';
 const props = defineProps<{
-  transition?:TransitionProps
+  transition?: TransitionProps;
 }>();
 const routeStore = useRouteStore();
 let keepAliveProps: undefined | ComputedRef<MeKeepAliveProps>;
