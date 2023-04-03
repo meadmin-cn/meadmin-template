@@ -43,15 +43,16 @@
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",
     "pinia": "^2.0.14",
-    "tableexport": "^5.2.0",
     "qs": "^6.11.0",
+    "tableexport": "^5.2.0",
     "vue": "^3.2.25",
     "vue-form-create": "^1.2.10",
     "vue-i18n": "^9.1.10",
     "vue-request": "^2.0.0-rc.2",
     "vue-router": "^4.1.1",
     "vxe-table": "^4.3.5",
-    "vxe-table-plugin-element": "^3.0.6"
+    "vxe-table-plugin-element": "^3.0.6",
+    "xe-utils": "^3.5.7"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
