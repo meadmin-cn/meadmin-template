@@ -24,7 +24,7 @@ const routeStore = useRouteStore();
 let keepAliveProps: undefined | ComputedRef<MeKeepAliveProps>;
 if (settingConfig.openKeepAlive) {
   keepAliveProps = computed<MeKeepAliveProps>(() => ({
-    max: 3,
+    max: 30,
     includeKey: [...routeStore.cacheFullPath],
   }));
   const route = useRoute();
