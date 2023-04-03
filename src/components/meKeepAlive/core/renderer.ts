@@ -9,9 +9,6 @@ import {
   queuePostFlushCb,
 } from 'vue';
 import { queueEffectWithSuspense } from './Suspense';
-import {getGlobalThis} from '@vue/shared';
-const globalThis = getGlobalThis();
-
 
 // An object exposing the internals of a renderer, passed to tree-shakeable
 // features so that they can be decoupled from this file. Keys are shortened
@@ -114,7 +111,7 @@ type PatchBlockChildrenFn = (
 
 type NextFn = (vnode: VNode) => RendererNode | null;
 
-export const queuePostRenderEffect = globalThis.__FEATURE_SUSPENSE__ ? queueEffectWithSuspense : queuePostFlushCb;
+export const queuePostRenderEffect = __FEATURE_SUSPENSE__ ? queueEffectWithSuspense : queuePostFlushCb;
 
 export type SetupRenderEffectFn = (
   instance: ComponentInternalInstance,
