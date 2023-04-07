@@ -2,7 +2,7 @@
   <el-form
     ref="elFormRef"
     class="me-search-form"
-    :class="fromClass"
+    :class="formClass"
     :label-width="labelWidth"
     :label-position="labelPosition"
   >
@@ -74,18 +74,18 @@ export default defineComponent<
   setup(props, { expose }) {
     const elFormRef = ref<FormInstance>();
     const showAll = ref(props.defaultAll);
-    const fromClass = ref('');
+    const formClass = ref('');
     const formResize = new ResizeObserver((entries) => {
       if (entries[0].contentRect.width < 768) {
-        return (fromClass.value = '');
+        return (formClass.value = '');
       }
       if (entries[0].contentRect.width < 1024) {
-        return (fromClass.value = 'lg');
+        return (formClass.value = 'lg');
       }
       if (entries[0].contentRect.width < 1600) {
-        return (fromClass.value = 'xl');
+        return (formClass.value = 'xl');
       }
-      return (fromClass.value = 'xl-2');
+      return (formClass.value = 'xl-2');
     });
 
     onMounted(() => {
@@ -130,7 +130,7 @@ export default defineComponent<
       elFormRef,
       search,
       loading,
-      fromClass,
+      formClass,
     };
   },
 });
