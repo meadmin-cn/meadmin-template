@@ -57,7 +57,7 @@ export default defineComponent<
   ComponentOptionsMixin,
   Record<string, any>
 >({
-  name: 'MeDialog',
+  name: 'MeSearchForm',
   props: props as any,
   setup(props, { expose }) {
     const elFormRef = ref<FormInstance>();
