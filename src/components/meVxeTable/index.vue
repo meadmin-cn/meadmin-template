@@ -37,7 +37,7 @@
                     :default-checked-keys="defaultChecked"
                     :data="collectColumn"
                     default-expand-all
-                    :props="{ label: (item:any)=>item.type==='seq'?'#':item.title, children: 'children' }"
+                    :props="{ label: (item) => (item.type === 'seq' ? '#' : item.title), children: 'children' }"
                     show-checkbox
                     @check-change="checkChange"
                   />
@@ -80,7 +80,10 @@
     <div class="me-vxe-body">
       <vxe-table ref="vxeTableRef" v-bind="$attrs">
         <slot></slot>
-        <template #empty>
+        <template v-if="$slots.loading" #loading>
+          <slot name="loading"></slot>
+        </template>
+        <template v-if="$slots.empty" #empty>
           <slot name="empty"></slot>
         </template>
       </vxe-table>
