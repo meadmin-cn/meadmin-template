@@ -1,13 +1,13 @@
 <template>
-  <el-config-provider :locale="settingStore.elLocale" :size="settingStore.themeConfig.size">
-    <router-view v-slot="{ Component }">
-      <me-component :is="Component" done-progress close-loading="layout"></me-component>
-    </router-view>
-  </el-config-provider>
+  <router-view v-slot="{ Component }">
+    <me-component :is="Component" done-progress close-loading="layout"></me-component>
+  </router-view>
+  <setElGlobel v-if="showSetElGlobel"></setElGlobel>
 </template>
 <script setup lang="ts">
 import { useSettingStore } from '@/store';
 import { SizeEnum } from '@/dict/configEnum';
+import SetElGlobel from './setElGlobel';
 const settingStore = useSettingStore();
 const htmlDom = document.getElementsByTagName('html')[0];
 watchEffect(() => {
@@ -16,6 +16,14 @@ watchEffect(() => {
   });
   htmlDom.classList.add('me-' + settingStore.themeConfig.size);
 });
+const showSetElGlobel = ref(true);
+watch(
+  () => [settingStore.elLocale, settingStore.themeConfig.size],
+  () => {
+    showSetElGlobel.value = !showSetElGlobel.value;
+    new Promise<void>((reactive) => reactive()).then(() => (showSetElGlobel.value = !showSetElGlobel.value));
+  },
+);
 </script>
 <style lang="scss" scoped>
 .fade-enter-active,
