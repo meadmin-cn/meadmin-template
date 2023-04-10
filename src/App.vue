@@ -1,8 +1,10 @@
 <template>
-  <router-view v-slot="{ Component }">
-    <me-component :is="Component" done-progress close-loading="layout"></me-component>
-  </router-view>
-  <setElGlobel v-if="showSetElGlobel"></setElGlobel>
+  <el-config-provider>
+    <router-view v-slot="{ Component }">
+      <me-component :is="Component" done-progress close-loading="layout"></me-component>
+    </router-view>
+    <set-el-globel v-if="showSetElGlobel"></set-el-globel>
+  </el-config-provider>
 </template>
 <script setup lang="ts">
 import { useSettingStore } from '@/store';
