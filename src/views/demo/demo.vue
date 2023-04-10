@@ -1,32 +1,30 @@
 <template>
   <div class="demo">
     <el-card>
-      <me-search-form :model="params" class="search-form" @search="search(1)">
+      <me-search-form :model="params" :default-all="true" class="search-form" @search="search(1)">
         <el-form-item :label="t('姓名')" prop="name">
           <el-input v-model="params.name"></el-input>
         </el-form-item>
-        <template #more>
-          <el-form-item :label="t('类型')" prop="type">
-            <el-select v-model="params.type">
-              <el-option v-for="(item, key) in bookType" :key="key" :value="key" :label="item" />
-            </el-select>
+        <el-form-item :label="t('类型')" prop="type">
+          <el-select v-model="params.type">
+            <el-option v-for="(item, key) in bookType" :key="key" :value="key" :label="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item :label="t('价格')" prop="priceStart">
+          <el-input-number v-model="params.priceStart" :min="0" :precision="2"></el-input-number>
+          &nbsp; - &nbsp;<el-form-item prop="priceEnd">
+            <el-input-number v-model="params.priceEnd" :min="0" :precision="2"></el-input-number>
           </el-form-item>
-          <el-form-item :label="t('价格')" prop="priceStart">
-            <el-input-number v-model="params.priceStart" :min="0" :precision="2"></el-input-number>
-            &nbsp; - &nbsp;<el-form-item prop="priceEnd">
-              <el-input-number v-model="params.priceEnd" :min="0" :precision="2"></el-input-number>
-            </el-form-item>
+        </el-form-item>
+        <el-form-item :label="t('章节')" prop="sectionStart">
+          <el-input-number v-model="params.sectionStart" :min="0" :precision="0"></el-input-number>
+          &nbsp; - &nbsp;<el-form-item prop="sectionEnd">
+            <el-input-number v-model="params.sectionEnd" :min="0" :precision="0"></el-input-number>
           </el-form-item>
-          <el-form-item :label="t('章节')" prop="sectionStart">
-            <el-input-number v-model="params.sectionStart" :min="0" :precision="0"></el-input-number>
-            &nbsp; - &nbsp;<el-form-item prop="sectionEnd">
-              <el-input-number v-model="params.sectionEnd" :min="0" :precision="0"></el-input-number>
-            </el-form-item>
-          </el-form-item>
-          <el-form-item :label="t('创建时间')" prop="createTime">
-            <el-date-picker v-model="params.createTime" type="daterange" value-format="YYYY-MM-DD" />
-          </el-form-item>
-        </template>
+        </el-form-item>
+        <el-form-item :label="t('创建时间')" prop="createTime">
+          <el-date-picker v-model="params.createTime" type="daterange" value-format="YYYY-MM-DD" />
+        </el-form-item>
       </me-search-form>
     </el-card>
     <el-card style="margin-top: 10px">
@@ -102,12 +100,3 @@ const showAddOrUp = (row?: Required<Info>) => {
   addOrUp.value = true;
 };
 </script>
-<style lang="scss" scoped>
-.demo {
-  .search-form {
-    ::v-deep(.el-input) {
-      width: 215px;
-    }
-  }
-}
-</style>

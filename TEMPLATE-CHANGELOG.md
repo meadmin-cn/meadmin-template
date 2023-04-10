@@ -1,5 +1,17 @@
 
 
+## [1.1.13](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.12...template-1.1.13) (2023-04-10)
+
+
+### Bug 修复[fix]
+
+* layput meKeepAlive 最大缓存值设置为30 ([4637542](https://github.com/meadmin-cn/meadmin-template/commit/4637542e9ac9939ddcb7f00bdd65b0305dfdc92d))
+
+
+### 重构[refactor]
+
+* 删除多余的类型引入 ([615f452](https://github.com/meadmin-cn/meadmin-template/commit/615f45288dab280c7b7520c13c370e7e935ec7a3))
+
 ## [1.1.12](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.11...template-1.1.12) (2023-04-03)
 
 

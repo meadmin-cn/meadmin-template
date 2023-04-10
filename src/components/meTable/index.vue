@@ -75,10 +75,10 @@
     </div>
     <el-table v-bind="$attrs" ref="elTableRef" v-loading="loading">
       <component :is="customColumnProps!.children"></component>
-      <template #append>
+      <template v-if="$slots.append" #append>
         <slot name="append"></slot>
       </template>
-      <template #empty>
+      <template v-if="$slots.empty" #empty>
         <slot name="empty"></slot>
       </template>
     </el-table>

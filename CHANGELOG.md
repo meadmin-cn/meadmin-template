@@ -1,5 +1,35 @@
 
 
+## [1.1.13](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.12...main-1.1.13) (2023-04-10)
+
+
+### 新功能[feat]
+
+* meTable 和 meVxeTable 透传slot加上if判断 ([d23e2df](https://github.com/meadmin-cn/meadmin-template/commit/d23e2dfaab12a1e5494d2647c0c68bca12390cba))
+
+
+### 性能改进[perf]
+
+* 单词错误修复 ([1698947](https://github.com/meadmin-cn/meadmin-template/commit/1698947a817ba1ded7405d95ca71462164fe6282))
+
+
+### 重构[refactor]
+
+* 删除多余的类型引入 ([615f452](https://github.com/meadmin-cn/meadmin-template/commit/615f45288dab280c7b7520c13c370e7e935ec7a3))
+* meSearchForm重构不兼容老写法 ([46a0bc4](https://github.com/meadmin-cn/meadmin-template/commit/46a0bc4655d044c49ec207488bedb6ecfc16e7d0))
+
+
+### 其他[chore]
+
+* template-release v1.1.13 ([f88a806](https://github.com/meadmin-cn/meadmin-template/commit/f88a806d322d744fd9b5e81c892eaf6689151ea3))
+
+
+### Bug 修复[fix]
+
+* 优化查询表单变更 更丝滑 ([66526ed](https://github.com/meadmin-cn/meadmin-template/commit/66526ed885be3b4b7b16c038fdbb5560b85011aa))
+* layput meKeepAlive 最大缓存值设置为30 ([4637542](https://github.com/meadmin-cn/meadmin-template/commit/4637542e9ac9939ddcb7f00bdd65b0305dfdc92d))
+* meSearchForm 组件名错误修复 ([1765ced](https://github.com/meadmin-cn/meadmin-template/commit/1765ced0a9aca832a6b93dc188fca1304d523e22))
+
 ## [1.1.12](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.11...main-1.1.12) (2023-04-03)
 
 

@@ -4,16 +4,14 @@
       <el-form-item :label="t('姓名')" prop="name">
         <el-input v-model="params.name"></el-input>
       </el-form-item>
-      <template #more>
-        <el-form-item :label="t('类型')" prop="type">
-          <el-select v-model="params.type">
-            <el-option v-for="(item, key) in typeObj" :key="key" :value="key" :label="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item :label="t('创建时间')" prop="createTimes">
-          <el-date-picker v-model="params.createTimes" type="daterange" value-format="YYYY-MM-DD" />
-        </el-form-item>
-      </template>
+      <el-form-item :label="t('类型')" prop="type">
+        <el-select v-model="params.type">
+          <el-option v-for="(item, key) in typeObj" :key="key" :value="key" :label="item" />
+        </el-select>
+      </el-form-item>
+      <el-form-item :label="t('创建时间')" prop="createTimes">
+        <el-date-picker v-model="params.createTimes" type="daterange" value-format="YYYY-MM-DD" />
+      </el-form-item>
     </me-search-form>
   </el-card>
 </template>
@@ -37,10 +35,3 @@ const search = () => {
   ElMessageBox.alert(JSON.stringify(params));
 };
 </script>
-<style lang="scss" scoped>
-.search-form {
-  ::v-deep(.el-input) {
-    width: 215px;
-  }
-}
-</style>
