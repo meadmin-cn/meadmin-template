@@ -11,7 +11,6 @@ export default defineComponent({
       undefined,
       true,
     );
-    return { template: '<div></div>' };
   },
   render: () => '',
 });
