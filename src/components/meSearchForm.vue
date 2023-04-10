@@ -79,7 +79,7 @@ export default defineComponent<
       if (entries[0].contentRect.width < 768) {
         return (formClass.value = '');
       }
-      if (entries[0].contentRect.width < 1024) {
+      if (entries[0].contentRect.width < 1150) {
         return (formClass.value = 'lg');
       }
       if (entries[0].contentRect.width < 1600) {
