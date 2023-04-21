@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 package-lock.json
-types/meIconComments.d.ts
+types/meIconComponents.d.ts
 src/store/module.ts
 types/directives.d.ts
 stats.html
