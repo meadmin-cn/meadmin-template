@@ -15,9 +15,9 @@ export default () =>
       // svg icon type
       pattern: ['*.svg'],
       dir: pathResolve('src/icons/svg'),
-      toFile: pathResolve('types/meIconComments.d.ts'),
+      toFile: pathResolve('types/meIconComponents.d.ts'),
       name: 'MeIcon_{{name}}',
-      template: fs.readFileSync(pathResolve('./template/meIconComments.d.ts'), 'utf-8'),
+      template: fs.readFileSync(pathResolve('./template/meIconComponents.d.ts'), 'utf-8'),
       codeTemplates: [{ key: '//code', template: '{{name}}: Icon;\n    ' }],
     },
     {
