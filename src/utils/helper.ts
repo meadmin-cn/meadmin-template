@@ -94,3 +94,27 @@ export const getColorLuma = function (color: string) {
   const blue = parseInt(color.slice(5, 7), 16);
   return red * 0.299 + green * 0.587 + blue * 0.114;
 };
+
+/**
+ * 递归代理对象/数组,响应后触发update方法
+ * @param value
+ * @param update
+ * @returns
+ */
+export const proxyValue = <T extends Record<string | number, any> | any[]>(value: T, update: () => void): T => {
+  return new Proxy<T>(value, {
+    get: function (obj, prop) {
+      if (typeof obj[prop as keyof T] === 'object') {
+        return proxyValue(obj[prop as keyof T] as T, update);
+      }
+      return obj[prop as keyof T];
+    },
+    set: function (obj, prop, value) {
+      const oldV = obj[prop as keyof T];
+      obj[prop as keyof T] = value;
+      update();
+      obj[prop as keyof T] = oldV;
+      return true;
+    },
+  });
+};
