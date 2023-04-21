@@ -66,6 +66,7 @@ export function request<R, P extends unknown[] = [], T extends boolean = boolean
   options: RequestOptions<R, P>,
   returnAxios: T,
 ): T extends true ? (...args: P) => Promise<R> : ReturnType<typeof useRequest<R, P>>;
+
 /**
  * 请求函数
  * @param axiosConfig  axios的配置项

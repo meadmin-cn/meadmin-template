@@ -56,6 +56,7 @@ export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI1
 };
 
 const loadComponentCache = new WeakSet<ComponentOptions>();
+
 /**
  * 获取异步导入组件及其子孙的语言包函数
  * @returns

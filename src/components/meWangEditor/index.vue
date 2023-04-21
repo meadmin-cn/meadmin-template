@@ -42,6 +42,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
+
   /** 编辑器默认内容 */
   defaultContent: {
     type: Array as PropType<SlateDescendant[]>,
@@ -53,15 +54,15 @@ const props = defineProps({
   },
 });
 const emit = defineEmits<{
-  (e:'update:modelValue',valueHtml :string):void,
-  (e:'onCreated',editor: IDomEditor):void,
-  (e:'onChange',editor: IDomEditor):void,
-  (e:'onDestroyed',editor: IDomEditor):void,
-  (e:'onMaxLength',editor: IDomEditor):void,
-  (e:'onFocus',editor: IDomEditor):void,
-  (e:'onBlur',editor: IDomEditor):void,
-  (e:'customAlert',s: string, t: string):void,
-  (e:'customPaste',editor: IDomEditor, event: ClipboardEvent):void,
+  (e: 'update:modelValue', valueHtml: string): void;
+  (e: 'onCreated', editor: IDomEditor): void;
+  (e: 'onChange', editor: IDomEditor): void;
+  (e: 'onDestroyed', editor: IDomEditor): void;
+  (e: 'onMaxLength', editor: IDomEditor): void;
+  (e: 'onFocus', editor: IDomEditor): void;
+  (e: 'onBlur', editor: IDomEditor): void;
+  (e: 'customAlert', s: string, t: string): void;
+  (e: 'customPaste', editor: IDomEditor, event: ClipboardEvent): void;
 }>();
 const { i18n } = useGlobalStore();
 // 编辑器实例，必须用 shallowRef

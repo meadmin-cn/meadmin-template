@@ -42,6 +42,7 @@ module.exports = {
   ],
   rules: {
     // override/add rules settings here, such as:
+    'lines-around-comment': ['warn', { beforeBlockComment: true }],
     'vue/multi-word-component-names': 'off',
     'vue/no-template-shadow': 'off',
     'vue/no-parsing-error': 'off',

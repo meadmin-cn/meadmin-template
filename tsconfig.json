@@ -26,5 +26,8 @@
     {
       "path": "./tsconfig.node.json"
     }
-  ]
+  ],
+  "vueCompilerOptions": {
+    "strictTemplates": false
+  }
 }
