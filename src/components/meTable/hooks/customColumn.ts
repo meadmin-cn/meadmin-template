@@ -8,6 +8,7 @@ interface Label {
   children: Label[];
 }
 const origionDefault = new Map<string, () => VNode[]>();
+
 /* 用于判断 vnode 是否是 el-table-column 组件 */
 function isElTableColumn(vnode: VNode) {
   return (vnode.type as Component)?.name === 'ElTableColumn';
