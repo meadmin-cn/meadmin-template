@@ -48,6 +48,7 @@ export default function mitter<Events extends Record<EventType, unknown>>(
   once = once ?? new Set();
 
   return {
+
     /**
      * A Map of event names to registered handler functions.
      */

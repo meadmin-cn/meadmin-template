@@ -226,6 +226,7 @@ export const localeList = [
   //     locale: 'bn',
   // },
 ];
+
 /**
  * VueI18n初始参数
  * 强制把legacy设置为了false
