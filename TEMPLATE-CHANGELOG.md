@@ -1,5 +1,27 @@
 
 
+## [1.1.14](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.13...template-1.1.14) (2023-04-26)
+
+
+### 其他[chore]
+
+* 锁定vue-tsc小版本,规避template检查bug ([60a95df](https://github.com/meadmin-cn/meadmin-template/commit/60a95df0d69413d14150217a0473190122528dac))
+
+
+### 新功能[feat]
+
+* 示例加上messageBox便于测试api响应 ([2e78817](https://github.com/meadmin-cn/meadmin-template/commit/2e7881774940424fa8f2eb11892df479970575a1))
+* eslint 加上块级 注释前面加空行 ([ae2ce87](https://github.com/meadmin-cn/meadmin-template/commit/ae2ce873eb8e57d7bd73a90821fcd43601cae7e2))
+* v-model绑定对象或数组，不使用源对象更改的解决方案 ([0a22b6e](https://github.com/meadmin-cn/meadmin-template/commit/0a22b6ee87275a449ef185103ca02ac0382086c9))
+
+
+### Bug 修复[fix]
+
+* 更改 element plus config设置方式，修复路由api模式下el api组件无法应用配置问题 ([e5d8039](https://github.com/meadmin-cn/meadmin-template/commit/e5d8039ee7819bf1e7e0746918e44cb192979367))
+* 加上缺少的全局组件声明 ([dc8714a](https://github.com/meadmin-cn/meadmin-template/commit/dc8714abfcfb14e7f037d0153dc8c66bd54fad00))
+* 文件命名错误修复 ([890d352](https://github.com/meadmin-cn/meadmin-template/commit/890d3528c34772167b8133248c0558ff0c2098cb))
+* 修复element plus api 样式覆盖问题 ([c366b4e](https://github.com/meadmin-cn/meadmin-template/commit/c366b4e2357ef1046f447e96016bcf9045cba135))
+
 ## [1.1.13](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.12...template-1.1.13) (2023-04-10)
 
 
