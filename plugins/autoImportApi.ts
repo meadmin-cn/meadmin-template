@@ -10,5 +10,5 @@ export default () =>
     imports: ['vue', 'vue-router', 'pinia', '@vueuse/core'],
     // 可以选择auto-imports.d.ts生成的位置，使用ts建议设置为'src/auto-imports.d.ts'
     dts: false, // pathResolve('types/auto-imports.d.ts'),
-    resolvers: [ElementPlusResolver()],
+    resolvers: [ElementPlusResolver({ importStyle: false })],
   });
