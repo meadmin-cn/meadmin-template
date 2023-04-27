@@ -80,11 +80,11 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar:horizontal {
-  height: 6px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -92,20 +92,20 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #0003;
+  background-color: rgb(213, 215, 218);
   border-radius: 10px;
   transition: all 0.2s ease-in-out;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
-  background-color: #0000004d;
+  background-color: rgb(193, 195, 199);
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background-color: #fff3;
+  background-color: rgb(56, 56, 59);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background-color: #fff6;
+  background-color: rgb(86, 88, 91);
 }
