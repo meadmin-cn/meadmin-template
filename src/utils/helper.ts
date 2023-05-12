@@ -113,7 +113,7 @@ export const proxyValue = <T extends Record<string | number, any> | any[]>(value
       const oldV = obj[prop as keyof T];
       obj[prop as keyof T] = value;
       update();
-      obj[prop as keyof T] = oldV;
+      setTimeout(() => (obj[prop as keyof T] = oldV));
       return true;
     },
   });
