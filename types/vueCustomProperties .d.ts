@@ -1,6 +1,6 @@
 declare module 'vue' {
-    interface ComponentCustomProperties {
-        $start?:boolean;
-    }
+  interface ComponentCustomProperties {
+    $start?: boolean;
+  }
 }
-export {}
+export {};

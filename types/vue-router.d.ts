@@ -1,4 +1,3 @@
-import { _RouteRecordBase, RouteMeta } from 'vue-router';
 declare module 'vue-router' {
   export interface RouteMeta extends Record<string | number | symbol, unknown> {
     // 标题设置该路由在侧边栏和面包屑中展示的名字

@@ -23,3 +23,6 @@ test
 .cache
 dist
 template
+
+## auto create files
+types/auto-imports.d.ts

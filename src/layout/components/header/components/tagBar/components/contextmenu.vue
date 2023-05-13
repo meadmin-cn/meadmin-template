@@ -85,8 +85,8 @@ const props = defineProps({
   },
 });
 const emit = defineEmits<{
-  (e:'update:modelValue',value:RouteLocationNormalized[]):void,
-  (e:'update:visible',value:boolean):void
+  (e: 'update:modelValue', value: RouteLocationNormalized[]): void;
+  (e: 'update:visible', value: boolean): void;
 }>();
 const tags = ref([] as RouteLocationNormalized[]);
 watch(

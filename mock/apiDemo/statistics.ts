@@ -1,4 +1,4 @@
-import { success, fail } from '../helper';
+import { success } from '../helper';
 //请求地址是按先后顺序模糊匹配
 export default [
   {

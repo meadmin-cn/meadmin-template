@@ -13,7 +13,7 @@ import SetElGlobel from './setElGlobel';
 const settingStore = useSettingStore();
 const htmlDom = document.getElementsByTagName('html')[0];
 watchEffect(() => {
-  Object.entries(SizeEnum).forEach(([key, value]) => {
+  Object.entries(SizeEnum).forEach(([, value]) => {
     htmlDom.classList.remove('me-' + value);
   });
   htmlDom.classList.add('me-' + settingStore.themeConfig.size);

@@ -7,7 +7,7 @@ export function setupProdMockServer() {
     eager: true,
   });
   let moduleArr: any[] = [];
-  Object.entries(modules).forEach(([key, module]: any) => {
+  Object.entries(modules).forEach(([, module]: any) => {
     moduleArr = moduleArr.concat(module);
   });
   createProdMockServer([...moduleArr]);

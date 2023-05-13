@@ -32,12 +32,12 @@
 import { GroupInfo, addGroupApi, editGroupApi, groupListApi } from '@/api/admin';
 import { FormInstance, FormRules } from 'element-plus';
 const props = defineProps<{
-  show:boolean,
-  data?:Required<GroupInfo>
+  show: boolean;
+  data?: Required<GroupInfo>;
 }>();
 const emit = defineEmits<{
-  (e:'update:show',show: boolean):void,
-  (e:'success'):void
+  (e: 'update:show', show: boolean): void;
+  (e: 'success'): void;
 }>();
 const formRef = ref<FormInstance>();
 const formData = ref(new GroupInfo());

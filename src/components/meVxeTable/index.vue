@@ -104,8 +104,6 @@ import {
   VxeTablePropTypes,
 } from 'vxe-table';
 import { debounce } from 'lodash-es';
-import { ElPagination } from 'element-plus';
-import { useGlobalStore } from '@/store';
 const props = {
   meClass: [String, Array as PropType<string[]>],
   name: {

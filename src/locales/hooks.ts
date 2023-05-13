@@ -66,7 +66,6 @@ export const useLoadMessages = () => {
   if (instance === null) {
     throw new Error('必须在setup中调用');
   }
-  const cache = new Set<any>();
   const app = instance.appContext.app;
   const loadMessages = (
     options: (VNode & { __v_isVNode: true }) | ComponentOptions | string,
@@ -74,10 +73,6 @@ export const useLoadMessages = () => {
     locale: string | undefined = undefined,
     importArr: Array<Promise<any>> = [],
   ) => {
-    if (cache.has(options)) {
-      return importArr;
-    }
-    cache.add(options);
     if (typeof options === 'string') {
       const component = app.component(capitalize(camelize(options)));
       loadMessages(component as ComponentOptions, isLoading, locale, importArr);
@@ -108,5 +103,5 @@ export const useLoadMessages = () => {
     }
     return importArr;
   };
-  return { loadMessages, clearCache: () => cache.clear() };
+  return loadMessages;
 };

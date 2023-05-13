@@ -16,11 +16,6 @@ module.exports = {
 
       // Script parser for `<script lang="ts">`
       ts: '@typescript-eslint/parser',
-
-      // Script parser for vue directives (e.g. `v-if=` or `:attribute=`)
-      // and vue interpolations (e.g. `{{variable}}`).
-      // If not specified, the parser determined by `<script lang ="...">` is used.
-      '<template>': 'espree',
     },
     sourceType: 'module',
     project: ['./tsconfig.json', './tsconfig.node.json'],
@@ -29,34 +24,23 @@ module.exports = {
   overrides: [
     {
       files: ['*.vue'],
-      rules: {
-        '@typescript-eslint/no-unused-vars': 'off',
-      },
+      rules: {},
     },
     {
       files: ['*.cjs'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-      },
+      rules: {},
     },
   ],
   rules: {
     // override/add rules settings here, such as:
     'lines-around-comment': ['warn', { beforeBlockComment: true }],
     'vue/multi-word-component-names': 'off',
-    'vue/no-template-shadow': 'off',
-    'vue/no-parsing-error': 'off',
     'vue/require-default-prop': 'off',
     'vue/no-v-html': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      // we are only using this rule to check for unused arguments since TS
-      // catches unused variables but not args.
-      { varsIgnorePattern: '.*', args: 'none' },
-    ],
+    '@typescript-eslint/no-unused-vars': ['error', { args: 'after-used' }],
     'no-undef': 'off', // ts(2304)
     '@typescript-eslint/naming-convention': [
       'error',

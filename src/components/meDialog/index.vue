@@ -1,7 +1,7 @@
 <template>
   <el-dialog ref="elDialogRef" class="me-dialog" :style="{ maxHeight }">
     <template v-for="(item, key) in $slots" :key="key" #[key]>
-      <component :is="item"></component>
+      <component :is="item as any"></component>
     </template>
   </el-dialog>
 </template>
