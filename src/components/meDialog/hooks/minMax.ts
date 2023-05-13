@@ -41,7 +41,7 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
     //设置其背景颜色为主色
     maxMinButton.style.color = 'var(--el-color-primary)';
   };
-  maxMinButton.onmouseout = function (e) {
+  maxMinButton.onmouseout = function () {
     //设置其背景颜色为默认色
     maxMinButton.style.color = 'var(--el-color-info)';
   };
@@ -80,7 +80,7 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
       //binding.value({x:e.pageX,y:e.pageY})
     };
 
-    document.onmouseup = function (e) {
+    document.onmouseup = function () {
       document.onmousemove = null;
       document.onmouseup = null;
     };
@@ -148,7 +148,7 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
       dragDom.style.height = y > minHeight ? `${y}px` : minHeight + 'px';
     };
     //拉伸结束
-    document.onmouseup = function (e) {
+    document.onmouseup = function () {
       document.onmousemove = null;
       document.onmouseup = null;
       el.dispatchEvent(resizeEvent);

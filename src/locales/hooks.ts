@@ -73,10 +73,6 @@ export const useLoadMessages = () => {
     locale: string | undefined = undefined,
     importArr: Array<Promise<any>> = [],
   ) => {
-    if (cache.has(options)) {
-      return importArr;
-    }
-    cache.add(options);
     if (typeof options === 'string') {
       const component = app.component(capitalize(camelize(options)));
       loadMessages(component as ComponentOptions, isLoading, locale, importArr);
@@ -107,5 +103,5 @@ export const useLoadMessages = () => {
     }
     return importArr;
   };
-  return { loadMessages, clearCache: () => cache.clear() };
+  return loadMessages;
 };

@@ -1,4 +1,3 @@
-import { objectEach } from 'xe-utils';
 import { success, fail } from '../helper';
 let id = 100000;
 const menu = [

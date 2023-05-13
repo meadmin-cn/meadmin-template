@@ -64,7 +64,7 @@ import {
   ElUpload,
   ElSpace,
 } from 'element-plus';
-import { ElDesignForm, ElGenerateForm } from 'vue-form-create';
+import { ElDesignForm } from 'vue-form-create';
 const app = getCurrentInstance()?.appContext.app;
 if (app && !app.config.globalProperties.$initCreate) {
   [

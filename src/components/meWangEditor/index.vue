@@ -29,7 +29,7 @@ import { onBeforeUnmount, shallowRef, PropType } from 'vue';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 import { i18nChangeLanguage, IEditorConfig, IToolbarConfig, IDomEditor, SlateDescendant } from '@wangeditor/editor';
 import { useGlobalStore } from '@/store';
-const props = defineProps({
+defineProps({
   mode: {
     type: String as PropType<'simple' | 'default'>,
     default: 'default',

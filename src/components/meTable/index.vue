@@ -74,7 +74,7 @@
       </div>
     </div>
     <el-table v-bind="$attrs" ref="elTableRef" v-loading="loading">
-      <component :is="customColumnProps!.children"></component>
+      <component :is="customColumnProps!.children as any"></component>
       <template v-if="$slots.append" #append>
         <slot name="append"></slot>
       </template>
