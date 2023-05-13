@@ -66,7 +66,6 @@ export const useLoadMessages = () => {
   if (instance === null) {
     throw new Error('必须在setup中调用');
   }
-  const cache = new Set<any>();
   const app = instance.appContext.app;
   const loadMessages = (
     options: (VNode & { __v_isVNode: true }) | ComponentOptions | string,

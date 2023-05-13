@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { PageEnum } from '@/dict/pageEnum';
 import { App } from 'vue';
 import { setupRouterGuard } from './guard';
