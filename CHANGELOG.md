@@ -1,5 +1,39 @@
 
 
+## [1.1.15](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.14...main-1.1.15) (2023-05-13)
+
+
+### 新功能[feat]
+
+* 更新vue版本为4.3 同步升级vite和vue-tsc版本 ([7dce364](https://github.com/meadmin-cn/meadmin-template/commit/7dce36429d932c3cc604a14dcf13ce420403a5f3))
+* 滚动条样式优化 ([ff323c6](https://github.com/meadmin-cn/meadmin-template/commit/ff323c6007720e7c0e42b64739cc8ec1c699f029))
+
+
+### Bug 修复[fix]
+
+* 修复错误的eslint template 设置 升级eslint版本 ([a52bf9d](https://github.com/meadmin-cn/meadmin-template/commit/a52bf9dab2f0fdb6b5dd3689dfab653021eaf572))
+* 修复element plus api 样式覆盖问题 ([c366b4e](https://github.com/meadmin-cn/meadmin-template/commit/c366b4e2357ef1046f447e96016bcf9045cba135))
+* 应用最新eslint规则 删除未使用的变量 ([c2bd051](https://github.com/meadmin-cn/meadmin-template/commit/c2bd05125485424105b4ab1cb5c6c980498d067f))
+* computedModel的源对象还原放到下个宏任务进行 ([8df8ed5](https://github.com/meadmin-cn/meadmin-template/commit/8df8ed594953f38f463d639e31d4a6b56ca65895))
+
+
+### 样式更改[style]
+
+* 代码格式化 ([fc685df](https://github.com/meadmin-cn/meadmin-template/commit/fc685df6e8a398ad9bcdeda8e74f58417ab7c046))
+* 重新格式化代码 ([ca589d2](https://github.com/meadmin-cn/meadmin-template/commit/ca589d2a4fe8819e917c82d40217b1a1fc0e0580))
+
+
+### 文档更改[docs]
+
+* 版本升级说明 ([d45ce67](https://github.com/meadmin-cn/meadmin-template/commit/d45ce67d26551906d727ce5c1a6c212bb4af1f3a))
+
+
+### 其他[chore]
+
+* 自动生成文件忽略格式化 ([5fd518e](https://github.com/meadmin-cn/meadmin-template/commit/5fd518e3767f5e4e8dfb8087925a156da3d352f4))
+* template-release v1.1.14 ([7e47fff](https://github.com/meadmin-cn/meadmin-template/commit/7e47fff82c2e3cdc07c87426656e3de85b6fce93))
+* template-release v1.1.15 ([89a89fa](https://github.com/meadmin-cn/meadmin-template/commit/89a89fae11eaa78d92b094f5c95160a41aac3654))
+
 ## [1.1.14](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.13...main-1.1.14) (2023-04-26)
 
 
