@@ -8,7 +8,7 @@
           :default-active="activeMenu"
           :collapse="!globalStore.isMobile && themeConfig.menuCollapse"
         >
-          <layout-menu-item v-for="route in routeStore.routes" :key="route.path" :item="route" />
+          <layout-menu-item v-for="item in routeStore.routes" :key="item.path" :item="item" />
         </el-menu>
       </el-scrollbar>
     </div>
