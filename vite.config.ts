@@ -84,8 +84,6 @@ export default async (configEnv: ConfigEnv): Promise<UserConfigExport> => {
         'element-plus/es/components/message/style/css',
         'element-plus/es/components/message-box/style/css',
         'element-plus/es/components/notification/style/css',
-        //因为core-js为babel动态引入,这里手动设置core-js/modules预构建,如果babelHelpers不是runtime模式可忽略此选项
-        ...fs.readdirSync(pathResolve('node_modules/core-js/modules')).map((name) => 'core-js/modules/' + name),
       ],
     },
   };
