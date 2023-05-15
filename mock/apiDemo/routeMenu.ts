@@ -1,4 +1,4 @@
-import { success, fail } from '../helper';
+import { success } from '../helper';
 
 const menu = [
   {
