@@ -1,5 +1,4 @@
 import { resolve } from 'path';
-import * as fs from 'fs';
 import { ConfigEnv, UserConfigExport } from 'vite';
 import autoprefixer from 'autoprefixer';
 import plugins from './plugins';
