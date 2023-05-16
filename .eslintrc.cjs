@@ -62,13 +62,14 @@ module.exports = {
       },
       {
         selector: ['memberLike'],
-        format: ['camelCase', 'PascalCase'],
-        leadingUnderscore: 'allowSingleOrDouble',
-        filter: {
-          // you can expand this regex to add more allowed names
-          regex: '^((__v_.*)|([0-9]+))$',
-          match: false,
-        },
+        format: null,
+        // format: ['camelCase', 'PascalCase'],
+        // leadingUnderscore: 'allowSingleOrDouble',
+        // filter: {
+        //   // you can expand this regex to add more allowed names
+        //   regex: '^((__v_.*)|([0-9]+))$',
+        //   match: false,
+        // },
       },
       {
         selector: 'enumMember',
