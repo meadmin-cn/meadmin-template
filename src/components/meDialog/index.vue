@@ -1,38 +1,56 @@
 <template>
   <el-dialog ref="elDialogRef" class="me-dialog" :style="{ maxHeight }">
-    <template v-for="(item, key) in $slots as Record< string, any>" :key="key" #[key]>
-      <component :is="item"></component>
+    <template v-for="(item, key) in $slots" :key="key" #[key]>
+      <component :is="item as any"></component>
     </template>
   </el-dialog>
 </template>
-<script setup lang="ts" name="MeDialog">
+<script lang="ts">
 import { ElDialog } from 'element-plus';
+import { ComponentOptionsMixin, ExtractPropTypes, Ref } from 'vue';
 import minMax from './hooks/minMax';
-const props = withDefaults(
-  defineProps<
-    // eslint-disable-next-line vue/prop-name-casing
-    ComponentProps<typeof ElDialog> & {
-      full?: boolean;
-      maxHeight?: string;
-    }
-  >(),
+const props = {
+  full: {
+    type: Boolean,
+    default: true,
+  },
+  maxHeight: {
+    type: String,
+    default: '60vh',
+  },
+};
+export default defineComponent<
+  ComponentProps<typeof ElDialog> & Partial<ExtractPropTypes<typeof props>>,
   {
-    full: true,
-    maxHeight: '60vh',
+    elDialogRef: Ref<InstanceType<typeof ElDialog> | undefined>;
   },
-);
-const elDialogRef = ref<InstanceType<typeof ElDialog>>();
-watch(
-  [() => elDialogRef.value?.dialogContentRef, () => props.full],
-  async () => {
-    if (elDialogRef.value?.dialogContentRef && props.full) {
-      await nextTick();
-      minMax(elDialogRef.value!.dialogContentRef.$el);
-    }
+  Record<string, any>,
+  Record<string, any>,
+  Record<string, any>,
+  ComponentOptionsMixin,
+  ComponentOptionsMixin,
+  Record<string, any>
+>({
+  name: 'MeDialog',
+  props: props as any,
+  setup(props, { expose }) {
+    const elDialogRef = ref<InstanceType<typeof ElDialog>>();
+    watch(
+      [() => elDialogRef.value?.dialogContentRef, () => props.full],
+      async () => {
+        if (elDialogRef.value?.dialogContentRef && props.full) {
+          await nextTick();
+          minMax(elDialogRef.value!.dialogContentRef.$el);
+        }
+      },
+      { immediate: true },
+    );
+    expose({ elDialogRef });
+    return {
+      elDialogRef,
+    };
   },
-  { immediate: true },
-);
-defineExpose({ elDialogRef });
+});
 </script>
 <style lang="scss">
 .me-dialog {
