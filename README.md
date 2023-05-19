@@ -10,7 +10,7 @@ Me-admin template是一个免费开源的中后台模板,基于vue3、vite4、 p
 
 
 ## 特性
- - **基于vue3、vite4、pinia、elment-plus、vue-request@next**
+ - **基于vue3、vite4、pinia、element-plus、vue-request@next**
  - **基于typescript** 应用级JavaScript 的语言
  - **可配置主题** 可配置主题色及主题模式
  - **友好的国际化方案** 基于vue-i18n 支持按组件异步加载语言包。
