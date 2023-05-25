@@ -1,5 +1,25 @@
 
 
+## [1.1.16](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.15...template-1.1.16) (2023-05-25)
+
+
+### Bug 修复[fix]
+
+* 删除core-js/modules预构建mac下vite4.4预构建不成功bug ([f6d7fc9](https://github.com/meadmin-cn/meadmin-template/commit/f6d7fc9d4000ba40916cd08f45a40cd851728e7b))
+
+
+### 新功能[feat]
+
+* 解除 类属性元素的命名限制 ([8bb0499](https://github.com/meadmin-cn/meadmin-template/commit/8bb04995ddd30133d8ce34731203a6a6eaffda6d))
+* 升级eslint相关包到最新版本 ([3010d3f](https://github.com/meadmin-cn/meadmin-template/commit/3010d3f49cb771a21c9e778b022dfd4823d69fd5))
+
+
+### 文档更改[docs]
+
+* 拼写错误更正 ([f1a117d](https://github.com/meadmin-cn/meadmin-template/commit/f1a117dca6d088c30a8da5218b654996f5e70cca))
+* 英文文档拼写错误修复 ([93850de](https://github.com/meadmin-cn/meadmin-template/commit/93850de02e5aeb7972b79ba21f7d5f48e965aaaa))
+* element-plus 拼写错误更正 ([53ccb78](https://github.com/meadmin-cn/meadmin-template/commit/53ccb78c2fa9f5d73572d07d754aeb8360de2ce0))
+
 ## [1.1.15](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.14...template-1.1.15) (2023-05-13)
 
 
