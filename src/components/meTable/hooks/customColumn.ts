@@ -7,7 +7,10 @@ interface Label {
   label?: string;
   children: Label[];
 }
-const origionDefault = new Map<string, () => VNode[]>();
+const origionDefault = new Map<
+  string,
+  (data: { row: Record<any, any>; column: Record<any, any>; $index: number }) => VNode[]
+>();
 
 /* 用于判断 vnode 是否是 el-table-column 组件 */
 function isElTableColumn(vnode: VNode) {
@@ -29,7 +32,11 @@ export default (slot: () => VNode[]) => {
         const label = labels.find((item) => item.value === parentId + '_' + index)!;
         label.label = vNode.props?.label;
         origionDefault.has(parentId + '_' + index) &&
-          getVNodes(origionDefault.get(parentId + '_' + index)!(), label.children, parentId + '_' + index);
+          getVNodes(
+            origionDefault.get(parentId + '_' + index)!({ row: {}, column: {}, $index: -1 }),
+            label.children,
+            parentId + '_' + index,
+          );
         return;
       }
       //checkedLabelsRaw不能是动态reactive，否则属性值变换时会触发default渲染造成抖动
@@ -49,14 +56,18 @@ export default (slot: () => VNode[]) => {
         if (!needScreen) {
           origionDefault.set(parentId + '_' + index, (vNode.children as Record<string, () => VNode[]>)?.default);
           getVNodes(
-            origionDefault.get(parentId + '_' + index)!(),
+            origionDefault.get(parentId + '_' + index)!({ row: {}, column: {}, $index: -1 }),
             labels[labels.length - 1].children,
             parentId + '_' + index,
           );
         }
         //必须使用函数方式包含 origion default 否则动态渲染会失效
-        (vNode.children as Record<string, () => VNode[]>).default = () =>
-          getVNodes(origionDefault.get(parentId + '_' + index)!(), [], parentId + '_' + index)();
+        (vNode.children as Record<string, (data: any) => VNode[]>).default = (data: any) =>
+          getVNodes(
+            origionDefault.get(parentId + '_' + index)!(data ?? { row: {}, column: {}, $index: -1 }),
+            [],
+            parentId + '_' + index,
+          )();
       }
       components.push(vNode);
     });
