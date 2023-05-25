@@ -1,5 +1,42 @@
 
 
+## [1.1.16](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.15...main-1.1.16) (2023-05-25)
+
+
+### 新功能[feat]
+
+* 解除 类属性元素的命名限制 ([8bb0499](https://github.com/meadmin-cn/meadmin-template/commit/8bb04995ddd30133d8ce34731203a6a6eaffda6d))
+* 升级eslint相关包到最新版本 ([3010d3f](https://github.com/meadmin-cn/meadmin-template/commit/3010d3f49cb771a21c9e778b022dfd4823d69fd5))
+
+
+### 重构[refactor]
+
+* **vue新语法:** meDialog组件用vue3.3新语法重构 ([c4c1a4d](https://github.com/meadmin-cn/meadmin-template/commit/c4c1a4d7f373a1e14b81822a8afeecb4745bc491))
+
+
+### 还原提交[revert]
+
+* 还原meDailog ([657c669](https://github.com/meadmin-cn/meadmin-template/commit/657c6692e3d45c4745a696ccb257703f3994afcd))
+
+
+### 文档更改[docs]
+
+* 拼写错误更正 ([f1a117d](https://github.com/meadmin-cn/meadmin-template/commit/f1a117dca6d088c30a8da5218b654996f5e70cca))
+* 英文文档拼写错误修复 ([93850de](https://github.com/meadmin-cn/meadmin-template/commit/93850de02e5aeb7972b79ba21f7d5f48e965aaaa))
+* element-plus 拼写错误更正 ([53ccb78](https://github.com/meadmin-cn/meadmin-template/commit/53ccb78c2fa9f5d73572d07d754aeb8360de2ce0))
+* element-plus 拼写错误更正 ([#66](https://github.com/meadmin-cn/meadmin-template/issues/66)) ([70b5d08](https://github.com/meadmin-cn/meadmin-template/commit/70b5d0819d06ff92948909bc0ed4676cf4fbcee9))
+
+
+### Bug 修复[fix]
+
+* 删除core-js/modules预构建mac下vite4.4预构建不成功bug ([f6d7fc9](https://github.com/meadmin-cn/meadmin-template/commit/f6d7fc9d4000ba40916cd08f45a40cd851728e7b))
+* 修复 meTable el-table-cloumn slot 不能传参问题 ([7d93df5](https://github.com/meadmin-cn/meadmin-template/commit/7d93df5d20cf2107bebeb0249720b0662a0b92a9))
+
+
+### 其他[chore]
+
+* template-release v1.1.16 ([d61602f](https://github.com/meadmin-cn/meadmin-template/commit/d61602faefcfa70029b591408c0a76d56d8f4497))
+
 ## [1.1.15](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.14...main-1.1.15) (2023-05-13)
 
 
