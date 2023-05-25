@@ -52,19 +52,25 @@
       <el-table-column :label="t('快递') + t(' ') + t('详情')">
         <el-table-column prop="name" :label="t('名称')" />
         <el-table-column :label="t('地址') + t(' ') + t('详情')">
-          <el-table-column prop="province" :label="t('省')" />
+          <el-table-column prop="province" :label="t('省')">
+            <template #default="{ row }">
+              <span>{{ row.province }}</span>
+            </template>
+          </el-table-column>
           <el-table-column prop="city" :label="t('市')" />
           <el-table-column prop="address" :label="t('地址')" />
           <el-table-column prop="zip" :label="t('邮政编码')"> </el-table-column>
         </el-table-column>
       </el-table-column>
       <el-table-column :label="t('操作')" min-width="162px">
-        <el-button>
-          <mel-icon-edit />
-        </el-button>
-        <el-button v-if="canDel" type="danger">
-          <mel-icon-delete />
-        </el-button>
+        <template #default="scope">
+          <el-button @click="print(scope)">
+            <mel-icon-edit />
+          </el-button>
+          <el-button v-if="canDel" type="danger">
+            <mel-icon-delete />
+          </el-button>
+        </template>
       </el-table-column>
       <template #empty>
         {{ t('空空如也') }}
@@ -101,6 +107,9 @@ const paginationOptions = reactive({
   layout: 'sizes, prev, pager, next, jumper, ->, total',
   change: getData,
 });
+const print = (data: any) => {
+  console.log(data);
+};
 </script>
 <style lang="scss" scoped>
 .table {
