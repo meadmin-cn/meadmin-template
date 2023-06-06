@@ -7,7 +7,7 @@
 </template>
 <script lang="ts">
 import { ElDialog } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPropTypes, Ref } from 'vue';
+import { ComponentOptionsMixin, ExtractPublicPropTypes, Ref } from 'vue';
 import minMax from './hooks/minMax';
 const props = {
   full: {
@@ -20,7 +20,7 @@ const props = {
   },
 };
 export default defineComponent<
-  ComponentProps<typeof ElDialog> & Partial<ExtractPropTypes<typeof props>>,
+  ComponentProps<typeof ElDialog> & ExtractPublicPropTypes<typeof props>,
   {
     elDialogRef: Ref<InstanceType<typeof ElDialog> | undefined>;
   },

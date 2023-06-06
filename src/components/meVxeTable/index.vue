@@ -94,7 +94,7 @@
 <script lang="ts">
 import './install';
 import pagination from './components/pagination.vue';
-import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
+import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPublicPropTypes, PropType, Ref } from 'vue';
 import {
   VXEComponent,
   VxeTableDefines,
@@ -105,7 +105,7 @@ import {
 } from 'vxe-table';
 import { debounce } from 'lodash-es';
 const props = {
-  meClass: [String, Array as PropType<string[]>],
+  meClass: [String, Array] as PropType<string[] | string>,
   name: {
     type: String,
     default: 'meVxeTable',
@@ -126,7 +126,7 @@ const props = {
     ],
   },
   print: {
-    type: [Object as PropType<VxeTablePropTypes.PrintConfig>, Boolean],
+    type: [Object, Boolean] as PropType<VxeTablePropTypes.PrintConfig | boolean>,
     default: () => ({}),
   },
   customColumn: {
@@ -155,7 +155,7 @@ const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown
   ['update:quickSearch']: (searchText: string) => void;
 };
 export default defineComponent<
-  ComponentProps<VXEComponent<VxeTableProps, VxeTableEventProps>> & Partial<ExtractPropTypes<typeof props>>,
+  ComponentProps<VXEComponent<VxeTableProps, VxeTableEventProps>> & ExtractPublicPropTypes<typeof props>,
   { vxeTableRef: Ref<VxeTableInstance | undefined> },
   Record<string, any>,
   Record<string, any>,

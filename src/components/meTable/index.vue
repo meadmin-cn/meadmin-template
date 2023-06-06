@@ -88,7 +88,7 @@
 <script lang="ts">
 import pagination from './components/pagination.vue';
 import { ElTable } from 'element-plus';
-import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
+import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPublicPropTypes, PropType, Ref } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
 import printTable from './hooks/print';
@@ -145,7 +145,7 @@ const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown
   ['update:quickSearch']: (searchText: string) => void;
 };
 export default defineComponent<
-  ComponentProps<typeof ElTable> & Partial<ExtractPropTypes<typeof props>>,
+  ComponentProps<typeof ElTable> & ExtractPublicPropTypes<typeof props>,
   {
     elTableRef: Ref<ELTableInstance | undefined>;
     customColumnProps: Ref<ReturnType<typeof customColumn> | undefined>;
