@@ -27,4 +27,8 @@ declare global {
       keyof InstanceType<DefineComponent>['$props']
     >]: InstanceType<Component>['$props'][K];
   };
+
+  type KeyOfMap<T extends Map> = Parameters<T['get']>[0];
+
+  type ValueOfMap<T extends Map> = ReturnType<T['get']>;
 }
