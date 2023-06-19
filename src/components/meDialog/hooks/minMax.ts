@@ -18,9 +18,20 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
   const dialogHeaderEl = el.querySelector('.el-dialog__header') as HTMLDivElement;
   //弹窗
   const dragDom = el;
-  dragDom.style.maxHeight = 'unset';
-  dragDom.style.width = nowWidth + 'px';
-  dragDom.style.height = nowHight + 'px';
+  let setedWidth = '';
+  let setedHeight = '';
+  const setWidthHeight = (width: string, height: string) => {
+    dragDom.style.maxHeight = 'unset';
+    if (width) {
+      setedWidth = width;
+      dragDom.style.width = width;
+    }
+    if (height) {
+      setedHeight = height;
+      dragDom.style.height = height;
+    }
+  };
+  setWidthHeight(nowWidth + 'px', nowHight + 'px');
   //清除选择头部文字效果
   dialogHeaderEl.onselectstart = () => false;
   //头部加上可拖动cursor
@@ -89,8 +100,7 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
   const setMaxMin = () => {
     if (el.fullscreen) {
       maxMin.innerHTML = fullscreenSvg;
-      dragDom.style.height = nowHight + 'px';
-      dragDom.style.width = nowWidth + 'px';
+      setWidthHeight(nowWidth + 'px', nowHight + 'px');
       dragDom.style.marginTop = nowMarginTop;
       dragDom.style.position = 'relative';
       el.fullscreen = false;
@@ -103,8 +113,7 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
       nowMarginTop = dragDom.style.marginTop;
       dragDom.style.left = '0';
       dragDom.style.top = '0';
-      dragDom.style.height = '100vh';
-      dragDom.style.width = '100vw';
+      setWidthHeight('100vw', '100vh');
       dragDom.style.marginTop = '0';
       dragDom.style.position = 'fixed';
       el.fullscreen = true;
@@ -144,8 +153,7 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
       const x = e.clientX - disX + (e.clientX - clientX); //这里 由于elementUI的dialog控制居中的，所以水平拉伸效果是双倍
       const y = e.clientY - disY;
       //比较是否小于最小宽高
-      dragDom.style.width = x > minWidth ? `${x}px` : minWidth + 'px';
-      dragDom.style.height = y > minHeight ? `${y}px` : minHeight + 'px';
+      setWidthHeight(x > minWidth ? `${x}px` : minWidth + 'px', y > minHeight ? `${y}px` : minHeight + 'px');
     };
     //拉伸结束
     document.onmouseup = function () {
@@ -154,4 +162,5 @@ export default (el: HTMLDivElement & { fullscreen: boolean }) => {
       el.dispatchEvent(resizeEvent);
     };
   };
+  return { resetWH: () => setWidthHeight(setedWidth, setedHeight) };
 };
