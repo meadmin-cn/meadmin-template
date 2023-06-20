@@ -15,7 +15,7 @@ import { localeConfig } from '@/config';
 import MessageBox from './components/messageBox.vue';
 import { useSettingStore } from '@/store';
 import User from './components/user.vue';
-const { themeConfig } = useSettingStore();
+const { themeConfig } = storeToRefs(useSettingStore());
 </script>
 <style lang="scss" scoped>
 .right {

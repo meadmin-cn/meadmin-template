@@ -67,7 +67,7 @@ import contextmenu from './components/contextmenu.vue';
 import { isExternal } from '@/utils/validate';
 import { resolve } from 'path-browserify';
 import $ from 'jquery';
-const { themeConfig } = useSettingStore();
+const { themeConfig } = storeToRefs(useSettingStore());
 // 初始化tags
 const tags = reactive([] as RouteLocationNormalized[]);
 const resolvePath = (routePath: string, basePath = '') => {

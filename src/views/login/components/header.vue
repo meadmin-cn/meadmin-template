@@ -8,7 +8,7 @@
 <script setup lang="ts" name="Header">
 import { localeConfig } from '@/config';
 import { useSettingStore } from '@/store';
-const { themeConfig } = useSettingStore();
+const { themeConfig } = storeToRefs(useSettingStore());
 </script>
 <style lang="scss" scoped>
 .header {

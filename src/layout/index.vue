@@ -36,7 +36,7 @@ import LayoutHeader from './components/header/index.vue';
 import LayoutMenu from './components/menu/index.vue';
 import LayoutPage from './components/page.vue';
 import { useSettingStore, useGlobalStore } from '@/store';
-const { themeConfig } = useSettingStore();
+const { themeConfig } = storeToRefs(useSettingStore());
 const globalStore = useGlobalStore();
 onMounted(() => {
   nextTick(() => (globalStore.layoutLoaded = true));
