@@ -1,7 +1,9 @@
 <template>
   <template v-if="!item.meta?.hideMenu">
     <template
-      v-if="onlyOneChild && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.meta?.alwaysShow"
+      v-if="
+        onlyOneChild && (!onlyOneChild.children?.length || onlyOneChild.noShowingChildren) && !item.meta?.alwaysShow
+      "
     >
       <component
         :is="onlyOneChild.meta?.isLink ? 'a' : 'routerLink'"
