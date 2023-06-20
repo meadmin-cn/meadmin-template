@@ -32,4 +32,8 @@ declare global {
   type ELTableInstance = InstanceType<typeof ElTable> & {
     getSelectionIndexs: () => number[]; //获取选中行的索引
   };
+
+  type KeyOfMap<T extends Map> = Parameters<T['get']>[0];
+
+  type ValueOfMap<T extends Map> = ReturnType<T['get']>;
 }

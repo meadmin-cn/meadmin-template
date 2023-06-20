@@ -1,13 +1,11 @@
 <template>
-  <el-dialog ref="elDialogRef" class="me-dialog" :style="{ maxHeight }">
-    <template v-for="(item, key) in $slots" :key="key" #[key]>
-      <component :is="item as any"></component>
-    </template>
+  <el-dialog ref="elDialogRef" class="me-dialog" :style="{ maxHeight }" @open="openHandle">
+    <template v-for="(item, key) in $slots" :key="key" #[key]> <component :is="item as any"></component> </template>a
   </el-dialog>
 </template>
 <script lang="ts">
 import { ElDialog } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPropTypes, Ref } from 'vue';
+import { ComponentOptionsMixin, ExtractPublicPropTypes, Ref } from 'vue';
 import minMax from './hooks/minMax';
 const props = {
   full: {
@@ -19,8 +17,12 @@ const props = {
     default: '60vh',
   },
 };
+
+const emits = ['open'] as unknown as {
+  open: () => void;
+};
 export default defineComponent<
-  ComponentProps<typeof ElDialog> & Partial<ExtractPropTypes<typeof props>>,
+  ComponentProps<typeof ElDialog> & ExtractPublicPropTypes<typeof props>,
   {
     elDialogRef: Ref<InstanceType<typeof ElDialog> | undefined>;
   },
@@ -29,25 +31,32 @@ export default defineComponent<
   Record<string, any>,
   ComponentOptionsMixin,
   ComponentOptionsMixin,
-  Record<string, any>
+  typeof emits
 >({
   name: 'MeDialog',
   props: props as any,
-  setup(props, { expose }) {
+  emits: emits,
+  setup(props, { expose, emit }) {
     const elDialogRef = ref<InstanceType<typeof ElDialog>>();
+    let resetWH: undefined | (() => void);
     watch(
       [() => elDialogRef.value?.dialogContentRef, () => props.full],
       async () => {
         if (elDialogRef.value?.dialogContentRef && props.full) {
           await nextTick();
-          minMax(elDialogRef.value!.dialogContentRef.$el);
+          resetWH = minMax(elDialogRef.value!.dialogContentRef.$el)?.resetWH;
         }
       },
       { immediate: true },
     );
+    const openHandle = () => {
+      resetWH?.();
+      emit('open');
+    };
     expose({ elDialogRef });
     return {
       elDialogRef,
+      openHandle,
     };
   },
 });
@@ -71,6 +80,8 @@ export default defineComponent<
   .el-dialog__body {
     overflow-y: auto;
     flex: 1;
+    margin-top: 10px;
+    flex-shrink: 0;
   }
   .el-dialog__footer {
     position: sticky;
