@@ -1,5 +1,37 @@
 
 
+## [1.1.17](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.16...main-1.1.17) (2023-06-21)
+
+
+### 重构[refactor]
+
+* 基础组件用新的vue类型语法重写 ([bb8bf4d](https://github.com/meadmin-cn/meadmin-template/commit/bb8bf4d98e068021c5f9000ae0889344316ca9a6))
+* 路由声明移除LayoutPage ([0d3447e](https://github.com/meadmin-cn/meadmin-template/commit/0d3447e4ae179688f074ac2d282347dbd4d403a9))
+* 移除LayoutPage引用 ([41d5624](https://github.com/meadmin-cn/meadmin-template/commit/41d5624a6f85c11d1b9404a315fb0ff6e8e972d7))
+
+
+### Bug 修复[fix]
+
+* 修复超过三级的菜单只有一个子元素时菜单不提升bug ([7abc316](https://github.com/meadmin-cn/meadmin-template/commit/7abc3166d27899367ee9f92bcee26214662f271c))
+* 修复当子菜单只有一层并且其子菜单为空数组时渲染出错bug ([3d23151](https://github.com/meadmin-cn/meadmin-template/commit/3d231517128ed730349bed8310a651e83e99dd8d))
+* 修复结构store失去响应问题 ([b3f74d8](https://github.com/meadmin-cn/meadmin-template/commit/b3f74d8cff9d1f24be22371388b2bb89584320d9))
+* 修复meDialog 关闭后再打开高度错误bug ([c86a86e](https://github.com/meadmin-cn/meadmin-template/commit/c86a86eb7cfe17b53f01214051c2966492a4f81b))
+* 修复store动态引入问题 ([223ff0d](https://github.com/meadmin-cn/meadmin-template/commit/223ff0d4ba240366b5339a09fce36d00f8e04676))
+
+
+### 新功能[feat]
+
+* 加上KeyOfMap、ValueOfMap ([3b0c0ac](https://github.com/meadmin-cn/meadmin-template/commit/3b0c0ac9bd67710263a2d1763279c2d6eb8c79e8))
+* 面包屑展示加上子元素判断 ([c236f8c](https://github.com/meadmin-cn/meadmin-template/commit/c236f8c47464e655cd16b1c4d84e66ba17759d5a))
+* 优化路由声明，自动声明动态路由的跟路由，动态路由菜单允许只有一级 ([99766d2](https://github.com/meadmin-cn/meadmin-template/commit/99766d27f8090356a31e2c2be66def8d63a9f9b5))
+
+
+### 其他[chore]
+
+* template-release v1.1.16 ([b4ccf72](https://github.com/meadmin-cn/meadmin-template/commit/b4ccf72a419e8327c8e0e67b6f3061c3250c7b6b))
+* template-release v1.1.17 ([417b49f](https://github.com/meadmin-cn/meadmin-template/commit/417b49f32cfbd88f2c8fbe08fefae975c739ce22))
+* vue-request 版本改为正式版本 ([8c7a6c1](https://github.com/meadmin-cn/meadmin-template/commit/8c7a6c141c64560d46e7e88e564a0b01f7229a75))
+
 ## [1.1.16](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.15...main-1.1.16) (2023-05-25)
 
 
