@@ -1,10 +1,10 @@
 import { RouteRecordRaw } from 'vue-router';
-import { LayoutPage } from '@/router/constant';
+import { Layout } from '@/router/constant';
 import { concatObjectValue } from '@/utils/helper';
 export const routes: RouteRecordRaw[] = [
   {
     path: 'multilevel',
-    component: LayoutPage,
+    component: Layout,
     meta: { title: '多级菜单' },
     children: concatObjectValue<RouteRecordRaw>(
       import.meta.glob('./multilevel/*.ts', { eager: true, import: 'routes' }),
