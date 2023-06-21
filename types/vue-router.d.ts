@@ -26,7 +26,7 @@ declare module 'vue-router' {
     // 若你想不管路由下面的 children 声明的个数都显示你的根路由
     // 你可以设置 alwaysShow: true，这样它就会忽略之前定义的规则，一直显示根路由
     alwaysShow?: boolean;
-    // 是否需要面包屑false不需要 ture或undefined为需要
+    // 是否需要面包屑 false不展示在面包屑,ture一直展示在面包屑,undefined当只有一个子元素面包屑时跳过展示
     breadcrumb?: boolean;
     //路由在菜单的index deep映射（会动态计算不要设置默认值）
     menuIndex?: number[];

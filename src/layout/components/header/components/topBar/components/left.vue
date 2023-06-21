@@ -37,7 +37,11 @@ const setBreadcrumbList = (route: RouteLocationNormalized) => {
   let temp = { children: routes.value } as unknown as RouteRecordRaw;
   route.meta.menuIndex!.forEach((item) => {
     temp = temp.children![item];
-    if (temp.meta && temp.meta.title && temp.meta.breadcrumb !== false) {
+    if (
+      temp.meta?.title &&
+      temp.meta.breadcrumb !== false &&
+      (temp.meta.breadcrumb || temp.children?.filter((v) => v.meta?.breadcrumb !== false).length !== 1)
+    ) {
       list.push({
         name: temp.name,
         path: temp.path,
