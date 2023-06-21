@@ -5,6 +5,8 @@ import { router, constantRoutes, asyncRoutes, flatteningRoutes2 } from '@/router
 import { RouteRecordRaw } from 'vue-router';
 import { settingConfig } from '@/config';
 import { menuApi } from '@/api/routeMenu';
+import { PageEnum } from '@/dict/pageEnum';
+import { Layout } from '@/router/constant';
 export default defineStore('route', {
   state: () => ({
     addRoutes: [] as RouteRecordRaw[],
@@ -31,7 +33,21 @@ export default defineStore('route', {
     },
     //初始化路由
     async initRoutes() {
-      flatteningRoutes2(await this.generateRoutes(), constantRoutes.length).forEach((route) => router.addRoute(route));
+      flatteningRoutes2(
+        [
+          {
+            path: '/',
+            redirect: PageEnum.HOME,
+            meta: {
+              title: '',
+            },
+            component: Layout,
+            children: await this.generateRoutes(),
+          },
+        ],
+        constantRoutes.length,
+        true,
+      ).forEach((route) => router.addRoute(route));
     },
   },
 });

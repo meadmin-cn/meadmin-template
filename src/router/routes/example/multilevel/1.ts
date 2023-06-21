@@ -1,14 +1,14 @@
 import { RouteRecordRaw } from 'vue-router';
-import { LayoutPage } from '@/router/constant';
+import { Layout } from '@/router/constant';
 export const routes: RouteRecordRaw[] = [
   {
     path: '1',
-    component: LayoutPage,
+    component: Layout,
     meta: { title: '多级菜单1' },
     children: [
       {
         path: '1-1',
-        component: LayoutPage,
+        component: Layout,
         meta: { title: '多级菜单1-1', alwaysShow: true },
         redirect: '/example/multilevel/1/1-1/1-1-1',
         children: [

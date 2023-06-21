@@ -64,20 +64,23 @@ const emit = defineEmits<{
   (e: 'customAlert', s: string, t: string): void;
   (e: 'customPaste', editor: IDomEditor, event: ClipboardEvent): void;
 }>();
-const { i18n } = useGlobalStore();
+const { i18n } = storeToRefs(useGlobalStore());
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef<IDomEditor | undefined>();
 defineExpose({ editorRef });
 //切换语言
 const showEditor = ref(true);
-i18nChangeLanguage(i18n.locale.value);
-watch(i18n.locale, async (locale) => {
-  // 切换语言 - 'en' 或者 'zh-CN'
-  showEditor.value = false;
-  await nextTick();
-  i18nChangeLanguage(locale);
-  showEditor.value = true;
-});
+i18nChangeLanguage(i18n.value.locale.value);
+watch(
+  () => i18n.value.locale.value,
+  async (locale) => {
+    // 切换语言 - 'en' 或者 'zh-CN'
+    showEditor.value = false;
+    await nextTick();
+    i18nChangeLanguage(locale);
+    showEditor.value = true;
+  },
+);
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
   editorRef.value && editorRef.value.destroy();

@@ -63,21 +63,21 @@ const menu = [
       },
       {
         path: 'multilevel',
-        component: 'LayoutPage',
+        component: 'Layout',
         meta: {
           title: '多级菜单',
         },
         children: [
           {
             path: '1',
-            component: 'LayoutPage',
+            component: 'Layout',
             meta: {
               title: '多级菜单1',
             },
             children: [
               {
                 path: '1-1',
-                component: 'LayoutPage',
+                component: 'Layout',
                 meta: {
                   title: '多级菜单1-1',
                   alwaysShow: true,
