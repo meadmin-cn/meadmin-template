@@ -24,17 +24,17 @@
 import { mitter, event } from '@/event';
 import { useSettingStore, useGlobalStore, useRouteStore } from '@/store';
 import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
-const { themeConfig } = useSettingStore();
+const { themeConfig } = storeToRefs(useSettingStore());
 const globalStore = useGlobalStore();
 const setMenuCollapse = () => {
-  themeConfig.menuCollapse = !themeConfig.menuCollapse;
+  themeConfig.value.menuCollapse = !themeConfig.value.menuCollapse;
 };
 const breadcrumbList = ref([] as Pick<RouteRecordRaw, 'name' | 'path' | 'meta' | 'redirect'>[]);
 const route = useRoute();
-const { routes } = useRouteStore();
+const { routes } = storeToRefs(useRouteStore());
 const setBreadcrumbList = (route: RouteLocationNormalized) => {
   const list = [] as Pick<RouteRecordRaw, 'name' | 'path' | 'meta' | 'redirect'>[];
-  let temp = { children: routes } as unknown as RouteRecordRaw;
+  let temp = { children: routes.value } as unknown as RouteRecordRaw;
   route.meta.menuIndex!.forEach((item) => {
     temp = temp.children![item];
     if (temp.meta && temp.meta.title && temp.meta.breadcrumb !== false) {

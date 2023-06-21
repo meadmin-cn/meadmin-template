@@ -17,7 +17,7 @@
 <script setup lang="ts" name="layoutMenu">
 import { useSettingStore, useRouteStore, useGlobalStore } from '@/store';
 import { mixColor, getColorLuma } from '@/utils/helper';
-const { themeConfig } = useSettingStore();
+const { themeConfig } = storeToRefs(useSettingStore());
 const routeStore = useRouteStore();
 const globalStore = useGlobalStore();
 const route = useRoute();
@@ -38,10 +38,10 @@ watch(
   { immediate: true },
 );
 const menuBg1 = computed(() =>
-  mixColor(themeConfig.menuBg, getColorLuma(themeConfig.menuBg) < 100 ? '#ffffff' : '#303133', 0.1),
+  mixColor(themeConfig.value.menuBg, getColorLuma(themeConfig.value.menuBg) < 100 ? '#ffffff' : '#303133', 0.1),
 );
-const menuActiveColor = computed(() => (getColorLuma(themeConfig.menuBg) < 100 ? '#ffffff' : '#303133'));
-const menuTextColor = computed(() => mixColor(themeConfig.menuBg, menuActiveColor.value, 0.8));
+const menuActiveColor = computed(() => (getColorLuma(themeConfig.value.menuBg) < 100 ? '#ffffff' : '#303133'));
+const menuTextColor = computed(() => mixColor(themeConfig.value.menuBg, menuActiveColor.value, 0.8));
 </script>
 <style lang="scss" scoped>
 .layout-menu {

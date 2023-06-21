@@ -8,7 +8,7 @@
 import { useSettingStore } from '@/store';
 import TopBar from './components/topBar/index.vue';
 import TagBar from './components/tagBar/index.vue';
-const { themeConfig } = useSettingStore();
+const { themeConfig } = storeToRefs(useSettingStore());
 </script>
 <style lang="scss" scoped>
 .layout-header {

@@ -12,14 +12,6 @@ import { resolve } from 'path-browserify';
 
 export const constantRoutes: RouteRecordRaw[] = [
   {
-    path: '/',
-    redirect: PageEnum.HOME,
-    meta: {
-      hideMenu: true,
-      title: '首页',
-    },
-  },
-  {
     path: PageEnum.LOGIN,
     component: async () => await import('@/views/login/index.vue'),
     meta: {
@@ -64,13 +56,14 @@ export const flatteningRoutes = (
   basePath = '',
   menuIndex: number[] = [],
   newRoutes: RouteRecordRaw[] = [],
+  baseIndex = 0,
 ) => {
   routes.forEach((route, index) => {
     route.path = resolvePath(route.path, basePath);
     if (!route.meta) {
       route.meta = { title: '' };
     }
-    route.meta.menuIndex = [...menuIndex, index];
+    route.meta.menuIndex = [...menuIndex, index + baseIndex];
     newRoutes.push(Object.assign({ ...route }, { children: [] }));
     if (route.children) {
       flatteningRoutes(route.children, route.path, route.meta.menuIndex, newRoutes);
@@ -79,7 +72,7 @@ export const flatteningRoutes = (
   return newRoutes;
 };
 //扁平化为2级路由
-export const flatteningRoutes2 = (routes: RouteRecordRaw[], startIndex = 0) => {
+export const flatteningRoutes2 = (routes: RouteRecordRaw[], startIndex = 0, ignoreFirst = false) => {
   const newRoutes = [] as RouteRecordRaw[];
   routes.forEach((route, index) => {
     if (!route.meta) {
@@ -90,7 +83,15 @@ export const flatteningRoutes2 = (routes: RouteRecordRaw[], startIndex = 0) => {
       Object.assign(
         { ...route },
         {
-          children: route.children ? flatteningRoutes(route.children, route.path, [index + startIndex]) : [],
+          children: route.children
+            ? flatteningRoutes(
+                route.children,
+                route.path,
+                ignoreFirst ? [] : [index + startIndex],
+                [],
+                ignoreFirst ? index + startIndex : 0,
+              )
+            : [],
         },
       ),
     );
