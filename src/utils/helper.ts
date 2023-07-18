@@ -104,7 +104,7 @@ export const getColorLuma = function (color: string) {
 export const proxyValue = <T extends Record<string | number, any> | any[]>(value: T, update: () => void): T => {
   return new Proxy<T>(value, {
     get: function (obj, prop) {
-      if (typeof obj[prop as keyof T] === 'object') {
+      if (obj[prop as keyof T] && typeof obj[prop as keyof T] === 'object') {
         return proxyValue(obj[prop as keyof T] as T, update);
       }
       return obj[prop as keyof T];
