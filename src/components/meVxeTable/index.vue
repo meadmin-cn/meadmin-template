@@ -37,7 +37,7 @@
                     :default-checked-keys="defaultChecked"
                     :data="collectColumn"
                     default-expand-all
-                    :props="{ label: (item) => (item.type === 'seq' ? '#' : item.title), children: 'children' }"
+                    :props="{ label: (item: TreeNodeData) => (item.type === 'seq' ? '#' : item.title), children: 'children' }"
                     show-checkbox
                     @check-change="checkChange"
                   />
@@ -104,6 +104,7 @@ import {
   VxeTablePropTypes,
 } from 'vxe-table';
 import { debounce } from 'lodash-es';
+import { TreeNodeData } from 'element-plus/es/components/tree/src/tree.type';
 const props = {
   meClass: [String, Array] as PropType<string[] | string>,
   name: {
