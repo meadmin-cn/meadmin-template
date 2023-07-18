@@ -40,7 +40,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { args: 'after-used' }],
+    '@typescript-eslint/no-unused-vars': ['warn', { args: 'after-used' }],
     'no-undef': 'off', // ts(2304)
     '@typescript-eslint/naming-convention': [
       'error',
