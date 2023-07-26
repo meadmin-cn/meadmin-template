@@ -22,7 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-package-lock.json
 types/meIconComponents.d.ts
 src/store/module.ts
 types/directives.d.ts
