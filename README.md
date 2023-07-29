@@ -91,6 +91,9 @@ git clone https://github.com/meadmin-cn/meadmin-template.git
   - `ignore` 临时暂存可忽略
   - `ci` CI发版
 
+## 交流群
+- QQ群 752939100
+
 ## 打赏作者
 
 作者还在为孩子奶粉钱苦苦挣扎，如果能帮到您欢迎打赏。打赏时请务必备注github name 后续会维护到打赏鸣谢列表
