@@ -1,5 +1,24 @@
 
 
+## [1.1.18](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.17...template-1.1.18) (2023-08-08)
+
+
+### Bug 修复[fix]
+
+* 修复深度代理值被设置为null时出错的bug ([1d23622](https://github.com/meadmin-cn/meadmin-template/commit/1d23622bcea2e026f201e31f7ecdeec2690eecc7))
+
+
+### 其他[chore]
+
+* @typescript-eslint/no-unused-vars 由error改为 warn ([aee0cf8](https://github.com/meadmin-cn/meadmin-template/commit/aee0cf8ef4412d801b472892db72c7df05eb7714))
+* 将package-lock加入到版本控制 ([0deca2e](https://github.com/meadmin-cn/meadmin-template/commit/0deca2e3c2cfc46dba261407cae3b5b5ebe0b76b))
+* vue-tsc 升级到1.8.6 ([dfc3247](https://github.com/meadmin-cn/meadmin-template/commit/dfc32475b3daa935018c33e138b4cfe0e3853034))
+
+
+### 文档更改[docs]
+
+* 加上qq群 ([2efd4d1](https://github.com/meadmin-cn/meadmin-template/commit/2efd4d1aa22f87fd0eb2923f12809eec61793d69))
+
 ## [1.1.17](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.16...template-1.1.17) (2023-06-21)
 
 
