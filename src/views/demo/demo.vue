@@ -81,6 +81,7 @@ import { ListParams, Info, listApi, delApi } from '@/api/demo';
 import { useLocalesI18n } from '@/locales/i18n';
 import { bookType } from '@/dict/book';
 import add from './components/add.vue';
+import { cloneDeep } from 'lodash-es';
 let { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'demo']);
 const params = reactive(new ListParams());
 const { loading, data, runAsync } = listApi();
@@ -96,7 +97,7 @@ const del = async (id: number) => {
 const addOrUp = ref(false);
 const info = ref<Required<Info>>();
 const showAddOrUp = (row?: Required<Info>) => {
-  info.value = row;
+  info.value = cloneDeep(row);
   addOrUp.value = true;
 };
 </script>
