@@ -1,5 +1,29 @@
 
 
+## [1.1.18](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.17...main-1.1.18) (2023-08-08)
+
+
+### 文档更改[docs]
+
+* 加上qq群 ([2efd4d1](https://github.com/meadmin-cn/meadmin-template/commit/2efd4d1aa22f87fd0eb2923f12809eec61793d69))
+
+
+### Bug 修复[fix]
+
+* 修复编辑demo未copy问题 ([e68eb1c](https://github.com/meadmin-cn/meadmin-template/commit/e68eb1cf733f7e9f6e3f0b6490b5da699ddb2af6))
+* 修复类型错误 ([8390057](https://github.com/meadmin-cn/meadmin-template/commit/8390057af3c2aae1476227fb852520d73ed7f13e))
+* 修复深度代理值被设置为null时出错的bug ([1d23622](https://github.com/meadmin-cn/meadmin-template/commit/1d23622bcea2e026f201e31f7ecdeec2690eecc7))
+
+
+### 其他[chore]
+
+* @typescript-eslint/no-unused-vars 由error改为 warn ([aee0cf8](https://github.com/meadmin-cn/meadmin-template/commit/aee0cf8ef4412d801b472892db72c7df05eb7714))
+* 加上挣钱的package-lock ([b1f537d](https://github.com/meadmin-cn/meadmin-template/commit/b1f537d802f115c7005b20c1b532612d80b3b466))
+* 将package-lock加入到版本控制 ([0deca2e](https://github.com/meadmin-cn/meadmin-template/commit/0deca2e3c2cfc46dba261407cae3b5b5ebe0b76b))
+* 优化写法，已适应编辑器识别 ([db9e786](https://github.com/meadmin-cn/meadmin-template/commit/db9e7862ecb57d1a5b02a6646e0bafc3ff7479d0))
+* template-release v1.1.18 ([4e2bbd9](https://github.com/meadmin-cn/meadmin-template/commit/4e2bbd96ac368fc006e32b312c94c5d44b5569c9))
+* vue-tsc 升级到1.8.6 ([dfc3247](https://github.com/meadmin-cn/meadmin-template/commit/dfc32475b3daa935018c33e138b4cfe0e3853034))
+
 ## [1.1.17](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.16...main-1.1.17) (2023-06-21)
 
 
