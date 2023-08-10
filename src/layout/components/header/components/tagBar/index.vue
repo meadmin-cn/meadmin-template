@@ -37,7 +37,7 @@
       <div
         v-if="themeConfig.tagBarMenu"
         class="icon pointer"
-        @click="setContextmenu($event.currentTarget as any, currentTag)"
+        @click.stop="setContextmenu($event.currentTarget as any, currentTag)"
       >
         <mel-icon-menu></mel-icon-menu>
       </div>
@@ -180,6 +180,15 @@ const close = async (event: HTMLElement, current: RouteLocationNormalized) => {
   await nextTick();
   contextmenuRef.value?.closeCurrent();
 };
+const closeContextMenu = () => {
+  showContextmenu.value = false;
+};
+onMounted(() => {
+  document.body.addEventListener('click', closeContextMenu);
+});
+onBeforeUnmount(() => {
+  document.body.removeEventListener('click', closeContextMenu);
+});
 const reload = () => {
   // 刷新
   router.replace('/redirect/' + encodeURIComponent(route.fullPath));
