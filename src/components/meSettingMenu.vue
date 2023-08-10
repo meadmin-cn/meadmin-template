@@ -53,7 +53,7 @@
 import { themeConfig as origionThemeConfig } from '@/config';
 import { useSettingStore, useUserStore } from '@/store';
 const setting = useSettingStore();
-const themeConfig = setting.themeConfig;
+const { themeConfig } = storeToRefs(setting);
 const userStore = useUserStore();
 const predefinePrimaryColors = reactive([
   '#409EFF',
