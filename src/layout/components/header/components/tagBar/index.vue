@@ -28,7 +28,7 @@
       </div>
     </el-scrollbar>
     <div class="right">
-      <div class="icon pointer" :class="{ 'is-disabled': scrollLeft >= max }" @click="go">
+      <div class="icon pointer" :class="{ 'is-disabled': Math.ceil(scrollLeft) >= max }" @click="go">
         <mel-icon-d-arrow-right></mel-icon-d-arrow-right>
       </div>
       <div v-if="themeConfig.tagBarRefresh" class="icon pointer" @click="reload">
