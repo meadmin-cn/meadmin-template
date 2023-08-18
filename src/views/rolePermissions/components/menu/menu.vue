@@ -9,6 +9,7 @@
       :tree-config="{ expandAll: true, line: true, reserve: true }"
       :checkbox-config="{ labelField: 'id' }"
       :row-config="{ keyField: 'rule', useKey: true }"
+      :column-config="{ useKey: true }"
       align="center"
       border
       me-class="table-menu"

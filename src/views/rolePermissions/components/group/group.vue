@@ -7,6 +7,7 @@
       :loading="group.loading.value"
       :row-config="{ isCurrent: true, useKey: true }"
       :tree-config="{ expandAll: true, line: true }"
+      :column-config="{ useKey: true }"
       :custom-column="false"
       :print="false"
       :export-menu="[]"
