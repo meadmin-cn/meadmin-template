@@ -137,7 +137,7 @@ const jump = (index: number) => {
         return;
       }
       if (index === tagsRef.value.length - 1) {
-        setScrollLeft(tagsRef.value[tagsRef.value.length - 1].offsetLeft);
+        setScrollLeft(max.value);
         return;
       }
       const parentWidth = scrollbarRef.value!.$el.clientWidth;
