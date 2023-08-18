@@ -105,22 +105,22 @@ const setScrollLeft = (left: number, isAdd = false) => {
   }
   $(scrollbarRef.value!.$el).find('.el-scrollbar__wrap').animate({ scrollLeft: left }, 300);
 };
-const max = ref(0);
 const tagsRef = ref([] as HTMLElement[]);
 const currentTag = ref<RouteLocationNormalized>({
   fullPath: '/',
   meta: { title: '' },
 } as RouteLocationNormalized);
 const route = useRoute();
-onMounted(() => {
+const max = ref(0);
+const setMax = () => {
   max.value = listRef.value!.offsetWidth - scrollbarRef.value?.$el.clientWidth;
-  mitter.on(
-    event.RESIZE,
-    () => {
-      max.value = listRef.value!.offsetWidth - scrollbarRef.value?.$el.clientWidth;
-    },
-    true,
-  );
+};
+onMounted(() => {
+  mitter.on(event.RESIZE, setMax, true);
+  watch(tags, setMax, {
+    flush: 'post',
+    immediate: true,
+  });
 });
 const back = () => {
   setScrollLeft(0 - scrollbarRef.value!.$el.clientWidth / 2, true);
@@ -137,7 +137,7 @@ const jump = (index: number) => {
         return;
       }
       if (index === tagsRef.value.length - 1) {
-        setScrollLeft(max.value);
+        max.value > 0 && setScrollLeft(max.value);
         return;
       }
       const parentWidth = scrollbarRef.value!.$el.clientWidth;
