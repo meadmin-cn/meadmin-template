@@ -131,19 +131,30 @@ const go = () => {
 const jump = (index: number) => {
   nextTick(() => {
     if (tagsRef.value[index]) {
-      const offsetLeft = tagsRef.value[index].offsetLeft;
-      const offsetWidth = tagsRef.value[index].offsetWidth;
-      const offsetRight = offsetWidth + offsetLeft;
+      currentTag.value = tags[index];
+      if (index === 0) {
+        setScrollLeft(0);
+        return;
+      }
+      if (index === tagsRef.value.length - 1) {
+        setScrollLeft(tagsRef.value[tagsRef.value.length - 1].offsetLeft);
+        return;
+      }
       const parentWidth = scrollbarRef.value!.$el.clientWidth;
       const parentLeft = scrollLeft.value;
       const parentRight = parentWidth + scrollLeft.value;
-      if (offsetLeft < parentLeft) {
+      const lastLeft = tagsRef.value[index - 1].offsetLeft;
+      const offsetLeft = tagsRef.value[index].offsetLeft;
+      const offsetRight = offsetLeft + tagsRef.value[index].offsetWidth;
+      const nextLeft = tagsRef.value[index + 1].offsetLeft;
+      const nextRight = nextLeft + tagsRef.value[index + 1].offsetWidth;
+      if (parentWidth <= offsetRight - lastLeft || parentWidth <= nextRight - offsetLeft) {
         setScrollLeft(offsetLeft);
+      } else if (lastLeft < parentLeft) {
+        setScrollLeft(lastLeft);
+      } else if (nextRight > parentRight) {
+        setScrollLeft(nextRight - parentWidth);
       }
-      if (offsetRight > parentRight) {
-        setScrollLeft(offsetLeft + offsetWidth - parentWidth);
-      }
-      currentTag.value = tags[index];
     }
   });
 };
