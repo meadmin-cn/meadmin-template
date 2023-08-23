@@ -50,7 +50,7 @@
     "vue-i18n": "^9.1.10",
     "vue-request": "^2.0.1",
     "vue-router": "^4.1.1",
-    "vxe-table": "^4.3.5",
+    "vxe-table": "^4.5.5",
     "vxe-table-plugin-element": "^3.0.6",
     "xe-utils": "^3.5.7"
   },
