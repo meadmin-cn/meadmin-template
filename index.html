@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <base target="_blank" />
     <title>me-admin</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
 
   <body>
@@ -17,6 +23,7 @@
           display: flex;
           justify-content: space-between;
         }
+
         .sk-flow-dot {
           width: 25%;
           height: 25%;
@@ -24,18 +31,22 @@
           border-radius: 50%;
           animation: sk-flow 1.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s infinite both;
         }
+
         .sk-flow-dot:nth-child(1) {
           animation-delay: -0.3s;
         }
+
         .sk-flow-dot:nth-child(2) {
           animation-delay: -0.15s;
         }
+
         @keyframes sk-flow {
           0%,
           80%,
           100% {
             transform: scale(0.3);
           }
+
           40% {
             transform: scale(1);
           }
