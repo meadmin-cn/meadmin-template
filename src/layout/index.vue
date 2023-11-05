@@ -1,19 +1,25 @@
 <template>
   <el-container class="layout">
-    <el-aside v-if="!globalStore.isMobile" width="max-content">
+    <el-aside v-if="!globalStore.isMobile && menuType !== 'top'" width="max-content">
       <layout-menu></layout-menu>
     </el-aside>
     <el-container>
       <el-header v-if="themeConfig.fixedHeader" class="right-header" height="max-content">
         <layout-header></layout-header>
       </el-header>
-      <el-main class="right-main">
-        <el-scrollbar view-class="me-right-main-view">
-          <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
-          <div id="me-main" class="me-main">
-            <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
-          </div>
-        </el-scrollbar>
+      <el-main class="main">
+        <el-aside v-if="menuType === 'top'" width="max-content">
+          <layout-menu></layout-menu>
+        </el-aside>
+        <el-main class="right-main">
+          <tag-bar v-if="themeConfig.tagBar"></tag-bar>
+          <el-scrollbar view-class="me-right-main-view">
+            <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
+            <div id="me-main" class="me-main">
+              <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
+            </div>
+          </el-scrollbar>
+        </el-main>
       </el-main>
     </el-container>
   </el-container>
@@ -35,8 +41,9 @@
 import LayoutHeader from './components/header/index.vue';
 import LayoutMenu from './components/menu/index.vue';
 import LayoutPage from './components/page.vue';
+import TagBar from './components/header/components/tagBar/index.vue';
 import { useSettingStore, useGlobalStore } from '@/store';
-const { themeConfig } = storeToRefs(useSettingStore());
+const { themeConfig, menuType } = storeToRefs(useSettingStore());
 const globalStore = useGlobalStore();
 onMounted(() => {
   nextTick(() => (globalStore.layoutLoaded = true));
@@ -45,15 +52,20 @@ onMounted(() => {
 <style lang="scss" scoped>
 .layout {
   height: 100%;
-
   .right-header {
     padding: 0;
   }
 
+  .main {
+    padding: 0;
+    display: flex;
+  }
   .right-main {
     padding: 0;
     // background-color: rgb(240, 242, 245);
     background-color: var(--el-bg-color-page);
+    display: flex;
+    flex-direction: column;
   }
 }
 

@@ -1,6 +1,26 @@
 <template>
   <el-drawer v-model="setting.showSettingMenu" :title="$t('项目配置')" size="300px" append-to-body>
-    <el-form label-position="left" label-width="170px">
+    <el-form class="content" label-position="left" label-width="170px">
+      <div class="title">
+        <div class="title-content">{{ $t('布局') }}</div>
+      </div>
+      <div class="info" :style="{ '--primaryColor': themeConfig.primaryColor }">
+        <div
+          class="layout-base layout-left"
+          :class="{ active: themeConfig.menuType === 'sidebar' }"
+          :title="$t('左侧菜单模式')"
+          @click="themeConfig.menuType = 'sidebar'"
+        ></div>
+        <div
+          class="layout-base layout-top"
+          :class="{ active: themeConfig.menuType === 'top' }"
+          :title="$t('顶部菜单混合模式')"
+          @click="themeConfig.menuType = 'top'"
+        ></div>
+      </div>
+      <div class="title">
+        <div class="title-content">{{ $t('配置') }}</div>
+      </div>
       <el-form-item :label="$t('主题色')">
         <el-color-picker v-model="themeConfig.primaryColor" :predefine="predefinePrimaryColors" />
       </el-form-item>
@@ -79,4 +99,87 @@ const clear = () => {
   setting.clearCache();
   userStore.logOut();
 };
+const activeColor = computed(() => themeConfig.value.primaryColor);
 </script>
+<style lang="scss" scoped>
+.content {
+  margin-top: -32px;
+  .title {
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin: 24px 0;
+    border-top: 1px var(--el-border-color) var(--el-border-style);
+    position: relative;
+    .title-content {
+      position: absolute;
+      background-color: var(--el-bg-color);
+      padding: 0 20px;
+      font-weight: 500;
+      color: var(--el-text-color-primary);
+      font-size: 14px;
+      left: 50%;
+      transform: translate(-50%) translateY(-50%);
+    }
+  }
+  .info {
+    display: flex;
+    justify-content: center;
+    .layout-base {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      position: relative;
+      background: #e5e7eb;
+      border: 1px solid #e5e7eb;
+      margin-right: 15px;
+      cursor: pointer;
+    }
+    .active {
+      border: 2px solid var(--primaryColor) !important;
+    }
+    .layout-left::before {
+      content: '';
+      background-color: #000;
+      position: absolute;
+      left: 0;
+      width: 10px;
+      top: 0;
+      bottom: 0;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    .layout-left::after {
+      content: '';
+      background-color: #fff;
+      position: absolute;
+      left: 10px;
+      right: 0;
+      top: 0;
+      height: 10px;
+      border-top-right-radius: 5px;
+    }
+    .layout-top::before {
+      content: '';
+      background-color: #000;
+      position: absolute;
+      left: 0;
+      width: 10px;
+      top: 10px;
+      bottom: 0;
+      border-bottom-left-radius: 5px;
+    }
+    .layout-top::after {
+      content: '';
+      background-color: #fff;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 10px;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+  }
+}
+</style>

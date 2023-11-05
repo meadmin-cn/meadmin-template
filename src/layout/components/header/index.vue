@@ -1,7 +1,6 @@
 <template>
   <div class="layout-header">
     <top-bar v-if="themeConfig.topBar"></top-bar>
-    <tag-bar v-if="themeConfig.tagBar"></tag-bar>
   </div>
 </template>
 <script setup lang="ts" name="LayoutHeader">
