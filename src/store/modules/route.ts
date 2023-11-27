@@ -11,6 +11,7 @@ export default defineStore('route', {
   state: () => ({
     addRoutes: [] as RouteRecordRaw[],
     cacheFullPath: new Set() as Set<string | RegExp>,
+    childsRoutes: [] as RouteRecordRaw[][],
   }),
   getters: {
     routes: (state) => constantRoutes.concat(state.addRoutes),
