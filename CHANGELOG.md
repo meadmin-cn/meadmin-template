@@ -1,5 +1,40 @@
 
 
+## [1.1.19](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.18...main-1.1.19) (2023-12-03)
+
+
+### 重构[refactor]
+
+* 优化默认样式，干掉一闪而过的滚动条 ([279a93c](https://github.com/meadmin-cn/meadmin-template/commit/279a93c1826be9245c450e638995cba98b58994e))
+
+
+### 新功能[feat]
+
+* 加上菜单侧边栏和左侧模式 ([63e83c6](https://github.com/meadmin-cn/meadmin-template/commit/63e83c6efbf49f014ccba89c46f629909b77a020))
+* tag菜单加上body点击时关闭 ([4553bde](https://github.com/meadmin-cn/meadmin-template/commit/4553bde10ef28a62131c803475a9b34e2ab2f76e))
+* tag滚动会自动多展示前一个/后一个tag ([33dfb3b](https://github.com/meadmin-cn/meadmin-template/commit/33dfb3bab2cff0f6559df6acfa9c93f147a19447))
+* tag滚动会自动多展示前一个/后一个tag ([4d40627](https://github.com/meadmin-cn/meadmin-template/commit/4d406275216cdb0d63c82a80a775ec2e0106e569))
+
+
+### 其他[chore]
+
+* template-release v1.1.18 ([499861d](https://github.com/meadmin-cn/meadmin-template/commit/499861d2647fb879a78b266aa79fa4198edd9c19))
+* template-release v1.1.19 ([794ff24](https://github.com/meadmin-cn/meadmin-template/commit/794ff248cb0d93dba847029713d622141f417b51))
+
+
+### Bug 修复[fix]
+
+* 加上 :column-config="{useKey:true}" 修复新版vxe-table报错 ([5079e3c](https://github.com/meadmin-cn/meadmin-template/commit/5079e3cc6ec670ed9b030054623ac96f4889e986))
+* 升级vxe-table版本 对应暗黑模式改为css变量模式 ([0dfc3e0](https://github.com/meadmin-cn/meadmin-template/commit/0dfc3e0c741130ef8d857bc75c0269fecc1ef6f4))
+* 修复顶栏菜单模式,...计算错误问题 ([d97f97d](https://github.com/meadmin-cn/meadmin-template/commit/d97f97d8287a9c4bb41ec7cceb0bb1d5896811a9))
+* 修复配置响应丢失问题 ([64393f1](https://github.com/meadmin-cn/meadmin-template/commit/64393f1fca5c7439d12e49ec92e589f83d05ec55))
+* 修复最大滚动tag值错误 ([30e07bf](https://github.com/meadmin-cn/meadmin-template/commit/30e07bf49fef07f0982ce6a5b8af0e167c752308))
+* 修复最大滚动tag值错误 ([5a5fb0f](https://github.com/meadmin-cn/meadmin-template/commit/5a5fb0f9614bef5dccfe509be5293d2de0113ce9))
+* 修复scrollLeft精度问题 ([68c6b81](https://github.com/meadmin-cn/meadmin-template/commit/68c6b81537415a2119c73aea101150c9a687ac97))
+* 修复tag变更时滚动最大值未更新错误 ([ea0d34c](https://github.com/meadmin-cn/meadmin-template/commit/ea0d34cfee63a05c6226b070221a70f69fe207f1))
+* 修复tag变更时滚动最大值未更新错误 ([ba38f08](https://github.com/meadmin-cn/meadmin-template/commit/ba38f088c12ad791a77571caa3cd8e7fe774c835))
+* 重新生成type文件 ([0fac8a6](https://github.com/meadmin-cn/meadmin-template/commit/0fac8a65f0a3ebfa15933dcaadab6e586c722207))
+
 ## [1.1.18](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.17...main-1.1.18) (2023-08-08)
 
 
