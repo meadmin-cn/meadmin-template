@@ -4,7 +4,6 @@
     <input v-model="value" name="text" />
     <me-keep-alive>
       <div></div>
-      <div></div>
     </me-keep-alive>
   </div>
 </template>
