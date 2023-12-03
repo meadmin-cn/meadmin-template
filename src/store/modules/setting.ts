@@ -2,6 +2,7 @@ import { Language } from 'element-plus/es/locale';
 import { themeConfig, settingKey, localeConfig } from '@/config';
 import { event, mitter } from '@/event';
 import { mixColor } from '@/utils/helper';
+import { useGlobalStore } from '../module';
 const { css } = useStyleTag('');
 const useSettingStore = defineStore('setting', {
   state: () => ({
@@ -11,6 +12,12 @@ const useSettingStore = defineStore('setting', {
     isDark: useDark({ storageKey: 'me-color-dark-scheme' }),
     showSettingMenu: false,
   }),
+  getters: {
+    menuType: (state) => {
+      const globalStore = useGlobalStore();
+      return globalStore.isMobile ? 'sidebar' : state.themeConfig.menuType;
+    },
+  },
   actions: {
     setPrimaryStyle() {
       const style = [];

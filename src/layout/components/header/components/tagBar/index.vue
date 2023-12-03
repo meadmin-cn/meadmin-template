@@ -221,6 +221,7 @@ watch(route, () => {
   height: $header-tag-height;
   display: flex;
   align-items: center;
+  background-color: var(--el-bg-color);
 
   .is-disabled {
     color: var(--el-disabled-text-color) !important;

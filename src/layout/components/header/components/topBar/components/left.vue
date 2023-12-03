@@ -1,9 +1,7 @@
 <template>
   <el-space class="left">
     <div></div>
-    <mel-icon-expand v-if="themeConfig.menuCollapse" class="fold-expand pointer" @click="setMenuCollapse">
-    </mel-icon-expand>
-    <mel-icon-fold v-else class="fold-expand pointer" @click="setMenuCollapse"></mel-icon-fold>
+    <Expand></Expand>
     <el-scrollbar
       v-if="!globalStore.isMobile && themeConfig.breadcrumb"
       :min-size="10"
@@ -24,11 +22,9 @@
 import { mitter, event } from '@/event';
 import { useSettingStore, useGlobalStore, useRouteStore } from '@/store';
 import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
+import Expand from '@/layout/components/expand.vue';
 const { themeConfig } = storeToRefs(useSettingStore());
 const globalStore = useGlobalStore();
-const setMenuCollapse = () => {
-  themeConfig.value.menuCollapse = !themeConfig.value.menuCollapse;
-};
 const breadcrumbList = ref([] as Pick<RouteRecordRaw, 'name' | 'path' | 'meta' | 'redirect'>[]);
 const route = useRoute();
 const { routes } = storeToRefs(useRouteStore());

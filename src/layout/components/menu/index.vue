@@ -1,6 +1,11 @@
 <template>
-  <div class="layout-menu" :class="{ collapse: !globalStore.isMobile && themeConfig.menuCollapse }">
-    <div class="title">M<span>e - Admin</span></div>
+  <div
+    v-if="menus.length"
+    class="layout-menu"
+    :class="{ 'has-title': menuType !== 'top', collapse: !globalStore.isMobile && themeConfig.menuCollapse }"
+  >
+    <Expand v-if="menuType === 'top'" class="expand"></Expand>
+    <Title v-else class="layout-title"></Title>
     <div class="menu-box">
       <el-scrollbar view-class="layout-menu-content">
         <el-menu
@@ -8,7 +13,7 @@
           :default-active="activeMenu"
           :collapse="!globalStore.isMobile && themeConfig.menuCollapse"
         >
-          <layout-menu-item v-for="item in routeStore.routes" :key="item.path" :item="item" />
+          <layout-menu-item v-for="item in menus" :key="item.path" :item="item" :collapse="themeConfig.menuCollapse" />
         </el-menu>
       </el-scrollbar>
     </div>
@@ -17,7 +22,10 @@
 <script setup lang="ts" name="layoutMenu">
 import { useSettingStore, useRouteStore, useGlobalStore } from '@/store';
 import { mixColor, getColorLuma } from '@/utils/helper';
-const { themeConfig } = storeToRefs(useSettingStore());
+import Title from '../title.vue';
+import Expand from '@/layout/components/expand.vue';
+
+const { themeConfig, menuType } = storeToRefs(useSettingStore());
 const routeStore = useRouteStore();
 const globalStore = useGlobalStore();
 const route = useRoute();
@@ -42,6 +50,9 @@ const menuBg1 = computed(() =>
 );
 const menuActiveColor = computed(() => (getColorLuma(themeConfig.value.menuBg) < 100 ? '#ffffff' : '#303133'));
 const menuTextColor = computed(() => mixColor(themeConfig.value.menuBg, menuActiveColor.value, 0.8));
+const menus = computed(() => {
+  return menuType.value === 'top' ? routeStore.childsRoutes[route.meta.menuIndex![0]] : routeStore.routes;
+});
 </script>
 <style lang="scss" scoped>
 .layout-menu {
@@ -51,21 +62,14 @@ const menuTextColor = computed(() => mixColor(themeConfig.value.menuBg, menuActi
   background-color: v-bind('themeConfig.menuBg');
   height: 100%;
   position: relative;
-  padding-top: var(--el-menu-item-height);
-  .title {
-    height: var(--el-menu-item-height);
-    line-height: var(--el-menu-item-height);
-    font-weight: bold;
-    padding: 0 12px;
-    font-size: 1.25em;
-    word-break: break-all;
-    overflow-y: hidden;
-    color: var(--el-menu-active-color);
-    background-color: inherit;
+
+  .layout-title {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
+    color: var(--el-menu-active-color);
+    width: 100%;
     box-shadow: 0 1px v-bind(menuBg1);
   }
   .menu-box {
@@ -120,6 +124,18 @@ const menuTextColor = computed(() => mixColor(themeConfig.value.menuBg, menuActi
       }
     }
   }
+  .expand {
+    position: absolute;
+    bottom: 20px;
+    right: 12px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    z-index: 1;
+  }
+}
+.has-title {
+  padding-top: $header-top-height;
 }
 .collapse {
   :deep(.layout-menu-content) {
