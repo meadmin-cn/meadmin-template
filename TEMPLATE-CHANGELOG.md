@@ -1,5 +1,28 @@
 
 
+## [1.1.19](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.18...template-1.1.19) (2023-12-03)
+
+
+### 重构[refactor]
+
+* 优化默认样式，干掉一闪而过的滚动条 ([279a93c](https://github.com/meadmin-cn/meadmin-template/commit/279a93c1826be9245c450e638995cba98b58994e))
+
+
+### 新功能[feat]
+
+* 加上菜单侧边栏和左侧模式 ([63e83c6](https://github.com/meadmin-cn/meadmin-template/commit/63e83c6efbf49f014ccba89c46f629909b77a020))
+* tag菜单加上body点击时关闭 ([4553bde](https://github.com/meadmin-cn/meadmin-template/commit/4553bde10ef28a62131c803475a9b34e2ab2f76e))
+* tag滚动会自动多展示前一个/后一个tag ([4d40627](https://github.com/meadmin-cn/meadmin-template/commit/4d406275216cdb0d63c82a80a775ec2e0106e569))
+
+
+### Bug 修复[fix]
+
+* 修复顶栏菜单模式,...计算错误问题 ([d97f97d](https://github.com/meadmin-cn/meadmin-template/commit/d97f97d8287a9c4bb41ec7cceb0bb1d5896811a9))
+* 修复配置响应丢失问题 ([64393f1](https://github.com/meadmin-cn/meadmin-template/commit/64393f1fca5c7439d12e49ec92e589f83d05ec55))
+* 修复最大滚动tag值错误 ([5a5fb0f](https://github.com/meadmin-cn/meadmin-template/commit/5a5fb0f9614bef5dccfe509be5293d2de0113ce9))
+* 修复scrollLeft精度问题 ([68c6b81](https://github.com/meadmin-cn/meadmin-template/commit/68c6b81537415a2119c73aea101150c9a687ac97))
+* 修复tag变更时滚动最大值未更新错误 ([ba38f08](https://github.com/meadmin-cn/meadmin-template/commit/ba38f088c12ad791a77571caa3cd8e7fe774c835))
+
 ## [1.1.18](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.17...template-1.1.18) (2023-08-08)
 
 
