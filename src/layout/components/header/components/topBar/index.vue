@@ -2,7 +2,7 @@
   <div class="top-bar">
     <Title v-if="menuType === 'top'"></Title>
     <Left v-else></Left>
-    <top-menu v-if="menuType === 'top'"></top-menu>
+    <top-menu v-if="menuType === 'top'" class="menu"></top-menu>
     <Right></Right>
   </div>
 </template>
