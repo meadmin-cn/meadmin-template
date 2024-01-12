@@ -42,6 +42,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { args: 'after-used' }],
     'no-undef': 'off', // ts(2304)
+    '@typescript-eslint/no-duplicate-enum-values': 'off',
     '@typescript-eslint/naming-convention': [
       'error',
       {
