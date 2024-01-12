@@ -1,7 +1,7 @@
 // .prettierrc.js
 module.exports = {
-  // 一行最多 120 字符
-  printWidth: 120,
+  // 一行最多 1000 字符 建议不强制换行使用编辑器的查看/自动换行进行展示换行
+  printWidth: 1000,
   // 超出不换行
   proseWrap: 'never',
   // 使用 2 个空格缩进
