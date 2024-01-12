@@ -99,7 +99,6 @@ const clear = () => {
   setting.clearCache();
   userStore.logOut();
 };
-const activeColor = computed(() => themeConfig.value.primaryColor);
 </script>
 <style lang="scss" scoped>
 .content {

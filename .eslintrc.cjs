@@ -46,7 +46,7 @@ module.exports = {
       'error',
       {
         selector: 'default',
-        format: ['camelCase'],
+        format: ['camelCase', 'PascalCase'],
         leadingUnderscore: 'allowSingleOrDouble',
         filter: {
           // you can expand this regex to add more allowed names

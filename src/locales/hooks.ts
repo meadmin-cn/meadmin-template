@@ -23,7 +23,7 @@ export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>(
 ) => {
   const res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
   if (messageImport) {
-    setLocaleMessage(res, res.locale.value, messageImport);
+    setLocaleMessage(res, res.locale.value!, messageImport);
     mitter.on(
       event.BEFORE_LOCAL_CHANGE,
       (params) => {
@@ -47,7 +47,7 @@ export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI1
 ) => {
   const res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
   if (messageImport) {
-    await setLocaleMessage(res, res.locale.value, messageImport);
+    await setLocaleMessage(res, res.locale.value!, messageImport);
     mitter.on(event.BEFORE_LOCAL_CHANGE, (params) => {
       setLocaleMessage(res, params.locale, messageImport);
     });

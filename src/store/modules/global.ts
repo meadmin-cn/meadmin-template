@@ -7,7 +7,7 @@ mitter.on(event.RESIZE, () => {
 });
 export default defineStore('global', {
   state: () => {
-    let _i18n: Composer<unknown, unknown, unknown>;
+    let _i18n: Composer;
     return {
       i18n: customRef((track, trigger) => {
         return {
@@ -15,7 +15,7 @@ export default defineStore('global', {
             track(); // track 方法放在 get 中，用于提示这个数据是需要追踪变化的
             return _i18n;
           },
-          set(i18n: Composer<unknown, unknown, unknown>) {
+          set(i18n: Composer) {
             if (!_i18n) {
               // 只初始化一次值
               _i18n = i18n;

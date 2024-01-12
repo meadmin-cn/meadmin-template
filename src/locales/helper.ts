@@ -5,7 +5,7 @@ import { loading, closeLoading } from '@/utils/loading';
 import { Language } from 'element-plus/es/locale';
 import { useGlobalStore, useSettingStore } from '@/store';
 import log from '@/utils/log';
-type GlobaleI18n = Composer<unknown, unknown, unknown, any>;
+type GlobaleI18n = Composer<Record<string, any>, Record<string, any>, Record<string, any>, any>;
 const messageMap: Map<string, Record<any, any>> = new Map();
 export type MessageImport = [(locale: string) => Promise<{ default: LocaleMessages<VueMessageType> }>, string?];
 
