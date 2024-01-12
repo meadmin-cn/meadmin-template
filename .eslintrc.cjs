@@ -42,11 +42,12 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { args: 'after-used' }],
     'no-undef': 'off', // ts(2304)
+    '@typescript-eslint/no-duplicate-enum-values': 'off',
     '@typescript-eslint/naming-convention': [
       'error',
       {
         selector: 'default',
-        format: ['camelCase'],
+        format: ['camelCase', 'PascalCase'],
         leadingUnderscore: 'allowSingleOrDouble',
         filter: {
           // you can expand this regex to add more allowed names

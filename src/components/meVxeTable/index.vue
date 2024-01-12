@@ -37,7 +37,7 @@
                     :default-checked-keys="defaultChecked"
                     :data="collectColumn"
                     default-expand-all
-                    :props="{ label: (item: TreeNodeData) => (item.type === 'seq' ? '#' : item.title), children: 'children' }"
+                    :props="elTreeProps"
                     show-checkbox
                     @check-change="checkChange"
                   />
@@ -196,6 +196,10 @@ export default defineComponent<
     });
     expose({ vxeTableRef });
     return {
+      elTreeProps: {
+        label: (item: TreeNodeData) => (item.type === 'seq' ? '#' : item.title),
+        children: 'children',
+      },
       vxeTableRef,
       collectColumn,
       defaultChecked,

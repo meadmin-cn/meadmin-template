@@ -1,6 +1,6 @@
 # Me-admin template
 ## Introduction
-Me-admin template is a free open source admin template, built on VUE3, Vite4, Pinia, and Element-Plus, right out of the box.
+Me-admin template is a free open source admin template, built on VUE3, Vite5, Pinia, and Element-Plus, right out of the box.
 
 **English** | [中文](./README.md)
 
@@ -34,7 +34,7 @@ Me-admin template is a free open source admin template, built on VUE3, Vite4, Pi
 
 ## Install and use
 
- nodejs version >= 16.15.1
+ nodejs version >= 20.10.0
 
 - clone code
 ```

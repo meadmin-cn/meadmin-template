@@ -22,7 +22,7 @@ interface Events {
   }; // 路由变更后
   [EventEnum.BEFORE_LOCAL_CHANGE]: {
     locale: string;
-    i18n: Composer<unknown, unknown, unknown>;
+    i18n: Composer<Record<string, any>, Record<string, any>, Record<string, any>, any>;
   }; // 全局语言变更前
   [EventEnum.INIT_DYNAMIC_VIEWS_MODULES]: DynamicViewsModules;
 }

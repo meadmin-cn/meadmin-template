@@ -1,7 +1,7 @@
-import { dirname, resolve } from 'path';
-import * as fs from 'fs';
+import { dirname, resolve } from 'node:path';
+import * as fs from 'node:fs';
 import { createPlugin } from 'vite-plugin-autogeneration-import-file';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 const { autoImport, resolver: resolverFn } = createPlugin();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
