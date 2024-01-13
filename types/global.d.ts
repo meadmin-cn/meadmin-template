@@ -22,11 +22,8 @@ declare global {
   /* eslint-disable */
 
   type ComponentProps<Component> = {
-    -readonly [K in keyof Omit<
-      InstanceType<Component>['$props'],
-      keyof InstanceType<DefineComponent>['$props']
-    >]: InstanceType<Component>['$props'][K];
-  };
+    -readonly [K in keyof Omit<InstanceType<Component>['$props'], keyof InstanceType<DefineComponent>['$props']>]: InstanceType<Component>['$props'][K];
+  } & { [key: `on${Capitalize<string>}`]: (...args: any[]) => any };
 
   type KeyOfMap<T extends Map> = Parameters<T['get']>[0];
 
