@@ -1,6 +1,6 @@
 import { closeLoading, loading } from '@/utils/loading';
 import { useUserStore, useGlobalStore } from '@/store';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 import { ElMessage } from 'element-plus';
 import log from './log';
 import { useRequest, Options, setGlobalOptions } from 'vue-request';
@@ -16,7 +16,7 @@ service.interceptors.request.use(
   (config) => {
     // 在发送请求之前做一些事情
     if (!config.headers) {
-      config.headers = {};
+      config.headers = {} as AxiosRequestHeaders;
     }
     const userStore = useUserStore();
     if (userStore.token) {
