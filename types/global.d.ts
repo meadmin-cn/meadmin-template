@@ -23,11 +23,8 @@ declare global {
   /* eslint-disable */
 
   type ComponentProps<Component> = {
-    -readonly [K in keyof Omit<
-      InstanceType<Component>['$props'],
-      keyof InstanceType<DefineComponent>['$props']
-    >]: InstanceType<Component>['$props'][K];
-  };
+    -readonly [K in keyof Omit<InstanceType<Component>['$props'], keyof InstanceType<DefineComponent>['$props']>]: InstanceType<Component>['$props'][K];
+  } & { [key: `on${Capitalize<string>}`]: (...args: any[]) => any };
 
   type ELTableInstance = InstanceType<typeof ElTable> & {
     getSelectionIndexs: () => number[]; //获取选中行的索引
