@@ -1,5 +1,32 @@
 
 
+## [1.1.20](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.19...main-1.1.20) (2024-01-13)
+
+
+### 新功能[feat]
+
+* 加上函数式组件调用支持(使用动态组件方式生成组件) ([3e18778](https://github.com/meadmin-cn/meadmin-template/commit/3e18778abc36d8f635e0b79eff5163d2ddfdb074))
+* typescript升级到5.2.3，vue-tsc 省级到 1.8.24，vite升级到4.5.1 ([a9c3697](https://github.com/meadmin-cn/meadmin-template/commit/a9c3697b56b1a6d07efe7f34510c9ebed7adf647))
+
+
+### 其他[chore]
+
+* @vitejs/plugin-vue 版本升级 ([a21ac98](https://github.com/meadmin-cn/meadmin-template/commit/a21ac9832bacde5a37bfbc1de9b4da65f76f9a4b))
+* 修改git hooks node版本 ([e7fe3bc](https://github.com/meadmin-cn/meadmin-template/commit/e7fe3bc95eb3e12acbb336ce6d77d13f1c06bdff))
+* 优化prettierrc 的换行规则 ([4cd1ad4](https://github.com/meadmin-cn/meadmin-template/commit/4cd1ad4dbe887e8d2d29c3e2ad39624e49185223))
+* template-release v1.1.20 ([655b6b2](https://github.com/meadmin-cn/meadmin-template/commit/655b6b26979fbb5118a4ba4f99692c1dd5d04974))
+* vite版本升级到vite5 ([2ef5ed0](https://github.com/meadmin-cn/meadmin-template/commit/2ef5ed0ac0955c677dbdfa4f731ed7fb4f5c3b49))
+
+
+### 样式更改[style]
+
+* 忽略esclint错误规则 ([fb5b903](https://github.com/meadmin-cn/meadmin-template/commit/fb5b90362303cb08ba8c679855790b0b72e00e4e))
+
+
+### 重构[refactor]
+
+* 升级 vue、typescript、eslint 相关依赖版本 ([03374ff](https://github.com/meadmin-cn/meadmin-template/commit/03374ff9ad21e148608d2381323c295b87e7133b))
+
 ## [1.1.19](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.18...main-1.1.19) (2023-12-03)
 
 
