@@ -1,6 +1,6 @@
 <template>
-  <div class="me-vxe-table" :class="meClass">
-    <div v-if="toolbar" class="me-vxe-toolbar">
+  <div v-resize="getTableHeight" class="me-vxe-table" :class="meClass">
+    <div v-if="toolbar" ref="meVxeToolbarRef" class="me-vxe-toolbar">
       <div v-if="$slots.search" v-show="showSearch" class="me-vxe-toolbar-search">
         <slot name="search"></slot>
       </div>
@@ -78,7 +78,7 @@
       </div>
     </div>
     <div class="me-vxe-body">
-      <vxe-table ref="vxeTableRef" v-bind="$attrs">
+      <vxe-table ref="vxeTableRef" :max-height="tableHeight" v-bind="$attrs">
         <slot></slot>
         <template v-if="$slots.loading" #loading>
           <slot name="loading"></slot>
@@ -88,7 +88,7 @@
         </template>
       </vxe-table>
     </div>
-    <pagination v-if="paginationOptions" :options="paginationOptions" class="pagination me-vxe-footer"></pagination>
+    <pagination v-if="paginationOptions" ref="mePaginationRef" :options="paginationOptions" class="pagination me-vxe-footer"></pagination>
   </div>
 </template>
 <script lang="ts">
@@ -105,6 +105,8 @@ import {
 } from 'vxe-table';
 import { debounce } from 'lodash-es';
 import { TreeNodeData } from 'element-plus/es/components/tree/src/tree.type';
+import resize  from './directives/resize';
+import {getFullHight} from './util';
 const props = {
   meClass: [String, Array] as PropType<string[] | string>,
   name: {
@@ -148,6 +150,10 @@ const props = {
     default: () => (t: ComponentCustomProperties['$t']) => t('快捷搜索'),
   },
   paginationOptions: Object as PropType<InstanceType<typeof pagination>['options']>,
+  autoHeight:{
+    type: Boolean,
+    default: true,
+  },
 };
 const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown as {
   quickSearch: (searchText: string) => void;
@@ -167,11 +173,14 @@ export default defineComponent<
 >({
   name: 'MeVxeTable',
   components: { pagination },
+  directives:{resize},
   inheritAttrs: false,
   props: props as any,
   emits,
   setup(props, { expose }) {
     const vxeTableRef = ref<VxeTableInstance>();
+    const meVxeToolbarRef = ref<HTMLDivElement|null>(null);
+    const mePaginationRef = ref<InstanceType<typeof pagination>|null>(null);
     const showSearch = ref(props.defaultShowSearch);
     const collectColumn = ref([] as VxeTableDefines.ColumnInfo[]);
     const defaultChecked = ref([] as string[]);
@@ -195,6 +204,14 @@ export default defineComponent<
       });
     });
     expose({ vxeTableRef });
+    const tableHeight = ref<number>();
+    const getTableHeight = (data:{width:number,height:number})=>{
+      if(props.autoHeight){
+        const toolbarHeight = meVxeToolbarRef.value? getFullHight(meVxeToolbarRef.value):0;
+        const paginationHeight = mePaginationRef.value?.$el? getFullHight(mePaginationRef.value?.$el):0;
+        tableHeight.value = data.height - toolbarHeight - paginationHeight;
+      }
+    }
     return {
       elTreeProps: {
         label: (item: TreeNodeData) => (item.type === 'seq' ? '#' : item.title),
@@ -232,6 +249,10 @@ export default defineComponent<
         );
       },
       showSearch,
+      getTableHeight,
+      tableHeight,
+      meVxeToolbarRef,
+      mePaginationRef,
     };
   },
 });
@@ -240,10 +261,13 @@ export default defineComponent<
 .me-vxe-table {
   $margin-top: 15px;
   $margin-left: 12px;
-
+  display: flex;
+  flex-direction: column;
   .me-vxe-toolbar {
     margin-top: -$margin-top;
     margin-bottom: $margin-top;
+    flex-shrink: 0;
+    flex-grow: 0;
 
     .me-vxe-toolbar-search {
       margin-top: $margin-top;
@@ -280,8 +304,13 @@ export default defineComponent<
       }
     }
   }
-
+  .me-vxe-body{
+    flex-shrink: 1;
+    overflow: auto;
+  }
   .pagination {
+    flex-shrink: 0;
+    flex-grow: 0;
     margin-top: $margin-top;
     justify-content: center;
   }
