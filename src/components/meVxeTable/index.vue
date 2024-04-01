@@ -263,6 +263,7 @@ export default defineComponent<
   $margin-left: 12px;
   display: flex;
   flex-direction: column;
+  height: 100%;
   .me-vxe-toolbar {
     margin-top: -$margin-top;
     margin-bottom: $margin-top;

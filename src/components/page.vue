@@ -16,9 +16,6 @@
     }
     .content-body{
         flex:1;
-        :deep(.me-vxe-table){
-            height: 100%;
-        }
     }
     .content-body:nth-child(n+2){
         margin-top: 10px;
