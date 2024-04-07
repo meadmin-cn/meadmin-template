@@ -18,4 +18,5 @@ export default async (props: Omit<ComponentProps<typeof Add>, 'show'> = {}) => {
     })),
   );
   await nextTick();
+  return key;
 };
