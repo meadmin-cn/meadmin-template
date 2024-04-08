@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="never" class="vxe-table-demo">
+  <el-card shadow="never" class="vxe-table-demo" >
     <me-vxe-table
       ref="meVxeTableRef"
       v-model:quick-search="searchForm.search"
@@ -9,8 +9,8 @@
       :edit-config="{ trigger: 'click', mode: 'row', showStatus: true }"
       :print="print"
       :pagination-options="paginationOptions"
+      :auto-height="false"
       stripe
-      height="600px"
       me-class="table"
       border
       show-overflow
