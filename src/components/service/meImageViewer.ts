@@ -7,6 +7,8 @@ export function createImageViewer(props: ComponentProps<typeof ElImageViewer>) {
     ElImageViewer,
     Object.assign(
       {
+        // 解决 element plus 2.8.0 及以上版本，不能关闭 image-viewer 的问题
+        teleported: true,
         onClose: function () {
           render(null, container);
           if (typeof props.onClose === 'function') {
