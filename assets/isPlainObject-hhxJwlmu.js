@@ -1,0 +1,1 @@
+import{al as c,bk as n,bl as a}from"./index-fzxr_SzS.js";var i="[object Object]",s=Function.prototype,b=Object.prototype,e=s.toString,p=b.hasOwnProperty,f=e.call(Object);function u(r){if(!c(r)||n(r)!=i)return!1;var o=a(r);if(o===null)return!0;var t=p.call(o,"constructor")&&o.constructor;return typeof t=="function"&&t instanceof t&&e.call(t)==f}export{u as i};
