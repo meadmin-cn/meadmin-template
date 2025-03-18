@@ -54,6 +54,14 @@ export default async (configEnv: ConfigEnv): Promise<UserConfigExport> => {
       __FEATURE_SUSPENSE__: `true`,
       __FEATURE_PROD_DEVTOOLS__: `false`,
     },
+    server:{
+      warmup:{//提前转换和缓存文件以进行预热。可以在服务器启动时提高初始页面加载速度，并防止转换瀑布
+        clientFiles:[//仅在客户端使用的文件,路径相对于root
+          './src/main.ts',
+          './src/utils/request.ts'
+        ]
+      }
+    },
     /* eslint-disable */
     build: {
       rollupOptions: {
