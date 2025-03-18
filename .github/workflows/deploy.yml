@@ -1,7 +1,7 @@
 name: deploy-template
 
 on:
-  # 每当 push 到 main 分支时触发部署
+  # 每当 push 到 template 分支时触发部署
   push:
     branches: [template]
   # 手动触发部署
@@ -25,7 +25,7 @@ jobs:
 
       # 缓存 node_modules
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: npm-cache
         with:
           path: |

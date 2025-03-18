@@ -22,21 +22,10 @@ const props = {
 
 const emits = ['open'] as unknown as {
   open: () => void;
-};
-export default defineComponent<
-  ComponentProps<typeof ElDialog> & ExtractPublicPropTypes<typeof props>,
-  {
-    elDialogRef: Ref<InstanceType<typeof ElDialog> | undefined>;
-  },
-  Record<string, any>,
-  Record<string, any>,
-  Record<string, any>,
-  ComponentOptionsMixin,
-  ComponentOptionsMixin,
-  typeof emits
->({
+} & ArrayEmitsOptionsToFns<Parameters<InstanceType<typeof ElDialog>['$emit']>>;;
+export default defineComponent({
   name: 'MeDialog',
-  props: props as any,
+  props: props as unknown as typeof props & ComponentObjectPropsOptionsFromData<InstanceType<typeof ElDialog>['$props']>,
   emits: emits,
   setup(props, { expose, emit }) {
     const elDialogRef = ref<InstanceType<typeof ElDialog>>();

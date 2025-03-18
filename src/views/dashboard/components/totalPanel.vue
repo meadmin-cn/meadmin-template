@@ -55,7 +55,7 @@ const list = reactive([
     iconColor: '#F56C6C',
     total: computed(() => (data.value ? ([data.value.turnover.total, '￥'] as [number, string]) : 0)),
     subTitle: computed(() => t('昨日新增') + '：'),
-    subTotal: computed(() => '￥' + data.value?.turnover.yesterdayTotal ?? ''),
+    subTotal: computed(() => '￥' + (data.value?.turnover.yesterdayTotal ?? '')),
   },
 ]);
 runAsync();

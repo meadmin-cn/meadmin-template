@@ -5,33 +5,33 @@ import { upperFirst } from 'lodash-es';
 
 export function installIcon(app: App) {
   function componentIcon(name: string, iconComponent: Component) {
-    app.component(name, {
+    app.component(name, defineComponent({
       props: {
         size: [Number, String],
         color: String,
       },
-      render() {
+      setup(props) {
         let fontSize: string | undefined;
-        if (this.size) {
-          if (typeof this.size === 'string') {
-            fontSize = this.size;
-          } else if (typeof this.size === 'number') {
-            fontSize = `${this.size as string}px`;
+        if (props.size) {
+          if (typeof props.size === 'string') {
+            fontSize = props.size;
+          } else if (typeof props.size === 'number') {
+            fontSize = `${props.size}px`;
           }
         }
-        return h(
+        return ()=>h(
           'i',
           {
             class: 'el-icon',
             style: {
               fontSize,
-              color: this.color,
+              color: props.color,
             },
           },
           h(iconComponent),
         );
       },
-    });
+    }));
   }
   // 注册element icons
   for (const [key, component] of Object.entries(elementPlusIconsVue)) {

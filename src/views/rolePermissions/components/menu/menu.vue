@@ -104,7 +104,7 @@ const search = (searchText: string) => {
 const getMenu = async () => {
   await menu.runAsync();
   menuDataCopy = cloneDeep(menu.data.value!);
-  search(menuRef.value!.searchText);
+  search(searchText.value);
 };
 getMenu();
 const editorInfo = ref<Omit<MenuListResult[number], 'children'>>();

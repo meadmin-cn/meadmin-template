@@ -54,6 +54,14 @@ export default async (configEnv: ConfigEnv): Promise<UserConfigExport> => {
       __FEATURE_SUSPENSE__: `true`,
       __FEATURE_PROD_DEVTOOLS__: `false`,
     },
+    server:{
+      warmup:{//提前转换和缓存文件以进行预热。可以在服务器启动时提高初始页面加载速度，并防止转换瀑布
+        clientFiles:[//仅在客户端使用的文件,路径相对于root
+          './src/main.ts',
+          './src/utils/request.ts'
+        ]
+      }
+    },
     /* eslint-disable */
     build: {
       rollupOptions: {
@@ -76,13 +84,14 @@ export default async (configEnv: ConfigEnv): Promise<UserConfigExport> => {
       },
     },
     optimizeDeps: {
-      //因为项目中很多用到了自动引入和动态加载，所以vite首次扫描依赖项会扫描不全，这里强制扫描全局。
-      entries: ['src/**/*.{ts,tsx,vue}'],
+      //因为项目中很多用到了自动引入和动态加载，所以vite首次扫描依赖项会扫描不全，这里强制扫描src下全局,并加载element-plus。
+      entries: ['src/**/*.{ts,tsx,vue}','./index.html'],
       include: [
         'element-plus/es/components/loading/style/css',
         'element-plus/es/components/message/style/css',
         'element-plus/es/components/message-box/style/css',
         'element-plus/es/components/notification/style/css',
+        'node_modules/element-plus/es/index.mjs',
       ],
     },
   };

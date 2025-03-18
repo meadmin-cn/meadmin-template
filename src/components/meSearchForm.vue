@@ -3,7 +3,7 @@
     ref="elFormRef"
     class="me-search-form"
     :class="formClass"
-    :label-width="labelWidth"
+    :label-width="labelWidth!"
     :label-position="labelPosition"
   >
     <slot></slot>
@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { ElForm } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPropTypes, PropType, Ref } from 'vue';
+import { PropType } from 'vue';
 import type { FormInstance } from 'element-plus';
 import $ from 'jquery';
 const props = {
@@ -57,21 +57,10 @@ const props = {
   onSearch: Function as PropType<() => void>,
   onReset: Function as PropType<() => void>,
 };
-export default defineComponent<
-  ComponentProps<typeof ElForm> & Partial<ExtractPropTypes<typeof props>>,
-  {
-    elFormRef: Ref<FormInstance | undefined>;
-  },
-  Record<string, any>,
-  Record<string, any>,
-  Record<string, any>,
-  ComponentOptionsMixin,
-  ComponentOptionsMixin,
-  Record<string, any>
->({
+export default defineComponent({
   name: 'MeSearchForm',
-  props: props as any,
-  setup(props, { expose }) {
+  props: props as unknown as ComponentObjectPropsOptionsFromData<InstanceType<typeof ElForm>['$props']> &  typeof props,
+    setup(props, { expose }) {
     const elFormRef = ref<FormInstance>();
     const showAll = ref(props.defaultAll);
     const formClass = ref('');
