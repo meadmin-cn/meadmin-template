@@ -1,5 +1,22 @@
 
 
+## [1.1.21](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.20...template-1.1.21) (2025-03-18)
+
+
+### 文档更改[docs]
+
+* readme说明变更 ([bbe0a51](https://github.com/meadmin-cn/meadmin-template/commit/bbe0a51381a2bc6efc271e116d1f40ddb12e8160))
+
+
+### 性能改进[perf]
+
+* 版本升级,vite升级为6.2、vue升级为3.5、typescript升级为5.8.2、vue-tsc升级为2.2 ([4e71ca7](https://github.com/meadmin-cn/meadmin-template/commit/4e71ca79927f794b258c758b1545853c970f27a3))
+
+
+### CI发版[ci]
+
+* 修复“Missing download info for actions/cache@v2”gitaction问题 ([5b658d4](https://github.com/meadmin-cn/meadmin-template/commit/5b658d4597dd64cc0a14dd0f9c35adbcae03eb74))
+
 ## [1.1.20](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.19...template-1.1.20) (2024-01-13)
 
 
