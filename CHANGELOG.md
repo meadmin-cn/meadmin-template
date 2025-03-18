@@ -1,5 +1,40 @@
 
 
+## [1.1.21](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.20...main-1.1.21) (2025-03-18)
+
+
+### 新功能[feat]
+
+* 加上标准布局页面组件 ([73773d4](https://github.com/meadmin-cn/meadmin-template/commit/73773d4ee0b97eaf814b6c1b918da23f3e8bed80))
+* meVxeTable组件加上高度自动计算 ([f37a4ae](https://github.com/meadmin-cn/meadmin-template/commit/f37a4aeda4fd9818842e4f43c5ace3058f177ae7))
+
+
+### Bug 修复[fix]
+
+* meVxeTable高度100%加到组件中 ([1f40156](https://github.com/meadmin-cn/meadmin-template/commit/1f40156906db6c012c87aad7d63d4b1a1f28c3d0))
+* vxeTable示例加上auto-height="false"防止高度异常 ([34cd933](https://github.com/meadmin-cn/meadmin-template/commit/34cd93373ae8127045051129b63614252d980bdf))
+
+
+### 其他[chore]
+
+* template-release v1.1.21 ([2326f9b](https://github.com/meadmin-cn/meadmin-template/commit/2326f9bd5c7d21b4bd4930f48e2bdb6c4a7d0699))
+
+
+### 文档更改[docs]
+
+* readme说明变更 ([bbe0a51](https://github.com/meadmin-cn/meadmin-template/commit/bbe0a51381a2bc6efc271e116d1f40ddb12e8160))
+
+
+### 性能改进[perf]
+
+* 版本升级 vite升级为6.2、vue升级为3.5、typescript升级为5.8.2、vue-tsc升级为2.2([4e71ca7](https://github.com/meadmin-cn/meadmin-template/commit/4e71ca79927f794b258c758b1545853c970f27a3))
+* vxe-table升级到4.6 ([ccf828e](https://github.com/meadmin-cn/meadmin-template/commit/ccf828ee9ee623c3536b4cc51593d04a4a04dc34))
+
+
+### CI发版[ci]
+
+* 修复“Missing download info for actions/cache@v2”gitaction问题 ([5b658d4](https://github.com/meadmin-cn/meadmin-template/commit/5b658d4597dd64cc0a14dd0f9c35adbcae03eb74))
+
 ## [1.1.20](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.19...main-1.1.20) (2024-01-13)
 
 
