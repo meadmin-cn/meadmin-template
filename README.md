@@ -1,7 +1,7 @@
 # Me-admin template
 ## 简介
-Me-admin template是一个免费开源的中后台模板,基于vue3、vite5、 pinia、 element-plus构建，开箱即用，本项目的开源协议为最宽松的MIT协议，使用无任何限制，本项目采用最新技术栈，可以作为项目的启动模版，以帮助你快速搭建企业级中后台，也是一个很好的学习项目。
-**已升级vue3.3 + vite 5, vite5 确实快了不少**
+Me-admin template是一个免费开源的中后台模板,基于vue3、vite6、 pinia、 element-plus构建，开箱即用，本项目的开源协议为最宽松的MIT协议，使用无任何限制，本项目采用最新技术栈，可以作为项目的启动模版，以帮助你快速搭建企业级中后台，也是一个很好的学习项目。
+**已升级vue3.5 + vite 6, vite6 首屏加载优化到了3s内**
 
 开源不易，如果能帮到您，麻烦在[Github](https://github.com/meadmin-cn/meadmin-template)中点个star。
 
@@ -10,7 +10,7 @@ Me-admin template是一个免费开源的中后台模板,基于vue3、vite5、 p
 
 
 ## 特性
- - **基于vue3、vite4、pinia、element-plus、vue-request@next**
+ - **基于vue3、vite、pinia、element-plus、vue-request@next**
  - **基于typescript** 应用级JavaScript 的语言
  - **可配置主题** 可配置主题色及主题模式
  - **友好的国际化方案** 基于vue-i18n 支持按组件异步加载语言包。
