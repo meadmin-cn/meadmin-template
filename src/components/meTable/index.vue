@@ -6,21 +6,14 @@
       </div>
       <div class="me-toolbar-menu">
         <div class="me-toolbar-buttons">
-          <el-button v-if="_.vnode.props.onRefresh" @click="$emit('refresh')"><mel-icon-refresh /></el-button>
-          <el-button v-if="_.vnode.props.onAdd" type="primary" @click="$emit('add')"><mel-icon-plus /></el-button>
+          <el-button v-if="vnodeProps?.onRefresh" @click="$emit('refresh')"><mel-icon-refresh /></el-button>
+          <el-button v-if="vnodeProps?.onAdd" type="primary" @click="$emit('add')"><mel-icon-plus /></el-button>
           <slot name="buttons"></slot>
         </div>
         <div class="me-toolbar-tools">
-          <el-input
-            v-if="quickSearch !== undefined"
-            :model-value="quickSearch"
-            :placeholder="
-              typeof quickSearchPlaceholder === 'function' ? quickSearchPlaceholder($t) : quickSearchPlaceholder
-            "
-            prefix-icon="mel-icon-search"
-            @update:model-value="$emit('update:quickSearch', $event)"
-            @change="$emit('quickSearch', $event)"
-          />
+          <el-input v-if="quickSearch !== undefined" :model-value="quickSearch" :placeholder="typeof quickSearchPlaceholder === 'function' ? quickSearchPlaceholder($t) : quickSearchPlaceholder
+            " prefix-icon="mel-icon-search" @update:model-value="$emit('update:quickSearch', $event)"
+            @change="$emit('quickSearch', $event)" />
           <el-button-group v-if="customColumn || exportMenu?.length || print">
             <el-popover v-if="customColumn" :teleported="false" placement="bottom" trigger="click" width="auto">
               <template #reference>
@@ -28,42 +21,27 @@
               </template>
               <template #default>
                 <el-scrollbar max-height="300px" class="popover-scrollbar-y">
-                  <el-tree
-                    node-key="value"
-                    :data="customColumnProps!.labels"
-                    default-expand-all
-                    :default-checked-keys="checkedLabels"
-                    :props="{ label: 'label', children: 'children' }"
-                    show-checkbox
-                    @check-change="checkChange"
-                  />
+                  <el-tree node-key="value" :data="customColumnProps!.labels" default-expand-all
+                    :default-checked-keys="checkedLabels" :props="{ label: 'label', children: 'children' }"
+                    show-checkbox @check-change="checkChange" />
                 </el-scrollbar>
               </template>
             </el-popover>
-            <el-popover
-              v-if="exportMenu?.length"
-              pure
-              placement="bottom"
-              trigger="click"
-              popper-class="me-exportmenu-popover el-dropdown__popper"
-            >
+            <el-popover v-if="exportMenu?.length" pure placement="bottom" trigger="click"
+              popper-class="me-exportmenu-popover el-dropdown__popper">
               <template #reference>
                 <el-button icon="mel-icon-download" :title="$t('导出')" />
               </template>
               <template #default>
                 <ul class="el-dropdown-menu">
-                  <li
-                    v-for="item in exportMenu"
-                    :key="item.label"
-                    class="el-dropdown-menu__item"
-                    @click="handleExport(item.handle, item.filename ?? name!)"
-                  >
+                  <li v-for="item in exportMenu" :key="item.label" class="el-dropdown-menu__item"
+                    @click="handleExport(item.handle, item.filename ?? name!)">
                     {{ item.label }}
                   </li>
                 </ul>
               </template>
             </el-popover>
-            <el-button v-if="print" icon="mel-icon-printer" :title="$t('打印')" @click="printTable(elTableRef, name)" />
+            <el-button v-if="print" icon="mel-icon-printer" :title="$t('打印')" @click="printTable(elTableRef!, name)" />
             <slot name="tools"></slot>
           </el-button-group>
           <el-button v-if="$slots.search" :title="$t('更多筛选')" @click="showSearch = !showSearch">
@@ -87,8 +65,8 @@
 </template>
 <script lang="ts">
 import pagination from './components/pagination.vue';
-import { ElTable } from 'element-plus';
-import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPublicPropTypes, PropType, Ref } from 'vue';
+import { TableInstance, TableProps } from 'element-plus';
+import { ComponentCustomProperties, PropType } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
 import printTable from './hooks/print';
@@ -143,26 +121,15 @@ const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown
   refresh: () => void;
   add: () => void;
   ['update:quickSearch']: (searchText: string) => void;
-};
-export default defineComponent<
-  ComponentProps<typeof ElTable> & ExtractPublicPropTypes<typeof props>,
-  {
-    elTableRef: Ref<ELTableInstance | undefined>;
-    customColumnProps: Ref<ReturnType<typeof customColumn> | undefined>;
-  },
-  Record<string, any>,
-  Record<string, any>,
-  Record<string, any>,
-  ComponentOptionsMixin,
-  ComponentOptionsMixin,
-  typeof emits
->({
+} & ArrayEmitsOptionsToFns<Parameters<TableInstance['$emit']>>;
+export default defineComponent({
   name: 'MeTable',
   components: { pagination },
   inheritAttrs: false,
-  props: props as any,
+  props: props as unknown as typeof props & ComponentObjectPropsOptionsFromData<TableProps<any>>,
   emits,
-  setup(props, { slots, expose }) {
+  setup(props, { slots, expose,emit }) {
+    console.log('------',this,props,emit,useAttrs(),);
     const showSearch = ref(props.defaultShowSearch);
     const customColumnProps = ref<ReturnType<typeof customColumn>>();
     const checkedLabels = shallowRef([] as string[]);
@@ -213,7 +180,7 @@ export default defineComponent<
       exportTable,
       printTable,
       handleExport: (
-        handle: (elTable: ELTableInstance, filename: string) => void | 'xls' | 'txt' | 'csv',
+        handle: (elTable: ELTableInstance, filename: string) => void | 'xlsx' | 'txt' | 'csv',
         filename: string,
       ) => {
         if (typeof handle === 'string') {
@@ -222,6 +189,7 @@ export default defineComponent<
           handle(elTableRef.value!, filename);
         }
       },
+      vnodeProps:getCurrentInstance()?.vnode.props
     };
   },
 });
@@ -230,17 +198,21 @@ export default defineComponent<
 .me-table {
   $margin-top: 15px;
   $margin-left: 12px;
+
   .me-toolbar {
     margin-top: -$margin-top;
     margin-bottom: $margin-top;
+
     .me-toolbar-search {
       margin-top: $margin-top;
     }
+
     .me-toolbar-menu {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
+
       .me-toolbar-buttons {
         > {
           :deep(*) {
@@ -248,30 +220,36 @@ export default defineComponent<
           }
         }
       }
+
       .me-toolbar-tools {
         margin-top: $margin-top;
         display: flex;
         align-items: center;
+
         > {
           :deep(*:not(:first-child)) {
             margin-left: $margin-left;
           }
         }
-        > .el-button-group {
+
+        >.el-button-group {
           flex-shrink: 0;
         }
       }
     }
   }
+
   .pagination {
     margin-top: $margin-top;
     justify-content: center;
   }
 }
+
 :global(.me-exportmenu-popover) {
   width: max-content !important;
   min-width: unset !important;
 }
+
 :global(.me-exportmenu-popover .el-dropdown-menu__item:not(.is-disabled):hover) {
   background-color: var(--el-dropdown-menuItem-hover-fill);
   color: var(--el-dropdown-menuItem-hover-color);

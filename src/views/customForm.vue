@@ -102,13 +102,13 @@ if (app && !app.config.globalProperties.$initCreate) {
     ElCollapse,
     ElSpace,
   ].forEach((item) => {
-    app.component(item.name, item);
+    app.component(item.name!, item);
   });
   app.config.globalProperties.$initCreate = true;
 }
 </script>
 <style lang="scss" scoped>
-@import '../components/meWangEditor/meWangEditor.scss';
+@use '../components/meWangEditor/meWangEditor.scss';
 .custom-form {
   display: flex;
   flex-direction: column;

@@ -62,7 +62,7 @@ const getGroup = async () => {
   await group.runAsync();
   groupDataCopy = cloneDeep(group.data.value!);
   emit('currentChange', []);
-  search(groupRef.value!.searchText);
+  search(searchText.value);
 };
 getGroup();
 const groupChange: VxeTableEvents.CurrentChange = ({ row }: { row: GroupListResult[number] }) =>

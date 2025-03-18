@@ -6,10 +6,10 @@
       </div>
       <div class="me-vxe-toolbar-menu">
         <div class="me-vxe-toolbar-buttons">
-          <el-button v-if="_.vnode.props.onRefresh" @click="$emit('refresh')">
+          <el-button v-if="vnodeProps?.onRefresh" @click="$emit('refresh')">
             <mel-icon-refresh />
           </el-button>
-          <el-button v-if="_.vnode.props.onAdd" type="primary" @click="$emit('add')">
+          <el-button v-if="vnodeProps?.onAdd" type="primary" @click="$emit('add')">
             <mel-icon-plus />
           </el-button>
           <slot name="buttons"></slot>
@@ -94,12 +94,11 @@
 <script lang="ts">
 import './install';
 import pagination from './components/pagination.vue';
-import { ComponentCustomProperties, ComponentOptionsMixin, ExtractPublicPropTypes, PropType, Ref } from 'vue';
+import { ComponentCustomProperties, PropType } from 'vue';
 import {
-  VXEComponent,
   VxeTableDefines,
-  VxeTableEventProps,
   VxeTableInstance,
+  VxeTableListeners,
   VxeTableProps,
   VxeTablePropTypes,
 } from 'vxe-table';
@@ -160,22 +159,13 @@ const emits = ['quickSearch', 'refresh', 'add', 'update:quickSearch'] as unknown
   refresh: () => void;
   add: () => void;
   ['update:quickSearch']: (searchText: string) => void;
-};
-export default defineComponent<
-  ComponentProps<VXEComponent<VxeTableProps, VxeTableEventProps>> & ExtractPublicPropTypes<typeof props>,
-  { vxeTableRef: Ref<VxeTableInstance | undefined> },
-  Record<string, any>,
-  Record<string, any>,
-  Record<string, any>,
-  ComponentOptionsMixin,
-  ComponentOptionsMixin,
-  typeof emits
->({
+} & Required<VxeTableListeners>;
+export default defineComponent({
   name: 'MeVxeTable',
   components: { pagination },
   directives:{resize},
   inheritAttrs: false,
-  props: props as any,
+  props:props as unknown as ComponentObjectPropsOptionsFromData<VxeTableProps> & typeof props,
   emits,
   setup(props, { expose }) {
     const vxeTableRef = ref<VxeTableInstance>();
@@ -253,6 +243,7 @@ export default defineComponent<
       tableHeight,
       meVxeToolbarRef,
       mePaginationRef,
+      vnodeProps:getCurrentInstance()?.vnode.props
     };
   },
 });

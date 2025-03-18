@@ -84,13 +84,14 @@ export default async (configEnv: ConfigEnv): Promise<UserConfigExport> => {
       },
     },
     optimizeDeps: {
-      //因为项目中很多用到了自动引入和动态加载，所以vite首次扫描依赖项会扫描不全，这里强制扫描全局。
-      entries: ['src/**/*.{ts,tsx,vue}'],
+      //因为项目中很多用到了自动引入和动态加载，所以vite首次扫描依赖项会扫描不全，这里强制扫描src下全局,并加载element-plus。
+      entries: ['src/**/*.{ts,tsx,vue}','./index.html'],
       include: [
         'element-plus/es/components/loading/style/css',
         'element-plus/es/components/message/style/css',
         'element-plus/es/components/message-box/style/css',
         'element-plus/es/components/notification/style/css',
+        'node_modules/element-plus/es/index.mjs',
       ],
     },
   };
