@@ -1,0 +1,1 @@
+import{k as s}from"./keys-CCqN2pHr.js";import{aU as c}from"./index-DZG639DV.js";function p(r){return function(n,o,a){for(var f=-1,t=Object(n),e=a(n),u=e.length;u--;){var i=e[++f];if(o(t[i],i,t)===!1)break}return n}}var m=p();function h(r,n){return r&&m(r,n,s)}function l(r){return typeof r=="function"?r:c}function w(r,n){return r&&h(r,l(n))}export{w as f};

@@ -1,0 +1,1 @@
+import{d as t,au as a,av as s,B as u,c,o as n}from"./core-CiXDiIgu.js";import{b as p}from"./index-DZG639DV.js";import"./mock-0DW-8kzW.js";import"./elIcon-Ch7qtnys.js";const m=t({setup:!0,name:"Redirect"}),S=t({...m,__name:"redirect",setup(_){const o=a(),r=s(),e=o.params.path;return p().cacheFullPath.delete(e),u(()=>r.replace(e)),(d,i)=>(n(),c("span"))}});export{S as default};
