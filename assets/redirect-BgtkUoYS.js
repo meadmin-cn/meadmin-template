@@ -1,0 +1,1 @@
+import{d as t,au as a,av as s,D as u,c,o as n}from"./core-C4-oPvXL.js";import{b as p}from"./index-gAuTWnPj.js";import"./mock-DBzxB1z9.js";import"./elIcon-CvLeSQbC.js";const m=t({setup:!0,name:"Redirect"}),k=t({...m,__name:"redirect",setup(_){const o=a(),r=s(),e=o.params.path;return p().cacheFullPath.delete(e),u(()=>r.replace(e)),(d,i)=>(n(),c("span"))}});export{k as default};
