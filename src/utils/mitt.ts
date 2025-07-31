@@ -6,7 +6,7 @@ type EventType = EventEnum;
 // An event handler can take an optional event argument
 // and should not return a value
 export type Handler<T = unknown> = (event: T) => void | Promise<void>;
-export type WildcardHandler<T = Record<string, unknown>> = (type: keyof T, event: T[keyof T]) => void;
+export type WildcardHandler<T = Record<string, unknown>> = (type: keyof T, event: T[keyof T]) => void | Promise<void>;
 
 // An array of all currently registered event handlers for a type
 export type EventHandlerList<T = unknown> = Array<Handler<T>>;
@@ -130,7 +130,13 @@ export default function mitter<Events extends Record<EventType, unknown>>(
       if (handlers) {
         handlers = (handlers as EventHandlerList<Events[keyof Events]>).slice();
         for (const handler of handlers) {
-          result.push(handler(evt));
+          const res = handler(evt);
+          if (res instanceof Promise) {
+            res.catch((error) => {
+              console.error(error);
+            });
+          }
+          result.push(res);
           if (once!.has(handler)) {
             this.off(type, handler);
           }
@@ -141,7 +147,13 @@ export default function mitter<Events extends Record<EventType, unknown>>(
       if (handlers) {
         handlers = (handlers as WildCardEventHandlerList<Events>).slice();
         for (const handler of handlers) {
-          result.push(handler(type, evt));
+          const res = handler(type, evt);
+          if (res instanceof Promise) {
+            res.catch((error) => {
+              console.error(error);
+            });
+          }
+          result.push(res);
         }
         once!.clear();
       }
