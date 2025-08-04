@@ -23,9 +23,14 @@ declare global {
 
   type ComponentProps<Component> = {
     -readonly [K in keyof Omit<InstanceType<Component>['$props'], keyof InstanceType<DefineComponent>['$props']>]: InstanceType<Component>['$props'][K];
-  } & { [key: `on${Capitalize<string>}`]: (...args: any[]) => any };
+  };
 
   type KeyOfMap<T extends Map> = Parameters<T['get']>[0];
 
   type ValueOfMap<T extends Map> = ReturnType<T['get']>;
+
+    //将 对象类型 转化为合法的组件props声明类型
+  type ComponentObjectPropsOptionsFromData<P=Record<string, unknown>> = {
+    [K in keyof P]-?: undefined extends P[K] ? Prop<P[K]|undefined>:Prop<P[K]>;
+  };
 }

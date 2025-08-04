@@ -6,6 +6,6 @@
 
 <script setup lang="ts" name="Add">
 import add from './add';
-const show = defineModel<boolean>('show');
+const show = defineModel<boolean>();
 defineEmits<{ closed: [] }>();
 </script>
