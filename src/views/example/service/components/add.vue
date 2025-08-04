@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts" name="Add">
-import add from './add';
+import add from './add.js';
 const show = defineModel<boolean>();
 defineEmits<{ closed: [] }>();
 </script>
