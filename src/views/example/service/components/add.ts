@@ -1,14 +1,14 @@
 import { useGlobalStore } from '@/store';
 import Add from './add.vue';
-export default async (props: Omit<ComponentProps<typeof Add>, 'show'> = {}) => {
+export default async (props: Omit<ComponentProps<typeof Add>, 'modelValue'> = {}) => {
   const show = ref(true);
   const globalStore = useGlobalStore();
   const key = globalStore.addGlobalComponents(
     Add,
     computed(() => ({
-      show: show.value,
+      modelValue: show.value,
       ...props,
-      ['onUpdate:show']: (value: boolean) => {
+      ['onUpdate:modelValue']: (value: boolean) => {
         show.value = value;
       },
       onClosed: () => {
