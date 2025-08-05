@@ -70,7 +70,6 @@
       </template>
     </vxe-column>
     </me-vxe-table>    
-    <add v-model="addOrUp" :data="info" @success="search(info ? params.page : 1)"></add>
   </page>
 </template>
 
@@ -78,8 +77,10 @@
 import { ListParams, Info, listApi, delApi } from '@/api/demo';
 import { useLocalesI18n } from '@/locales/i18n';
 import { bookType } from '@/dict/book';
-import add from './components/add.vue';
+import Add from './components/add.vue';
 import { cloneDeep } from 'lodash-es';
+import useActionModel from '@/hooks/actionModel';
+const {open} = useActionModel(Add);
 let { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'demo']);
 const params = reactive(new ListParams());
 const { loading, data, runAsync } = listApi();
@@ -97,6 +98,10 @@ const info = ref<Required<Info>>();
 const showAddOrUp = (row?: Required<Info>) => {
   info.value = cloneDeep(row);
   addOrUp.value = true;
+  open({
+    data:info.value,
+    onSuccess:()=>search(info.value ? params.page : 1),
+  })
 };
 </script>
 

@@ -1,11 +1,6 @@
 <template>
-  <me-dialog
-    :title="t(info.id ? '编辑' : '新增')"
-    :model-value="modelValue"
-    :close-on-click-modal="false"
-    class="add-dialog"
-    @update:model-value="emit('update:modelValue', $event)"
-  >
+  <me-dialog :title="t(info.id ? '编辑' : '新增')" :model-value="modelValue" :close-on-click-modal="false"
+    class="add-dialog">
     <el-form ref="formEl" :model="info" :rules="rules" class="add">
       <el-form-item :label="t('姓名')" prop="name">
         <el-input v-model="info.name"></el-input>
@@ -26,8 +21,8 @@
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button type="primary" :loading="loading" @click="sub()">{{ t('提交') }}</el-button>
-      <el-button @click="emit('update:modelValue', false)">{{ t('取消') }}</el-button>
+      <me-button type="primary" @click="sub()">{{ t('提交') }}</me-button>
+      <me-button @click="modelValue = false">{{ t('取消') }}</me-button>
     </template>
   </me-dialog>
 </template>
@@ -41,10 +36,9 @@ let { t } = useLocalesI18n({}, [(locale: string) => import(`../lang/${locale}.js
 const info = ref(new Info());
 const props = defineProps<{
   data?: Required<Info>;
-  modelValue: boolean;
 }>();
+const modelValue = defineModel<boolean>();
 const emit = defineEmits<{
-  (e: 'update:modelValue', show: boolean): void;
   (e: 'success'): void;
 }>();
 watch(
@@ -65,20 +59,20 @@ const formEl = ref<FormInstance>();
 const loading = ref(false);
 const sub = async () => {
   loading.value = true;
-  formEl.value!.validate(async (isValid, invalidFields) => {
-    if (isValid) {
-      if (info.value.id) {
-        await updateApi().runAsync(info.value.id, info.value);
-      } else {
-        await addApi().runAsync(info.value);
-      }
-      emit('update:modelValue', false);
-      emit('success');
-    } else {
-      formEl.value!.scrollToField(Object.keys(invalidFields!)[0]);
-    }
+  try {
+    await formEl.value!.validate();
+  } catch (invalidFields) {
     loading.value = false;
-  });
+    return formEl.value!.scrollToField(Object.keys(invalidFields!)[0]);
+  }
+  if (info.value.id) {
+    await updateApi().runAsync(info.value.id, info.value);
+  } else {
+    await addApi().runAsync(info.value);
+  }
+  emit('success');
+  loading.value = false;
+  modelValue.value = false;
 };
 </script>
 <style lang="scss" scoped>
