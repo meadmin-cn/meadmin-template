@@ -17,12 +17,9 @@ defineOptions({inheritAttrs:false});
 async function handleClick(event:MouseEvent) {
   loading.value = true;
   try{
-    await (attrs.onClick as Function)?.(event);
-  }catch(e){
-    throw e;
+    await (attrs.onClick as (...args:any[])=>any)?.(event);
   }finally{
     loading.value = false;
-
   }
 }
 const vm = getCurrentInstance();
