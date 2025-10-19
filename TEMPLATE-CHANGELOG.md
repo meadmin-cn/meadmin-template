@@ -1,5 +1,29 @@
 
 
+## [1.1.22](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.21...template-1.1.22) (2025-08-05)
+
+
+### 新功能[feat]
+
+* 函数式组件封装 ([c544d36](https://github.com/meadmin-cn/meadmin-template/commit/c544d365471e317c4e0dd12bc6dc6741e4290014))
+* meButton组件，可自动根据click函数loading ([9b0124d](https://github.com/meadmin-cn/meadmin-template/commit/9b0124d662c1dd2332f25b43b297c343e6a4aa5a))
+
+
+### Bug 修复[fix]
+
+* 修复弹窗无法递归打卡错误 ([ca9b0f5](https://github.com/meadmin-cn/meadmin-template/commit/ca9b0f5c123338e0642fd7a66295a20f1e34a742))
+* 修复事件总线执行异步事件不打印错误日志问题 ([fa35f70](https://github.com/meadmin-cn/meadmin-template/commit/fa35f706050d3fa5b37644d27d0686f9f81aeb86))
+
+
+### 其他[chore]
+
+* element-plus版本是升级到2.9 ([240e135](https://github.com/meadmin-cn/meadmin-template/commit/240e1359379758f719d7f9ab7f88fcbeac1255af))
+
+
+### 性能改进[perf]
+
+* menuItem使用递归组件引入方式写法 ([6dc5400](https://github.com/meadmin-cn/meadmin-template/commit/6dc5400cf588a9998c0aade2c60a556a285f3807))
+
 ## [1.1.21](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.20...template-1.1.21) (2025-03-18)
 
 
