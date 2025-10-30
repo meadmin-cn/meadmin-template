@@ -6,7 +6,7 @@
         <div v-show="collapse" v-else class="icon-text">{{ $t(menu.meta.title).slice(0, 1) }}</div>
         <span class="menu">{{ $t(menu.meta!.title!) }}</span>
       </template>
-      <menu-item v-for="child in menu.children" :key="child.path" :item="child"></menu-item>
+      <layout-menu-item v-for="child in menu.children" :key="child.path" :item="child"></layout-menu-item>
     </el-sub-menu>
     <template v-else>
       <component

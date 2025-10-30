@@ -13,7 +13,7 @@
           :default-active="activeMenu"
           :collapse="!globalStore.isMobile && themeConfig.menuCollapse"
         >
-          <menu-item v-for="item in menus" :key="item.path" :item="item" :collapse="themeConfig.menuCollapse" />
+          <layout-menu-item v-for="item in menus" :key="item.path" :item="item" :collapse="themeConfig.menuCollapse" />
         </el-menu>
       </el-scrollbar>
     </div>
@@ -24,8 +24,6 @@ import { useSettingStore, useRouteStore, useGlobalStore } from '@/store';
 import { mixColor, getColorLuma } from '@/utils/helper';
 import Title from '../title.vue';
 import Expand from '@/layout/components/expand.vue';
-import MenuItem from './components/menuItem.vue';
-
 const { themeConfig, menuType } = storeToRefs(useSettingStore());
 const routeStore = useRouteStore();
 const globalStore = useGlobalStore();
