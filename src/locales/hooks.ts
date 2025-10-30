@@ -17,13 +17,11 @@ import { camelize, capitalize, ComponentOptions, VNode } from 'vue';
  * @param messageImport
  * @returns
  */
-export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>(
-  options?: Options,
-  messageImport?: MessageImport,
-) => {
+export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>(options?: Options, messageImport?: MessageImport) => {
   const res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
+  let loadRes = undefined; //加载语言包返回值，如需要等待加载完语言包后再渲染组件 可以在组件
   if (messageImport) {
-    setLocaleMessage(res, res.locale.value!, messageImport);
+    loadRes = setLocaleMessage(res, res.locale.value!, messageImport);
     mitter.on(
       event.BEFORE_LOCAL_CHANGE,
       (params) => {
@@ -32,7 +30,7 @@ export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>(
       true,
     );
   }
-  return res;
+  return { ...res, loadRes };
 };
 
 /**
@@ -41,10 +39,7 @@ export const useLocalesI18n = <Options extends UseI18nOptions = UseI18nOptions>(
  * @param messageImport
  * @returns
  */
-export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI18nOptions>(
-  options?: Options,
-  messageImport?: MessageImport,
-) => {
+export const asyncUseLocalesI18n = async <Options extends UseI18nOptions = UseI18nOptions>(options?: Options, messageImport?: MessageImport) => {
   const res = useI18n<Options>(Object.assign({ useScope: 'local' }, options));
   if (messageImport) {
     await setLocaleMessage(res, res.locale.value!, messageImport);
@@ -67,12 +62,7 @@ export const useLoadMessages = () => {
     throw new Error('必须在setup中调用');
   }
   const app = instance.appContext.app;
-  const loadMessages = (
-    options: (VNode & { __v_isVNode: true }) | ComponentOptions | string,
-    isLoading = true,
-    locale: string | undefined = undefined,
-    importArr: Array<Promise<any>> = [],
-  ) => {
+  const loadMessages = (options: (VNode & { __v_isVNode: true }) | ComponentOptions | string, isLoading = true, locale: string | undefined = undefined, importArr: Array<Promise<any>> = []) => {
     if (typeof options === 'string') {
       const component = app.component(capitalize(camelize(options)));
       loadMessages(component as ComponentOptions, isLoading, locale, importArr);

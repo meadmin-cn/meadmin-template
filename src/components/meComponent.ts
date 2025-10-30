@@ -1,9 +1,9 @@
-import { PropType, Ref, Transition, TransitionProps, VNode } from 'vue';
+import { PropType, Ref, SuspenseProps, Transition, TransitionProps } from 'vue';
 import { MeKeepAliveProps, default as MeKeepAlive } from './meKeepAlive';
-import { useLoadMessages } from '@/locales/i18n';
 import { done } from '@/utils/nProgress';
-import { localeConfig } from '@/config';
 import { closeLoading, loadingObject } from '@/utils/loading';
+import { Suspense } from 'vue';
+import { omit } from 'lodash-es';
 export default defineComponent({
   name: 'MeComponent',
   props: {
@@ -15,9 +15,9 @@ export default defineComponent({
     doneProgress: Boolean,
     closeLoading: String as PropType<keyof typeof loadingObject>,
     transition: Object as PropType<TransitionProps>,
+    suspense: Object as PropType<SuspenseProps>,
   },
-  setup(props, { attrs }) {
-    const loadMessages = useLoadMessages();
+  setup(props, { attrs, slots }) {
     const componentIs: Ref<any> = ref(undefined);
     const key = ref(props.componentKey);
     const _attrs = ref(attrs);
@@ -25,34 +25,36 @@ export default defineComponent({
       () => props.is,
       async (is) => {
         if (is) {
-          localeConfig.loadMessageConfig.componentLoad && (await Promise.allSettled(loadMessages(is as any, false))); // 自动加载语言包
-          componentIs.value = is;
           key.value = props.componentKey;
           _attrs.value = attrs;
           props.doneProgress && done();
-          props.closeLoading && closeLoading(false, 1, props.closeLoading);
+          (!props.suspense && !slots.fallback) && props.closeLoading && closeLoading(false, 1, props.closeLoading);
+          componentIs.value = is;
         }
       },
       { immediate: true },
     );
-
     return () => {
-      const components = [] as VNode[];
-      components.push(
-        h(componentIs.value || 'div', {
-          key: key.value,
-          ..._attrs.value,
-        }),
-      );
+      let component = h(componentIs.value || 'div', {
+        key: key.value,
+        ..._attrs.value,
+      }, omit(slots,'fallback'));
+      if (props.suspense || slots.fallback) {
+        const tmpComponent = component;
+        component = h(Suspense, {...(props.suspense || {}),onResolve:()=>{
+          props.suspense?.onResolve?.();
+          props.closeLoading && closeLoading(false, 1, props.closeLoading);
+        }}, { default: () => tmpComponent, fallback: slots.fallback });
+      }
       if (props.keepAlive) {
-        const index = components.length - 1;
-        components.push(h(MeKeepAlive, props.keepAlive, [components[index]]));
+        const tmpComponent = component;
+        component = h(MeKeepAlive, props.keepAlive, [tmpComponent]);
       }
       if (props.transition) {
-        const index = components.length - 1;
-        components.push(h(Transition, props.transition, { default: () => components[index] }));
+        const tmpComponent = component;
+        component = h(Transition, props.transition, { default: () => tmpComponent });
       }
-      return components[components.length - 1];
+      return component;
     };
   },
 });
