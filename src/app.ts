@@ -9,11 +9,5 @@ export async function bootscrapt() {
   await Promise.allSettled(mitter.emit(event.START, app));
   app.component('LayoutMenuItem', layoutMenuItem);
   mitter.emit(event.READY, app);
-  //忽略resolveComponent can only be used in render() or setup().的警告
-  app.config.warnHandler = (msg, instance, trace) => {
-    if (msg !== 'resolveComponent can only be used in render() or setup().') {
-      console.warn(`[Vue warn]: ${msg}`, instance, trace);
-    }
-  };
   app.mount('#app');
 }
