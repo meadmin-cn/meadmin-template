@@ -13,7 +13,7 @@
         </el-aside>
         <el-main class="right-main">
           <tag-bar v-if="themeConfig.tagBar"></tag-bar>
-          <el-scrollbar view-class="me-right-main-view">
+          <el-scrollbar id="me-main-scroll" view-class="me-right-main-view">
             <layout-header v-if="!themeConfig.fixedHeader"></layout-header>
             <div id="me-main" class="me-main">
               <layout-page :transition="{ name: 'fade-transform', mode: 'out-in' }"></layout-page>
