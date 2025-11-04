@@ -19,7 +19,8 @@
 <script setup lang="ts" name="SearchForm">
 import MeSearchForm from '@/components/meSearchForm.vue';
 import { useLocalesI18n } from '@/locales/i18n';
-let { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'searchForm']);
+const { t, loadRes } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'searchForm']);
+await loadRes;
 const typeObj = {
   '1': '书籍',
   '2': '电脑',

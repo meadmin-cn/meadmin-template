@@ -22,7 +22,8 @@
 <script setup lang="ts">
 import { statisticsApi } from '@/api/statistics';
 import { useLocalesI18n } from '@/locales/i18n';
-let { t } = useLocalesI18n({}, [(locale) => import(`../lang/${locale}.json`), 'dashboard']);
+const { t, loadRes } = useLocalesI18n({}, [(locale) => import(`../lang/${locale}.json`), 'dashboard']);
+await loadRes;
 const { loading, runAsync, data } = statisticsApi(true);
 const list = reactive([
   {
