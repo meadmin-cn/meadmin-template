@@ -6,7 +6,7 @@
       :data="group.data.value ?? []"
       :loading="group.loading.value"
       :row-config="{ isCurrent: true, useKey: true }"
-      :tree-config="{ expandAll: true, line: true }"
+      :tree-config="{ expandAll: true, showLine: true }"
       :column-config="{ useKey: true }"
       :custom-column="false"
       :print="false"
@@ -81,13 +81,14 @@ const del = (id: number) => {
       // catch error
     });
 };
+const { runAsync: editRunAsync} = editGroupApi();
 const setGroupRules = async (rules?: string[]) => {
   if (!rules) {
     return false;
   }
   const row = groupRef.value!.vxeTableRef!.getCurrentRecord();
   if (row) {
-    await editGroupApi().runAsync(row.id, { rules });
+    await editRunAsync(row.id, { rules });
     row.rules = rules;
     return true;
   }
