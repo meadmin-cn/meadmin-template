@@ -32,7 +32,8 @@ import { Info, addApi, updateApi } from '@/api/demo';
 import { useLocalesI18n } from '@/locales/i18n';
 import { bookType } from '@/dict/book';
 import { FormInstance, FormRules } from 'element-plus';
-let { t } = useLocalesI18n({}, [(locale: string) => import(`../lang/${locale}.json`), 'demo']);
+const { t, loadRes } = useLocalesI18n({}, [(locale: string) => import(`../lang/${locale}.json`), 'demo']);
+await loadRes;
 const info = ref(new Info());
 const props = defineProps<{
   data?: Required<Info>;

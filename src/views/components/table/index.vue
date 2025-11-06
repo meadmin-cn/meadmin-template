@@ -84,7 +84,8 @@ import { useLocalesI18n } from '@/locales/i18n';
 import { FormInstance } from 'element-plus';
 const meTableRef = ref<MeTableInstance>();
 const customColumn = ref(true);
-const { t } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'tableLang']);
+const { t, loadRes } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'tableLang']);
+await loadRes;
 const canDel = ref(true);
 const searchForm = reactive({
   search: '',

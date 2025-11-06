@@ -94,7 +94,7 @@
 <script lang="ts">
 import './install';
 import pagination from './components/pagination.vue';
-import { ComponentCustomProperties, PropType } from 'vue';
+import { ComponentCustomProperties, PropType, useTemplateRef } from 'vue';
 import {
   VxeTableDefines,
   VxeTableInstance,
@@ -168,9 +168,9 @@ export default defineComponent({
   props:props as unknown as ComponentObjectPropsOptionsFromData<VxeTableProps> & typeof props,
   emits,
   setup(props, { expose }) {
-    const vxeTableRef = ref<VxeTableInstance>();
-    const meVxeToolbarRef = ref<HTMLDivElement|null>(null);
-    const mePaginationRef = ref<InstanceType<typeof pagination>|null>(null);
+    const vxeTableRef = useTemplateRef<VxeTableInstance>('vxeTableRef');
+    const meVxeToolbarRef = useTemplateRef<HTMLDivElement>('meVxeToolbarRef');
+    const mePaginationRef = useTemplateRef<InstanceType<typeof pagination>>('mePaginationRef');
     const showSearch = ref(props.defaultShowSearch);
     const collectColumn = ref([] as VxeTableDefines.ColumnInfo[]);
     const defaultChecked = ref([] as string[]);
@@ -181,17 +181,17 @@ export default defineComponent({
       data.visible = is;
       refreshColumn();
     };
-    onMounted(() => {
-      nextTick(() => {
-        const { collectColumn: origionCollectColumn, fullColumn } = vxeTableRef.value!.getTableColumn();
-        collectColumn.value = origionCollectColumn;
-        defaultChecked.value = fullColumn.reduce((previousValue, currentValue) => {
-          if (currentValue.visible) {
-            previousValue.push(currentValue.id);
-          }
-          return previousValue;
-        }, [] as string[]);
-      });
+    onMounted(async () => {
+      await nextTick();
+      await nextTick();//等两次渲染完成才能获取到列
+      const { collectColumn: origionCollectColumn, fullColumn } = vxeTableRef.value!.getTableColumn();
+      collectColumn.value = origionCollectColumn;
+      defaultChecked.value = fullColumn.reduce((previousValue, currentValue) => {
+        if (currentValue.visible) {
+          previousValue.push(currentValue.id);
+        }
+        return previousValue;
+      }, [] as string[]);
     });
     expose({ vxeTableRef });
     const tableHeight = ref<number>();
@@ -234,7 +234,7 @@ export default defineComponent({
                 ? vxeTableRef.value!.getCheckboxRecords()
                 : undefined,
             },
-            props.print === true,
+            props.print === true?{}:props.print,
           ),
         );
       },

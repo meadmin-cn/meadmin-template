@@ -40,7 +40,8 @@ import { SVGRenderer } from 'echarts/renderers';
 import { mitter, event } from '@/event';
 import { throttle } from 'lodash-es';
 import { useLocalesI18n } from '@/locales/i18n';
-let { t } = useLocalesI18n({}, [(locale) => import(`../lang/${locale}.json`), 'dashboard']);
+const { t, loadRes } = useLocalesI18n({}, [(locale) => import(`../lang/${locale}.json`), 'dashboard']);
+await loadRes;
 echarts.use([
   TitleComponent,
   ToolboxComponent,

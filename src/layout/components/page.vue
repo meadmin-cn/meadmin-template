@@ -7,6 +7,7 @@
       :component-key="route.fullPath"
       done-progress
       close-loading="layout"
+      :suspense="{}"
     >
     </me-component>
   </router-view>
