@@ -27,9 +27,11 @@ export default defineComponent({
         if (is) {
           key.value = props.componentKey;
           _attrs.value = attrs;
-          props.doneProgress && done();
-          (!props.suspense && !slots.fallback) && props.closeLoading && closeLoading(false, 1, props.closeLoading);
           componentIs.value = is;
+          if(!props.suspense && !slots.fallback){
+            props.doneProgress && done();
+            props.closeLoading && closeLoading(false, 1, props.closeLoading);
+          }
         }
       },
       { immediate: true },
@@ -42,8 +44,9 @@ export default defineComponent({
       if (props.suspense || slots.fallback) {
         const tmpComponent = component;
         component = h(Suspense, {...(props.suspense || {}),onResolve:()=>{
-          props.suspense?.onResolve?.();
+          props.doneProgress && done();
           props.closeLoading && closeLoading(false, 1, props.closeLoading);
+          props.suspense?.onResolve?.();
         }}, { default: () => tmpComponent, fallback: slots.fallback });
       }
       if (props.keepAlive) {
