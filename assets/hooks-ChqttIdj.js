@@ -1,0 +1,1 @@
+import{az as c}from"./core-B3jmcjX3.js";import{s as a,m as n,E as r}from"./index-BoXgzgB5.js";const E=(l,s)=>{const e=c(Object.assign({useScope:"local"},l));let o;return s&&(o=a(e,e.locale.value,s),n.on(r.BEFORE_LOCAL_CHANGE,t=>{a(e,t.locale,s)},!0)),{...e,loadRes:o}};export{E as u};

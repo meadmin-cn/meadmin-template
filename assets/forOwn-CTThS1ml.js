@@ -1,0 +1,1 @@
+import{aI as s,aJ as c}from"./index-BoXgzgB5.js";function p(n){return function(r,i,f){for(var o=-1,t=Object(r),e=f(r),u=e.length;u--;){var a=e[++o];if(i(t[a],a,t)===!1)break}return r}}var h=p();function l(n,r){return n&&h(n,r,s)}function F(n){return typeof n=="function"?n:c}function m(n,r){return n&&l(n,F(r))}export{m as f};
