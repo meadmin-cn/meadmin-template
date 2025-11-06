@@ -1,5 +1,12 @@
 
 
+## [1.1.23](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.24...main-1.1.23) (2025-11-06)
+
+
+### 文档更改[docs]
+
+* 版本号还原 ([0e87e09](https://github.com/meadmin-cn/meadmin-template/commit/0e87e09f6133e2d7573de7f4d0536300f81f8178))
+
 ## [1.1.22](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.21...main-1.1.22) (2025-08-05)
 
 
