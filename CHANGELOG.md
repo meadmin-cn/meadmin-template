@@ -2,6 +2,33 @@
 
 ## [1.1.23](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.24...main-1.1.23) (2025-11-06)
 
+### 新功能[feat]
+
+* 组件语言加载加上等待 ([bfba1b6](https://github.com/meadmin-cn/meadmin-template/commit/bfba1b6b513c81b93cd3d3e4f93c4bd4e873c7e2))
+
+
+### Bug 修复[fix]
+
+* 修复vue循环引用警告，menu-item改为全局注册。 ([9a2a058](https://github.com/meadmin-cn/meadmin-template/commit/9a2a0583d76db1352c6f07aec6dea537f7193cc3))
+* 移除 警告忽略 ([a54b849](https://github.com/meadmin-cn/meadmin-template/commit/a54b849df022a9f5a8f1f6d9915d7cfb2fc0fda0))
+
+
+### 其他[chore]
+
+* template-release v1.1.23 ([5149b38](https://github.com/meadmin-cn/meadmin-template/commit/5149b382dd0321dad4990309aa9b5fe1d62aee66))
+
+
+### 重构[refactor]
+
+* mebutton优化 ([c0ed63a](https://github.com/meadmin-cn/meadmin-template/commit/c0ed63a546257a37566d02d5b62ad733033a5d05))
+
+
+### 性能改进[perf]
+
+* 函数式组件放在suspense内，使其可以异步setup ([6d5b34a](https://github.com/meadmin-cn/meadmin-template/commit/6d5b34a013a6df2536d72f57179873d2de75a7ca))
+* 移除自动组件语言包识别编译选项及多余的组件语言包加载函数 ([25bed81](https://github.com/meadmin-cn/meadmin-template/commit/25bed81097dfb0f3f33dabf5c9f0b50d5ef38dec))
+* 组件语言包加载，改为通过Suspense结合异步组件实现 ([c1c62c0](https://github.com/meadmin-cn/meadmin-template/commit/c1c62c087158977c03183f01744fc0d3b75f8453))
+* meButton优化写法 ([3f04ff8](https://github.com/meadmin-cn/meadmin-template/commit/3f04ff8e476c024ebb59f9d5b611dd4b0adeea08))
 
 ### 文档更改[docs]
 
