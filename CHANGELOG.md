@@ -1,7 +1,6 @@
 
 
-## [1.1.24](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.22...main-1.1.24) (2025-11-06)
-
+## [1.1.23](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.24...main-1.1.23) (2025-11-06)
 
 ### 新功能[feat]
 
@@ -30,6 +29,10 @@
 * 移除自动组件语言包识别编译选项及多余的组件语言包加载函数 ([25bed81](https://github.com/meadmin-cn/meadmin-template/commit/25bed81097dfb0f3f33dabf5c9f0b50d5ef38dec))
 * 组件语言包加载，改为通过Suspense结合异步组件实现 ([c1c62c0](https://github.com/meadmin-cn/meadmin-template/commit/c1c62c087158977c03183f01744fc0d3b75f8453))
 * meButton优化写法 ([3f04ff8](https://github.com/meadmin-cn/meadmin-template/commit/3f04ff8e476c024ebb59f9d5b611dd4b0adeea08))
+
+### 文档更改[docs]
+
+* 版本号还原 ([0e87e09](https://github.com/meadmin-cn/meadmin-template/commit/0e87e09f6133e2d7573de7f4d0536300f81f8178))
 
 ## [1.1.22](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.21...main-1.1.22) (2025-08-05)
 
