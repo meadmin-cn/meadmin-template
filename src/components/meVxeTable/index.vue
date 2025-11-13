@@ -298,7 +298,6 @@ export default defineComponent({
   }
   .me-vxe-body{
     flex-shrink: 1;
-    overflow: auto;
   }
   .pagination {
     flex-shrink: 0;

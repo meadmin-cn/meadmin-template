@@ -14,7 +14,7 @@
       show-overflow
       height="auto"
       me-class="table-group"
-      @current-change="groupChange"
+      @current-row-change="groupChange"
       @add="showAddOrEditor()"
       @refresh="getGroup"
       @quick-search="search"
@@ -65,7 +65,7 @@ const getGroup = async () => {
   search(searchText.value);
 };
 getGroup();
-const groupChange: VxeTableEvents.CurrentChange = ({ row }: { row: GroupListResult[number] }) =>
+const groupChange: VxeTableEvents.CurrentRowChange<GroupListResult[number]> = ({ row }) =>
   emit('currentChange', row.rules);
 const editorInfo = shallowRef<Omit<GroupListResult[number], 'children'>>();
 const showAddOrEditor = (info?: GroupListResult[number]) => {
