@@ -21,7 +21,7 @@
       </el-form-item>
     </el-form>
     <template #footer>
-      <me-button type="primary" @click="sub()">{{ t('提交') }}</me-button>
+      <me-button  type="primary" @click="sub()">{{ t('提交') }}</me-button>
       <me-button @click="modelValue = false">{{ t('取消') }}</me-button>
     </template>
   </me-dialog>
