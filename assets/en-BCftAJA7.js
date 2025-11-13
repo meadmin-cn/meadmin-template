@@ -1,0 +1,1 @@
+const e={名称:"Name",类型:"Type",日期:"Date",地址:"Address",查询:"Search",重置:"Reset",快递:"Delivery",详情:"Info",邮政编码:"Zip",省:"Province",市:"City",操作:"Action",删除切换:"Del Change",空空如也:"Absolutely Empty",清空:"Clear",全选:"Select All",上一页:"Previous Page",下一页:"Next Page"};export{e as default};
