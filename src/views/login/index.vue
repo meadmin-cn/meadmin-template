@@ -45,8 +45,7 @@ const formRef = ref<FormInstance>();
 const route = useRoute();
 const router = useRouter();
 let loginParams = reactive(new LoginParams());
-const { t, loadRes } = useLocalesI18n();
-await loadRes;
+const { t } = useLocalesI18n();
 const rules = computed<FormRules>(() => ({
   username: [
     {
