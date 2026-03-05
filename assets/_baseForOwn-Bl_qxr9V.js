@@ -1,0 +1,1 @@
+import{bi as u}from"./index-pAeQZ1-G.js";function l(e){return function(r,i,s){for(var o=-1,a=Object(r),n=s(r),f=n.length;f--;){var t=n[++o];if(i(a[t],t,a)===!1)break}return r}}var b=l();function p(e,r){return e&&b(e,r,u)}export{b as a,p as b};
