@@ -1,6 +1,7 @@
 import * as elementPlusIconsVue from '@element-plus/icons-vue';
 import path from 'path-browserify';
-import { App, Component, h } from 'vue';
+import type { App, Component} from 'vue';
+import { h } from 'vue';
 import { upperFirst } from 'lodash-es';
 
 export function installIcon(app: App) {

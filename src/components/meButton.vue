@@ -9,7 +9,7 @@
 <script setup lang="ts" name="MeButton">
 import { ElButton } from 'element-plus';
 import { omit } from 'lodash-es';
-import { ComponentInstance, ComponentPublicInstance } from 'vue';
+import type { ComponentInstance, ComponentPublicInstance } from 'vue';
 
 const loading = ref(false);
 const attrs = useAttrs();

@@ -1,4 +1,4 @@
-import { I18nOptions } from 'vue-i18n';
+import type { I18nOptions } from 'vue-i18n';
 
 export const loadMessageConfig = {
   // 导入语言包配置

@@ -1,5 +1,5 @@
 import { viteMockServe } from '@meadmin-cn/vite-plugin-mock';
-import { ConfigEnv } from 'vite';
+import type { ConfigEnv } from 'vite';
 export default ({ command }: ConfigEnv) =>
   viteMockServe({
     mockPath: 'mock/apiDemo',

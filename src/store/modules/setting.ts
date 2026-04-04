@@ -1,4 +1,4 @@
-import { Language } from 'element-plus/es/locale';
+import type { Language } from 'element-plus/es/locale';
 import { themeConfig, settingKey, localeConfig } from '@/config';
 import { event, mitter } from '@/event';
 import { mixColor } from '@/utils/helper';

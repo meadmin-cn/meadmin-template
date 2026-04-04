@@ -21,7 +21,7 @@
 <script setup lang="ts" name="Left">
 import { mitter, event } from '@/event';
 import { useSettingStore, useGlobalStore, useRouteStore } from '@/store';
-import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
+import type { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
 import Expand from '@/layout/components/expand.vue';
 const { themeConfig } = storeToRefs(useSettingStore());
 const globalStore = useGlobalStore();

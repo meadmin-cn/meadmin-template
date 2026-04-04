@@ -62,7 +62,7 @@
 import { mitter, event } from '@/event';
 import { useRouteStore, useSettingStore } from '@/store';
 import { ElScrollbar } from 'element-plus';
-import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
+import type { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
 import contextmenu from './components/contextmenu.vue';
 import { isExternal } from '@/utils/validate';
 import { resolve } from 'path-browserify';

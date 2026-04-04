@@ -1,5 +1,6 @@
 import { useGlobalStore } from '@/store';
-import { Component, onBeforeUnmount } from 'vue';
+import type { Component} from 'vue';
+import { onBeforeUnmount } from 'vue';
 /**
  * 创建弹窗action调用
  * @param component 组件

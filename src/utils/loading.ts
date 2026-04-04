@@ -1,4 +1,4 @@
-import { LoadingOptions } from 'element-plus';
+import type { LoadingOptions } from 'element-plus';
 import { throttle } from 'lodash-es';
 const loadingInstance: Record<string, ReturnType<typeof ElLoading.service>> = {};
 class Loading {

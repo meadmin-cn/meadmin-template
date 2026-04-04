@@ -1,6 +1,6 @@
-import { Composer } from 'vue-i18n';
+import type { Composer } from 'vue-i18n';
 import { event, mitter } from '@/event';
-import { Component, VNode } from 'vue';
+import type { Component, VNode } from 'vue';
 const WIDTH = 992; // refer to Bootstrap's responsive design
 const isMobile = ref(window.document.body.offsetWidth < WIDTH);
 mitter.on(event.RESIZE, () => {

@@ -1,8 +1,8 @@
-import { LocaleMessages, VueMessageType, Composer } from 'vue-i18n';
+import type { LocaleMessages, VueMessageType, Composer } from 'vue-i18n';
 import { localeConfig as config } from '@/config';
 import { event, mitter } from '@/event';
 import { loading, closeLoading } from '@/utils/loading';
-import { Language } from 'element-plus/es/locale';
+import type { Language } from 'element-plus/es/locale';
 import { useGlobalStore, useSettingStore } from '@/store';
 import log from '@/utils/log';
 type GlobaleI18n = Composer<Record<string, any>, Record<string, any>, Record<string, any>, any>;

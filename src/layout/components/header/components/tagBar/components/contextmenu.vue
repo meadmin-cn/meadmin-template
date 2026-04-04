@@ -64,8 +64,8 @@
 </template>
 <script setup lang="ts" name="Contextmenu">
 import { useRouteStore } from '@/store';
-import { PropType } from 'vue';
-import { RouteLocationNormalized } from 'vue-router';
+import type { PropType } from 'vue';
+import type { RouteLocationNormalized } from 'vue-router';
 const props = defineProps({
   modelValue: {
     required: true,

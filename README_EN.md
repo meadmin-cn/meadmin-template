@@ -1,7 +1,9 @@
 # Me-admin template
 ## Introduction
-Me-admin template is a free open source admin template, built on VUE3, Vite5, Pinia, and Element-Plus, right out of the box.
-****已升级vue3.5 + vite 6, vite6 首屏加载优化到了3s内**
+Me-admin template is a free open source admin template, built on VUE3, Vite8, Pinia, and Element-Plus, right out of the box.
+**I have upgraded to vue3.5 + vite 8, and the loading speed of vite8 is indeed fast**
+
+**Full-stack project recommendation** `nodejs` full-stack one-stop solution [meadmin](https://www.meadmin.cn), completed and launched. The front end uses the current template, while the back end uses `midway`. Supports one-click `crud` to facilitate rapid development.
 
 **English** | [中文](./README.md)
 

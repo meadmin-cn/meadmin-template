@@ -1,11 +1,12 @@
-import {
+import type {
   RendererNode,
   RendererElement,
   RendererOptions,
   ComponentInternalInstance,
   SuspenseBoundary,
   VNode,
-  VNodeArrayChildren,
+  VNodeArrayChildren} from 'vue';
+import {
   queuePostFlushCb,
 } from 'vue';
 import { queueEffectWithSuspense } from './Suspense';
