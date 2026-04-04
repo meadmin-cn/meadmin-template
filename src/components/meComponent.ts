@@ -1,7 +1,10 @@
-import { PropType, Ref, SuspenseProps, Transition, TransitionProps } from 'vue';
-import { MeKeepAliveProps, default as MeKeepAlive } from './meKeepAlive';
+import type { PropType, Ref, SuspenseProps, TransitionProps } from 'vue';
+import { Transition } from 'vue';
+import type { MeKeepAliveProps} from './meKeepAlive';
+import { default as MeKeepAlive } from './meKeepAlive';
 import { done } from '@/utils/nProgress';
-import { closeLoading, loadingObject } from '@/utils/loading';
+import type { loadingObject } from '@/utils/loading';
+import { closeLoading } from '@/utils/loading';
 import { Suspense } from 'vue';
 import { omit } from 'lodash-es';
 export default defineComponent({

@@ -1,5 +1,6 @@
-import { App } from 'vue';
-import { createI18n, I18nOptions } from 'vue-i18n';
+import type { App } from 'vue';
+import type { I18nOptions } from 'vue-i18n';
+import { createI18n } from 'vue-i18n';
 import { localeConfig as config } from '@/config';
 import { setI18nLanguage } from './helper';
 import { useGlobalStore, useSettingStore } from '@/store';

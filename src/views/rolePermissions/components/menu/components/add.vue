@@ -4,9 +4,10 @@
       <el-form-item label="父级" prop="parentId">
         <el-tree-select
           v-model="formData.parentId"
-          :props="{ label: 'name', value: 'id' }"
+          :props="{ label: 'name'}"
           :data="menuData"
           :render-after-expand="false"
+          value-key="id"
           filterable
           check-strictly
         />
@@ -39,7 +40,7 @@
 </template>
 <script setup lang="ts" name="Add">
 import { addMenuApi, MenuInfo, editMenuApi, menuListApi } from '@/api/menu';
-import { FormInstance, FormRules } from 'element-plus';
+import type { FormInstance, FormRules } from 'element-plus';
 import { type, status } from '../dict';
 const props = defineProps<{
   show: boolean;

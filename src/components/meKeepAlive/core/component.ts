@@ -1,4 +1,4 @@
-import { ConcreteComponent } from 'vue';
+import type { ConcreteComponent } from 'vue';
 import { isFunction } from '@vue/shared';
 export function getComponentName(Component: ConcreteComponent, includeInferred = true): string | false | undefined {
   return isFunction(Component)

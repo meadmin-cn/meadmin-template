@@ -2,7 +2,7 @@ import MenuModeEnum from '@/dict/menuModeEnum';
 import { filterAsyncRoutes, initDynamicViewsModules } from '@/utils/permission';
 import useUserStore from './user';
 import { router, constantRoutes, asyncRoutes, flatteningRoutes2 } from '@/router';
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 import { settingConfig } from '@/config';
 import { menuApi } from '@/api/routeMenu';
 import { PageEnum } from '@/dict/pageEnum';

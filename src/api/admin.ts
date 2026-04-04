@@ -4,6 +4,7 @@ const enum Api {
   GROUP = 'admin/group/index',
   ADD_GROUP = 'admin/group/add',
   EDIT_GROUP = 'admin/group/{id}',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   DEL_GROUP = 'admin/group/{id}',
 }
 

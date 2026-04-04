@@ -1,6 +1,7 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import { PageEnum } from '@/dict/pageEnum';
-import { App } from 'vue';
+import type { App } from 'vue';
 import { setupRouterGuard } from './guard';
 import { concatObjectValue } from '@/utils/helper';
 import { Layout } from '@/router/constant';

@@ -1,6 +1,6 @@
 <template>
   <div class="me-wang-editor">
-    <Toolbar v-if="showEditor" class="wang-toolbar" :editor="editorRef" :default-config="config.toolbar" :mode="mode" />
+    <Editor.Toolbar v-if="showEditor" class="wang-toolbar" :editor="editorRef" :default-config="config.toolbar" :mode="mode" />
     <Editor
       v-if="showEditor"
       :model-value="modelValue"
@@ -25,9 +25,11 @@
 <script setup lang="ts" name="MeWangEditor">
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import './meWangEditor.scss';
-import { onBeforeUnmount, shallowRef, PropType } from 'vue';
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
-import { i18nChangeLanguage, IEditorConfig, IToolbarConfig, IDomEditor, SlateDescendant } from '@wangeditor/editor';
+import type { PropType } from 'vue';
+import { onBeforeUnmount, shallowRef } from 'vue';
+import { Editor } from '@wangeditor/editor-for-vue';
+import type { IEditorConfig, IToolbarConfig, IDomEditor, SlateDescendant } from '@wangeditor/editor';
+import { i18nChangeLanguage } from '@wangeditor/editor';
 import { useGlobalStore } from '@/store';
 defineProps({
   mode: {

@@ -153,9 +153,9 @@
   </el-card>
 </template>
 <script setup lang="ts" name="VxeTableDemo">
-import { VxeTablePropTypes } from 'vxe-table';
+import type { VxeTablePropTypes } from 'vxe-table';
 import XEUtils from 'xe-utils';
-import { FormInstance } from 'element-plus';
+import type { FormInstance } from 'element-plus';
 import { listApi } from '@/api/vxeTable';
 const meVxeTableRef = ref<MeVxeTableInstance>();
 const xTable = computed(() => meVxeTableRef.value?.vxeTableRef);

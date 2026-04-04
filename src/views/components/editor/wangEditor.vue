@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts" name="WangEditor">
-import { IDomEditor } from '@wangeditor/editor';
+import type { IDomEditor } from '@wangeditor/editor';
 const html = ref('<p>hello word!</p>');
 const config = {
   editor: {

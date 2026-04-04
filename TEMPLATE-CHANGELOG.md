@@ -1,4 +1,9 @@
+# Changelog
 
+## 1.2.0 (2026-04-04)
+
+* feat: 升级到vite 8 ([fc7425c](https://github.com/meadmin-cn/meadmin-template/commit/fc7425c))
+* feat: 优化meComponents loading效果 ([e142058](https://github.com/meadmin-cn/meadmin-template/commit/e142058))
 
 ## [1.1.23](https://github.com/meadmin-cn/meadmin-template/compare/template-1.1.22...template-1.1.23) (2025-11-04)
 

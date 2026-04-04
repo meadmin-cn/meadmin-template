@@ -40,9 +40,10 @@
   </div>
 </template>
 <script setup lang="ts" name="Group">
-import { groupListApi, GroupListResult, delGroupApi, editGroupApi } from '@/api/admin';
+import type { GroupListResult} from '@/api/admin';
+import { groupListApi, delGroupApi, editGroupApi } from '@/api/admin';
 import { cloneDeep } from 'lodash-es';
-import { VxeTableEvents } from 'vxe-table';
+import type { VxeTableEvents } from 'vxe-table';
 import { searchTreeTable } from '@/utils/helper';
 import Add from './components/add.vue';
 import { omit } from 'lodash-es';

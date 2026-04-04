@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts" name="LayoutPage">
-import { MeKeepAliveProps } from '@/components/meKeepAlive';
+import type { MeKeepAliveProps } from '@/components/meKeepAlive';
 import { settingConfig } from '@/config';
 import { useRouteStore } from '@/store';
-import { ComputedRef, TransitionProps } from 'vue';
+import type { ComputedRef, TransitionProps } from 'vue';
 const props = defineProps<{
   transition?: TransitionProps;
 }>();

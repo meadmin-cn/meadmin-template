@@ -29,7 +29,7 @@
 
 <script setup lang="ts" name="MenuItem">
 import { useRouteStore } from '@/store';
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 const routeStore = useRouteStore();
 const props = defineProps<{ item: RouteRecordRaw; noChild?: boolean; collapse?: boolean }>();
 const menu = ref<RouteRecordRaw>();

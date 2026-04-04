@@ -8,8 +8,9 @@
 
 <script setup lang="ts">
 import formatNumber from 'format-number';
-import { PropType } from 'vue';
-import { TransitionPresets, useTransition, EasingFunction } from '@vueuse/core';
+import type { PropType } from 'vue';
+import type { EasingFunction } from '@vueuse/core';
+import { TransitionPresets, useTransition } from '@vueuse/core';
 const props = defineProps({
   start: {
     type: Number,

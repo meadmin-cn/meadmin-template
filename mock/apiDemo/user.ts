@@ -1,4 +1,5 @@
-import { success, fail, getRequestToken, RequestParams } from '../helper';
+import type { RequestParams } from '../helper';
+import { success, fail, getRequestToken } from '../helper';
 const tokens = {
   admin: {
     token: 'adminToken',

@@ -31,6 +31,7 @@ const params = reactive({
   type: '',
   createTimes: ['', ''] as [string, string],
 });
+// @ts-ignore
 const formRef = ref<InstanceType<typeof MeSearchForm>>();
 const search = () => {
   ElMessageBox.alert(JSON.stringify(params));

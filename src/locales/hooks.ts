@@ -6,10 +6,11 @@
  * @FilePath: \meadmin-template\src\locales\hooks.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import { useI18n, UseI18nOptions } from 'vue-i18n';
-import { loadMessage, MessageImport, setLocaleMessage } from './helper';
+import type { UseI18nOptions } from 'vue-i18n';
+import { useI18n } from 'vue-i18n';
+import type { MessageImport} from './helper';
+import { setLocaleMessage } from './helper';
 import { mitter, event } from '@/event';
-import { camelize, capitalize, ComponentOptions, VNode } from 'vue';
 
 /**
  * useI18n 会自动加载locale语言包（语言包加载为异步执行，如果语言包被加载过则执行时效和同步一致）

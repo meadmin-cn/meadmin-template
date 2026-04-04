@@ -4,6 +4,7 @@ const enum Api {
   LIST = 'menu/index',
   ADD = 'admin/menu/add',
   EDIT = 'admin/menu/{id}',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   DEL = 'admin/menu/{id}',
 }
 

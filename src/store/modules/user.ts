@@ -1,10 +1,11 @@
 import { event, mitter } from '@/event';
-import { Ref } from 'vue';
+import type { Ref } from 'vue';
 import cookies from 'js-cookie';
 import { loginConfig as config } from '@/config';
 import { loading } from '@/utils/loading';
 import { PageEnum } from '@/dict/pageEnum';
-import { loginApi, LoginParams, userInfoApi, UserInfoResult } from '@/api/user';
+import type { LoginParams, UserInfoResult } from '@/api/user';
+import { loginApi, userInfoApi } from '@/api/user';
 import useRouteStore from './route';
 import { router } from '@/router';
 interface UserState {

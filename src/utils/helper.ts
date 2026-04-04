@@ -1,4 +1,5 @@
-import { default as XEUtils, SearchTreeOptions } from 'xe-utils';
+import type { SearchTreeOptions } from 'xe-utils';
+import { default as XEUtils } from 'xe-utils';
 import { cloneDeep } from 'lodash-es';
 
 /**

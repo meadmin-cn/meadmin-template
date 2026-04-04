@@ -82,7 +82,7 @@ flowchart TD
 const language = computed(
   () =>
     ({
-      'zh-cn': 'zh-CN', // eslint-disable-line
+      'zh-cn': 'zh-CN',  
       en: 'en-US',
     }[setting.locale] ?? 'zh-CN'),
 );
@@ -90,7 +90,7 @@ const language = computed(
 const onUploadImg = async (files: File[], callback: (urls: string[]) => void) => {
   const res = await Promise.all(
     files.map((file) => {
-      return new Promise<{ data: { url: string } }>((rev, rej) => {
+      return new Promise<{ data: { url: string } }>((rev, _rej) => {
         const reader = new FileReader();
         reader.addEventListener(
           'load',
