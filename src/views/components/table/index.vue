@@ -97,10 +97,13 @@ const searchForm = reactive({
   page: 1,
   size: 10,
 });
-const { loading, run, data, refresh } = listApi({ defaultParams: [searchForm], manual: false });
+const { loading, run, data, refresh } = listApi({ defaultParams: [searchForm], manual: true });
 const getData = (page = searchForm.page, size = searchForm.size) => {
   run(Object.assign(searchForm, { page, size }));
 };
+onMounted(() => {
+  getData();
+});
 const paginationOptions = reactive({
   currentPage: computed(() => searchForm.page),
   pageSize: computed(() => searchForm.size),

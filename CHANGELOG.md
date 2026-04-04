@@ -1,5 +1,17 @@
 # Changelog
 
+## <small>1.2.1 (2026-04-04)</small>
+
+* chore: 还原错误的action设置 ([f4c489e](https://github.com/meadmin-cn/meadmin-template/commit/f4c489e))
+* chore: template-release v1.2.1 ([80b57ee](https://github.com/meadmin-cn/meadmin-template/commit/80b57ee))
+* chore: vite 版本改为~8.0.3 修复github action打包失败问题 ([5213ba5](https://github.com/meadmin-cn/meadmin-template/commit/5213ba5))
+* fix: 修复表格展示bug ([236973d](https://github.com/meadmin-cn/meadmin-template/commit/236973d))
+* fix: 修复打包部署后请求异常问题 ([6f669c4](https://github.com/meadmin-cn/meadmin-template/commit/6f669c4))
+* fix: 修复github action 问题 ([5cb436e](https://github.com/meadmin-cn/meadmin-template/commit/5cb436e))
+* fix: 修复linux下打包 scss文件转义错误bug ([1f6b49c](https://github.com/meadmin-cn/meadmin-template/commit/1f6b49c))
+* fix: 修复locak文件导致linux下打包错误bug ([d7df342](https://github.com/meadmin-cn/meadmin-template/commit/d7df342))
+* ci: git安装脚本node版本修复 ([49e4d3b](https://github.com/meadmin-cn/meadmin-template/commit/49e4d3b))
+
 ## 1.2.0 (2026-04-04)
 
 * docs: 错别字更改 ([8c77e4e](https://github.com/meadmin-cn/meadmin-template/commit/8c77e4e))
