@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 import { Layout } from '@/router/constant';
 export const routes: RouteRecordRaw[] = [
   {

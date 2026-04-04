@@ -11,7 +11,7 @@
       :row-config="{ keyField: 'rule', useKey: true }"
       :column-config="{ useKey: true }"
       align="center"
-      border
+      borderz
       me-class="table-menu"
       height="auto"
       show-overflow
@@ -58,10 +58,11 @@
   </div>
 </template>
 <script setup lang="ts" name="Menu">
-import { delMenuApi, menuListApi, MenuListResult } from '@/api/menu';
+import type { MenuListResult } from '@/api/menu';
+import { delMenuApi, menuListApi } from '@/api/menu';
 import { cloneDeep, omit } from 'lodash-es';
 import { searchTreeTable } from '@/utils/helper';
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 import * as dict from './dict';
 import Add from './components/add.vue';
 const props = defineProps({

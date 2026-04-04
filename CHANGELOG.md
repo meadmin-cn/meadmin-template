@@ -1,4 +1,16 @@
+# Changelog
 
+## 1.2.0 (2026-04-04)
+
+* docs: 错别字更改 ([8c77e4e](https://github.com/meadmin-cn/meadmin-template/commit/8c77e4e))
+* docs: 说明文档更改 ([4491af2](https://github.com/meadmin-cn/meadmin-template/commit/4491af2))
+* docs: 增加说明 ([eb1fa71](https://github.com/meadmin-cn/meadmin-template/commit/eb1fa71))
+* chore: template-release v1.2.0 ([c7b5c98](https://github.com/meadmin-cn/meadmin-template/commit/c7b5c98))
+* feat: 升级到vite 8 ([fc7425c](https://github.com/meadmin-cn/meadmin-template/commit/fc7425c))
+* feat: 优化meComponents loading效果 ([e142058](https://github.com/meadmin-cn/meadmin-template/commit/e142058))
+* fix: 登录页设置为同步组件 ([2b6316b](https://github.com/meadmin-cn/meadmin-template/commit/2b6316b))
+* fix: 修复表格宽度非整数时div滚动条问题 ([d268590](https://github.com/meadmin-cn/meadmin-template/commit/d268590))
+* fix: 修复类型提示错误 ([e50d66e](https://github.com/meadmin-cn/meadmin-template/commit/e50d66e))
 
 ## [1.1.23](https://github.com/meadmin-cn/meadmin-template/compare/main-1.1.24...main-1.1.23) (2025-11-06)
 

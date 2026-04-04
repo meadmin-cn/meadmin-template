@@ -5,9 +5,10 @@
         <el-tree-select
           v-model="formData.parentId"
           :disabled="data !== undefined"
-          :props="{ label: 'name', value: 'id',disabled:({id}:Required<GroupInfo>)=>id<=0}"
+          :props="{ label: 'name', disabled:({id}:any)=>id<=0}"
           :data="groupData"
           :render-after-expand="false"
+          value-key="id"
           filterable
           check-strictly
         />
@@ -30,7 +31,7 @@
 </template>
 <script setup lang="ts" name="Add">
 import { GroupInfo, addGroupApi, editGroupApi, groupListApi } from '@/api/admin';
-import { FormInstance, FormRules } from 'element-plus';
+import type { FormInstance, FormRules } from 'element-plus';
 const props = defineProps<{
   show: boolean;
   data?: Required<GroupInfo>;

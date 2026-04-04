@@ -74,7 +74,8 @@
 </template>
 
 <script setup lang="ts" name="Demo">
-import { ListParams, Info, listApi, delApi } from '@/api/demo';
+import type { Info} from '@/api/demo';
+import { ListParams, listApi, delApi } from '@/api/demo';
 import { useLocalesI18n } from '@/locales/i18n';
 import { bookType } from '@/dict/book';
 import Add from './components/add.vue';

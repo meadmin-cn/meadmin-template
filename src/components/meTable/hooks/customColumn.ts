@@ -1,5 +1,5 @@
 import { debounce } from 'lodash-es';
-import { VNode, Component } from 'vue';
+import type { VNode, Component } from 'vue';
 import { useGlobalStore } from '@/store';
 const { i18n } = useGlobalStore();
 interface Label {
@@ -98,7 +98,7 @@ export default (slot: () => VNode[]) => {
     checkedLabels,
     clean: (() => {
       localeWacth();
-      checkedLabelsWatch;
+      checkedLabelsWatch();
     }) as (() => void) | undefined,
   };
 };

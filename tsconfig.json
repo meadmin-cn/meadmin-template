@@ -1,33 +1,7 @@
 {
-  "compilerOptions": {
-    "forceConsistentCasingInFileNames": true,
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "jsx": "preserve",
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "#/*": ["types/*"]
-    },
-    "typeRoots": ["./node_modules/@types/", "./types", "./node_modules"],
-    "types": ["element-plus/global", "vite/client", "vite-svg-loader"]
-  },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts", "mock/**/*.ts"],
+  "files": [],
   "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ],
-  "vueCompilerOptions": {
-    "strictTemplates": false
-  }
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

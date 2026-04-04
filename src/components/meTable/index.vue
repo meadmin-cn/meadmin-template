@@ -11,7 +11,8 @@
           <slot name="buttons"></slot>
         </div>
         <div class="me-toolbar-tools">
-          <el-input v-if="quickSearch !== undefined" :model-value="quickSearch" :placeholder="typeof quickSearchPlaceholder === 'function' ? quickSearchPlaceholder($t) : quickSearchPlaceholder
+          <el-input
+v-if="quickSearch !== undefined" :model-value="quickSearch" :placeholder="typeof quickSearchPlaceholder === 'function' ? quickSearchPlaceholder($t) : quickSearchPlaceholder
             " prefix-icon="mel-icon-search" @update:model-value="$emit('update:quickSearch', $event)"
             @change="$emit('quickSearch', $event)" />
           <el-button-group v-if="customColumn || exportMenu?.length || print">
@@ -21,20 +22,23 @@
               </template>
               <template #default>
                 <el-scrollbar max-height="300px" class="popover-scrollbar-y">
-                  <el-tree node-key="value" :data="customColumnProps!.labels" default-expand-all
+                  <el-tree
+node-key="value" :data="customColumnProps!.labels" default-expand-all
                     :default-checked-keys="checkedLabels" :props="{ label: 'label', children: 'children' }"
                     show-checkbox @check-change="checkChange" />
                 </el-scrollbar>
               </template>
             </el-popover>
-            <el-popover v-if="exportMenu?.length" pure placement="bottom" trigger="click"
+            <el-popover
+v-if="exportMenu?.length" pure placement="bottom" trigger="click"
               popper-class="me-exportmenu-popover el-dropdown__popper">
               <template #reference>
                 <el-button icon="mel-icon-download" :title="$t('导出')" />
               </template>
               <template #default>
                 <ul class="el-dropdown-menu">
-                  <li v-for="item in exportMenu" :key="item.label" class="el-dropdown-menu__item"
+                  <li
+v-for="item in exportMenu" :key="item.label" class="el-dropdown-menu__item"
                     @click="handleExport(item.handle, item.filename ?? name!)">
                     {{ item.label }}
                   </li>
@@ -65,8 +69,8 @@
 </template>
 <script lang="ts">
 import pagination from './components/pagination.vue';
-import { TableInstance, TableProps } from 'element-plus';
-import { ComponentCustomProperties, PropType } from 'vue';
+import type { TableInstance, TableProps } from 'element-plus';
+import type { ComponentCustomProperties, PropType } from 'vue';
 import customColumn from './hooks/customColumn';
 import exportTable from './hooks/exportTable';
 import printTable from './hooks/print';

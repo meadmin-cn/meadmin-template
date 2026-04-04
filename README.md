@@ -1,15 +1,13 @@
 # Me-admin template
 ## 简介
-Me-admin template是一个免费开源的中后台模板,基于vue3、vite6、 pinia、 element-plus构建，开箱即用，本项目的开源协议为最宽松的MIT协议，使用无任何限制，本项目采用最新技术栈，可以作为项目的启动模版，以帮助你快速搭建企业级中后台，也是一个很好的学习项目。
-**已升级vue3.5 + vite 6, vite6 首屏加载优化到了3s内**
+Me-admin template是一个免费开源的中后台模板,基于vue3、vite8、 pinia、 element-plus构建，开箱即用，本项目的开源协议为最宽松的MIT协议，使用无任何限制，本项目采用最新技术栈，可以作为项目的启动模版，以帮助你快速搭建企业级中后台，也是一个很好的学习项目。
+**已升级vue3.5 + vite 8, vite8 加载确实快**
 
 开源不易，如果能帮到您，麻烦在[Github](https://github.com/meadmin-cn/meadmin-template)中点个star。
 
-nodejs 的全栈 开源项目已完成 [meadmin](https://github.com/meadmin-cn/meadmin)
+**全栈项目推荐** `nodejs`全栈一栈式解决方案[meadmin](https://www.meadmin.cn)，已完成上线，前端使用的当前模板，后端使用的`midway`。支持一键`crud`助力快速开发。
 
 **中文** | [English](./README_EN.md)
-
-
 
 ## 特性
  - **基于vue3、vite、pinia、element-plus、vue-request@next**
@@ -41,7 +39,7 @@ nodejs 的全栈 开源项目已完成 [meadmin](https://github.com/meadmin-cn/m
 
 ## 快速开始
 
- nodejs版本建议>=20.10.0
+ nodejs版本建议>=22.12.0
 
 - clone 代码
 ```
@@ -98,7 +96,7 @@ git clone https://github.com/meadmin-cn/meadmin-template.git
 
 ## 打赏作者
 
-作者还在为孩子奶粉钱苦苦挣扎，如果能帮到您欢迎打赏。打赏时请务必备注github name 后续会维护到打赏鸣谢列表
+如果能帮到您欢迎打赏。打赏时请务必备注github name 后续会维护到打赏鸣谢列表
 
 ![./payCode.jpg](https://gitee.com/meadmin-cn/meadmin-template/raw/main/payCode.jpg)
 

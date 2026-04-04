@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts" name="MeButton">
-import { ButtonInstance } from 'element-plus';
+import type { ButtonInstance } from 'element-plus';
 import { omit } from 'lodash-es';
-import { ComponentPublicInstance } from 'vue';
+import type { ComponentPublicInstance } from 'vue';
 
 const loading = ref(false);
 const attrs = useAttrs();

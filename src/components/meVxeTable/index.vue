@@ -94,8 +94,9 @@
 <script lang="ts">
 import './install';
 import pagination from './components/pagination.vue';
-import { ComponentCustomProperties, PropType, useTemplateRef } from 'vue';
-import {
+import type { ComponentCustomProperties, PropType} from 'vue';
+import { useTemplateRef } from 'vue';
+import type {
   VxeTableDefines,
   VxeTableInstance,
   VxeTableListeners,
@@ -103,7 +104,7 @@ import {
   VxeTablePropTypes,
 } from 'vxe-table';
 import { debounce } from 'lodash-es';
-import { TreeNodeData } from 'element-plus/es/components/tree/src/tree.type';
+import type { TreeNodeData } from 'element-plus/es/components/tree/src/tree.type';
 import resize  from './directives/resize';
 import {getFullHight} from './util';
 const props = {

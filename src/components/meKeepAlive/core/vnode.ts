@@ -1,4 +1,5 @@
-import { ComponentInternalInstance, VNode, callWithAsyncErrorHandling } from 'vue';
+import type { ComponentInternalInstance, VNode} from 'vue';
+import { callWithAsyncErrorHandling } from 'vue';
 import { ErrorCodes } from './errorHandling';
 type VNodeMountHook = (vnode: VNode) => void;
 type VNodeUpdateHook = (vnode: VNode, oldVNode: VNode) => void;

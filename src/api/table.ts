@@ -1,4 +1,5 @@
-import { request, RequestOptions } from '@/utils/request';
+import type { RequestOptions } from '@/utils/request';
+import { request } from '@/utils/request';
 
 const enum Api {
   LIST = 'table/list',

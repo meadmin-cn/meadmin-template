@@ -1,4 +1,5 @@
-import { Defaults, TableExport } from 'tableexport';
+import type { Defaults} from 'tableexport';
+import { TableExport } from 'tableexport';
 type ExportType = 'csv' | 'txt' | 'xlsx';
 export default (elTable: ELTableInstance, type: ExportType, filename?: string, options?: Defaults) => {
   const selectionIndexs = elTable.getSelectionIndexs();

@@ -1,11 +1,15 @@
-import { request, RequestOptions } from '@/utils/request';
-import { bookType } from '@/dict/book';
-import { PageParams, PageResult } from './api.model';
+import type { RequestOptions } from '@/utils/request';
+import { request } from '@/utils/request';
+import type { bookType } from '@/dict/book';
+import type { PageResult } from './api.model';
+import { PageParams } from './api.model';
 
 const enum Api {
   LIST = 'demo',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   ADD = 'demo',
   UPDATE = 'demo/{id}',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   DELETE = 'demo/{id}',
 }
 

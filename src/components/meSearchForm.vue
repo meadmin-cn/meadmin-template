@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts">
-import { ElForm } from 'element-plus';
-import { PropType } from 'vue';
+import type { ElForm } from 'element-plus';
+import type { PropType } from 'vue';
 import type { FormInstance } from 'element-plus';
 import $ from 'jquery';
 const props = {

@@ -1,5 +1,6 @@
 <template>
-  <me-dialog :title="t(info.id ? '编辑' : '新增')" :model-value="modelValue" :close-on-click-modal="false"
+  <me-dialog
+:title="t(info.id ? '编辑' : '新增')" :model-value="modelValue" :close-on-click-modal="false"
     class="add-dialog">
     <el-form ref="formEl" :model="info" :rules="rules" class="add">
       <el-form-item :label="t('姓名')" prop="name">
@@ -31,7 +32,7 @@
 import { Info, addApi, updateApi } from '@/api/demo';
 import { useLocalesI18n } from '@/locales/i18n';
 import { bookType } from '@/dict/book';
-import { FormInstance, FormRules } from 'element-plus';
+import type { FormInstance, FormRules } from 'element-plus';
 const { t, loadRes } = useLocalesI18n({}, [(locale: string) => import(`../lang/${locale}.json`), 'demo']);
 await loadRes;
 const info = ref(new Info());

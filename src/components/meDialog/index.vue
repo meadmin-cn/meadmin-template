@@ -6,8 +6,7 @@
   </el-dialog>
 </template>
 <script lang="ts">
-import { ElDialog } from 'element-plus';
-import { ComponentOptionsMixin, ExtractPublicPropTypes, Ref } from 'vue';
+import type { ElDialog } from 'element-plus';
 import minMax from './hooks/minMax';
 const props = {
   full: {

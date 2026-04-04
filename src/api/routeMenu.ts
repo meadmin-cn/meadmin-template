@@ -1,5 +1,6 @@
-import { request, RequestOptions } from '@/utils/request';
-import { RouteRecordRaw } from 'vue-router';
+import type { RequestOptions } from '@/utils/request';
+import { request } from '@/utils/request';
+import type { RouteRecordRaw } from 'vue-router';
 
 const enum Api {
   MENU = 'menu/list',

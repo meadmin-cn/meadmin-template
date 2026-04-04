@@ -1,4 +1,5 @@
-import { ComponentInternalInstance, devtools } from 'vue';
+import type { ComponentInternalInstance} from 'vue';
+import { devtools } from 'vue';
 const enum DevtoolsHooks {
   APP_INIT = 'app:init',
   APP_UNMOUNT = 'app:unmount',

@@ -1,7 +1,7 @@
 <template>
   <div class="role-permissions">
     <el-scrollbar always view-class="body">
-      <group ref="group" class="group" @current-change="checkedRules = $event"></group>
+      <Group ref="group" class="group" @current-change="checkedRules = $event"></Group>
       <Menu class="menu" :checked-rules="checkedRules" @sub-rules="group!.setGroupRules($event)"></Menu>
     </el-scrollbar>
   </div>

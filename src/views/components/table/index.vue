@@ -81,7 +81,7 @@
 <script setup lang="ts" name="Table">
 import { listApi } from '@/api/table';
 import { useLocalesI18n } from '@/locales/i18n';
-import { FormInstance } from 'element-plus';
+import type { FormInstance } from 'element-plus';
 const meTableRef = ref<MeTableInstance>();
 const customColumn = ref(true);
 const { t, loadRes } = useLocalesI18n({}, [(locale: string) => import(`./lang/${locale}.json`), 'tableLang']);

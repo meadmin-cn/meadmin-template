@@ -1,8 +1,8 @@
 import { Layout, LayoutPage } from '@/router/constant';
 import Page404 from '@/views/404.vue';
 import { useUserStore } from '@/store';
-import { RouteRecordRaw } from 'vue-router';
-import { DefineComponent } from 'vue';
+import type { RouteRecordRaw } from 'vue-router';
+import type { DefineComponent } from 'vue';
 import log from './log';
 import { mitter } from '@/event';
 import EventEnum from '@/dict/eventEnmu';

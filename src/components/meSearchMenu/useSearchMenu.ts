@@ -1,5 +1,5 @@
 import { useGlobalStore, useRouteStore } from '@/store';
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 import { resolvePath, jump } from '@/router';
 
 import { debounce } from 'lodash-es';
