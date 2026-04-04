@@ -1,0 +1,1 @@
+import{t as e}from"./keys-PJdoTFyg.js";import{t}from"./identity-CFhi6axH.js";function n(e){return function(t,n,r){for(var i=-1,a=Object(t),o=r(t),s=o.length;s--;){var c=o[e?s:++i];if(n(a[c],c,a)===!1)break}return t}}var r=n();function i(t,n){return t&&r(t,n,e)}function a(e){return typeof e==`function`?e:t}function o(e,t){return e&&i(e,a(t))}export{o as t};

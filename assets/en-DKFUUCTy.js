@@ -1,0 +1,1 @@
+var e=`Switch languages to see the effect`,t=`Open Network to see the language pack request`,n={切换语言查看效果:e,打开Network可以看到语言包请求:t};export{n as default,e as 切换语言查看效果,t as 打开Network可以看到语言包请求};

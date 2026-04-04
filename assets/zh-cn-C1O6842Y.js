@@ -1,0 +1,1 @@
+import{t as e}from"./forOwn-BYygwrnW.js";var t={large:`大`,default:`默认`,small:`小`," ":``},n=Object.assign({"./default.json":t}),r={};e(n,e=>{Object.assign(r,e)});export{r as default};

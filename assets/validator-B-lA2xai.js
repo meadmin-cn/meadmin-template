@@ -1,0 +1,1 @@
+import{Vt as e}from"./use-global-config-CbbvLqpD.js";var t=t=>[``,...e].includes(t);export{t};

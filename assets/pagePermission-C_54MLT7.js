@@ -1,0 +1,1 @@
+import{B as e,h as t}from"./runtime-core.esm-bundler-Dj3I3lVV.js";import{t as n}from"./_plugin-vue_export-helper-1r9tKl2A.js";var r={};function i(n,r){return e(),t(`div`,null,`当前页面 admin/editor可见`)}var a=n(r,[[`render`,i]]);export{a as default};
