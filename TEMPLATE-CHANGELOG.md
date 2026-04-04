@@ -1,5 +1,14 @@
 # Changelog
 
+## <small>1.2.1 (2026-04-04)</small>
+
+* fix: 修复打包部署后请求异常问题 ([6f669c4](https://github.com/meadmin-cn/meadmin-template/commit/6f669c4))
+* fix: 修复linux下打包 scss文件转义错误bug ([1f6b49c](https://github.com/meadmin-cn/meadmin-template/commit/1f6b49c))
+* chore: 还原错误的action设置 ([f4c489e](https://github.com/meadmin-cn/meadmin-template/commit/f4c489e))
+* chore: vite 版本改为~8.0.3 修复github action打包失败问题 ([5213ba5](https://github.com/meadmin-cn/meadmin-template/commit/5213ba5))
+* ci: git安装脚本node版本修复 ([49e4d3b](https://github.com/meadmin-cn/meadmin-template/commit/49e4d3b))
+* docs: 错别字更改 ([8c77e4e](https://github.com/meadmin-cn/meadmin-template/commit/8c77e4e))
+
 ## 1.2.0 (2026-04-04)
 
 * feat: 升级到vite 8 ([fc7425c](https://github.com/meadmin-cn/meadmin-template/commit/fc7425c))
