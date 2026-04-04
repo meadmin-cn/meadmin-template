@@ -1,0 +1,1 @@
+var e=`/meadmin-template/assets/index-BbeE_3rN.css`;export{e as default};

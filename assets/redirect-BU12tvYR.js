@@ -1,0 +1,1 @@
+import{G as e,J as t,T as n,k as r}from"./vue.runtime.esm-bundler-DtDJ9-Ei.js";import{u as i}from"./router-DMDRWWK9.js";import{i as a,r as o}from"./vue-router-C89RJwPn.js";var s=r({...r({setup:!0,name:`Redirect`}),__name:`redirect`,setup(r){let s=o(),c=a(),l=s.params.path;return i().cacheFullPath.delete(l),e(()=>c.replace(l)),(e,r)=>(t(),n(`span`))}});export{s as default};

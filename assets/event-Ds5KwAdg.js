@@ -1,0 +1,1 @@
+var e=`update:modelValue`,t=`change`,n=`input`;export{n,e as r,t};

@@ -1,0 +1,1 @@
+import{$t as e}from"./use-global-config-Dw3twedn.js";var t=t=>[``,...e].includes(t);export{t};

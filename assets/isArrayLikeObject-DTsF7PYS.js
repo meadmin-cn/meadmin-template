@@ -1,0 +1,1 @@
+import{g as e,u as t}from"./keys-oJoJ-M24.js";import{t as n}from"./identity-BDX0NRtY.js";import{a as r,i}from"./_flatRest-Bdy-j7MC.js";function a(e,t){return r(i(e,t,n),e+``)}function o(n){return e(n)&&t(n)}export{a as n,o as t};

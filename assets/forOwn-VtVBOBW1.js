@@ -1,0 +1,1 @@
+import{t as e}from"./identity-BDX0NRtY.js";import{t}from"./_baseForOwn-CPo2ZtXg.js";function n(t){return typeof t==`function`?t:e}function r(e,r){return e&&t(e,n(r))}export{r as t};

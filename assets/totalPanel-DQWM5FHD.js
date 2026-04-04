@@ -1,0 +1,1 @@
+import{t as e}from"./totalPanel-BO2IgbUu.js";export{e as default};

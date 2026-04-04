@@ -1,0 +1,1 @@
+import{t as e}from"./keys-oJoJ-M24.js";function t(e){return function(t,n,r){for(var i=-1,a=Object(t),o=r(t),s=o.length;s--;){var c=o[e?s:++i];if(n(a[c],c,a)===!1)break}return t}}var n=t();function r(t,r){return t&&n(t,r,e)}export{n,r as t};

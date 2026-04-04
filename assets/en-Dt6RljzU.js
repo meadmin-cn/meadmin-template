@@ -1,0 +1,1 @@
+var e=`Name`,t=`Type`,n=`Book Name`,r=`Price`,i=`Section`,a=`Create Time`,o={姓名:e,类型:t,书名:n,价格:r,章节:i,创建时间:a};export{o as default,n as 书名,r as 价格,a as 创建时间,e as 姓名,i as 章节,t as 类型};

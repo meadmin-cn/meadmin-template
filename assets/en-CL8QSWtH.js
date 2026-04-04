@@ -1,0 +1,1 @@
+var e=`Screen`,t=`Name`,n=`Type`,r=`Create Date`,i={筛选:e,姓名:t,类型:n,创建时间:r};export{i as default,r as 创建时间,t as 姓名,e as 筛选,n as 类型};
