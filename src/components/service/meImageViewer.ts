@@ -9,6 +9,7 @@ export function createImageViewer(props: ComponentProps<typeof ElImageViewer>) {
       {
         onClose: function () {
           render(null, container);
+          document.body.removeChild(container);
           if (typeof props.onClose === 'function') {
             props.onClose.call(this);
           }
@@ -19,6 +20,6 @@ export function createImageViewer(props: ComponentProps<typeof ElImageViewer>) {
   );
   render(vnode, container);
   // instances will remove this item when close function gets called. So we do not need to worry about it.
-  document.body.appendChild(container.firstElementChild!);
+  document.body.appendChild(container);
   return vnode;
 }
