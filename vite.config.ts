@@ -69,43 +69,43 @@ export default async (configEnv: ConfigEnv): Promise<UserConfigExport> => {
       target: [ "chrome93", "safari15.2"],
       rolldownOptions: {
         output: {
-          codeSplitting: {
-            minSize: 20000,
-            groups: [
-              {
-                test: "vue",
-                name: "core",
-              },
-              {
-                test: "vue-router",
-                name: "core",
-              },
-              {
-                test: "pinia",
-                name: "core",
-              },
-              {
-                test: "vue-request",
-                name: "core",
-              },
-              {
-                test: "jquery",
-                name: "core",
-              },
-              {
-                test: "axios",
-                name: "core",
-              },
-              {
-                test: /node_modules\/@element-plus\/icons-vue/,
-                name: "elIcon",
-              },
-              {
-                test: /.\/mock/,
-                name: "mock",
-              },
-            ],
-          },
+          // codeSplitting: { //自定义打包合并后会造成加载顺序异常，可能和rolldown 打包有关系，暂时不使用
+          //   minSize: 20000,
+          //   groups: [
+          //     {
+          //       test: "vue",
+          //       name: "core",
+          //     },
+          //     {
+          //       test: "vue-router",
+          //       name: "core",
+          //     },
+          //     {
+          //       test: "pinia",
+          //       name: "core",
+          //     },
+          //     {
+          //       test: "vue-request",
+          //       name: "core",
+          //     },
+          //     {
+          //       test: "jquery",
+          //       name: "core",
+          //     },
+          //     {
+          //       test: "axios",
+          //       name: "core",
+          //     },
+          //     {
+          //       test: /node_modules\/@element-plus\/icons-vue/,
+          //       name: "elIcon",
+          //     },
+          //     {
+          //       test: /.\/mock/,
+          //       name: "mock",
+          //     },
+          //   ],
+          // },
         },
       },
     },
