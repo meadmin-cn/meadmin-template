@@ -38,6 +38,8 @@ jobs:
       - name: Build
         run: |
           npm install
+          npm uninstall vite
+          npm install vite@~8.0.3 -D
           npm run build-github
           touch ./dist/.nojekyll
 
