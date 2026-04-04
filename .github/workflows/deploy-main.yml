@@ -35,13 +35,20 @@ jobs:
             ${{ runner.os }}-npm-
 
       # 运行构建脚本
-      - name: Build
-        run: |
-          npm install
-          npm uninstall vite
-          npm install vite@~8.0.3 -D
-          npm run build-github
-          touch ./dist/.nojekyll
+      - name: Install dependencies
+        run: npm install
+
+      - name: Uninstall vite
+        run: npm uninstall vite
+
+      - name: Install vite specific version
+        run: npm install vite@~8.0.3 -D
+
+      - name: Build project
+        run: npm run build-github
+
+      - name: Create .nojekyll file
+        run: touch ./dist/.nojekyll
 
       # 查看 workflow 的文档来获取更多信息
       # @see https://github.com/crazy-max/ghaction-github-pages
