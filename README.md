@@ -5,7 +5,7 @@ Me-admin template是一个免费开源的中后台模板,基于vue3、vite8、 p
 
 开源不易，如果能帮到您，麻烦在[Github](https://github.com/meadmin-cn/meadmin-template)中点个star。
 
-**全栈项目推荐** `nodejs`全栈一栈式解决方案[meadmin](https://www.meadmin.cn),完成上线，前端使用的当前模板，后端使用的`midway`。支持一键`crud`助力快速开发。
+**全栈项目推荐** `nodejs`全栈一栈式解决方案[meadmin](https://www.meadmin.cn)，已完成上线，前端使用的当前模板，后端使用的`midway`。支持一键`crud`助力快速开发。
 
 **中文** | [English](./README_EN.md)
 
