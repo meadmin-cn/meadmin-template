@@ -40,7 +40,7 @@ export default async (configEnv: ConfigEnv): Promise<UserConfigExport> => {
       alias: [
         // /@/xxxx => src/xxxx
         {
-          find: '@/',
+          find: "@/",
           replacement: pathResolve("src") + "/",
         },
       ],
@@ -66,46 +66,27 @@ export default async (configEnv: ConfigEnv): Promise<UserConfigExport> => {
     },
     /* eslint-disable */
     build: {
-      target: [ "chrome93", "safari15.2"],
+      target: ["chrome93", "safari15.2"],
       rolldownOptions: {
         output: {
-          // codeSplitting: { //自定义打包合并后会造成加载顺序异常，可能和rolldown 打包有关系，暂时不使用
-          //   minSize: 20000,
-          //   groups: [
-          //     {
-          //       test: "vue",
-          //       name: "core",
-          //     },
-          //     {
-          //       test: "vue-router",
-          //       name: "core",
-          //     },
-          //     {
-          //       test: "pinia",
-          //       name: "core",
-          //     },
-          //     {
-          //       test: "vue-request",
-          //       name: "core",
-          //     },
-          //     {
-          //       test: "jquery",
-          //       name: "core",
-          //     },
-          //     {
-          //       test: "axios",
-          //       name: "core",
-          //     },
-          //     {
-          //       test: /node_modules\/@element-plus\/icons-vue/,
-          //       name: "elIcon",
-          //     },
-          //     {
-          //       test: /.\/mock/,
-          //       name: "mock",
-          //     },
-          //   ],
-          // },
+          strictExecutionOrder: true, //强制引用顺序
+          codeSplitting: {
+            //自定义打包合并
+            groups: [
+              {
+                test: /node_modules\/(vue|vue-router|pinia|vue-request|axios)/,
+                name: "core",
+              },
+              {
+                test: /node_modules\/@element-plus\/icons-vue/,
+                name: "elIcon",
+              },
+              {
+                test: /.\/mock/,
+                name: "mock",
+              },
+            ],
+          },
         },
       },
     },

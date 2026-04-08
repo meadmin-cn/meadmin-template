@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>1.2.2 (2026-04-08)</small>
+
+* chore: 加上核心包打包合并 ([ae7bd52](https://github.com/meadmin-cn/meadmin-template/commit/ae7bd52))
+* chore: vite更新到8.0.7 ([d5fc89c](https://github.com/meadmin-cn/meadmin-template/commit/d5fc89c))
+
 ## <small>1.2.1 (2026-04-04)</small>
 
 * fix: 修复打包部署后请求异常问题 ([6f669c4](https://github.com/meadmin-cn/meadmin-template/commit/6f669c4))
