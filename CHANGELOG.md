@@ -1,5 +1,12 @@
 # Changelog
 
+## <small>1.2.2 (2026-04-08)</small>
+
+* chore: 版本更改 ([bca9969](https://github.com/meadmin-cn/meadmin-template/commit/bca9969))
+* chore: 加上核心包打包合并 ([ae7bd52](https://github.com/meadmin-cn/meadmin-template/commit/ae7bd52))
+* chore: template-release v1.2.2 ([118da33](https://github.com/meadmin-cn/meadmin-template/commit/118da33))
+* chore: vite更新到8.0.7 ([d5fc89c](https://github.com/meadmin-cn/meadmin-template/commit/d5fc89c))
+
 ## <small>1.2.1 (2026-04-04)</small>
 
 * chore: 还原错误的action设置 ([f4c489e](https://github.com/meadmin-cn/meadmin-template/commit/f4c489e))
