@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-Bhmf7a9N.js";var t,n,r,i,a,o,s;e((()=>{t=`Name`,n=`Type`,r=`Book Name`,i=`Price`,a=`Section`,o=`Create Time`,s={姓名:t,类型:n,书名:r,价格:i,章节:a,创建时间:o}}))();export{s as default,r as 书名,i as 价格,o as 创建时间,t as 姓名,a as 章节,n as 类型};

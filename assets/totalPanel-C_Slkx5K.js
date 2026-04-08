@@ -1,0 +1,1 @@
+import{n as e,t}from"./totalPanel-CT81BJbF.js";t();export{e as default};

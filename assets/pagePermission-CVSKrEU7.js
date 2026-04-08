@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-Bhmf7a9N.js";import{W as t,ft as n,x as r}from"./core-BvvpgYiM.js";import{n as i,t as a}from"./_plugin-vue_export-helper-vH50fkt-.js";function o(e,r){return n(),t(`div`,null,`当前页面 admin/editor可见`)}var s,c;e((()=>{r(),i(),s={},c=a(s,[[`render`,o]])}))();export{c as default};
