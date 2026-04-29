@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-D-ODljcQ.js";var t,n,r;e((()=>{t=`Switch languages to see the effect`,n=`Open Network to see the language pack request`,r={切换语言查看效果:t,打开Network可以看到语言包请求:n}}))();export{r as default,t as 切换语言查看效果,n as 打开Network可以看到语言包请求};

@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-D-ODljcQ.js";import{et as t,tt as n}from"./index-CnT6CtQM.js";var r,i=e((()=>{r={large:`大`,default:`默认`,small:`小`," ":``}})),a,o;e((()=>{i(),t(),a=Object.assign({"./default.json":r}),o={},n(a,e=>{Object.assign(o,e)})}))();export{o as default};
