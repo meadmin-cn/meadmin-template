@@ -34,7 +34,7 @@
               <div class="icon-grid">
                 <div v-for="icon in filteredSvgIcons" :key="icon" class="icon-grid-item" @click="selectIcon(icon)">
                   <component :is="icon" />
-                  <div class="name">{{ icon.replace('SdssIcon', '') }}</div>
+                  <div class="name">{{ icon.replace('MeIcon', '') }}</div>
                 </div>
               </div>
             </el-scrollbar>
@@ -44,7 +44,7 @@
               <div class="icon-grid">
                 <div v-for="icon in filteredElementIcons" :key="icon" class="icon-grid-item" @click="selectIcon(icon)">
                   <component :is="icon" />
-                  <div class="name">{{ icon.replace('SelIcon', '') }}</div>
+                  <div class="name">{{ icon.replace('MelIcon', '') }}</div>
                 </div>
               </div>
             </el-scrollbar>
@@ -124,7 +124,7 @@ watch(
 );
 onMounted(() => {
   if (displayIcon.value) {
-    if (typeof displayIcon.value === 'string' && displayIcon.value.startsWith('SelIcon')) {
+    if (typeof displayIcon.value === 'string' && displayIcon.value.startsWith('MelIcon')) {
       activeTab.value = 'element';
     } else {
       activeTab.value = 'svg';
