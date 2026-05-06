@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-D-ODljcQ.js";import{H as t,ut as n,y as r}from"./core-1GgsbOov.js";import{ft as i,pt as a}from"./index-DOStS1ae.js";function o(e,r){return n(),t(`div`,null,`当前页面 admin/editor可见`)}var s,c;e((()=>{r(),a(),s={},c=i(s,[[`render`,o]])}))();export{c as default};
