@@ -21,9 +21,14 @@
             {{ $t('Gitee') }}
           </el-dropdown-item>
         </a>
-        <a href="https://meadmin-cn.github.io/meadmin-template-doc/">
+        <a href="https://www.meadmin.cn/meadmin-template-doc/">
           <el-dropdown-item>
             {{ $t('文档') }}
+          </el-dropdown-item>
+        </a>
+        <a href="https://www.meadmin.cn/">
+          <el-dropdown-item>
+            {{ $t('全栈解决方案') }}
           </el-dropdown-item>
         </a>
         <el-dropdown-item divided @click="userStore.logOut()">
