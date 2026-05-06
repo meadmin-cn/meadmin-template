@@ -24,9 +24,9 @@ Me-admin template is a free open source admin template, built on VUE3, Vite8, Pi
 - Full version Chinese site: [https://meadmin-cn.gitee.io/meadmin-template](https://meadmin-cn.gitee.io/meadmin-template)
   
 ## Documentation
-- Chinese site: [https://meadmin-cn.github.io/meadmin-template-doc](https://meadmin-cn.github.io/meadmin-template-doc)
-- github site: [https://meadmin-cn.gitee.io/meadmin-template-doc](https://meadmin-cn.gitee.io/meadmin-template-doc)
-  
+- github site: [https://meadmin-cn.github.io/meadmin-template-doc](https://meadmin-cn.github.io/meadmin-template-doc)
+- Chinese site: [https://www.meadmin.cn/meadmin-template-doc/](https://www.meadmin.cn/meadmin-template-doc/)
+
 ## branch
 - [main](https://github.com/meadmin-cn/meadmin-template/tree/main) full edition
 - [template](https://github.com/meadmin-cn/meadmin-template/tree/template) foundation forms
