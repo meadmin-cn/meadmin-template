@@ -23,7 +23,7 @@ Me-admin template是一个免费开源的中后台模板,基于vue3、vite8、 p
   
 ## 预览
 - 完整版国外访问：[https://meadmin-cn.github.io/meadmin-template](https://meadmin-cn.github.io/meadmin-template)
-- 完整版国内访问：[https://meadmin-cn.gitee.io/meadmin-template](https://meadmin-cn.gitee.io/meadmin-template)
+- 完整版国内访问：[https://demo.meadmin.cn/admin](https://demo.meadmin.cn/admin)
   
 ## 文档
 - 国外访问: [https://meadmin-cn.github.io/meadmin-template-doc](https://meadmin-cn.github.io/meadmin-template-doc)
