@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-BM3Ffeng.js";import{M as t,j as n}from"./index-Ck7gaW_F.js";function r(e){return t(()=>({url:a.STATISTICS,method:`get`}),{noLoading:e})}function i(){return t(()=>({url:a.CHART,method:`get`}),{noLoading:!0})}var a,o=e((()=>{n(),a=function(e){return e.STATISTICS=`statistics/index`,e.CHART=`statistics/chart`,e}(a||{})}));export{o as n,r,i as t};
